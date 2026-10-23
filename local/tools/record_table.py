@@ -58,6 +58,9 @@ KNOWN = {
 STATUS_NAMES = {5: "Burning", 33: "Heavy burning", 43: "Gas", 44: "Gas", 38: "Stun (small)",
                 39: "Stun (medium)", 40: "Stun (large)", 41: "Stun (massive)"}
 
+# 64-bit name hashes -> their string, when the dictionary (hd2data) has the preimage
+HASH_NAMES: dict[str, str] = {}
+
 NOISE = re.compile(r"Sound|Audio|Anim|Event|VO|Material|Decal|Particle|Effect$|Icon|Node", re.I)
 
 
@@ -143,7 +146,8 @@ def decode(column: dict, row: bytes, lib, enums: dict) -> tuple[str, object]:
         return str(number), number
     if size == 8:
         number = int.from_bytes(chunk, "little")
-        return f"0x{number:016X}", None
+        label = HASH_NAMES.get(f"{number:016X}")
+        return (label if label else f"0x{number:016X}"), None
     return f"{size}B", None
 
 
@@ -174,6 +178,9 @@ def main(argv=None) -> int:
     lib = tl.load(str(typelib_path))
     names = load_names(names_path)
     go = json.loads(go_path.read_text(encoding="utf-8"))["types"] if go_path.exists() else {}
+    dictionary = REPO.parent / "hd2data" / "data" / "hash-names.json"
+    if dictionary.exists():
+        HASH_NAMES.update(json.loads(dictionary.read_text(encoding="utf-8")).get("names", {}))
     known_path = CACHE / "known-names.json"
     known_data = json.loads(known_path.read_text(encoding="utf-8")) if known_path.exists() else {}
     known_tables = known_data.get("tables", {})

@@ -18,8 +18,8 @@ local/
   .venv/            uv venv with pynacl (not committed)
 ```
 
-**Handover notes** (environment, data facts, the add-a-stat procedure, pitfalls): `../../经验/hd2-sseo-local-dev.md`.
-**The game's data model** (LDLD blocks, type ids, hash correction, the weapon data chain): `../../经验/hd2-game-model.md`.
+**Handover notes** (environment, data facts, the add-a-stat procedure, pitfalls): `../../ref/hd2-sseo-local-dev.md`.
+**The game's data model** (LDLD blocks, type ids, hash correction, the weapon data chain): `../../ref/hd2-game-model.md`.
 
 ## Why this shape
 
@@ -82,7 +82,7 @@ a blank means "no source — the offset and values are still exact".
 `wiki_names.py` needs the wiki's dumps, which are the wiki's content and are not vendored:
 
 ```bash
-python ../经验/hd2-datamined/tools/fetch_wiki_modules.py --out local/cache/wiki-modules
+python ../ref/hd2-datamined/tools/fetch_wiki_modules.py --out local/cache/wiki-modules
 ```
 
 ### Type names

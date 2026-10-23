@@ -23,7 +23,7 @@ from pathlib import Path
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parent.parent
 CACHE = REPO / "local" / "cache"
-DEFAULT = REPO.parent / "经验" / "hd2-datamined" / "tools" / "table_export.py"
+DEFAULT = REPO.parent / "ref" / "hd2-datamined" / "tools" / "table_export.py"
 
 
 def literal_dict(text: str, start: int) -> dict:

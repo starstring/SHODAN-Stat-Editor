@@ -10,7 +10,7 @@ offset actually equal the wiki's values for many rows:
 
 Fetch the modules first (they are the wiki's content, not vendored here):
 
-    python ../../经验/hd2-datamined/tools/fetch_wiki_modules.py --out local/cache/wiki-modules
+    python ../../ref/hd2-datamined/tools/fetch_wiki_modules.py --out local/cache/wiki-modules
 
 Output (`local/cache/wiki-names.json`) is merged into `known-names.json` by `known_names.py`.
 """

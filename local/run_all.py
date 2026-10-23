@@ -78,8 +78,8 @@ def main(argv=None) -> int:
     if modules.is_dir():
         run(PYTHON, "wiki_names.py")      # places wiki names by matching real values
     else:
-        print("  (no wiki modules: fetch them with 经验/hd2-datamined/tools/fetch_wiki_modules.py)")
-    curated = HERE.parent.parent / "经验" / "hd2-datamined" / "tools" / "table_export.py"
+        print("  (no wiki modules: fetch them with ref/hd2-datamined/tools/fetch_wiki_modules.py)")
+    curated = HERE.parent.parent / "ref" / "hd2-datamined" / "tools" / "table_export.py"
     if curated.exists():
         run(PYTHON, "known_names.py", "--source", str(curated))   # merges both dictionaries
     else:

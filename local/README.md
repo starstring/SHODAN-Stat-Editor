@@ -18,8 +18,8 @@ local/
   .venv/            uv venv with pynacl (not committed)
 ```
 
-**Handover notes** (environment, data facts, the add-a-stat procedure, pitfalls): `../../ref/hd2-sseo-local-dev.md`.
-**The game's data model** (LDLD blocks, type ids, hash correction, the weapon data chain): `../../ref/hd2-game-model.md`.
+**Handover notes** (environment, data facts, the add-a-stat procedure, pitfalls): `../../hd2data/docs/07-sseo-extension.md` (essentials) and `../../hd2data/docs/09-sseo-handover.md` (everything).
+**The game's data model** (LDLD blocks, type ids, hash correction, the weapon data chain): `../../hd2data/docs/01-game-model.md`; all of it: `../../hd2data/index.md`.
 
 ## Why this shape
 

@@ -1,7 +1,8 @@
 # SHODAN Stat Editor
 
-Change the stats of weapons, throwables, stratagems, mechas, attachments, armor passives and your
-helldiver in **Helldivers 2**, and transmog armor passives: stack any passives into one. **SHODAN Stat Editor
+Change the stats of weapons, throwables, stratagems, mechas, boosters, attachments, armor passives and your
+helldiver in **Helldivers 2**, and transmog armor passives: stack any passives into one. The **Enemy Editor**
+changes every enemy, your SEAF allies and how they spawn, and keeps custom difficulties as presets. **SHODAN Stat Editor
 Offline** (SSEO) is a Windows program: pick a weapon, change its numbers, press **Install into the
 game**, and play. It writes your values into the game's own
 data files, so no mod loader is needed and the game does not have to run while you edit. Keep
@@ -30,6 +31,7 @@ no longer works; SSEO replaces it. See [In-game version](#in-game-version).
 | Ammo | Magazine size, starting magazines, magazines from supply, max spare magazines, reload time, rounds per reload and reload allowed below (clip weapons, in-game version only) |
 | Handling | Recoil, spread, sway, ergonomics |
 | Heat | Overheat threshold, heat per shot / per second, cool-down time, heatsinks |
+| Loadout | Slot: list a primary weapon among the secondaries, or a secondary among the primaries |
 | Projectile swap | The projectile the weapon fires: pick another weapon's (by name, or type its id) |
 | Grenade swap | In-game version only: fire a throwable grenade, Dynamite or a throwable mine from a grenade launcher or pistol, the One-Two's launcher or the Grenadier Battlement (solo missions) |
 
@@ -59,7 +61,7 @@ takes priority over Projectile swap.
 
 | Stratagem | Stats |
 |---|---|
-| All | Cooldown, and uses where limited |
+| All | Cooldown, uses where limited, and the call-in code (record a new one with the arrow keys or WASD) |
 | Eagles | Uses per rearm, Eagle rearm time; time between bombs (bombers), fire duration (Strafing Run, 110mm Rocket Pods), run length |
 | Orbital and Eagle strikes | For every projectile and blast they use: velocity, inner / outer / shockwave radius, and the full damage set above |
 | Orbital barrages and strikes | Salvos, shells per salvo, time between shells, time between salvos, spread area; the Walking Barrage's walking speed |
@@ -81,11 +83,22 @@ takes priority over Projectile swap.
 Body parts whose names aren't known show as "Part N". The Breacher's left arm is a shield whose
 hit is an ability, not a weapon stat, so it has no damage to change.
 
+**Boosters**: the boosters whose values are in the game's data files, on the Boosters tab
+
+| Booster | Stats |
+|---|---|
+| Experimental Infusion | Effect duration, movement speed and damage taken |
+| Firebomb Hellpods, Stun Pods | The blast every hellpod sets off: damage, radii and its burn or stun |
+| Concealed Insertion | Smoke radius |
+| Dead Sprint | Health drain |
+| Armed Resupply Pods | The resupply pod's turret, stat for stat like a weapon |
+| Surplus EAT Allocation | Uses of the extra EAT |
+
 **Attachments**: optics, underbarrels, muzzles and ammunition types, on the Attachments tab
 
 | Attachment | Stats |
 |---|---|
-| Optics, underbarrels, muzzles (weapons' own Custom muzzle brakes included), shotgun chokes | Ergonomics bonus, and where the attachment has them: sway, recoil, climb and spread multipliers |
+| Optics, underbarrels, muzzles (weapons' own Custom muzzle brakes included), shotgun chokes | Ergonomics bonus, and where the attachment has them: sway, recoil, climb and spread multipliers; an optic's zoom levels and zeroing distances |
 | Ammunition types (alternate loads included), by their names in game | Recoil and spread multipliers |
 
 An attachment's values apply to every weapon fitted with it (an ammunition type's, to every
@@ -115,6 +128,9 @@ Give an armor passive the effects of any other passives, as many as you like. On
   not let one armor be changed alone.
 - **Reset passive** clears its stack and turns its own effects back on.
 
+**Armor weight**: on the Armors tab, make any armor light, medium or heavy. Speed and stamina
+follow the weight you pick.
+
 **Helldiver**: first on the Armors tab: health, each body part's health, movement speeds and
 stamina. It changes every helldiver in your game: restore the game's files before joining other
 players' lobbies.
@@ -127,6 +143,37 @@ players' lobbies.
 - The **Records** tab lists every projectile, explosion and status record of the game, named after
   the game's rounds and the weapons using them. The explosion rows on a weapon page stay its own
   explosion's: edit a newly chosen one here.
+
+## Enemy Editor
+
+Make your own difficulty. Click **SHODAN Enemy Editor** at the top left: the window turns red and
+edits the enemies instead; **SHODAN Stat Editor** switches back. One Install puts the changes of
+both editors in the game. Its tabs are Terminids, Automatons, Illuminate, SEAF and Spawning.
+
+| Page | Stats |
+|---|---|
+| Every enemy | Health, armor, durable ratio, explosive damage taken, bleed-out health and regeneration; each body part's health and armor, and whether destroying it kills the enemy |
+| Behavior | Movement speed, size, sight range and cone, hearing, how long it keeps tracking you after losing sight, stagger resistance, stun and gas resistance, and the fire, acid, electric and gas damage it takes |
+| Attacks | Each melee attack's damage, armor penetration, stagger and push; the explosion it sets off when it dies |
+| Enemy weapons | Each gun listed under its enemy, stat for stat like a weapon: damage, armor penetration, explosion, projectile speed, fire rate, magazine and spread |
+| Shields and jamming | Shield capacity and recharge; the jamming radius of Stratagem Jammers, Command Bunkers and AA Emplacements; the scrambling radius of Cognitive Disruptors; the Leviathan's flight height |
+| SEAF | Every SEAF soldier kind, stat for stat like an enemy, with its weapons; the weapons each kind carries, from the ones the game has for SEAF |
+| All Terminids, All Automatons, All Illuminate, All SEAF | One row for the whole faction: health, armor, damage, movement speed, sight, stagger resistance, stun and gas resistance, fire damage taken |
+| Spawning | Per faction: reinforcement size and frequency, or none at all; the cap on enemies at once; patrol frequency and patrols at once; modifier patrols; outpost garrison size; Fabricator and bug hole output |
+| All factions | The lowest patrol and reinforcement rates the game allows, and SEAF reinforcement and wave cooldowns |
+
+**Custom difficulties.** The Enemy Editor's **Presets** hold only enemy and spawning values, apart
+from the Stat Editor's: loading a difficulty leaves your weapons as they are, and loading a weapon
+setup leaves the enemies. It comes with **Default** (the game's own values), **Horde**, **Glass
+Cannon** and **Elite**; change them, delete them or add your own. They are saved as
+`enemy_preset_01.txt` … next to config.txt, to share like full presets.
+
+- A faction row leaves alone every enemy you have changed by hand, so a difficulty can raise a
+  whole faction and still tune single enemies.
+- Some values are shared: a melee attack, gun or death explosion used by several enemies changes
+  for all of them.
+- Spawn values are multipliers of the game's own (1 is no change). A very high enemy cap can make
+  the game stutter or crash.
 
 ## Install
 
@@ -192,7 +239,9 @@ The **Settings** button at the bottom right opens its options:
   this repository, before it is tested. It may break; switch back to Releases to get the next
   tested version.
 - **Tabs shown**: hide the tabs you do not use (their items leave the search too).
-- **Several vehicles of a kind**: on by default; a loadout can take more than one exosuit, FRV or tank.
+- **Several vehicles of a kind**: off by default; on, a loadout can take more than one exosuit, FRV or tank.
+- **Sniper crosshair in third person**: off by default; on, sniper rifles show a crosshair when you aim in
+  third person.
 - **Reset all values**: every change of the current setup back to the game's values (asks
   "Sure?" first; click again to confirm).
 
@@ -312,9 +361,11 @@ the result as the Development build pre-release.
 - **Bingus Shared Loader** by CowboyBingus, which runs the in-game version.
 - **[LuaJIT](https://luajit.org)** (MIT) and **[libsodium](https://libsodium.org)** (ISC), which SSEO
   ships: their licences are in the release's THIRD-PARTY-NOTICES.txt.
-- **HD2Runtime** by Skyeshade, whose weapon and stratagem catalogs name the weapons and map
-  every strike to its projectiles, blasts and damage, and whose research locates package loading
-  and the live entity and unit layouts that Grenade swap uses.
+- **HD2Runtime** by Skyeshade, whose weapon, stratagem and enemy catalogs name the weapons and
+  enemies and map every strike to its projectiles, blasts and damage, and whose research locates
+  package loading and the live entity and unit layouts that Grenade swap uses.
+- **Gameplay Reforged: Recovery Edition** by SweetSwallow and **Little Enemy Kontrol** by Nappleon,
+  whose enemy and spawn edits showed where those values live.
 - **[Filediver](https://github.com/xypwn/filediver)** and the **[helldivers.io](https://helldivers.io/)**
   data dump by shalzuth, for the game's data layouts and the armor passives.
 - The **[Helldivers 2 wiki](https://helldivers.wiki.gg/)**, whose passive descriptions name every

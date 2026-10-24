@@ -22,8 +22,10 @@ VERSION = re.search(r"version = '([\d.]+)'", open(PANEL, encoding='utf-8').read(
 readme = r"""SHODAN Stat Editor Offline v{version}  (SSEO)
 by SHODAN - https://github.com/SHODAN-HORAI/SHODAN-Stat-Editor
 
-Change the stats of weapons, throwables, stratagems, vehicles, attachments and armor passives in Helldivers 2's
-own data files. No mod loader, and the game does not need to run: the changes apply when the game starts.
+Change the stats of weapons, throwables, stratagems, vehicles, boosters, attachments and armor passives in
+Helldivers 2's own data files. The Enemy Editor (click "SHODAN Enemy Editor" at the top left) changes every
+enemy, your SEAF allies and how they spawn, and keeps custom difficulties as presets. No mod loader, and the
+game does not need to run: the changes apply when the game starts.
 
 HOW TO USE
 1. Close Helldivers 2.
@@ -37,6 +39,16 @@ HOW TO USE
 %LOCALAPPDATA%\SHODAN\StatEditor\originals, with your values, presets and logs.
 After a game update, or Steam's "Verify integrity of game files", the game's own files are back:
 start SSEO and press Install again.
+
+OTHER MODS
+SSEO should work alongside mods that change the same game files (other stat or stratagem tools) without
+conflict, as long as they go in first: SSEO keeps their changes and adds yours on top. This is not
+thoroughly tested yet.
+1. Install or apply the other mod.
+2. Start SSEO and press Install.
+3. To change or remove the other mod later, press Restore in SSEO first, change the other mod, then
+   press Install in SSEO again.
+Where both change the same stat, SSEO's value wins.
 
 UPDATES
 At start SSEO asks GitHub for its latest release. When there is a newer one, "Update to v..." appears at the

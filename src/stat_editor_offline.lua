@@ -1,6 +1,6 @@
 -- HD2-Addon: mods/shodan/stat_editor
--- SHODAN Stat Editor v3.2.0 by SHODAN. Run by SHODAN Stat Editor Offline (offline/host.lua).
-local MOD = { global = 'ShodanStatEditor', title = 'SHODAN Stat Editor', version = '3.2.0', author = 'SHODAN', log = 'SHODANStatEditor.log' }
+-- SHODAN Stat Editor v4.0.0 by SHODAN. Run by SHODAN Stat Editor Offline (offline/host.lua).
+local MOD = { global = 'ShodanStatEditor', title = 'SHODAN Stat Editor', version = '4.0.0', author = 'SHODAN', log = 'SHODANStatEditor.log' }
 -- magazines, heatsinks and ammunition types: the game's names, by the text id of the item (its English text)
 MOD.item_names = {
     [0x046FF548] = '5.5x50mm Ripper',
@@ -376,10 +376,123 @@ MOD.round_names = {
     [354] = '70mm Laser-Guided Missile Mk2',
     [355] = '85mm High-Explosive Grenade Mk2',
 }
+-- armors: the game's names, by the text id of the armor kit
+MOD.kit_names = {
+    [0x04533C7A] = 'EX-00 Prototype X',
+    [0x04E317CA] = 'CM-21 Trench Paramedic',
+    [0x056E4441] = 'B-22 Model Citizen',
+    [0x09D77183] = 'TG-8 Sharpshooter',
+    [0x0F8B6B05] = 'CM-17 Butcher',
+    [0x10D32856] = 'SA-32 Dynamo',
+    [0x112A1FEE] = 'SS-500 Pale Prosecutor',
+    [0x11644CBD] = 'AF-52 Lockdown',
+    [0x11E71326] = 'EX-03 Prototype 3',
+    [0x15385B49] = 'CW-4 Arctic Ranger',
+    [0x1B1CF8E3] = 'UF-16 Inspector',
+    [0x1D305570] = 'SA-8 Ram',
+    [0x1E0BABAE] = 'SA-25 Steel Trooper',
+    [0x1F5B4D7A] = 'CM-09 Bonesnapper',
+    [0x2064551F] = 'RS-20 Constrictor',
+    [0x23A903AE] = 'GS-11 Democracy\'s Deputy',
+    [0x249D7091] = 'CE-27 Ground Breaker',
+    [0x27825499] = 'TR-40 Gold Eagle',
+    [0x282F3770] = 'I-92 Fire Fighter',
+    [0x2BF1345D] = 'I-09 Heatseeker',
+    [0x2D487598] = 'BP-20 Correct Officer',
+    [0x2EF383C1] = 'SA-7 Headfirst',
+    [0x366B891B] = 'RS-40 Beast of Prey',
+    [0x38168B90] = 'FS-55 Devastator',
+    [0x38298D27] = 'RS-6 Fiend Destroyer',
+    [0x3E9C501E] = 'B-24 Enforcer',
+    [0x4269DD2F] = 'AD-26 Bleeding Edge',
+    [0x43BD29BB] = 'TR-62 Knight',
+    [0x44DC4579] = 'SC-34 Infiltrator',
+    [0x49225B9A] = 'EX-16 Prototype 16',
+    [0x4B6FD4A6] = 'CE-35 Trench Engineer',
+    [0x4FD99C0F] = 'B-16 Battle-Scarred Veteran',
+    [0x523BA461] = 'FS-23 Battle Master',
+    [0x538E1ED3] = 'BP-77 Grand Juror',
+    [0x540BA0B2] = 'CE-74 Breaker',
+    [0x56D77FAC] = 'A-9 Helljumper',
+    [0x56ECCA5C] = 'SA-12 Servo-Assisted',
+    [0x57B55E42] = 'AF-91 Field Chemist',
+    [0x59DBA404] = 'GS-66 Lawmaker',
+    [0x5A1E06D4] = 'O-2 Heavy Operator',
+    [0x5A24D0D0] = 'SR-64 Cinderblock',
+    [0x5DD5E780] = 'BFM-77 Reformer',
+    [0x606233AB] = 'CW-36 Winter Warrior',
+    [0x620A18C5] = 'PH-9 Predator',
+    [0x62EA456F] = 'IE-12 Righteous',
+    [0x6857AC79] = 'UF-84 Doubt Killer',
+    [0x6CCC59A7] = 'SA-04 Combat Technician',
+    [0x6E531B9A] = 'BP-32 Jackboot',
+    [0x70CF3B78] = 'FS-61 Dreadnought',
+    [0x7523B88D] = 'SS-15 Focal Point',
+    [0x779C24F9] = 'KDM-763 Pacesetter',
+    [0x780CCA87] = 'CE-67 Titan',
+    [0x7834520F] = 'SR-18 Roadblock',
+    [0x78755FA1] = 'B-01 Tactical',
+    [0x791E13F7] = 'PH-202 Twigsnapper',
+    [0x795C12F4] = 'DP-8 Mountain-Scaled',
+    [0x7EF0D18B] = 'B-08 Light Gunner',
+    [0x7FEF5D6D] = 'TR-9 Cavalier of Democracy',
+    [0x83C41D03] = 'AF-50 Noxious Ranger',
+    [0x83D0BBDC] = 'DP-00 Tactical',
+    [0x87F6B239] = 'DS-10 Big Game Hunter',
+    [0x893271F8] = 'TR-117 Alpha Commander',
+    [0x8A22602B] = 'SC-15 Drone Master',
+    [0x8F2D7126] = 'CM-14 Physician',
+    [0x90D5F96F] = 'IE-57 Hell-Bent',
+    [0x94DE5F89] = 'SS-33 Mimetic Marshal',
+    [0x996FDD44] = 'B-27 Fortified Commando',
+    [0x9EBCAD7F] = 'I-44 Salamander',
+    [0xA1653599] = 'KDM-73 Dragoon',
+    [0xA23CABAE] = 'FS-37 Ravager',
+    [0xA270CA6E] = 'RE-1861 Parade Commander',
+    [0xA2D73A98] = 'O-3 Free Spirit',
+    [0xA3222D58] = 'DS-191 Scorpion',
+    [0xA3536DD3] = 'DP-11 Champion of the People',
+    [0xA4E420FB] = 'UF-50 Bloodhound',
+    [0xA5972E25] = 'CM-10 Clinician',
+    [0xAA028EAF] = 'RE-2310 Honorary Guard',
+    [0xAA21A238] = 'CE-101 Guerilla Gorilla ',
+    [0xAD028A55] = 'FS-11 Executioner',
+    [0xAD456275] = 'CE-81 Juggernaut',
+    [0xAD6A4B44] = 'CE-07 Demolition Specialist',
+    [0xB4FE6545] = 'A-35 Recon',
+    [0xB70378BC] = 'FS-05 Marksman',
+    [0xBC776BF1] = 'SC-30 Trailblazer Scout',
+    [0xBEB90174] = 'AF-02 Haz-Master',
+    [0xC25D4D98] = 'CW-9 White Wolf',
+    [0xC692CC5E] = 'AC-1 Dutiful',
+    [0xC7D6E5ED] = 'AD-11 Livewire',
+    [0xD1923A46] = 'CW-22 Kodiak',
+    [0xD3DED852] = 'DP-40 Hero of the Federation',
+    [0xD54B8082] = 'RS-67 Null Cipher',
+    [0xDA47855A] = 'CE-64 Grenadier',
+    [0xDD009AD7] = 'SC-37 Legionnaire',
+    [0xDD05CD51] = 'SR-24 Street Scout',
+    [0xDD537C15] = 'TR-7 Ambassador of the Brand',
+    [0xE060E14F] = 'AD-49 Apollonian',
+    [0xE333B56E] = 'DS-42 Federation\'s Blade',
+    [0xE4D5B461] = 'PH-56 Jaguar',
+    [0xE8162B4A] = 'TG-122 Demo-Trooper',
+    [0xE85249F5] = 'BFM-220 Ironclad',
+    [0xE85E6600] = 'AC-2 Obedient',
+    [0xE867121D] = 'CPR-80 Bulwark',
+    [0xE9248FAC] = 'GS-17 Frontier Marshall',
+    [0xECA42A1F] = '',
+    [0xECB02294] = 'I-102 Draconaught',
+    [0xEE8E36D3] = 'DP-53 Saviour of the Free',
+    [0xF0ABC83F] = 'FS-38 Eradicator',
+    [0xF5787144] = 'IE-3 Martyr',
+    [0xFE5E96BE] = 'FS-34 Exterminator',
+}
 -- vehicle parts (damage zones): their names, by hash
 MOD.vehicle_parts = {
     [0x04361A85] = 'Left box 0',
     [0x0A3AD217] = 'Right side panel 1',
+    [0x1CA30E1F] = 'Front right wheel hub',
     [0x2374EAE2] = 'Back periscope side 8',
     [0x2739DFAC] = 'Front right cockpit',
     [0x28B43F0A] = 'Right front block',
@@ -413,6 +526,9 @@ MOD.vehicle_parts = {
     [0xCA47A7A9] = 'Front left cockpit',
     [0xD67B6D46] = 'Front hull',
     [0xD7533836] = 'Right box 1',
+    [0xDA4E893D] = 'Back right wheel hub',
+    [0xDCF4D6AF] = 'Back left wheel hub',
+    [0xDDA1B25E] = 'Front left wheel hub',
     [0xE1B844F5] = 'Rear cockpit',
     [0xECD09CBC] = 'Antenna',
     [0xEE2D8C68] = 'Left top block',
@@ -420,12 +536,205 @@ MOD.vehicle_parts = {
     [0xFA833708] = 'Back hatch',
     [0xFD477E17] = 'Radar',
 }
+-- the Enemy Editor's enemies (HD2Runtime's enemy catalogue): faction, kind, name, variant, entity, zones
+MOD.ENEMY_LIST = {
+    { 'automatons', 'structure', 'Ammunition Stockpile', '', '61D99052540F61A3', '0=all', '' },
+    { 'automatons', 'enemy', 'War Strider', '', 'EF570293245A17C2', '0=leg_left;1=l_hip;2=l_leg_shield;3=r_leg_shield;4=leg_right;5=r_hip;6=turret;7=l_rocketpod;8=r_rocketpod;9=torso;10=eye', '' },
+    { 'illuminate', 'enemy', 'Crescent Overseer', '', 'E8F19A0AA958E46D', '0=head;1=torso;2=arms_right;3=arms_left;4=legs_left;5=legs_right;22=torso_armor;24=hips_armor', '' },
+    { 'automatons', 'enemy', 'Berserker', 'Base', 'A6A68D8AF177F3A1', '0=head;1=chest_left;2=boss;3=pelvis;4=l_shoulderplate;5=r_shoulderplate;6=right_arm;7=left_arm;8=right_leg;9=left_leg', '613=Chainsaw;614=Stomp' },
+    { 'automatons', 'enemy', 'Berserker', 'Iron fleet', '54E107DACF6929CB', '0=head;1=chest_left;2=boss;3=pelvis;4=l_shoulderplate;5=r_shoulderplate;6=right_arm;7=left_arm;8=right_leg;9=left_leg', '613=Chainsaw;614=Stomp' },
+    { 'automatons', 'enemy', 'Berserker', 'Ivory legion', 'B5DBC0C240C921AD', '0=head;1=chest_left;2=boss;3=pelvis;4=l_shoulderplate;5=r_shoulderplate;6=right_arm;7=left_arm;8=right_leg;9=left_leg', '613=Chainsaw;614=Stomp' },
+    { 'automatons', 'enemy', 'Berserker', 'Jumppack', 'D5792F6856B06BA4', '0=head;1=chest_left;2=boss;3=pelvis;4=l_shoulderplate;5=r_shoulderplate;6=right_arm;7=left_arm;8=right_leg;9=left_leg', '613=Chainsaw;614=Stomp' },
+    { 'automatons', 'enemy', 'Big walker cannon', '', '843D18D4B5512B63', '0=barrel', '' },
+    { 'terminids', 'structure', 'Blocking rock', '', 'C4FEEC77882AE03E', '0=egg', '' },
+    { 'illuminate', 'enemy', 'Wretch', '', 'CC188F0C80505C6C', '0=l_wrist_blade;1=l_shoulder_blade;2=r_wrist_blade;3=r_shoulder_blade;4=left_arm;5=right_arm;6=left_leg;7=right_leg;8=head;9=chest', '' },
+    { 'illuminate', 'enemy', 'Crusher', '', '905809A4C28D8A45', '0=helmet;1=head;2=torso;3=left_arm;4=right_arm;5=pelvis;6=left_leg;7=right_leg', '' },
+    { 'terminids', 'enemy', 'Bile Spewer', 'Base', '36AA99CCE5E60146', '0=head;1=mouth;2=lower_spine;3=spine_plate;4=r_front_leg;5=l_front_leg;6=r_back_leg;7=l_back_leg', '' },
+    { 'terminids', 'enemy', 'Rupture Spewer', '', 'A381A11C07D3EB94', '0=head;1=mouth;2=lower_spine;3=spine_plate;4=r_front_leg;5=l_front_leg;6=r_back_leg;7=l_back_leg', '' },
+    { 'terminids', 'enemy', 'Nursing Spewer', 'Base', 'CC7022FDD172089B', '0=head;1=mouth;2=lower_spine;3=spine_plate;4=r_front_leg;5=l_front_leg;6=r_back_leg;7=l_back_leg', '' },
+    { 'terminids', 'enemy', 'Nursing Spewer', 'Mission', '6021E22338333D88', '0=head;1=mouth;2=lower_spine;3=spine_plate;4=r_front_leg;5=l_front_leg;6=r_back_leg;7=l_back_leg', '' },
+    { 'terminids', 'enemy', 'Bile Spewer', 'Tier 2', 'CCAE5264ACD591B7', '0=head;1=mouth;2=lower_spine;3=spine_plate;4=r_front_leg;5=l_front_leg;6=r_back_leg;7=l_back_leg', '' },
+    { 'terminids', 'structure', 'Spore Spewer', 'Base', 'AA28CAF964D05500', '', '' },
+    { 'terminids', 'structure', 'Spore Spewer', 'Large', 'E02E6BD34B606A85', '', '' },
+    { 'terminids', 'structure', 'Spore Spewer', 'Tcs', '15031543894C3F3C', '', '' },
+    { 'terminids', 'structure', 'Larva Container', '', '9EA89CEEA6F8E766', '', '' },
+    { 'terminids', 'structure', 'Shrieker Nest', '', '095686275A113614', '0=all', '' },
+    { 'illuminate', 'structure', 'Explosive Barrel', '', 'FDFADE29AE5FE1D0', '0=collision', '' },
+    { 'terminids', 'structure', 'Hive Breaker Drill', '', 'DF3C4F91E298BFA4', '0=drill', '' },
+    { 'automatons', 'enemy', 'Devastator', 'Jump pack', 'BE743B2FAA3A6E26', '0=head;1=chest;2=boss;3=pelvis;4=l_shoulderplate;5=r_shoulderplate;6=right_arm;7=left_arm;8=right_hip;9=right_hip;10=right_leg;11=left_leg', '' },
+    { 'terminids', 'enemy', 'Charger', '', '1A7FCDFF98C664B0', '0=head;1=body_rear;3=torso_underside;4=torso_inside;7=back_leg_l;8=back_leg_r;9=middle_leg_l;10=middle_leg_r;15=front_leg_l;16=front_leg_r', '579=Charge destruction;580=Charge hit infantry;581=Charge hit vehicle;582=Melee crush;583=Obstacle crush' },
+    { 'terminids', 'enemy', 'Spore Charger', '', '6B202392F4AB605E', '0=head;1=body_rear;3=torso_underside;4=torso_inside;7=back_leg_l;8=back_leg_r;9=middle_leg_l;10=middle_leg_r;15=front_leg_l;16=front_leg_r;23=neck', '579=Charge destruction;580=Charge hit infantry;581=Charge hit vehicle;582=Melee crush;583=Obstacle crush' },
+    { 'terminids', 'enemy', 'Charger Behemoth', 'Bull', '3AFF5FD7D5450B99', '0=head;1=body_rear;3=torso_underside;4=torso_inside;7=back_leg_l;8=back_leg_r;9=middle_leg_l;10=middle_leg_r;15=front_leg_l;16=front_leg_r', '579=Charge destruction;580=Charge hit infantry;581=Charge hit vehicle;582=Melee crush;583=Obstacle crush' },
+    { 'terminids', 'enemy', 'Rupture Charger', '', '0AB7B92B131C228C', '0=head;1=body_rear;3=torso_underside;4=torso_inside;7=back_leg_l;8=back_leg_r;9=middle_leg_l;10=middle_leg_r;11=middle_leg_r;12=middle_leg_l;17=front_leg_l;18=front_leg_r', '579=Charge destruction;580=Charge hit infantry;581=Charge hit vehicle;582=Melee crush;583=Obstacle crush' },
+    { 'terminids', 'enemy', 'Charger Behemoth', 'Tier2', 'A05BD1EC67B3AC4C', '0=head;1=body_rear;3=torso_underside;4=torso_inside;7=back_leg_l;8=back_leg_r;9=middle_leg_l;10=middle_leg_r;15=front_leg_l;16=front_leg_r', '579=Charge destruction;580=Charge hit infantry;581=Charge hit vehicle;582=Melee crush;583=Obstacle crush' },
+    { 'automatons', 'structure', 'Chemical Backpack', '', '43EC60F66E7E046B', '', '' },
+    { 'automatons', 'structure', 'Bulk Fabricator', '', '4232EE48E2CFD24E', '0=insides', '' },
+    { 'automatons', 'structure', 'Command Bunker', '', '6E499C5C95B019FC', '', '' },
+    { 'automatons', 'structure', 'Command bunker', 'Side', '298C464F7F4261E3', '', '' },
+    { 'automatons', 'structure', 'Command bunker', 'Top', '485C04E03CCC969E', '', '' },
+    { 'automatons', 'enemy', 'Trooper LMG backpack', '', '426B3DF007BE9F18', '', '' },
+    { 'automatons', 'enemy', 'Trooper', 'Base', '7ECE5304F868F6B3', '0=head;1=chest;2=left_arm;3=right_arm;4=leg_right;5=leg_left', '605=Shove;606=Assaultfist' },
+    { 'automatons', 'enemy', 'Commissar', 'Base', 'A71AAFD82C6EBC92', '0=head;1=chest;2=left_arm;3=right_arm;4=leg_right;5=leg_left', '605=Shove;606=Assaultfist' },
+    { 'automatons', 'enemy', 'Commissar', 'Jump', '215CE160A17BE4CD', '0=head;1=chest;2=left_arm;3=right_arm;4=leg_right;5=leg_left', '605=Shove;606=Assaultfist' },
+    { 'automatons', 'enemy', 'Trooper', 'Elite', '7B48CACDBACB3881', '0=head;1=chest;2=left_arm;3=right_arm;4=leg_right;5=leg_left', '605=Shove;606=Assaultfist' },
+    { 'automatons', 'enemy', 'Pyro Trooper', '', '82A87AD8D595B2BA', '0=head;1=chest;2=left_arm;3=right_arm;4=leg_right;5=leg_left', '605=Shove;606=Assaultfist' },
+    { 'automatons', 'enemy', 'Trooper', 'Ivory legion', '9F57782F00E6ED20', '0=head;1=chest;2=left_arm;3=right_arm;4=leg_right;5=leg_left', '605=Shove;606=Assaultfist' },
+    { 'automatons', 'enemy', 'Raider', 'Ivory legion tier 2', 'E683D2CA5618D74A', '0=head;1=chest;2=left_arm;3=right_arm;4=leg_right;5=leg_left', '605=Shove;606=Assaultfist' },
+    { 'automatons', 'enemy', 'Trooper', 'Jump', 'AF0F9B3A163787A5', '0=head;1=chest;2=left_arm;3=right_arm;4=leg_right;5=leg_left', '605=Shove;606=Assaultfist' },
+    { 'automatons', 'enemy', 'Assault Raider', '', '856E9710E45E760F', '0=head;1=chest;2=left_arm;3=right_arm;4=backpack;5=leg_left', '605=Shove;606=Assaultfist' },
+    { 'automatons', 'enemy', 'Trooper jump pack', '', 'E2E62FDD39407FE3', '0=collision', '' },
+    { 'automatons', 'enemy', 'Brawler', '', 'D8CBC4A807A6D035', '0=left_arm;1=chest;2=left_arm;3=right_arm;4=leg_right;5=leg_left', '605=Shove;606=Assaultfist' },
+    { 'automatons', 'enemy', 'Scout Raider', '', '30CF04B2EC8C9BD4', '0=head;1=chest;2=left_arm;3=right_arm;4=backpack;5=leg_left', '605=Shove;606=Assaultfist' },
+    { 'automatons', 'enemy', 'Trooper', 'Scout walker rider', 'FB9937035D652C43', '0=head;1=chest;2=left_arm;3=right_arm;4=leg_right;5=leg_left', '605=Shove;606=Assaultfist' },
+    { 'automatons', 'enemy', 'Trooper', 'Shotgun', '257D805CAA7E10C0', '0=head;1=chest;2=left_arm;3=right_arm;4=leg_right;5=leg_left', '605=Shove;606=Assaultfist' },
+    { 'automatons', 'enemy', 'Trooper', 'Tier 1', '4019623142351CB6', '0=head;1=chest;2=left_arm;3=right_arm;4=leg_right;5=leg_left', '605=Shove;606=Assaultfist' },
+    { 'automatons', 'enemy', 'Raider', 'Tier 2', '64BA5F030B114EC1', '0=head;1=chest;2=left_arm;3=right_arm;4=leg_right;5=leg_left', '605=Shove;606=Assaultfist' },
+    { 'automatons', 'enemy', 'Marauder', '', '0002BA767DF856F3', '0=head;1=chest;2=left_arm;3=right_arm;4=leg_right;5=leg_left', '605=Shove;606=Assaultfist' },
+    { 'illuminate', 'enemy', 'Voteless', 'Base', '78E1497571012C47', '1=arm_r;2=r_hand;3=arm_l;4=l_hand;5=l_foot;6=r_foot', '621=Swipe and claw' },
+    { 'illuminate', 'enemy', 'Voteless', 'V2', '0ADC9F9173AD8E1D', '1=arm_r;2=r_hand;3=arm_l;4=l_hand;5=l_foot;6=r_foot', '621=Swipe and claw' },
+    { 'illuminate', 'enemy', 'Voteless', 'V3', '44458A2C52B002FB', '1=arm_r;2=r_hand;3=arm_l;4=l_hand;5=l_foot;6=r_foot', '621=Swipe and claw' },
+    { 'automatons', 'enemy', 'Agitator', 'Base', '9D8827FED763650E', '0=l_elbow;1=l_shoulder;2=r_shoulder;3=r_elbow;4=head;7=pelvis', '' },
+    { 'automatons', 'enemy', 'Agitator', 'Female', '09FE0BE51A23396C', '0=l_elbow;1=l_shoulder;2=r_shoulder;3=r_elbow;4=head;7=pelvis', '' },
+    { 'automatons', 'enemy', 'Radical', 'Base', '746A7F3BEDA32699', '0=l_elbow;1=l_shoulder;2=r_shoulder;3=r_elbow;4=head;7=pelvis', '' },
+    { 'automatons', 'enemy', 'Radical', 'Female', 'CBB1BA3366009C3A', '0=l_elbow;1=l_shoulder;2=r_shoulder;3=r_elbow;4=head;7=pelvis', '' },
+    { 'terminids', 'enemy', 'Dragonroach', '', '960B48A421A3FAAA', '16=head;17=torso_left;18=torso_right;19=butt_lower;20=left_arm;21=right_arm;22=inner_body;23=inner_torso;26=rb_wing;27=lb_wing;28=lf_wing;29=rf_wing', '' },
+    { 'automatons', 'enemy', 'Dropship', '', 'DB90077E76FAA025', '0=body;1=back_body;2=front_left_thruster;3=back_pump_flamer;4=l_rear_engine_pitch;5=r_rear_engine_pitch', '' },
+    { 'terminids', 'structure', 'Egg', '', '06D3C4720E642FC1', '0=egg', '' },
+    { 'terminids', 'structure', 'Egg cluster', 'Base', '480445A33039CE5E', '0=egg', '' },
+    { 'terminids', 'structure', 'Egg cluster', 'Destroyed', 'AE8666D603EE51FF', '0=egg', '' },
+    { 'automatons', 'structure', 'HMG Emplacement', '', 'A98F8B559C7993D8', '0=body_front', '' },
+    { 'automatons', 'structure', 'MG Emplacement', '', '2C1A7790C435FD67', '0=main_body;1=gunshield', '' },
+    { 'illuminate', 'structure', 'Landed ship door shield', '', '1449EB0752E0476E', '0=shield_zone', '' },
+    { 'automatons', 'enemy', 'Devastator jump pack', '', '33B3E0CE8D179EEC', '0=collision', '' },
+    { 'illuminate', 'enemy', 'Veracitor', '', '20B9C7734DAEAD65', '0=pilot_seat;2=boss;10=left_arm;14=right_arm;17=left_hip;19=left_leg;20=right_hip;22=right_leg;25=shield', '' },
+    { 'illuminate', 'enemy', 'Gatekeeper', '', '453FE22C634EB30F', '0=pilot_seat;2=boss;11=left_arm;14=left_gun;16=right_arm;19=right_gun;20=left_hip;21=left_leg;24=right_hip;25=right_leg;28=back_hip;32=shield', '' },
+    { 'automatons', 'structure', 'Fleet ship', '', '99CB7F36F9A951F9', '', '' },
+    { 'automatons', 'structure', 'Grinder', '', 'E2E6E77DCC99A1CB', '0=navigation', '' },
+    { 'automatons', 'enemy', 'Gunship', '', '282EB766C1FFA6A1', '0=body;1=front_left_thruster;2=back_pump_flamer;3=back_right_thruster;4=back_left_thruster', '' },
+    { 'illuminate', 'structure', 'Harvester objective', '', 'BB2984B9B83EBFD1', '', '' },
+    { 'illuminate', 'enemy', 'Shield forcefield', 'Hexagon', 'DAC7D53FE0749F5F', '0=c_hex_01;1=c_hex_02;2=c_hex_03;3=c_hex_04;4=c_hex_05;5=c_hex_06;6=c_hex_07;7=c_hex_08;8=c_hex_09;9=c_hex_10;10=c_hex_12;11=c_hex_13;12=c_hex_14;13=c_hex_15;14=c_hex_16;15=c_hex_17;16=c_hex_18;17=c_hex_19', '' },
+    { 'terminids', 'enemy', 'Hive Lord', '', 'D465D9C7F77A07CB', '0=jaws;1=crown;2=spine5;3=spine4;4=spine3;5=spine2;6=spine1;7=spine0;8=boss;9=spine_roll_back;10=spine_roll_back;11=spine_roll_back;12=defeat_arrowhead;13=spine_roll_back;14=boss_back;15=body_collision_spine;17=body_collision_spine;19=body_collision_spine;21=body_head;22=l_pincer;23=r_pincer;24=l_leg;25=r_leg;26=l_leg;27=r_leg;28=spine1_l_leg;29=spine1_r_leg;30=spine2_l_leg;31=spine2_r_leg;32=spine3_l_leg;33=spine3_r_leg;34=spine4_l_leg;35=spine4_r_leg;36=spine5_l_leg;37=spine5_r_leg', '' },
+    { 'terminids', 'enemy', 'Hunter', 'Base', 'D9511E9F6BD62E3F', '0=head;1=l_front_leg;2=r_front_leg;3=l_rear_leg;4=r_rear_leg;5=l_claw;6=r_claw;7=r_wing;8=l_wing', '586=Melee;587=Tongue;588=Pounce;589=Sync kill' },
+    { 'terminids', 'enemy', 'Spore Burst Hunter', '', '1F0A91729C0004E0', '0=head;1=l_front_leg;2=r_front_leg;3=l_rear_leg;4=r_rear_leg;5=l_claw;6=r_claw;7=r_wing;8=l_wing', '586=Melee;587=Tongue;588=Pounce;589=Sync kill' },
+    { 'terminids', 'enemy', 'Hunter', 'Tier 1', '3D0E03E2D574E1CA', '0=head;1=l_front_leg;2=r_front_leg;3=l_rear_leg;4=r_rear_leg;5=l_claw;6=r_claw;7=r_wing;8=l_wing', '586=Melee;587=Tongue;588=Pounce;589=Sync kill' },
+    { 'terminids', 'enemy', 'Hunter', 'Tier 2', '5CA832447445C0BA', '0=head;1=l_front_leg;2=r_front_leg;3=l_rear_leg;4=r_rear_leg;5=l_claw;6=r_claw;7=r_wing;8=l_wing', '586=Melee;587=Tongue;588=Pounce;589=Sync kill' },
+    { 'terminids', 'enemy', 'Predator Hunter', '', '883401AF2A98A5F6', '0=head;1=l_front_leg;2=r_front_leg;3=l_rear_leg;4=r_rear_leg;5=l_claw;6=r_claw;7=r_wing;8=l_wing', '586=Melee;587=Tongue;588=Pounce;589=Sync kill' },
+    { 'illuminate', 'enemy', 'Stingray', '', '19E18B46EC55D94A', '0=back_body;1=front_body;2=l_wing;3=r_wing;4=l_weapon_bay;5=r_weapon_bay', '' },
+    { 'illuminate', 'enemy', 'Warp Ship', '', '74E2285C01DA4F71', '0=body_left;1=body_right;2=fin_front;3=beamer;4=back_wing_right;5=back_wing_left;6=middle_wing_right;7=middle_wing_left', '' },
+    { 'illuminate', 'enemy', 'Overseer', 'Base', 'DA40BB347C7447F2', '0=head;1=torso;2=arms_right;3=arms_left;4=legs_left;5=legs_right;22=torso_armor;24=hips_armor', '622=Dash stun;623=Quick slash;624=Blunt swipe;625=Overhead slash;626=Staff explosion' },
+    { 'illuminate', 'enemy', 'Overseer', 'Fake', 'F1610AC48CDC5240', '0=head;1=torso;2=arms_right;3=arms_left;4=legs_left;5=legs_right;22=torso_armor;24=hips_armor', '622=Dash stun;623=Quick slash;624=Blunt swipe;625=Overhead slash;626=Staff explosion' },
+    { 'illuminate', 'enemy', 'Xenobite Ardent', '', '08E6FFC2474287BD', '0=head;1=torso;2=arms_right;3=arms_left;4=legs_left;5=legs_right;22=torso_armor;24=hips_armor', '622=Dash stun;623=Quick slash;624=Blunt swipe;625=Overhead slash;626=Staff explosion' },
+    { 'illuminate', 'enemy', 'Leviathan cannon', 'Base', '4E342031A9D5C4F9', '', '' },
+    { 'illuminate', 'enemy', 'Leviathan cannon', 'Left head', 'F196069E7E14C497', '', '' },
+    { 'illuminate', 'enemy', 'Leviathan cannon', 'Right head', '7ACB4BD753B71DE0', '', '' },
+    { 'illuminate', 'enemy', 'Leviathan', '', 'F22D027B37BEF107', '13=rotator', '' },
+    { 'illuminate', 'enemy', 'Leviathan bomb', '', 'AF8529D541954E88', '', '' },
+    { 'terminids', 'enemy', 'Impaler', 'Base', 'DCF8E74212FBEE3B', '0=head;1=torso_inside;2=torso_outside;3=middle_leg_l;5=middle_leg_r;7=back_leg_l;8=back_leg_r;15=body_rear;16=torso_underside;17=l_tentacle;18=m_tentacle;19=r_tentacle', '442=Tentacle impact;590=Melee crush' },
+    { 'terminids', 'enemy', 'Impaler', 'Tentacle', '672F7DA17F3BA34A', '', '442=Tentacle impact' },
+    { 'illuminate', 'enemy', 'Elevated Overseer', '', '604A794EC45BB820', '0=head;1=torso;2=arms_right;3=arms_left;4=legs_left;5=legs_right;22=torso_armor;24=hips_armor', '' },
+    { 'automatons', 'structure', 'Automaton Dropship', '', 'D84FFC32A6E640A8', '', '' },
+    { 'automatons', 'enemy', 'Hulk Obliterator', '', '1E66EE1F6F7FD00E', '0=left_arm;1=right_arm;2=left_leg;3=right_leg;4=head', '607=Shove;608=Saw;609=Stomp;610=Obstacle large' },
+    { 'automatons', 'enemy', 'Hulk Scorcher', 'Assault', '3E0537D606438FEA', '0=left_arm;1=right_arm;2=left_leg;3=right_leg;4=head', '607=Shove;608=Saw;609=Stomp;610=Obstacle large' },
+    { 'automatons', 'enemy', 'Hulk', '', '96BA14C9EBB49CE1', '0=left_arm;1=right_arm;2=left_leg;3=right_leg;4=head', '607=Shove;608=Saw;609=Stomp;610=Obstacle large' },
+    { 'automatons', 'enemy', 'Hulk flag', 'Base', '8FC2784308E9BA99', '', '' },
+    { 'automatons', 'enemy', 'Hulk flag', 'Ivory legion', 'C2B9EB21B06F8378', '', '' },
+    { 'automatons', 'enemy', 'Hulk Firebomber', '', '6DAB2EADF5D8B692', '0=left_arm;1=right_arm;2=left_leg;3=right_leg;4=head', '607=Shove;608=Saw;609=Stomp;610=Obstacle large' },
+    { 'automatons', 'enemy', 'Hulk Scorcher', 'Ivory legion assault', '1897BDD32105D2DC', '0=left_arm;1=right_arm;2=left_leg;3=right_leg;4=head', '607=Shove;608=Saw;609=Stomp;610=Obstacle large' },
+    { 'automatons', 'enemy', 'Hulk jetpack', '', 'B940C889D77F8219', '0=collision', '' },
+    { 'automatons', 'enemy', 'Hulk Bruiser', '', '137988CEA16458F7', '0=left_arm;1=right_arm;2=left_leg;3=right_leg;4=head', '607=Shove;608=Saw;609=Stomp;610=Obstacle large' },
+    { 'illuminate', 'enemy', 'Fleshmob', '', '67DC32DCA4F02D33', '0=stomach_zone;1=left_leg;2=right_leg;3=lower_back;4=front_face;5=front_left_face;7=front_right_face;8=head_zone;9=back_face;10=l_elbow;11=r_elbow;12=l_extra_elbow;13=r_extra_elbow', '' },
+    { 'illuminate', 'structure', 'Overship', '', 'BAF9DBD86B22270A', '0=body_default;1=body_default;2=head', '' },
+    { 'illuminate', 'structure', 'Hijack Tech Hub Nexus Machine', '', '68053EAE33FFA084', '', '' },
+    { 'illuminate', 'enemy', 'Watcher', '', 'AC60E78435098C9D', '0=body;1=right_wing;2=left_wing;3=bottom_wing;4=top_wing;5=eye', '' },
+    { 'terminids', 'enemy', 'Scavenger', 'Base', '8FF0A839830A7692', '0=r_foreleg_shoulder;1=l_foreleg_wrist;2=r_hindleg_wrist;4=face', '597=Stab' },
+    { 'terminids', 'enemy', 'Spore Burst Scavenger', '', 'DB964631BE1CF501', '0=r_foreleg_shoulder;1=l_foreleg_wrist;2=r_hindleg_wrist;4=face', '597=Stab' },
+    { 'terminids', 'enemy', 'Pouncer', '', 'AAB438596F5E8FD9', '0=r_foreleg_shoulder;1=l_foreleg_wrist;2=r_hindleg_wrist;4=face', '597=Stab' },
+    { 'terminids', 'enemy', 'Bile Spitter', '', '72A83E49CED6DB3D', '0=r_foreleg_shoulder;1=l_foreleg_wrist;2=r_hindleg_wrist;4=face', '' },
+    { 'terminids', 'enemy', 'Scavenger', 'Tier 1', '51EEA86BF6997E4E', '0=r_foreleg_shoulder;1=l_foreleg_wrist;2=r_hindleg_wrist;4=face', '597=Stab' },
+    { 'terminids', 'enemy', 'Scavenger', 'Tier 1 captive', 'DFBACBD977A948DC', '0=r_foreleg_shoulder;1=l_foreleg_wrist;2=r_hindleg_wrist;4=face', '597=Stab' },
+    { 'terminids', 'enemy', 'Scavenger', 'Tier 2', '9A8A3AAE287B230C', '0=r_foreleg_shoulder;1=l_foreleg_wrist;2=r_hindleg_wrist;4=face', '597=Stab' },
+    { 'illuminate', 'enemy', 'Shield forcefield', 'Outcast', 'C0DF2A134BD15AD5', '0=c_hex_01;1=c_hex_02;2=c_hex_03;3=c_hex_04;4=c_hex_05;5=c_hex_06;6=c_hex_07;7=c_hex_08;8=c_hex_09', '' },
+    { 'terminids', 'enemy', 'Shrieker', 'Base', '64090088502435DD', '0=l_rear_leg;1=head;2=r_front_wing_flap;3=l_front_wing_flap', '598=Dive;599=Pounce' },
+    { 'terminids', 'enemy', 'Shrieker', 'Gloom', 'F0B26FA9258128D3', '0=l_rear_leg;1=head;2=r_front_wing_flap;3=l_front_wing_flap', '598=Dive;599=Pounce' },
+    { 'automatons', 'enemy', 'Vox Engine', '', 'BC242702FB46B7E7', '0=torso;1=left_speaker;2=right_speaker;3=left_head_flap;4=right_head_flap;5=left_front_track_knee;6=left_back_track_knee;7=right_front_track_knee;8=right_back_track_knee;9=left_front_track_bar;10=left_back_track_bar;11=right_front_track_bar;12=right_back_track_bar;13=vent_back_bar;17=vent_sarcophagus;18=vent_under;22=left_rocket;23=right_rocket;24=head;25=tracks', '' },
+    { 'automatons', 'enemy', 'Devastator', 'Base', 'AE63E525853D7044', '0=head;1=chest;2=boss;3=pelvis;4=l_shoulderplate;5=r_shoulderplate;6=right_arm;7=left_arm;8=right_hip;9=right_hip;10=right_leg;11=left_leg', '611=Punch;614=Stomp' },
+    { 'automatons', 'enemy', 'Devastator', 'Iron fleet', 'C626D2BB495A202D', '0=head;1=chest;2=boss;3=pelvis;4=l_shoulderplate;5=r_shoulderplate;6=right_arm;7=left_arm;8=right_hip;9=right_hip;10=right_leg;11=left_leg', '611=Punch;614=Stomp' },
+    { 'automatons', 'enemy', 'Devastator', 'Ivory legion', '57EED0EAC346CD9D', '0=head;1=chest;2=boss;3=pelvis;4=l_shoulderplate;5=r_shoulderplate;6=right_arm;7=left_arm;8=right_hip;9=right_hip;10=right_leg;11=left_leg', '611=Punch;614=Stomp' },
+    { 'automatons', 'enemy', 'Heavy Devastator', 'Base', 'B92435FBF60F0748', '0=head;1=chest;2=boss;3=pelvis;4=l_shoulderplate;5=r_shoulderplate;6=right_arm;7=left_arm;8=right_hip;9=right_hip;10=right_leg;11=left_leg;12=backpack', '611=Punch;614=Stomp' },
+    { 'automatons', 'enemy', 'Heavy Devastator', 'Assassinate', 'F8B5A81A86D5D4EB', '0=head;1=chest;2=boss;3=pelvis;4=l_shoulderplate;5=r_shoulderplate;6=right_arm;7=left_arm;8=right_hip;9=right_hip;10=right_leg;11=left_leg;12=backpack', '611=Punch;614=Stomp' },
+    { 'automatons', 'enemy', 'Incendiary MG Devastator', '', '58B2B86C11369241', '0=head;1=chest;2=boss;3=pelvis;4=l_shoulderplate;5=r_shoulderplate;6=right_arm;7=left_arm;8=right_hip;9=right_hip;10=right_leg;11=left_leg;12=backpack', '611=Punch;614=Stomp' },
+    { 'automatons', 'enemy', 'Rocket Devastator', 'Base', '9647B00CC3A9D36F', '0=head;1=chest;2=boss;3=pelvis;4=l_shoulderplate;5=r_shoulderplate;6=right_arm;7=left_arm;8=right_hip;9=right_hip;10=right_leg;11=left_leg;12=rocket_pods', '611=Punch;614=Stomp' },
+    { 'automatons', 'enemy', 'Rocket Devastator', 'Assassinate', 'F66D0BAD8693779A', '0=head;1=chest;2=boss;3=pelvis;4=l_shoulderplate;5=r_shoulderplate;6=right_arm;7=left_arm;8=right_hip;9=right_hip;10=right_leg;11=left_leg;12=rocket_pods', '611=Punch;614=Stomp' },
+    { 'automatons', 'enemy', 'Rocket Devastator', 'Ivory legion', 'C9BCCCB0A54A82A4', '0=head;1=chest;2=boss;3=pelvis;4=l_shoulderplate;5=r_shoulderplate;6=right_arm;7=left_arm;8=right_hip;9=right_hip;10=right_leg;11=left_leg;12=rocket_pods', '611=Punch;614=Stomp' },
+    { 'automatons', 'enemy', 'Heavy Devastator shield', 'Base', 'F96257FCAE258CAA', '0=main', '611=Punch;614=Stomp' },
+    { 'automatons', 'enemy', 'Heavy Devastator shield', 'Ivory legion', 'FEB484EE972469F7', '0=main', '611=Punch;614=Stomp' },
+    { 'automatons', 'enemy', 'Conflagration Devastator', '', 'E0353177F1329573', '0=head;1=chest;2=boss;3=pelvis;4=l_shoulderplate;5=r_shoulderplate;6=right_arm;7=left_arm;8=right_hip;9=right_hip;10=right_leg;11=left_leg', '611=Punch;614=Stomp' },
+    { 'automatons', 'enemy', 'Factory Strider', 'Base', 'D37E8D120D2836E3', '3=right_front_leg;7=right_back_leg;11=left_front_leg;15=left_back_leg;16=head_armor;17=head_body;18=neck_armor;19=neck_body;20=front_armor;21=left_armor;22=right_armor;24=engine_front;25=engine_rear;27=back_armor;28=front_body;29=right_body;30=left_body;31=back_body', '585=Obstacle' },
+    { 'automatons', 'structure', 'Fabricator', 'Airborne', '5158E582FBEB26BD', '0=insides', '' },
+    { 'automatons', 'structure', 'Fabricator', 'Assault', '22CC0ED4CEB9CB68', '0=insides', '' },
+    { 'automatons', 'structure', 'Fabricator', 'Base', 'F0B98FB953B13960', '0=insides', '' },
+    { 'automatons', 'structure', 'Fabricator', 'Phalanx', 'A1A7B76B29088843', '0=insides', '' },
+    { 'automatons', 'structure', 'Fabricator', 'Standard', '4FB8EB356AC8553E', '0=insides', '' },
+    { 'automatons', 'enemy', 'Factory Strider', 'Jammer', '30F2DEE2333F227A', '3=right_front_leg;7=right_back_leg;11=left_front_leg;15=left_back_leg;16=head_armor;17=head_body;18=neck_armor;19=neck_body;20=front_armor;21=left_armor;22=right_armor;24=engine_front;25=engine_rear;27=back_armor;28=front_body;29=right_body;30=left_body;31=back_body', '585=Obstacle' },
+    { 'terminids', 'structure', 'Spore Lung', '', 'DC901B71A3A73B9A', '', '' },
+    { 'terminids', 'enemy', 'Stalker', '', 'F540CA9D9D4A422E', '0=l_back_leg;1=l_front_leg;2=r_front_leg;3=r_back_leg;4=r_claw;5=l_claw;6=spine_lower;7=head;9=wings', '600=Stab;601=Tongue;602=Scream' },
+    { 'terminids', 'enemy', 'Bile Titan', '', '9E2E17F2CCCCAFDD', '16=head;17=torso_left;18=torso_right;19=butt_lower;20=left_arm;21=right_arm;22=inner_body;23=inner_torso', '307=Stomp shockwave;603=Stomp;604=Acid spray' },
+    { 'terminids', 'enemy', 'Spore Burst Bile Titan', '', 'EF04CB84D097A497', '16=head;17=torso_left;18=torso_right;19=butt_lower;20=left_arm;21=right_arm;22=inner_body;23=inner_torso', '307=Stomp shockwave;603=Stomp;604=Acid spray' },
+    { 'automatons', 'enemy', 'Shredder Tank', '', 'C6449FFD9EA3779C', '0=hull_front;1=hull_right;2=hull_left;3=hull_back;4=right_tracks;5=left_tracks', '' },
+    { 'automatons', 'enemy', 'Tank', '', '31BAE74D2F064D8D', '0=hull_front;1=hull_right;2=hull_left;3=hull_back;4=right_tracks;5=left_tracks', '' },
+    { 'automatons', 'enemy', 'Annihilator Tank', '', '53D8919D7B8ABD67', '0=hull_front;1=hull_right;2=hull_left;3=hull_back;4=right_tracks;5=left_tracks', '' },
+    { 'automatons', 'enemy', 'Fusion Repeater', '', '16023E554FEE830E', '', '' },
+    { 'automatons', 'enemy', 'Barrager Tank', '', '63DF3D07B7424588', '0=hull_front;1=hull_right;2=hull_left;3=hull_back;4=right_tracks;5=left_tracks', '' },
+    { 'automatons', 'enemy', 'Fusion Autocannon', '', '49674794A165EDA8', '0=front;1=back', '' },
+    { 'automatons', 'enemy', 'Tank turret', 'Base', 'B8580CAC32214FC0', '', '' },
+    { 'automatons', 'enemy', 'Heavy Fusion Cannon', '', '8FB47DD28B398CF7', '0=front;1=back', '' },
+    { 'automatons', 'enemy', 'Ballistic Missile', '', '5D142C3A73EBC634', '', '' },
+    { 'terminids', 'structure', 'TCS support', 'Base', 'BF908A82B8E787AC', '0=collision', '' },
+    { 'terminids', 'structure', 'TCS support', '2', 'C3D9B291BD97B935', '0=collision', '' },
+    { 'illuminate', 'enemy', 'Harvester', 'Base', '965EAE5A51ACDD4A', '0=body_default;1=body_front;3=eye;9=body_right;11=body_left;13=left_hip;20=right_hip;27=back_hip', '' },
+    { 'illuminate', 'enemy', 'Harvester', 'Tier 2', 'D63FCBFF0851B7AF', '0=body_default;1=body_front;3=eye;9=body_right;11=body_left;13=left_hip;20=right_hip;27=back_hip', '' },
+    { 'illuminate', 'structure', 'Gazer', 'Base', '0883366204E1CCC5', '', '' },
+    { 'automatons', 'enemy', 'AA Emplacement', '', 'AEAEF7A1851E6C9D', '0=battery', '' },
+    { 'automatons', 'enemy', 'Cannon Turret', 'Base', 'ABDB2E2A0479D8CA', '', '' },
+    { 'automatons', 'enemy', 'Bunker Turret', '', 'CD28A27A79BE53D5', '', '' },
+    { 'automatons', 'enemy', 'Cannon Turret', 'Heavycannon', '2CF3488C4845F8BD', '0=front;1=back', '' },
+    { 'automatons', 'enemy', 'Automaton Mortar Emplacement', '', 'FF5CC825B9571052', '0=back', '' },
+    { 'illuminate', 'structure', 'Gazer', 'Objective', '1448D494665D01A0', '', '' },
+    { 'automatons', 'enemy', 'Scout Strider', '', 'F8131632AA867107', '0=leg_left;1=leg_right;2=turret;3=torso', '' },
+    { 'terminids', 'enemy', 'Bile Warrior', '', '10081ACEF6163EF6', '0=face;1=l_rear_leg;2=r_rear_leg;3=r_front_leg;4=l_front_leg;5=r_claw;6=l_claw', '594=Claw;595=Headbutt;596=Stomp' },
+    { 'terminids', 'enemy', 'Warrior', 'Base', 'EACEE39FA017B495', '0=face;1=l_rear_leg;2=r_rear_leg;3=r_front_leg;4=l_front_leg;5=r_claw;6=l_claw', '594=Claw;595=Headbutt;596=Stomp' },
+    { 'terminids', 'enemy', 'Brood Commander', '', 'D522FD4748D443A5', '0=face;1=l_rear_leg;2=r_rear_leg;3=r_front_leg;4=l_front_leg;5=r_claw;6=l_claw', '576=Charge destruction;577=Charge hit infantry;578=Charge hit vehicle;594=Claw' },
+    { 'terminids', 'enemy', 'Alpha Commander', '', 'F79CD8BB654397DF', '0=face;1=l_rear_leg;2=r_rear_leg;3=r_front_leg;4=l_front_leg;5=r_claw;6=l_claw', '576=Charge destruction;577=Charge hit infantry;578=Charge hit vehicle;594=Claw' },
+    { 'terminids', 'enemy', 'Rupture Warrior', '', 'A35207C6F2150806', '0=face;1=l_rear_leg;2=r_rear_leg;3=r_front_leg;4=l_front_leg;5=r_claw;6=l_claw', '594=Claw;595=Headbutt;596=Stomp' },
+    { 'terminids', 'enemy', 'Spore Burst Warrior', '', '728421351D440EBC', '0=face;1=l_rear_leg;2=r_rear_leg;3=r_front_leg;4=l_front_leg;5=r_claw;6=l_claw', '594=Claw;595=Headbutt;596=Stomp' },
+    { 'terminids', 'enemy', 'Hive Guard', '', 'A1F37BF2A40FBDE4', '0=face;1=l_rear_leg;2=r_rear_leg;3=r_front_leg;4=l_front_leg;5=r_claw;6=l_claw;7=r_front_leg;8=l_front_leg', '594=Claw;595=Headbutt;596=Stomp' },
+    { 'terminids', 'enemy', 'Warrior', 'Tier 1', 'BE39E313A1E46BB9', '0=face;1=l_rear_leg;2=r_rear_leg;3=r_front_leg;4=l_front_leg;5=r_claw;6=l_claw', '594=Claw;595=Headbutt;596=Stomp' },
+    { 'terminids', 'enemy', 'Warrior', 'Tier 1 captive', '4E97FB073BDC7A4B', '0=face;1=l_rear_leg;2=r_rear_leg;3=r_front_leg;4=l_front_leg;5=r_claw;6=l_claw', '594=Claw;595=Headbutt;596=Stomp' },
+    { 'terminids', 'enemy', 'Warrior', 'Tier 2', '32541FC4EC7C9CDC', '0=face;1=l_rear_leg;2=r_rear_leg;3=r_front_leg;4=l_front_leg;5=r_claw;6=l_claw', '594=Claw;595=Headbutt;596=Stomp' },
+    { 'terminids', 'enemy', 'Warrior', 'Tier 2 guard', 'B2A6FA1E4284C7E6', '0=face;1=l_rear_leg;2=r_rear_leg;3=r_front_leg;4=l_front_leg;5=r_claw;6=l_claw', '594=Claw;595=Headbutt;596=Stomp' },
+    { 'automatons', 'structure', 'Stratagem Jammer', '', '23C85E970FB46685', '', '' },
+    { 'illuminate', 'structure', 'Cognitive Disruptor', '', '3478839C3C9B6646', '', '' },
+    { 'automatons', 'structure', 'Stratagem Scrambler (convoy)', '', 'B971B1141E1CBFAC', '', '' },
+    { 'seaf', 'enemy', 'SEAF Soldier', 'Variant 1', '75F7E96AF7DCD303', '0=head;1=torso;2=left_arm;3=right_arm;4=left_leg;5=right_leg', '' },
+    { 'seaf', 'enemy', 'SEAF Soldier', 'Variant 2', '6B22AE8E5F669D4F', '0=head;1=torso;2=left_arm;3=right_arm;4=left_leg;5=right_leg', '' },
+    { 'seaf', 'enemy', 'SEAF Soldier', 'Variant 3', 'A00331F24DEEF2EE', '0=head;1=torso;2=left_arm;3=right_arm;4=left_leg;5=right_leg', '' },
+    { 'seaf', 'enemy', 'SEAF Soldier', 'Variant 4', '548136F66F5C9B5C', '0=head;1=torso;2=left_arm;3=right_arm;4=left_leg;5=right_leg', '' },
+    { 'seaf', 'enemy', 'SEAF Leader', 'Variant 1', 'BCFC57848F206106', '0=head;1=torso;2=left_arm;3=right_arm;4=left_leg;5=right_leg', '' },
+    { 'seaf', 'enemy', 'SEAF Leader', 'Variant 2', '78DABC7344E50234', '0=head;1=torso;2=left_arm;3=right_arm;4=left_leg;5=right_leg', '' },
+    { 'seaf', 'enemy', 'SEAF Medic', 'Variant 1', '14453B8FCB040099', '0=head;1=torso;2=left_arm;3=right_arm;4=left_leg;5=right_leg', '' },
+    { 'seaf', 'enemy', 'SEAF Medic', 'Variant 2', '6FB1E73E00A84329', '0=head;1=torso;2=left_arm;3=right_arm;4=left_leg;5=right_leg', '' },
+    { 'seaf', 'enemy', 'SEAF Medic', 'Variant 3', 'C47287D738BE91C3', '0=head;1=torso;2=left_arm;3=right_arm;4=left_leg;5=right_leg', '' },
+    { 'seaf', 'enemy', 'SEAF Specialist', 'Variant 1', 'BFB5C88D557595D8', '0=head;1=torso;2=left_arm;3=right_arm;4=left_leg;5=right_leg', '' },
+    { 'seaf', 'enemy', 'SEAF Specialist', 'Variant 2', 'A6DCC225E1263606', '0=head;1=torso;2=left_arm;3=right_arm;4=left_leg;5=right_leg', '' },
+}
 -- translations of the panel, by its English text (built from lang/*.json and the game's own names)
 -- and the fonts to draw them with: { font, its glyph texture } resource ids, the first one loaded wins
 MOD.langs = {
   { id = 'zh-Hans', name = '简体中文', list = '、',
     fonts = { { font = '160f67c841834f8d', atlas = '808957ab8b672904' }, { font = 'e01b1c60bb279a7c', atlas = '1a87fa21dafbd90e' } },
     exact = {
+      [' page(s):'] = ' 个页面：',
+      [' to enemies and spawning with it.'] = '（敌人与生成）。',
       ['"+ New preset" (or Insert) saves your current changes as one; you name it next.'] = '“+ 新建预设”（或 Insert 键）会把当前修改存为一组，接着你可以为它命名。',
       ['(Not Used) Additional Strafing Runs'] = '（未使用）额外机枪扫射',
       ['(Not Used) Air-TO-Air Missles'] = '（未使用）空对空导弹',
@@ -439,7 +748,10 @@ MOD.langs = {
       ['+ Throwables (start, max)'] = '投掷物数量（初始 / 上限）',
       ['- / + steps through the stratagems by name (-- / ++: 10 at a time).'] = '- / + 按名称切换战略配备（-- / ++ 每次切换 10 项）。',
       ['0 = normal projectile; - / + selects a throwable grenade by name above.'] = '0 = 常规弹丸；- / + 按上方名称选择投掷手雷。',
-      ['0: hits deal their normal damage, 1: their durable damage (the weapon\'s lower one)'] = '0：按普通伤害计算；1：按耐久伤害计算；中间值按两者比例计算。',
+      ['0 light, 1 medium, 2 heavy'] = '0 轻型，1 中型，2 重型',
+      ['0: at once. The RL-77 waits 0.2 s, the P-34 Breacher (it sticks and burns first) 1 s.'] = '0：立即。RL-77 等待 0.2 秒，P-34 Breacher（先粘附燃烧）1 秒。',
+      ['0: hits deal their normal damage, 1: their durable damage (the weapon\'s lower one)'] = '0：命中造成普通伤害，1：造成耐久伤害（武器较低的那个）',
+      ['0: no patrols'] = '0：没有巡逻',
       ['100kg Bomb'] = '100KG炸弹',
       ['100kg Bomb Mk2'] = '100KG炸弹 MK2',
       ['100kg Bomb Mk3'] = '100KG炸弹 MK3',
@@ -511,6 +823,7 @@ MOD.langs = {
       ['15x100mm Standard Rocket'] = '15x100mm标准火箭弹',
       ['15x100mm Thermite'] = '15x100mm铝热弹',
       ['15x100mm Toxic'] = '15x100mm毒弹',
+      ['2'] = '2',
       ['20mm APHET Rounds'] = '20mm穿甲高爆曳光弹',
       ['20mm Flak Rounds'] = '20mm 空爆炮弹',
       ['20mm HE Cannon'] = '20mm高爆炮弹',
@@ -592,6 +905,8 @@ MOD.langs = {
       ['A mounted copy run by AI (emplacement-style). Not the one you carry.'] = '由 AI 操作的固定版本（炮台式）。不是你携带的那把。',
       ['A mounted copy. Not the one you carry.'] = '固定版本。不是你携带的那把。',
       ['A preset keeps every change you have made as one set, under a name you choose.'] = '预设会把你所有的修改作为一组保存，并取一个你指定的名字。',
+      ['A preset keeps every enemy and spawning change as one custom difficulty, under a name you choose. Your weapon changes are kept apart.'] = '预设会把所有敌人与生成的改动保存为一个自定义难度，名称由你决定。武器改动单独保存。',
+      ['A value changed on an enemy\'s own page stays red: this page leaves it as it is.'] = '在敌人自己页面上更改的数值保持红色：此页面不会改动它。',
       ['A/AC-8 Autocannon Sentry'] = 'A/AC-8 自动哨戒炮',
       ['A/ARC-3 Tesla Tower'] = 'A/ARC-3 特斯拉塔',
       ['A/FLAM-40 Flame Sentry'] = 'A/FLAM-40 火焰喷射哨戒炮',
@@ -602,6 +917,7 @@ MOD.langs = {
       ['A/M-23 EMS Mortar Sentry'] = 'A/M-23 电磁冲击波迫击哨戒炮',
       ['A/MG-43 Machine Gun Sentry'] = 'A/MG-43 哨戒机枪',
       ['A/MLS-4X Rocket Sentry'] = 'A/MLS-4X 火箭哨戒炮',
+      ['AA Emplacement'] = '防空炮台',
       ['AC-8 Autocannon'] = 'AC-8 机炮',
       ['AMMO'] = '弹药',
       ['AMW-20 Apex'] = 'AMW-20 尖峰',
@@ -631,11 +947,24 @@ MOD.langs = {
       ['Accelerator Rifle'] = '加速步枪',
       ['Acclimated'] = '应变自如',
       ['Acid'] = '酸液',
+      ['Acid (experimental)'] = '酸液（实验性）',
+      ['Acid damage taken (x)'] = '受到的酸液伤害（x）',
+      ['Acid splash (experimental)'] = '酸液飞溅（实验性）',
+      ['Acid storm (experimental)'] = '酸雨风暴（实验性）',
       ['Adjudicator'] = '审判者',
       ['Adreno-Defibrillator'] = '肾上腺素除颤器',
       ['Advanced Filtration'] = '高级过滤能力',
+      ['Agitator'] = '惑乱者',
       ['Aiming sway'] = '瞄准晃动',
+      ['Airborne'] = '空降',
       ['Airburst Rocket Launcher'] = '空爆火箭弹发射器',
+      ['All'] = '全部',
+      ['All Automatons'] = '所有机器人',
+      ['All Illuminate'] = '所有光能者',
+      ['All SEAF'] = '所有 SEAF',
+      ['All Terminids'] = '所有虫族',
+      ['All factions'] = '所有阵营',
+      ['Alpha Commander'] = '阿尔法指挥官',
       ['Also includes'] = '同时包含',
       ['Alternate ammunition'] = '另一种弹药',
       ['Amendment'] = '修正',
@@ -646,9 +975,11 @@ MOD.langs = {
       ['Ammo carried'] = '携带弹药',
       ['Ammo from resupply'] = '补给箱补充弹药',
       ['Ammunition'] = '弹药',
+      ['Ammunition Stockpile'] = '弹药库',
       ['Angled Foregrip'] = '倾斜前握把',
       ['Angled Foregrip Advanced'] = '高级倾斜前握把',
       ['Angled Foregrip With Laser'] = '激光瞄准器与倾斜前握把',
+      ['Annihilator Tank'] = '湮灭坦克',
       ['Another copy of this weapon, not identified yet.'] = '该武器的另一份副本，尚未识别。',
       ['Antenna'] = '天线',
       ['Anti-Air Missile'] = '防空导弹',
@@ -671,21 +1002,32 @@ MOD.langs = {
       ['Arm armor'] = '机臂护甲',
       ['Arm durability'] = '机臂耐久',
       ['Arm health'] = '机臂生命值',
+      ['Armed Resupply Pods'] = '武装重新补给舱',
       ['Arming distance (m)'] = '解除保险距离（米）',
       ['Arming time (s)'] = '解除保险时间（秒）',
       ['Armor'] = '护甲',
+      ['Armor (+)'] = '护甲（+）',
       ['Armor pen. (direct)'] = '穿甲等级（正面命中）',
       ['Armor pen. (extreme angle)'] = '穿甲等级（极端角度）',
       ['Armor pen. (large angle)'] = '穿甲等级（大角度）',
       ['Armor pen. (slight angle)'] = '穿甲等级（小角度）',
+      ['Armor penetration'] = '穿甲',
+      ['Armor weight'] = '护甲重量',
       ['Armors'] = '护甲',
       ['Ask'] = '询问',
+      ['Assassinate'] = '刺杀',
+      ['Assault'] = '突击',
+      ['Assault Raider'] = '特攻奇袭者',
       ['Assault Rifle'] = '突击步枪',
       ['Attachment'] = '配件',
       ['Attachments'] = '配件',
+      ['Attacks'] = '攻击',
       ['Autocannon'] = '机炮',
       ['Autocannon Sentry'] = '自动哨戒炮',
       ['Automatic'] = '自动',
+      ['Automaton Dropship'] = '机器人运输舰',
+      ['Automaton Mortar Emplacement'] = '机器人的迫击炮台',
+      ['Automatons'] = '机器人',
       ['B-1 Supply Pack'] = 'B-1 补给背包',
       ['B-100 Portable Hellbomb'] = 'B-100 便携式地狱火炸弹',
       ['B/FLAM-80 Cremator'] = 'B/FLAM-80 焚燃者',
@@ -698,33 +1040,71 @@ MOD.langs = {
       ['BR-14 Adjudicator'] = 'BR-14 审判者',
       ['BURST'] = '二次爆炸',
       ['BURST RADIUS'] = '二次爆炸半径',
-      ['Back'] = '返回',
+      ['Back'] = '背部',
+      ['Back (button)'] = '返回',
+      ['Back armor'] = '后装甲',
+      ['Back body'] = '后身体',
       ['Back door block'] = '后舱门块',
+      ['Back face'] = '后面',
       ['Back hatch'] = '后舱盖',
+      ['Back hip'] = '后髋部',
       ['Back periscope side 8'] = '潜望镜后侧 8',
+      ['Back pump flamer'] = '后部喷火器泵',
       ['Background opacity'] = '背景不透明度',
       ['Backpack'] = '背包',
+      ['Ballistic Missile'] = '弹道导弹',
       ['Ballistic Padding'] = '防弹内衬',
       ['Ballistic Shield Backpack'] = '防弹护盾背包',
       ['Ballistic shield'] = '防弹盾',
       ['Barrage'] = '弹幕',
+      ['Barrager Tank'] = '铁幕坦克',
+      ['Barrel'] = '炮管',
+      ['Base'] = '基础',
       ['Bastion MK XVI'] = '堡垒Mk XVI',
+      ['Battery'] = '电池',
+      ['Beamer'] = '光束器',
       ['Belt-Fed Grenade Launcher'] = '弹链式榴弹发射器',
+      ['Berserker'] = '狂暴者',
+      ['Better stratagem bounce'] = '改进战略配备弹跳',
+      ['Big walker cannon'] = '步行机巨炮',
+      ['Bile Spewer'] = '胆汁喷涌虫',
+      ['Bile Spewer acid burst'] = '胆汁喷涌虫酸液爆裂',
+      ['Bile Spitter'] = '胆汁吐沫虫',
+      ['Bile Titan'] = '吐酸泰坦',
+      ['Bile Warrior'] = '胆汁武斗虫',
       ['Bingus Shared Loader by CowboyBingus'] = 'Bingus 共享加载器 · CowboyBingus',
       ['Blast'] = '爆炸',
       ['Blast angle (deg)'] = '爆炸角(度)',
       ['Blast delay (s)'] = '起爆延迟（秒）',
       ['Blast proximity (m)'] = '近炸触发距离（米）',
       ['Blast radius'] = '爆炸半径',
+      ['Bleed (experimental)'] = '流血（实验性）',
+      ['Bleed-out health'] = '流血状态生命值',
+      ['Blind (experimental)'] = '致盲（实验性）',
       ['Blitzer'] = '雷霆',
       ['Block game input while open'] = '打开时屏蔽游戏输入',
+      ['Blocking rock'] = '阻挡岩石',
       ['Blunt-Force Mitigation'] = '钝击创伤缓和',
       ['Body'] = '躯干',
+      ['Body collision spine'] = '躯体脊椎',
+      ['Body default'] = '身体',
+      ['Body front'] = '身体前部',
+      ['Body head'] = '头部',
       ['Body health'] = '躯干生命值',
       ['Body parts'] = '身体部位',
+      ['Body rear'] = '身体后部',
       ['Bolt Pistol'] = '爆弹手枪',
       ['Bonnet'] = '引擎盖',
       ['Boost after the launch (s)'] = '起跳后的推进时间（秒）',
+      ['Booster selection is limited due to the other boosters keeping their values in the game\'s program (game.dll), not in the data files SSEO edits. Those could only be changed while the game runs, which is currently impossible.'] = '可选的增强配备有限：其他增强配备的数值保存在游戏程序（game.dll）中，而不在 SSEO 修改的数据文件里。这些数值只能在游戏运行时修改，而这目前无法做到。',
+      ['Boosters'] = '强化资源',
+      ['Boss'] = '核心',
+      ['Boss back'] = '核心后部',
+      ['Bottom wing'] = '下翼',
+      ['Braking height (m)'] = '制动高度（米）',
+      ['Braking speed (m/s)'] = '制动速度（米/秒）',
+      ['Braking time (s)'] = '制动时间（秒）',
+      ['Brawler'] = '乱斗者',
       ['Breacher'] = '爆破者',
       ['Breaching Hammer'] = '破门锤',
       ['Break-Action Shotgun'] = '中折式霰弹枪',
@@ -732,15 +1112,38 @@ MOD.langs = {
       ['Breaker Incendiary'] = '高燃“破裂者”',
       ['Breaker Spray&Pray'] = '千发百中“破裂者”',
       ['Breakthrough Exosuit'] = '“突破”外骨骼装甲',
+      ['Brood Commander'] = '虫族指挥官',
       ['Bug Plug'] = '虫穴封堵装置',
       ['Bug Thumper'] = '虫群震动诱饵',
+      ['Bulk Fabricator'] = '巨型构筑者',
+      ['Bull'] = '公牛',
       ['Bullet Storm'] = '子弹风暴',
+      ['Bunker Turret'] = '碉堡炮台',
       ['Burn time (s)'] = '燃烧时间(秒)',
       ['Burning'] = '燃烧',
       ['Burning applied to you'] = '对你施加的燃烧',
       ['Burst'] = '二次爆炸',
       ['Burst radius'] = '二次爆炸半径',
       ['Bushwhacker'] = '游击兵',
+      ['Butt lower'] = '臀部下方',
+      ['C hex 01'] = '六边形 01',
+      ['C hex 02'] = '六边形 02',
+      ['C hex 03'] = '六边形 03',
+      ['C hex 04'] = '六边形 04',
+      ['C hex 05'] = '六边形 05',
+      ['C hex 06'] = '六边形 06',
+      ['C hex 07'] = '六边形 07',
+      ['C hex 08'] = '六边形 08',
+      ['C hex 09'] = '六边形 09',
+      ['C hex 10'] = '六边形 10',
+      ['C hex 12'] = '六边形 12',
+      ['C hex 13'] = '六边形 13',
+      ['C hex 14'] = '六边形 14',
+      ['C hex 15'] = '六边形 15',
+      ['C hex 16'] = '六边形 16',
+      ['C hex 17'] = '六边形 17',
+      ['C hex 18'] = '六边形 18',
+      ['C hex 19'] = '六边形 19',
       ['CB-9 Exploding Crossbow'] = 'CB-9 爆燃弩',
       ['CHARGE'] = '充能',
       ['CLUSTER BOMB'] = '集束炸弹',
@@ -759,6 +1162,7 @@ MOD.langs = {
       ['Caltrops'] = '铁蒺藜',
       ['Camera shake radius (m)'] = '镜头震动半径(米)',
       ['Cancel'] = '取消',
+      ['Cannon Turret'] = '加农炮台',
       ['Cargo Container'] = '货运集装箱',
       ['Carpet Bombing Run'] = '地毯式轰炸',
       ['Carry Data'] = '运送数据',
@@ -772,10 +1176,16 @@ MOD.langs = {
       ['Charged'] = '蓄力',
       ['Charged explosion'] = '蓄力爆炸',
       ['Charged shot'] = '蓄力射击',
+      ['Charger'] = '强袭虫',
+      ['Charger Behemoth'] = '巨兽级强袭虫',
+      ['Charger acid burst'] = '冲锋者酸液爆裂',
       ['Charges'] = '使用次数',
       ['Charges from resupply'] = '补给箱补充的使用次数',
+      ['Chemical Backpack'] = '装有化学武器的背包',
+      ['Chest'] = '胸部',
       ['Chest bleeding damage'] = '胸部流血伤害',
       ['Chest damage taken'] = '受到胸部伤害',
+      ['Choked (experimental)'] = '窒息（实验性）',
       ['Choose a weapon on the left.'] = '请在左侧选择武器。',
       ['Clear'] = '清除',
       ['Click again to overwrite'] = '再次点击以覆盖',
@@ -784,17 +1194,26 @@ MOD.langs = {
       ['Climb multiplier (vertical)'] = '枪口上扬倍率（垂直）',
       ['Climb speed (m/s)'] = '爬升速度(米/秒)',
       ['Climb time limit (s)'] = '爬升时限(秒)',
+      ['Climbing and sliding'] = '攀爬与滑行',
       ['Cluster Bomb'] = '集束炸弹',
+      ['Cognitive Disruptor'] = '感知干扰器',
+      ['Collision'] = '碰撞体',
       ['Combat Hatchet'] = '战斗短柄斧',
       ['Combat Scope 4x'] = '4倍战斗瞄准镜',
       ['Combat Walker'] = '战斗步行机甲',
       ['Combat Walker Breacher'] = '爆破型战斗机甲',
+      ['Command Bunker'] = '指挥碉堡',
+      ['Command bunker'] = '指挥碉堡',
       ['Commando'] = '突击兵',
+      ['Commissar'] = '机械统帅',
+      ['Concealed Insertion'] = '隐蔽上阵',
       ['Concealment when still, crouched / prone'] = '静止蹲伏或卧倒时的隐蔽',
       ['Concussive Padding (Grenadier)'] = '防震内衬（掷弹兵型）',
       ['Concussive Padding (Hazmat)'] = '防震内衬（防化型）',
       ['Concussive Padding (Reinforced)'] = '防震内衬（强化型）',
       ['Cone angle (deg)'] = '锥角(度)',
+      ['Conflagration Devastator'] = '烈火蹂躏者',
+      ['Confusion (experimental)'] = '混乱（实验性）',
       ['Constitution'] = '宪法',
       ['Consumables'] = '消耗品',
       ['Contact Mine'] = '接触式地雷',
@@ -807,25 +1226,39 @@ MOD.langs = {
       ['Countdown before delivery (s)'] = '投送前倒计时（秒）',
       ['Coyote'] = '野狼',
       ['Cremator'] = '焚燃者',
+      ['Crescent Overseer'] = '新月监视者',
       ['Crisper'] = '迅击',
       ['Crouched jog speed (m/s)'] = '蹲伏慢跑速度(米/秒)',
       ['Crouched speed while aiming (m/s)'] = '蹲伏瞄准时速度(米/秒)',
       ['Crouched sprint speed (m/s)'] = '蹲伏冲刺速度(米/秒)',
       ['Crouched walk speed (m/s)'] = '蹲伏步行速度(米/秒)',
+      ['Crown'] = '冠部',
       ['Cruise speed (m/s)'] = '巡航速度(米/秒)',
+      ['Crusher'] = '粉碎者',
+      ['Custom difficulties'] = '自定义难度',
       ['Cyborg Carry Data'] = '运送生化人数据',
+      ['Cyborg fire (experimental)'] = '赛博格火焰（实验性）',
       ['DAMAGE'] = '伤害',
       ['DBS-2 Double Freedom'] = 'DBS-2 双重自由',
       ['DEPLOYER'] = '部署舱',
       ['DIRECT HIT'] = '直击',
       ['Dagger'] = '匕首',
       ['Damage'] = '伤害',
+      ['Damage (x)'] = '伤害（x）',
+      ['Damage passed to the body (x)'] = '传递给身体的伤害 (x)',
+      ['Damage taken (multiplier)'] = '受到伤害（倍率）',
       ['Damage tick (s)'] = '伤害间隔(秒)',
+      ['Damage ticks per minute'] = '每分钟伤害次数',
       ['Damage to you'] = '对你造成的伤害',
       ['Dark Fluid Backpack'] = '暗液背包',
+      ['Dark Fluid burst'] = '暗流体爆裂',
       ['Data Jack'] = '数据接口',
       ['De-Escalator'] = '缓和使者',
+      ['Dead Sprint'] = '死亡冲刺',
       ['Deadeye'] = '鹰眼',
+      ['Deaf (experimental)'] = '失聪（实验性）',
+      ['Death explosions'] = '死亡爆炸',
+      ['Defeat arrowhead'] = '弱点箭头',
       ['Defender'] = '防卫者',
       ['Defoliation Tool'] = '除叶工具',
       ['Delete'] = '删除',
@@ -833,6 +1266,9 @@ MOD.langs = {
       ['Demolition force'] = '破坏力',
       ['Deployer'] = '部署舱',
       ['Desert Stormer'] = '沙漠突击者',
+      ['Destroyed'] = '已摧毁',
+      ['Devastator'] = '蹂躏者',
+      ['Devastator jump pack'] = '蹂躏者喷射背包',
       ['Deviation'] = '偏移幅度',
       ['Diligence'] = '勤勉',
       ['Diligence Counter Sniper'] = '反狙击“勤勉”',
@@ -846,14 +1282,20 @@ MOD.langs = {
       ['Double-Edge Sickle'] = '双刃镰刀',
       ['Down'] = '下移',
       ['Drag factor'] = '阻力系数',
+      ['Dragonroach'] = '蟑龙',
+      ['Drill'] = '钻头',
       ['Drilling Charge'] = '钻探炸药',
       ['Driver gun'] = '驾驶员机枪',
       ['Drone'] = '无人机',
+      ['Dropship'] = '运输舰',
+      ['Dropship death (air)'] = '运输艇毁灭（空中）',
+      ['Dropship death (ground)'] = '运输艇毁灭（地面）',
+      ['Drowning depth offset (m)'] = '溺水深度偏移（米）',
       ['Drum Magazine'] = '弹鼓',
       ['Dune Walker Sniper Scope 10x'] = '10倍狙击瞄准镜',
       ['Duo Sniper Scope 10x'] = '“杜奥”10倍狙击瞄准镜',
       ['Durable damage'] = '耐久伤害',
-      ['Durable ratio (0-1)'] = '耐伤比例(0-1)',
+      ['Durable ratio (0-1)'] = '耐久比例 (0-1)',
       ['Duration (s)'] = '持续时间(秒)',
       ['Dynamite'] = '炸药',
       ['E/AT-12 Anti-Tank Emplacement'] = 'E/AT-12 反坦克炮台',
@@ -883,71 +1325,113 @@ MOD.langs = {
       ['Eagle Strafing Run'] = '“飞鹰”机枪扫射',
       ['Eagle rearm time (s)'] = '飞鹰重新武装时间（秒）',
       ['Eagle strike. The rearm time is shared by every Eagle.'] = '飞鹰打击。所有飞鹰共用重新武装时间。',
+      ['Eagles cannot be called within this distance while it stands'] = '在其被摧毁前，此范围内无法呼叫飞鹰',
       ['Edit the grenade on Throwables to tune it. Assets load before selection applies.'] = '在“投掷物”页编辑该手雷即可调整。资源加载完成后选择才会生效。',
+      ['Effect'] = '效果',
+      ['Egg'] = '虫卵',
+      ['Egg cluster'] = '虫卵簇',
+      ['Electric (experimental)'] = '电击（实验性）',
+      ['Electric damage taken (x)'] = '受到的电击伤害（x）',
       ['Electrical Conduit'] = '电路导管',
+      ['Elevated Overseer'] = '崇高监视者',
+      ['Elite'] = '精英',
       ['Emancipator Exosuit'] = '“解放者”外骨骼装甲',
       ['Emergency Extraction Beacon'] = '紧急撤离信标',
       ['Emplacement'] = '炮台',
       ['Emplacement: its cooldown, its body, then its weapon.'] = '炮台：依次为冷却时间、本体、武器。',
       ['Emplacements'] = '部署设施',
+      ['Enemies and values this page changes are marked in blue in the list and on their pages.'] = '此页面更改的敌人和数值在列表和其页面中以蓝色标出。',
+      ['Enemy Editor'] = '敌人编辑器',
+      ['Enemy cap (x)'] = '敌人数量上限 (x)',
       ['Enemy detection range'] = '敌人侦测范围',
+      ['Enemy.'] = '敌人。',
+      ['Engine front'] = '前引擎',
+      ['Engine rear'] = '后引擎',
       ['Engineering Kit'] = '工程包',
       ['Entrenchment Tool'] = '堑壕工具',
       ['Epoch'] = '纪元',
       ['Ergonomics'] = '人机工效',
       ['Ergonomics bonus'] = '人机工效加成',
       ['Eruptor'] = '爆裂铳',
+      ['Every SEAF soldier at once. Soldiers you have edited on their own page keep their values.'] = '一次调整所有 SEAF 士兵。在各自页面修改过的士兵保留其数值。',
       ['Every armor with this passive gets their effects too (set on their own pages).'] = '拥有此被动的所有护甲也会获得它们的效果（在各自页面设置）。',
       ['Every change as soon as it is pushed, before testing: it may break.'] = '每项更改一经推送即更新，未经测试：可能出错。',
       ['Every commit'] = '每次提交',
+      ['Every enemy of this faction at once. Enemies you have edited on their own page keep their values.'] = '一次调整该阵营的所有敌人。在各自页面修改过的敌人保留其数值。',
       ['Every helldiver in your game. Restore the game\'s files before joining other players\' lobbies.'] = '你游戏中的所有绝地潜兵。加入其他玩家的大厅前，请先恢复游戏文件。',
       ['Every passive is in already.'] = '所有被动都已添加。',
       ['Evictor'] = '驱逐者',
       ['Expendable Anti-Tank'] = '消耗性反坦克武器',
       ['Expendable Anti-Tank (Booster)'] = '消耗性反坦克武器（增强配备）',
       ['Expendable Napalm'] = '消耗性凝固汽油弹',
+      ['Experimental Infusion'] = '试验性注射剂',
       ['Expiry explosion (id)'] = '存续结束时爆炸（编号）',
       ['Explodes after death (s)'] = '死亡后爆炸（秒）',
       ['Exploding Crossbow'] = '爆燃弩',
       ['Explosion'] = '爆炸',
       ['Explosion (expiry)'] = '爆炸（存续结束）',
       ['Explosion id'] = '爆炸编号',
+      ['Explosive Barrel'] = '爆炸桶',
       ['Explosive damage taken'] = '受到爆炸伤害',
+      ['Explosive damage taken (x)'] = '受到的爆炸伤害 (x)',
       ['Extended Magazine'] = '加长弹匣',
       ['Extra Padding'] = '额外垫料',
       ['Extra stratagem'] = '额外战略配备',
       ['Extra stratagem (choice)'] = '额外战略配备（选择）',
       ['Extraction'] = '撤离',
       ['Extraction Beacon'] = '撤离信标',
+      ['Eye'] = '眼睛',
       ['FAF-14 Spear'] = 'FAF-14 飞矛',
       ['FIRE'] = '开火',
       ['FLAM-40 Flamethrower'] = 'FLAM-40 火焰喷射器',
       ['FLAM-66 Torcher'] = 'FLAM-66 火炬手',
+      ['Fabricator'] = '构筑者',
+      ['Fabricator / bug hole batch size (x)'] = '构筑者 / 虫洞批量 (x)',
+      ['Fabricator / bug hole queue (x)'] = '构筑者 / 虫洞队列 (x)',
+      ['Fabricator / bug hole refill speed (x)'] = '构筑者 / 虫洞补充速度 (x)',
+      ['Fabricator / bug hole release speed (x)'] = '构筑者 / 虫洞释放速度 (x)',
+      ['Fabricator death'] = '制造厂毁灭',
+      ['Face'] = '面部',
+      ['Factory Strider'] = '移动工厂',
+      ['Fake'] = '伪装',
       ['Feet First'] = '护腿为上',
+      ['Female'] = '女性',
       ['Field depth (m)'] = '雷区纵深（米）',
       ['Field width (m)'] = '雷区宽度（米）',
+      ['Fin front'] = '前鳍',
       ['Finding the stats...'] = '正在查找数值...',
       ['Fire'] = '开火',
       ['Fire damage taken'] = '受到火焰伤害',
+      ['Fire damage taken (x)'] = '受到的火焰伤害（x）',
       ['Fire duration (s)'] = '持续开火时间（秒）',
       ['Fire panic'] = '着火恐慌',
       ['Fire rate (RPM)'] = '射速（RPM）',
       ['Fire/gas/acid/arc damage taken'] = '受到火焰 / 毒气 / 酸液 / 电弧伤害',
+      ['Firebomb Hellpods'] = '火焰炸弹绝地喷射舱',
       ['Flame Sentry'] = '火焰喷射哨戒炮',
       ['Flames'] = '喷射火焰',
       ['Flames Mk2'] = '喷射火焰 MK2',
       ['Flamethrower'] = '火焰喷射器',
       ['Flamethrower slow'] = '火焰喷射减速',
       ['Flashlight'] = '照明',
+      ['Fleet ship'] = '舰队舰船',
+      ['Fleshmob'] = '肉瘤体',
+      ['Flight height (m)'] = '飞行高度（米）',
       ['Flinch'] = '受击瞄准抖动',
       ['Flinch (0 prevents it)'] = '受击瞄准抖动（0 为免疫）',
+      ['Floating depth offset (m)'] = '漂浮深度偏移（米）',
       ['Folder'] = '文件夹',
       ['Folder path copied.'] = '已复制文件夹路径。',
+      ['Foliage pass-through'] = '穿透植被',
       ['Fortified'] = '强化',
       ['Forward share of the launch (0-1)'] = '起跳前冲占比(0-1)',
       ['Found in the game data (not in the built-in list).'] = '在游戏数据中找到（不在内置列表中）。',
       ['Frag'] = '破片弹',
       ['From supply'] = '来自补给',
+      ['Front'] = '前部',
+      ['Front armor'] = '前装甲',
+      ['Front body'] = '前身体',
+      ['Front face'] = '前面',
       ['Front hull'] = '前车体',
       ['Front left cockpit'] = '左前驾驶舱',
       ['Front right cockpit'] = '右前驾驶舱',
@@ -955,6 +1439,8 @@ MOD.langs = {
       ['Full charge explosion'] = '满蓄力爆炸',
       ['Full charge shot'] = '满蓄力射击',
       ['Fuse time (s)'] = '引信时间(秒)',
+      ['Fusion Autocannon'] = '聚变机炮',
+      ['Fusion Repeater'] = '聚变连发炮',
       ['G-10 Incendiary'] = 'G-10 燃烧弹',
       ['G-109 Urchin'] = 'G-109 海胆',
       ['G-11 Caltrops'] = 'G-11 铁蒺藜',
@@ -993,12 +1479,18 @@ MOD.langs = {
       ['Gas confusion'] = '毒气混乱',
       ['Gas confusion (Sterilizer)'] = '毒气混乱（灭菌器）',
       ['Gas damage taken'] = '受到毒气伤害',
+      ['Gas damage taken (x)'] = '受到的毒气伤害（x）',
+      ['Gas resistance (x)'] = '毒气抗性（x）',
+      ['Gatekeeper'] = '御门者',
       ['Gatling Sentry'] = '加特林哨戒炮',
+      ['Gazer'] = '凝视者',
       ['Generator'] = '发电机',
       ['Generator Pack'] = '护盾生成背包',
       ['Giga Grenade'] = '千兆级榴弹',
       ['GitHub'] = 'GitHub',
       ['GitHub link copied.'] = '已复制 GitHub 链接。',
+      ['Gloom'] = '幽暗',
+      ['Gloom (experimental)'] = '幽暗（实验性）',
       ['Gravity factor'] = '重力系数',
       ['Grenade'] = '手雷',
       ['Grenade Launcher'] = '榴弹发射器',
@@ -1008,6 +1500,7 @@ MOD.langs = {
       ['Grenade swap'] = '手雷交换',
       ['Grenade swap stopped (see the log); launchers fire their own projectiles again.'] = '已停止榴弹替换（详见日志）；发射器恢复使用自身弹丸。',
       ['Grenadier Battlement'] = '掷弹兵防卫墙',
+      ['Grinder'] = '粉碎者',
       ['Ground All-Terrain Extraction Rig (GATER)'] = '地面全地形采集钻机（GATER）',
       ['Guard Dog (Drone)'] = '护卫犬无人机',
       ['Guard Dog (Drone) Stun'] = '电击护卫犬无人机',
@@ -1016,33 +1509,58 @@ MOD.langs = {
       ['Guidance on after (s)'] = '导引启动延迟(秒)',
       ['Gun'] = '枪械',
       ['Gunner FRV'] = '炮手快速侦察载具',
+      ['Gunshield'] = '炮盾',
+      ['Gunship'] = '炮舰',
       ['Gunslinger'] = '神枪手',
       ['HANDLING'] = '操控',
       ['HMG Emplacement'] = '重机枪部署支架',
       ['Halt'] = '止息',
       ['Handling'] = '操控',
+      ['Harvester'] = '猎杀器',
+      ['Harvester objective'] = '猎杀器（任务目标）',
       ['Head'] = '头部',
+      ['Head armor'] = '头部装甲',
+      ['Head body'] = '头部（本体）',
       ['Head health'] = '头部生命值',
+      ['Head zone'] = '头部',
       ['Health'] = '生命值',
+      ['Health (x)'] = '生命值（x）',
       ['Health Pack Rack'] = '医疗包架',
+      ['Health drain'] = '生命流失',
+      ['Hearing (x)'] = '听觉 (x)',
       ['Heat'] = '热量',
       ['Heat per second firing'] = '射击时每秒积热',
       ['Heat per shot'] = '每发积热',
       ['Heat per warp (%)'] = '每次跃迁热量（%）',
       ['Heatsinks from supply'] = '补给获得的散热器数',
+      ['Heavy Devastator'] = '重型蹂躏者',
+      ['Heavy Devastator shield'] = '重型蹂躏者盾牌',
+      ['Heavy Fusion Cannon'] = '重型聚变炮',
       ['Heavy Machine Gun'] = '重机枪',
+      ['Heavy armor'] = '重型护甲',
       ['Heavy burning'] = '重度燃烧',
+      ['Heavycannon'] = '重炮',
       ['Hellbomb'] = '地狱火炸弹',
       ['Helldiver'] = '绝地潜兵',
       ['Helldivers 2 is running: close it first.'] = '《绝地潜兵 2》正在运行：请先关闭游戏。',
       ['Helldivers 2 is running: close it, then Install.'] = '《绝地潜兵 2》正在运行：请先关闭游戏，再点击“写入游戏”。',
       ['Helldivers 2 is running: close it, then restore.'] = 'Helldivers 2 正在运行：请先关闭游戏，再恢复。',
       ['Helldivers 2 is running: you can edit, but close it before you Install.'] = '《绝地潜兵 2》正在运行：可以编辑，但写入前必须关闭游戏。',
+      ['Hellpod: initial drop'] = '地狱舱：初始空投',
+      ['Hellpod: reinforcement'] = '地狱舱：增援',
+      ['Helmet'] = '头盔',
+      ['Hexagon'] = '六边形',
       ['High Capacity Heatsink'] = '高容量散热器',
       ['High Dissipation Heatsink'] = '高功率散热器',
       ['High Explosive'] = '高爆弹',
       ['High-Velocity Shrapnel'] = '高速破片',
+      ['Highest ledge it climbs (m)'] = '可攀爬的最高边缘（米）',
+      ['Hijack Tech Hub Nexus Machine'] = '技术中心枢纽机器',
       ['Hips'] = '腰部',
+      ['Hips armor'] = '髋部装甲',
+      ['Hive Breaker Drill'] = '“虫窝破裂者”钻机',
+      ['Hive Guard'] = '虫窝护卫',
+      ['Hive Lord'] = '霸王虫',
       ['Homing Anti-Air Missile'] = '追踪式防空导弹',
       ['Homing Ground Missile'] = '追踪式地面导弹',
       ['Homing Ground Missile Mk2'] = '追踪式地面导弹 MK2',
@@ -1054,40 +1572,71 @@ MOD.langs = {
       ['Hover time, full-speed climb (s)'] = '悬停时间：全速爬升(秒)',
       ['Hover time, holding height (s)'] = '悬停时间：保持高度(秒)',
       ['Hoverpack Backpack'] = '悬浮背包',
+      ['How close this zoom step looks: 1 is the normal view, 2 twice as close, 4 four times.'] = '这一档的放大程度：1 为正常视野，2 拉近两倍，4 拉近四倍。',
       ['How far away the jet starts its run. With its speed, it sets how long the Eagle takes to arrive.'] = '飞鹰开始攻击航线时距目标的距离，与飞行速度共同决定抵达时间。',
+      ['How long the round waits after the hit (or after the blast proximity trips) before it goes off.'] = '射弹命中后（或近炸距离触发后）等待多久才爆炸。',
+      ['How quickly the scoped view catches up when you move your aim at this zoom (0.6 on most optics).'] = '此倍率下移动瞄准时，瞄准镜视野跟上的速度（大多数瞄具为 0.6）。',
+      ['Hulk'] = '巨型者',
+      ['Hulk Bruiser'] = '巨型碾压者',
+      ['Hulk Firebomber'] = '巨型烈焰轰炸者',
+      ['Hulk Obliterator'] = '巨型抹煞者',
+      ['Hulk Scorcher'] = '巨型炙炎者',
+      ['Hulk flag'] = '巨型者旗帜',
+      ['Hulk jetpack'] = '巨型者喷射背包',
+      ['Hull back'] = '车体后部',
+      ['Hull front'] = '车体前部',
+      ['Hunter'] = '追猎虫',
       ['Hyena'] = '鬣狗',
+      ['Illuminate'] = '光能者',
+      ['Illusionist death'] = '幻术师死亡',
       ['Immediate Extraction Beacon'] = '立即撤离信标',
       ['Immolation'] = '焚身',
       ['Impact'] = '冲击弹',
       ['Impact damage taken'] = '受到冲击伤害',
       ['Impact explosion (id)'] = '命中爆炸 (ID)',
+      ['Impaler'] = '穿刺虫',
       ['Incendiary'] = '燃烧弹',
       ['Incendiary Impact'] = '燃烧冲击弹',
+      ['Incendiary MG Devastator'] = '燃烧机枪蹂躏者',
       ['Incendiary Mine Deployer'] = '燃烧布雷器',
       ['Incinerator FRV'] = '炽灼型快速侦察载具',
       ['Inflammable'] = '易燃易爆',
       ['Injures you above heat (%)'] = '超过此热量会灼伤(%)',
+      ['Inner body'] = '内身体',
       ['Inner radius (m)'] = '内半径(米)',
+      ['Inner torso'] = '内躯干',
+      ['Insides'] = '内部',
       ['Install into the game'] = '写入游戏',
       ['Installing: finding what changed...'] = '写入中：正在查找改动…',
       ['Installing: writing the files...'] = '写入中：正在写入文件…',
       ['Integrated Explosives'] = '集成炸药',
       ['Interface language'] = '界面语言',
+      ['Inverted aim assist (experimental)'] = '反向瞄准辅助（实验性）',
       ['Ion Scope 4x'] = '4倍离子瞄准镜',
       ['Iron Sights'] = '机械瞄具',
       ['Iron Sights Long'] = '长型机械瞄具',
+      ['Iron fleet'] = '钢铁舰队',
       ['It doesn\'t take a loadout slot, but the HUD\'s stratagem list can fill up.'] = '不占配装栏位，但可能占满屏幕上的战略配备列表。',
       ['Its effects are added to every armor with this passive.'] = '其效果会添加到拥有此被动的所有护甲上。',
       ['Its stats above apply.'] = '上方的数值生效。',
+      ['Ivory legion'] = '象牙军团',
+      ['Ivory legion assault'] = '象牙军团突击',
+      ['Ivory legion tier 2'] = '象牙军团2级',
       ['JAR-5 Dominator'] = 'JAR-5 主宰',
       ['Jammed Pinata'] = '受干扰的彩罐',
+      ['Jammer'] = '干扰器',
+      ['Jamming'] = '干扰',
+      ['Jaws'] = '颚',
       ['Jog speed (m/s)'] = '慢跑速度(米/秒)',
       ['Jogging empties it in (s)'] = '慢跑耗尽用时(秒)',
+      ['Jump'] = '跳跃',
       ['Jump Pack'] = '喷射背包',
       ['Jump cost (share of stamina)'] = '跳跃消耗(体力占比)',
       ['Jump pack'] = '喷射背包',
+      ['Jumppack'] = '喷射背包',
       ['Jumppack Backpack'] = '喷射背包',
       ['K-2 Throwing Knife'] = 'K-2 飞刀',
+      ['Killing it kills the enemy'] = '摧毁即击杀敌人',
       ['Kinetic Displacement Mitigation'] = '动能位移减缓',
       ['Knight'] = '骑士',
       ['Knockdown chance'] = '击倒几率',
@@ -1107,9 +1656,12 @@ MOD.langs = {
       ['LIFT-182 Warp Pack'] = 'LIFT-182 传送背包',
       ['LIFT-850 Jump Pack'] = 'LIFT-850 喷射背包',
       ['LIFT-860 Hover Pack'] = 'LIFT-860 悬浮背包',
+      ['Landed ship door shield'] = '着陆舰舱门护盾',
       ['Language'] = '语言',
+      ['Large'] = '大型',
       ['Large Plasma Bolt'] = '大型等离子弹',
       ['Larger Plasma Container'] = '扩容等离子弹药匣',
+      ['Larva Container'] = '幼虫储存器',
       ['Laser'] = '激光',
       ['Laser Cannon'] = '激光大炮',
       ['Laser Rifle (Drone)'] = '激光步枪无人机',
@@ -1123,43 +1675,109 @@ MOD.langs = {
       ['Launch duration (s)'] = '起跳推进时间（秒）',
       ['Launch force'] = '起跳推力',
       ['Launch speed (m/s)'] = '发射速度（米/秒）',
+      ['Lava (experimental)'] = '熔岩（实验性）',
+      ['Lb wing'] = '左后翼',
       ['Left'] = '左',
-      ['Left arm'] = '左臂',
+      ['Left arm'] = '左手臂',
       ['Left arm health'] = '左臂生命值',
+      ['Left armor'] = '左装甲',
+      ['Left arms'] = '左手臂',
+      ['Left back leg'] = '左后腿',
       ['Left back panel'] = '左后板',
+      ['Left back thruster'] = '左后推进器',
+      ['Left back track bar'] = '左后履带支杆',
+      ['Left back track knee'] = '左后履带膝部',
+      ['Left back wing'] = '左后翼',
+      ['Left body'] = '左身体',
       ['Left box 0'] = '左储物箱 0',
       ['Left box 1'] = '左储物箱 1',
       ['Left box 2'] = '左储物箱 2',
+      ['Left chest'] = '左胸部',
+      ['Left claw'] = '左爪',
+      ['Left elbow'] = '左肘部',
+      ['Left extra elbow'] = '左额外肘部',
+      ['Left foot'] = '左脚',
+      ['Left foreleg wrist'] = '左前腿腕部',
       ['Left front block'] = '左前块',
       ['Left front door'] = '左前门',
+      ['Left front face'] = '左前面',
+      ['Left front leg'] = '左前腿',
       ['Left front light'] = '左前灯',
+      ['Left front thruster'] = '左前推进器',
+      ['Left front track bar'] = '左前履带支杆',
+      ['Left front track knee'] = '左前履带膝部',
+      ['Left front wing flap'] = '左前襟翼',
+      ['Left gun'] = '左炮',
+      ['Left hand'] = '左手',
+      ['Left head'] = '左头部',
+      ['Left head flap'] = '左头部护片',
+      ['Left hip'] = '左髋部',
+      ['Left hull'] = '左车体',
       ['Left leg'] = '左腿',
       ['Left leg health'] = '左腿生命值',
+      ['Left leg shield'] = '左腿护盾',
+      ['Left legs'] = '左腿',
+      ['Left middle leg'] = '左中腿',
+      ['Left middle wing'] = '左中翼',
       ['Left mirror'] = '左后视镜',
+      ['Left pincer'] = '左钳',
       ['Left rear door'] = '左后门',
+      ['Left rear engine pitch'] = '左后引擎（俯仰）',
+      ['Left rear leg'] = '左后腿',
+      ['Left rocket'] = '左火箭',
+      ['Left rocketpod'] = '左火箭舱',
+      ['Left shoulder'] = '左肩部',
+      ['Left shoulder blade'] = '左肩刀刃',
+      ['Left shoulderplate'] = '左肩甲',
       ['Left side panel 0'] = '左侧板 0',
       ['Left side panel 1'] = '左侧板 1',
+      ['Left speaker'] = '左扬声器',
+      ['Left spine1 leg'] = '第1节左腿',
+      ['Left spine2 leg'] = '第2节左腿',
+      ['Left spine3 leg'] = '第3节左腿',
+      ['Left spine4 leg'] = '第4节左腿',
+      ['Left spine5 leg'] = '第5节左腿',
+      ['Left tentacle'] = '左触手',
       ['Left top block'] = '左上块',
+      ['Left torso'] = '左躯干',
       ['Left track'] = '左履带',
+      ['Left tracks'] = '左履带',
+      ['Left weapon bay'] = '左武器舱',
+      ['Left wing'] = '左翼',
+      ['Left wrist blade'] = '左腕刀刃',
       ['Leg injury immunity (1 on)'] = '免疫腿部受伤（1 为开启）',
       ['Leveller'] = '荡平者',
+      ['Leviathan'] = '利维坦',
+      ['Leviathan bomb'] = '利维坦炸弹',
+      ['Leviathan cannon'] = '利维坦火炮',
+      ['Lf wing'] = '左前翼',
       ['Liberator'] = '解放者',
       ['Liberator Carbine'] = '“解放者”卡宾枪',
       ['Liberator Concussive'] = '震荡“解放者”',
       ['Liberator Legacy'] = '“解放者”传承',
       ['Liberator Penetrator'] = '穿甲“解放者”',
       ['Lifetime (s)'] = '存续时间(秒)',
+      ['Light armor'] = '轻型护甲',
+      ['Light, medium or heavy, per armor (every armor set with that name).'] = '每件护甲的轻型、中型或重型（同名的所有护甲套装）。',
       ['Limb health'] = '四肢生命值',
       ['Limb injury avoidance'] = '避免肢体受伤的几率',
       ['Load'] = '读取',
+      ['Loadout'] = '装备配置',
       ['Log file'] = '日志文件',
       ['Log file path copied.'] = '已复制日志文件路径。',
       ['Logs'] = '日志',
       ['Logs and Presets'] = '日志与预设',
       ['Loses its target past (deg)'] = '超出此角度丢失目标(度)',
+      ['Lower back'] = '下背部',
+      ['Lower it if a high zoom spins the view.'] = '如果高倍率时视野旋转，请调低。',
+      ['Lower spine'] = '下脊椎',
+      ['Lowest patrol frequency (x)'] = '最低巡逻频率 (x)',
+      ['Lowest rates'] = '最低频率',
+      ['Lowest reinforcement frequency (x)'] = '最低增援频率 (x)',
       ['Loyalist'] = '忠诚者',
       ['Lumberer Exosuit'] = '“伐木者”外骨骼装甲',
       ['Lure Mine'] = '诱饵地雷',
+      ['M tentacle'] = '中触手',
       ['M-1000 Maxigun'] = 'M-1000 重装机枪',
       ['M-102 Gunner FRV'] = 'M-102 炮手快速侦察载具',
       ['M-103 Supply FRV'] = 'M-103 补给型快速侦察载具',
@@ -1172,6 +1790,7 @@ MOD.langs = {
       ['M7S SMG'] = 'M7S 冲锋枪',
       ['M90A Shotgun'] = 'M90A 霰弹枪',
       ['MA5C Assault Rifle'] = 'MA5C 突击步枪',
+      ['MG Emplacement'] = '机枪部署支架',
       ['MG-206 Heavy Machine Gun'] = 'MG-206 重机枪',
       ['MG-206 Heavy Machine Gun (mounted B)'] = 'MG-206 重机枪（固定式 B）',
       ['MG-43 Machine Gun'] = 'MG-43 机枪',
@@ -1190,7 +1809,10 @@ MOD.langs = {
       ['Maelstrom'] = '风暴漩涡',
       ['Magazine size'] = '弹匣容量',
       ['Magazines from supply'] = '补给获得的弹匣数',
+      ['Main'] = '主体',
+      ['Main body'] = '主身体',
       ['Main gun'] = '主炮',
+      ['Marauder'] = '劫掠者',
       ['Marker radar scan every (s)'] = '标记雷达扫描间隔（秒）',
       ['Mass (kg)'] = '质量(千克)',
       ['Max carried'] = '最大携带',
@@ -1204,6 +1826,7 @@ MOD.langs = {
       ['Med-Kit'] = '急救包',
       ['Medic Backpack'] = '医疗背包',
       ['Medium Plasma Bolt'] = '中型等离子弹',
+      ['Medium armor'] = '中型护甲',
       ['Melee damage'] = '近战伤害',
       ['Melta Mine'] = '热熔地雷',
       ['Meltagun'] = '热熔枪',
@@ -1218,18 +1841,28 @@ MOD.langs = {
       ['Missile'] = '导弹',
       ['Missile Pistol'] = '制导手枪',
       ['Missile flight'] = '导弹飞行',
+      ['Mission'] = '任务',
       ['Missions'] = '任务',
       ['Missions clan station'] = '空间站任务',
       ['Mist'] = '迷雾',
       ['Mobile Comms Relay'] = '移动通信中继器',
+      ['Modifier patrol frequency (x)'] = '修正巡逻频率 (x)',
+      ['Modifier patrol size (x)'] = '修正巡逻规模 (x)',
       ['Mortar Sentry'] = '迫击哨戒炮',
+      ['Mouth'] = '口部',
       ['Move while reloading'] = '换弹时可移动',
       ['Movement'] = '移动',
+      ['Movement speed (multiplier)'] = '移动速度（倍率）',
+      ['Movement speed (x)'] = '移动速度 (x)',
       ['Muzzle'] = '枪口',
       ['Muzzle brake'] = '枪口制退器',
       ['Napalm Bomb'] = '凝固汽油弹',
       ['Napalm Bomb Mk2'] = '凝固汽油弹 MK2',
       ['Napalm Bomb Mk3'] = '凝固汽油弹 MK3',
+      ['Navigation'] = '导航',
+      ['Neck'] = '颈部',
+      ['Neck armor'] = '颈部装甲',
+      ['Neck body'] = '颈部（本体）',
       ['No changes: loading it puts every value back to the game\'s.'] = '没有修改：读取它会把所有数值恢复为游戏原值。',
       ['No presets yet.'] = '还没有预设。',
       ['Noise'] = '噪音',
@@ -1241,9 +1874,11 @@ MOD.langs = {
       ['Nothing to install: your values are the game\'s own.'] = '无需写入：所有数值均为游戏原值。',
       ['Nova'] = '新星',
       ['Nuke'] = '核弹',
+      ['Nursing Spewer'] = '抚育喷涌虫',
       ['OFFLINE  -  edits the game\'s files; they apply when the game starts'] = '离线  -  编辑游戏文件；游戏启动时生效',
       ['OK'] = '确定',
       ['ORBITAL BEAM'] = '轨道光束',
+      ['Objective'] = '任务目标',
       ['Off'] = '关',
       ['Off: its stats above are left out; only the passives below apply.'] = '关闭：上方的数值不生效；只有下方的被动生效。',
       ['Off: the game\'s values everywhere; your '] = '关闭：全局使用游戏数值，你的',
@@ -1253,10 +1888,15 @@ MOD.langs = {
       ['On'] = '开',
       ['On: a loadout can take more than one exosuit, FRV or tank.'] = '开启：单次配装可携带多台 外骨骼装甲、FRV 或坦克。',
       ['On: in your armory / stratagem list.'] = '开启：出现在你的军械库 / 战略配备列表中。',
+      ['On: sniper rifles show a crosshair when you aim in third person.'] = '开启：以第三人称瞄准时，狙击步枪显示准星。',
+      ['On: stratagem balls stick on more surfaces instead of bouncing off.'] = '开启：战略配备信标可粘附在更多表面上，而不会弹开。',
       ['On: your '] = '开启：你的',
       ['On: your arc chain length / split apply with other players too (arcs can stay on screen).'] = '开启：你的电弧连锁长度 / 分裂对其他玩家同样生效（电弧可留在屏幕上）。',
+      ['On: your rockets, launcher rounds and stratagem ordnance fly through tree canopies and bushes.'] = '开启：你的火箭弹、发射器弹药和战略配备弹药可穿过树冠和灌木。',
       ['One True Flag'] = '唯一真旗',
       ['One-Two'] = '幺二',
+      ['One-handed'] = '单手持握',
+      ['Only works with the blast angle at 360, and the distance has to be larger than one step of the round:'] = '只在爆炸角为 360 时生效，且距离要大于射弹每帧的位移：',
       ['Open'] = '打开',
       ['Open / close key'] = '打开 / 关闭热键',
       ['Opened the GitHub page in your browser.'] = '已在浏览器中打开 GitHub 页面。',
@@ -1283,9 +1923,14 @@ MOD.langs = {
       ['Orbital strike.'] = '轨道打击。',
       ['Other'] = '其他',
       ['Other players are in your game: arc chain length / split use the game\'s values.'] = '你的对局中存在其他玩家：电弧连锁长度 / 分裂将使用游戏数值。',
+      ['Outcast'] = '流放者',
       ['Outer radius (m)'] = '外半径(米)',
+      ['Outpost garrison size (x)'] = '前哨驻军规模 (x)',
+      ['Outposts and spawners'] = '前哨与生成点',
       ['Overcharge limit (s)'] = '过载上限(秒)',
       ['Overheat threshold'] = '过热阈值',
+      ['Overseer'] = '监视者',
+      ['Overship'] = '统御舰',
       ['Own effects'] = '自身效果',
       ['Oxygenator'] = '供氧器',
       ['P-11 Stim Pistol'] = 'P-11 治疗剂手枪',
@@ -1321,18 +1966,27 @@ MOD.langs = {
       ['Partial charge shot'] = '部分蓄力射击',
       ['Passive'] = '被动',
       ['Patriot Exosuit'] = '“爱国者”外骨骼装甲',
+      ['Patrol frequency (x)'] = '巡逻频率 (x)',
+      ['Patrols'] = '巡逻',
+      ['Patrols at once (x)'] = '同时巡逻数 (x)',
       ['Peacemaker'] = '和平制造者',
       ['Peak Physique'] = '健壮体格',
+      ['Pelvis'] = '骨盆',
       ['Pen.'] = '穿甲',
       ['Penetration slowdown'] = '穿透后速度衰减',
+      ['Phalanx'] = '方阵',
       ['Physical shield'] = '实体护盾',
+      ['Pilot seat'] = '驾驶座',
       ['Pineapple'] = '菠萝',
       ['Plasma Pistol. Canister Extended'] = '等离子手枪：扩容弹药罐',
       ['Plasma Pistol. Canister Pistol'] = '等离子手枪：标准弹药罐',
       ['Point of interest range'] = '兴趣点探测范围',
+      ['Poison (experimental)'] = '中毒（实验性）',
       ['Poison Drill'] = '毒剂钻探装置',
       ['Portable Hellbomb'] = '便携式地狱火炸弹',
       ['Position scatter (m)'] = '布雷位置随机偏移（米）',
+      ['Pouncer'] = '猛扑虫',
+      ['Predator Hunter'] = '掠食追猎虫',
       ['Presets'] = '预设',
       ['President rewards'] = '总统奖励',
       ['Press a key (Esc cancels)'] = '请按一个键(Esc 取消)',
@@ -1350,6 +2004,7 @@ MOD.langs = {
       ['Punisher Plasma'] = '等离子“制裁者”',
       ['Purifier'] = '净化者',
       ['Push force'] = '击退力',
+      ['Pyro Trooper'] = '炙焰装甲兵',
       ['Pyrotech'] = '烟花术',
       ['Quasar Cannon'] = '类星体加农炮',
       ['R-2 Amendment'] = 'R-2 修正',
@@ -1372,8 +2027,12 @@ MOD.langs = {
       ['RS-422 Railgun'] = 'RS-422 磁轨炮',
       ['Rack'] = '挂架',
       ['Radar'] = '雷达',
+      ['Radiation (heavy) (experimental)'] = '辐射（重度）（实验性）',
+      ['Radiation (light) (experimental)'] = '辐射（轻度）（实验性）',
+      ['Radical'] = '激进先锋',
       ['Radius'] = '半径',
       ['Radius (m)'] = '半径(米)',
+      ['Raider'] = '奇袭者',
       ['Rail Cannon Round'] = '轨道炮弹',
       ['Railgun'] = '磁轨炮',
       ['Railgun Round'] = '磁轨炮弹',
@@ -1383,6 +2042,7 @@ MOD.langs = {
       ['Range'] = '射程',
       ['Range (m)'] = '射程(米)',
       ['Rapid Heatsink'] = '快速散热器',
+      ['Rb wing'] = '右后翼',
       ['Re-Educator'] = '思想改造',
       ['Reach downward (m)'] = '向下触及(米)',
       ['Reach upward (m)'] = '向上触及(米)',
@@ -1405,10 +2065,14 @@ MOD.langs = {
       ['Refills crouched in (s)'] = '蹲伏恢复用时(秒)',
       ['Refills prone in (s)'] = '卧倒恢复用时(秒)',
       ['Refills standing in (s)'] = '站立恢复用时(秒)',
-      ['Regeneration (health/s)'] = '再生(生命/秒)',
+      ['Regeneration (health/s)'] = '再生 (生命值/秒)',
       ['Regeneration delay after damage (s)'] = '受伤后再生延迟（秒）',
       ['Reinforced Epaulettes'] = '强化肩章',
       ['Reinforcement Beacon'] = '增援信标',
+      ['Reinforcement frequency (x)'] = '增援频率 (x)',
+      ['Reinforcement size (x)'] = '增援规模 (x)',
+      ['Reinforcements'] = '增援',
+      ['Reinforcements (flares, breaches, drops)'] = '增援 (信号弹、虫潮、空投)',
       ['Releases'] = '正式版',
       ['Reload allowed below (rounds)'] = '允许装填的剩余弹数上限',
       ['Reload time (s)'] = '装填时间（秒）',
@@ -1419,35 +2083,92 @@ MOD.langs = {
       ['Rename'] = '重命名',
       ['Reprimand'] = '训斥',
       ['Reset all values'] = '重置全部数值',
+      ['Reset booster'] = '重置增强配备',
+      ['Reset enemy'] = '重置敌人',
       ['Reset helldiver'] = '重置潜兵',
       ['Reset passive'] = '重置被动',
       ['Reset record'] = '重置记录',
+      ['Reset spawning'] = '重置生成',
       ['Reset weapon'] = '重置武器',
       ['Resets all values from the current preset to default.'] = '将当前预设的全部数值恢复为默认值。',
       ['Restore the game\'s files'] = '恢复游戏原始文件',
       ['Restoring the game\'s files...'] = '正在恢复游戏原始文件...',
       ['Resupply'] = '重新补给',
+      ['Rf wing'] = '右前翼',
       ['Rifle Justice. Short '] = '“正义”步枪：短弹匣',
       ['Right'] = '右',
-      ['Right arm'] = '右臂',
+      ['Right arm'] = '右手臂',
       ['Right arm health'] = '右臂生命值',
+      ['Right armor'] = '右装甲',
+      ['Right arms'] = '右手臂',
+      ['Right back leg'] = '右后腿',
       ['Right back panel'] = '右后板',
+      ['Right back thruster'] = '右后推进器',
+      ['Right back track bar'] = '右后履带支杆',
+      ['Right back track knee'] = '右后履带膝部',
+      ['Right back wing'] = '右后翼',
+      ['Right body'] = '右身体',
       ['Right box 0'] = '右储物箱 0',
       ['Right box 1'] = '右储物箱 1',
       ['Right box 2'] = '右储物箱 2',
+      ['Right claw'] = '右爪',
+      ['Right elbow'] = '右肘部',
+      ['Right extra elbow'] = '右额外肘部',
+      ['Right foot'] = '右脚',
+      ['Right foreleg shoulder'] = '右前腿肩部',
       ['Right front block'] = '右前块',
       ['Right front door'] = '右前门',
+      ['Right front face'] = '右前面',
+      ['Right front leg'] = '右前腿',
       ['Right front light'] = '右前灯',
+      ['Right front track bar'] = '右前履带支杆',
+      ['Right front track knee'] = '右前履带膝部',
+      ['Right front wing flap'] = '右前襟翼',
+      ['Right gun'] = '右炮',
+      ['Right hand'] = '右手',
+      ['Right head'] = '右头部',
+      ['Right head flap'] = '右头部护片',
+      ['Right hindleg wrist'] = '右后腿腕部',
+      ['Right hip'] = '右髋部',
+      ['Right hull'] = '右车体',
       ['Right leg'] = '右腿',
       ['Right leg health'] = '右腿生命值',
+      ['Right leg shield'] = '右腿护盾',
+      ['Right legs'] = '右腿',
+      ['Right middle leg'] = '右中腿',
+      ['Right middle wing'] = '右中翼',
       ['Right mirror'] = '右后视镜',
+      ['Right pincer'] = '右钳',
       ['Right rear door'] = '右后门',
+      ['Right rear engine pitch'] = '右后引擎（俯仰）',
+      ['Right rear leg'] = '右后腿',
+      ['Right rocket'] = '右火箭',
+      ['Right rocketpod'] = '右火箭舱',
+      ['Right shoulder'] = '右肩部',
+      ['Right shoulder blade'] = '右肩刀刃',
+      ['Right shoulderplate'] = '右肩甲',
       ['Right side panel 0'] = '右侧板 0',
       ['Right side panel 1'] = '右侧板 1',
+      ['Right speaker'] = '右扬声器',
+      ['Right spine1 leg'] = '第1节右腿',
+      ['Right spine2 leg'] = '第2节右腿',
+      ['Right spine3 leg'] = '第3节右腿',
+      ['Right spine4 leg'] = '第4节右腿',
+      ['Right spine5 leg'] = '第5节右腿',
+      ['Right tentacle'] = '右触手',
       ['Right top block'] = '右上块',
+      ['Right torso'] = '右躯干',
       ['Right track'] = '右履带',
+      ['Right tracks'] = '右履带',
+      ['Right weapon bay'] = '右武器舱',
+      ['Right wing'] = '右翼',
+      ['Right wrist blade'] = '右腕刀刃',
       ['Rock Solid'] = '坚如磐石',
+      ['Rocket Devastator'] = '火箭蹂躏者',
       ['Rocket Sentry'] = '火箭哨戒炮',
+      ['Rocket pods'] = '火箭舱',
+      ['Rooted (experimental)'] = '定身（实验性）',
+      ['Rotator'] = '转子',
       ['Round 1 blast'] = '第 1 发爆炸',
       ['Round 1 blast radius'] = '第 1 发爆炸半径',
       ['Round 1 projectile'] = '第 1 发弹丸',
@@ -1458,13 +2179,24 @@ MOD.langs = {
       ['Rounds loaded'] = '已装填弹数',
       ['Rounds per reload'] = '每次装填弹数',
       ['Run length (m)'] = '攻击航线长度（米）',
+      ['Rupture Charger'] = '爆裂强袭虫',
+      ['Rupture Spewer'] = '爆裂喷涌虫',
+      ['Rupture Warrior'] = '爆裂武斗虫',
       ['S-11 Speargun'] = 'S-11 矛枪',
+      ['SEAF'] = 'SEAF',
       ['SEAF Artillery: Explosive'] = 'SEAF 火炮：高爆弹',
       ['SEAF Artillery: HIGH-YIELD EXPLOSIVE'] = 'SEAF 火炮：高当量爆炸弹',
       ['SEAF Artillery: Mini Nuke'] = 'SEAF 火炮：微型核弹',
       ['SEAF Artillery: Napalm'] = 'SEAF 火炮：凝固汽油弹',
       ['SEAF Artillery: Smoke'] = 'SEAF 火炮：烟雾弹',
       ['SEAF Artillery: Static Field'] = 'SEAF 火炮：静电场',
+      ['SEAF Leader'] = 'SEAF 指挥官',
+      ['SEAF Medic'] = 'SEAF 医疗兵',
+      ['SEAF Soldier'] = '超级地球武装部队战士',
+      ['SEAF Specialist'] = 'SEAF 专家',
+      ['SEAF reinforcement cooldown (x)'] = 'SEAF 增援冷却 (x)',
+      ['SEAF soldier: an ally.'] = 'SEAF 士兵：友军。',
+      ['SEAF wave cooldown (x)'] = 'SEAF 波次冷却 (x)',
       ['SECOND MODE'] = '第二模式',
       ['SG-20 Halt'] = 'SG-20 止息',
       ['SG-22 Bushwhacker'] = 'SG-22 游击兵',
@@ -1482,6 +2214,7 @@ MOD.langs = {
       ['SH-51 Directional Shield'] = 'SH-51 定向护盾',
       ['SHARED WITH'] = '共用',
       ['SHIELD'] = '护盾',
+      ['SHODAN ENEMY EDITOR'] = 'SHODAN 敌人编辑器',
       ['SHODAN STAT EDITOR'] = 'SHODAN 数值编辑器',
       ['SHODAN weapon mods are running too: they put their own values back every 5 s'] = '检测到 SHODAN 武器 mod 同时运行：它们每 5 秒会把数值改回自己的设定',
       ['SHRAPNEL'] = '破片',
@@ -1503,12 +2236,19 @@ MOD.langs = {
       ['Salvos'] = '齐射次数',
       ['Save'] = '保存',
       ['Save current changes here'] = '在此保存当前修改',
+      ['Scavenger'] = '食腐虫',
+      ['Scavenger acid burst'] = '清道夫酸液爆裂',
+      ['Scope'] = '瞄准镜',
       ['Scorcher'] = '焦土',
       ['Scout'] = '侦察',
+      ['Scout Raider'] = '侦查奇袭者',
+      ['Scout Strider'] = '侦察纵步者',
+      ['Scout walker rider'] = '侦察步行机驾驶员',
       ['Scrambler'] = '扰频器',
       ['Scythe'] = '长柄镰',
       ['Seaf Gun'] = 'SEAF 火炮',
       ['Seaf Squad'] = 'SEAF 小队',
+      ['Search enemies'] = '搜索敌人',
       ['Search radius (m)'] = '搜索半径(米)',
       ['Search weapons and stratagems'] = '搜索武器与战略配备',
       ['Second ammo'] = '第二弹种',
@@ -1522,6 +2262,7 @@ MOD.langs = {
       ['Seeker'] = '寻踪者',
       ['Seismic Probe'] = '地震探针',
       ['Senator'] = '参议员',
+      ['Senses'] = '感知',
       ['Sentry'] = '哨戒炮',
       ['Sentry: its cooldown, its body, then its weapon.'] = '哨戒炮：依次为冷却时间、本体、武器。',
       ['Servo-Assisted'] = '伺服辅助',
@@ -1538,11 +2279,14 @@ MOD.langs = {
       ['Shield arm zone armor'] = '护盾臂部位护甲',
       ['Shield capacity'] = '护盾容量',
       ['Shield emitter'] = '护盾发生器',
+      ['Shield forcefield'] = '护盾力场',
       ['Shield plate armor'] = '护盾板护甲',
       ['Shield plate health'] = '护盾板生命值',
+      ['Shield zone'] = '护盾',
       ['Ship upgrades that make support weapons and sentries launch at once skip it (tested).'] = '让支援武器和哨戒炮立即发射的舰船升级会跳过此倒计时（已由作者测试）。',
       ['Shockwave radius (m)'] = '冲击波半径(米)',
       ['Short Magazine'] = '短弹匣',
+      ['Shotgun'] = '霰弹枪',
       ['Shoulder Mounted Camera'] = '肩载摄像机',
       ['Shrapnel'] = '榴霰弹',
       ['Shrapnel blast radius'] = '破片爆炸半径',
@@ -1551,25 +2295,65 @@ MOD.langs = {
       ['Shrapnel pieces'] = '破片数量',
       ['Shrapnel projectile'] = '破片弹丸',
       ['Shrapnel projectile (id)'] = '破片弹丸（编号）',
+      ['Shredder Tank'] = '碎裂坦克',
+      ['Shrieker'] = '尖啸虫',
+      ['Shrieker Nest'] = '尖啸虫巢穴',
       ['Sickle'] = '镰刀',
+      ['Side'] = '侧面',
       ['Siege-Ready'] = '蓄势出击',
+      ['Sight cone height (degrees)'] = '视野锥高度 (度)',
+      ['Sight cone width (degrees)'] = '视野锥宽度 (度)',
+      ['Sight range (m)'] = '视野距离 (米)',
+      ['Sight range (x)'] = '视野范围（x）',
       ['Sightliner'] = '视界者',
       ['Silo'] = '发射井',
       ['Simo Iron Sights'] = '“西莫”机械瞄具',
+      ['Size'] = '体型',
+      ['Size (x)'] = '体型 (x)',
       ['Slide speed / duration'] = '滑行速度 / 持续时间',
+      ['Slope slide ends at (degrees)'] = '斜坡滑行结束角度（度）',
+      ['Slope slide starts at (degrees)'] = '斜坡滑行起始角度（度）',
+      ['Slot (choice)'] = '栏位（选择）',
+      ['Slot: 1 primary or 3 secondary.'] = '栏位：1 主武器或 3 副武器。',
+      ['Slot: Primary'] = '栏位：主武器',
+      ['Slot: Secondary'] = '栏位：副武器',
+      ['Slowed (experimental)'] = '减速（实验性）',
       ['Slugger'] = '重炮手',
       ['Small Plasma Bolt'] = '小型等离子弹',
       ['Smoke'] = '烟雾弹',
+      ['Smoke radius, edge (m)'] = '烟雾半径，边缘(米)',
+      ['Smoke radius, full (m)'] = '烟雾半径，浓密(米)',
       ['Smokescreen'] = '烟幕',
       ['Sniper Scope 10x'] = '10倍狙击瞄准镜',
       ['Sniper Scope 10x Helghast'] = '10倍狙击瞄准镜',
+      ['Sniper crosshair in third person'] = '第三人称狙击步枪准星',
       ['Solo Silo'] = '单兵导弹发射井',
       ['Sos Beacon'] = '求救信标',
+      ['Spawn height (m)'] = '生成高度（米）',
+      ['Spawner death'] = '刷怪点毁灭',
+      ['Spawning'] = '敌人生成',
+      ['Spawning limits every faction shares.'] = '所有阵营共用的生成限制。',
       ['Spear'] = '飞矛',
       ['Speargun'] = '矛枪',
       ['Speed until it has fired (m/s)'] = '开火前飞行速度（米/秒）',
       ['Speed while aiming (m/s)'] = '瞄准时速度(米/秒)',
+      ['Spine lower'] = '下脊椎',
+      ['Spine plate'] = '脊椎甲板',
+      ['Spine roll back'] = '脊椎后部',
+      ['Spine0'] = '脊椎 0',
+      ['Spine1'] = '脊椎 1',
+      ['Spine2'] = '脊椎 2',
+      ['Spine3'] = '脊椎 3',
+      ['Spine4'] = '脊椎 4',
+      ['Spine5'] = '脊椎 5',
       ['Spire Sterilizer'] = '尖塔灭菌器',
+      ['Spore Burst Bile Titan'] = '孢裂吐酸泰坦',
+      ['Spore Burst Hunter'] = '孢裂追猎虫',
+      ['Spore Burst Scavenger'] = '孢裂食腐虫',
+      ['Spore Burst Warrior'] = '孢裂武斗虫',
+      ['Spore Charger'] = '孢子强袭虫',
+      ['Spore Lung'] = '孢肺',
+      ['Spore Spewer'] = '孢子喷涌虫',
       ['Spotting range (m)'] = '索敌距离(米)',
       ['Spread (horizontal)'] = '散布(水平)',
       ['Spread (vertical)'] = '散布(垂直)',
@@ -1584,8 +2368,11 @@ MOD.langs = {
       ['StA-X3 W.A.S.P. Launcher'] = 'StA-X3 W.A.S.P.发射器',
       ['Stage '] = '阶段 ',
       ['Stagger force'] = '硬直力',
+      ['Stagger resistance (x)'] = '硬直抗性（x）',
+      ['Stalker'] = '追踪虫',
       ['Stalwart'] = '盟友',
       ['Stamina'] = '体力',
+      ['Standard'] = '标准',
       ['Standard Drum'] = '标准弹鼓',
       ['Standard Heatsink'] = '标准散热器',
       ['Standard Plasma Container'] = '标准等离子弹药匣',
@@ -1594,22 +2381,37 @@ MOD.langs = {
       ['Starting heatsinks'] = '初始备用散热器数',
       ['Starting magazines'] = '初始备用弹匣数',
       ['Starting rounds'] = '初始备用弹数',
+      ['Starting speed (m/s)'] = '初始速度（米/秒）',
       ['Starts at heat'] = '初始热量',
+      ['Stat Editor'] = '属性编辑器',
       ['Stationary Shroud'] = '静止隐匿',
       ['Status'] = '状态',
       ['Status effects'] = '状态效果',
+      ['Statuses'] = '状态效果',
       ['Stim Pistol'] = '治疗剂手枪',
+      ['Stingray'] = '刺魟',
       ['Stoker'] = '司炉者',
+      ['Stomach zone'] = '腹部',
       ['Stops you while firing'] = '开火时锁定移动',
       ['Stratagem'] = '战略配备',
+      ['Stratagem Jammer'] = '战略配备干扰装置',
+      ['Stratagem Scrambler (convoy)'] = '战略配备扰乱器（车队）',
+      ['Stratagem jamming radius (m)'] = '战略配备干扰半径（米）',
+      ['Stratagem scrambling radius (m)'] = '战略配备扰乱半径（米）',
       ['Stratagems'] = '战略配备',
+      ['Structure.'] = '建筑。',
       ['Stun'] = '眩晕弹',
+      ['Stun (Illuminate) (experimental)'] = '眩晕弹（光能者）（实验性）',
       ['Stun (large)'] = '眩晕弹（大）',
       ['Stun (massive)'] = '眩晕弹（极大）',
+      ['Stun (massive) (experimental)'] = '眩晕弹（巨大）（实验性）',
       ['Stun (medium)'] = '眩晕弹（中）',
       ['Stun (small)'] = '眩晕弹（小）',
       ['Stun Baton'] = '眩晕短棍',
       ['Stun Lance'] = '眩晕长矛',
+      ['Stun Pods'] = '眩晕喷射舱',
+      ['Stun and gas resistance (x)'] = '眩晕与毒气抗性（x）',
+      ['Stun resistance (x)'] = '眩晕抗性（x）',
       ['Stun rounds'] = '眩晕弹',
       ['Stun rounds fire (id)'] = '眩晕弹发射的弹丸（编号）',
       ['Supplementary Adrenaline'] = '肾上腺素补充剂',
@@ -1619,14 +2421,17 @@ MOD.langs = {
       ['Support'] = '支援武器',
       ['Support reload speed'] = '支援武器装填速度',
       ['Support weapon drop; the weapon itself is under Support.'] = '支援武器空投；武器本身列在“支援武器”分类下。',
+      ['Suppressed'] = '消音',
       ['Suppressor'] = '消音器',
       ['Sure?'] = '确定？',
+      ['Surplus EAT Allocation'] = '盈余EAT配给',
       ['Surviving lethal damage'] = '致命伤害存活几率',
       ['Swapping makes the shot the chosen weapon\'s, your edits to it included: damage,'] = '替换后使用所选武器的弹丸，包含你对其伤害、',
       ['Sway multiplier'] = '晃动系数',
       ['Sweeper'] = '扫荡者',
       ['Swim speed (m/s)'] = '游泳速度(米/秒)',
       ['TCS 03 Thumper'] = 'TCS 03 震动装置',
+      ['TCS support'] = 'TCS支架',
       ['TD-110 Maelstrom'] = 'TD-110 风暴漩涡',
       ['TD-220 Bastion MK XVI'] = 'TD-220 堡垒MK XVI',
       ['TED-63 Dynamite'] = 'TED-63 炸药',
@@ -1639,10 +2444,14 @@ MOD.langs = {
       ['Tank Reload AT'] = '坦克反坦克弹补给',
       ['Tank Reload Canister'] = '坦克霰弹补给',
       ['Tank Reload HE'] = '坦克高爆弹补给',
+      ['Tank turret'] = '坦克炮塔',
       ['Target search interval, max (s)'] = '索敌间隔，最大（秒）',
       ['Target search interval, min (s)'] = '索敌间隔，最小（秒）',
+      ['Tcs'] = 'TCS',
       ['Team weapons'] = '小队武器',
       ['Tenderizer'] = '肉锤',
+      ['Tentacle'] = '触手',
+      ['Terminids'] = '虫族',
       ['Tesla Tower'] = '特斯拉塔',
       ['Tested releases only.'] = '仅限经过测试的正式版。',
       ['That did not work; see the log.'] = '操作失败，请查看日志。',
@@ -1659,6 +2468,7 @@ MOD.langs = {
       ['The beacon\'s countdown before the delivery is sent.'] = '信标启动后、开始投送前的倒计时。',
       ['The beacon\'s timer still counts down the usual time (tested).'] = '信标仍显示原本的倒计时（已由作者测试）。',
       ['The charge backpack, the charge and its blast. Cooldown: Stratagems tab.'] = '炸药背包、炸药包及其爆炸。冷却时间见“战略配备”页。',
+      ['The explosion the round sets off when it hits something. 0: no explosion.'] = '射弹命中物体时引发的爆炸。0：不爆炸。',
       ['The flamethrower you carry.'] = '你携带的火焰喷射器。',
       ['The game holds at most 2048 rounds in a magazine.'] = '游戏中一个弹匣最多容纳 2048 发。',
       ['The game\'s own files are already in place.'] = '当前已是游戏原始文件。',
@@ -1668,12 +2478,15 @@ MOD.langs = {
       ['The one you carry. The CQC-20 Breaching Hammer is listed under Support.'] = '你携带的那一把。CQC-20 破拆锤列在“支援武器”下。',
       ['The one you carry. The CQC-72 support version is listed under Support.'] = '你携带的那一把。CQC-72 支援版本列在“支援武器”下。',
       ['The pistol you carry. The One-Two\'s launcher is listed under the One-Two.'] = '你携带的手枪。“幺二”的发射器列在“幺二”下。',
+      ['The range the sights are set for at this step (you switch steps in game). At that range the shot lands'] = '这一档瞄具归零的距离（在游戏中切换档位）。在该距离子弹正好',
       ['The recharge time is 0: set it above 0 first.'] = '充能时间为 0：请先设为大于 0 的值。',
       ['The rifle you carry. The grenade launcher is listed separately.'] = '你携带的步枪。榴弹发射器单独列出。',
       ['The rifle you carry. The underbarrel shotgun is listed separately.'] = '你携带的步枪。下挂霰弹枪单独列出。',
+      ['The round goes off when it passes this close to an enemy, without hitting it. 0: off (the RL-77 uses 2 m).'] = '射弹从敌人这么近的距离经过时即使没有命中也会爆炸。0：关闭（RL-77 为 2 米）。',
       ['The support hammer delivered by hellpod. The game data files it next to the Machete.'] = '由空投舱投送的支援锤。游戏数据将它列在砍刀旁边。',
       ['The support weapon. The CQC-73 is listed under Secondary.'] = '支援武器。CQC-73 列在“副武器”下。',
       ['Thermite'] = '铝热弹',
+      ['Thermite (experimental)'] = '铝热（实验性）',
       ['Throw range'] = '投掷距离',
       ['Throw spread (degrees)'] = '投掷散布(度)',
       ['Throw velocity, max (m/s)'] = '投掷速度上限(米/秒)',
@@ -1682,15 +2495,37 @@ MOD.langs = {
       ['Throwable launching is supported in solo missions only.'] = '发射投掷物仅支持单人任务。',
       ['Throwables'] = '投掷物',
       ['Throwing Knife'] = '飞刀',
+      ['Tier 1'] = '1 级',
+      ['Tier 1 captive'] = '1级俘虏',
+      ['Tier 2'] = '2 级',
+      ['Tier 2 guard'] = '2级守卫',
+      ['Tier2'] = '2 级',
+      ['Time before drowning (s)'] = '溺水前时间（秒）',
       ['Time between bombs (s)'] = '投弹间隔(秒)',
       ['Time between salvos (s)'] = '齐射间隔(秒)',
       ['Time between shells (s)'] = '炮弹发射间隔（秒）',
+      ['Time deployed (s)'] = '部署持续时间（秒）',
+      ['Top'] = '顶部',
       ['Top left hatch'] = '左上舱盖',
       ['Top right hatch'] = '右上舱盖',
+      ['Top wing'] = '上翼',
       ['Torcher'] = '火炬手',
+      ['Tornado stun (experimental)'] = '龙卷风眩晕（实验性）',
+      ['Torso'] = '躯干',
+      ['Torso armor'] = '躯干装甲',
+      ['Torso inside'] = '躯干内部',
+      ['Torso outside'] = '躯干外部',
+      ['Torso underside'] = '躯干底部',
+      ['Toughness'] = '耐久',
       ['Tracer rounds'] = '曳光弹',
+      ['Tracking after losing sight (x)'] = '失去视线后的追踪（x）',
       ['Tracking speed'] = '跟踪速度',
+      ['Tracks'] = '履带',
+      ['Tremor (experimental)'] = '震颤（实验性）',
       ['Trigger delay (s)'] = '触发延迟(秒)',
+      ['Trooper'] = '装甲兵',
+      ['Trooper LMG backpack'] = '装甲兵轻机枪背包',
+      ['Trooper jump pack'] = '装甲兵喷射背包',
       ['True Grit'] = '坚韧不拔',
       ['Tube Reddot 2x'] = '2倍红点瞄准镜',
       ['Tube Reddot 2x Legacy'] = '旧式2倍管状红点瞄准镜',
@@ -1725,13 +2560,24 @@ MOD.langs = {
       ['Urchin'] = '海胆',
       ['Uses per mission'] = '每次任务使用次数',
       ['Uses per rearm'] = '每次重新武装后的可用次数',
+      ['V2'] = 'v2',
+      ['V3'] = 'v3',
       ['VEHICLE'] = '载具',
       ['VG-70 Variable'] = 'VG-70 变数',
       ['Variable'] = '变数',
       ['Vehicle'] = '载具',
+      ['Vehicle death (huge)'] = '载具毁灭（巨型）',
+      ['Vehicle death (large, air)'] = '载具毁灭（大型，空中）',
+      ['Vehicle death (large, ground)'] = '载具毁灭（大型，地面）',
+      ['Vehicle death (medium)'] = '载具毁灭（中型）',
+      ['Vehicle death (medium, ground)'] = '载具毁灭（中型，地面）',
       ['Vehicle. The weapons it carries are listed under it.'] = '载具。其搭载的武器列在它下方。',
       ['Velocity'] = '初速',
       ['Velocity (m/s)'] = '初速(米/秒)',
+      ['Vent back bar'] = '通风口后支杆',
+      ['Vent sarcophagus'] = '石棺通风口',
+      ['Vent under'] = '下通风口',
+      ['Veracitor'] = '证真者',
       ['Verdict'] = '裁决',
       ['Vertical Grip'] = '垂直前握把',
       ['Vertical Grip 45 Degree'] = '45度垂直前握把',
@@ -1739,6 +2585,8 @@ MOD.langs = {
       ['Vertical Grip Flashlight'] = '垂直前握把带照明',
       ['Veto'] = '否决者',
       ['Volatile Plasma Bolt'] = '不稳定等离子弹',
+      ['Voteless'] = '无票者',
+      ['Vox Engine'] = '噪轰引擎',
       ['W.A.S.P. Launcher'] = 'W.A.S.P.发射器',
       ['WEAPON STATS'] = '武器数值',
       ['WIND-UP'] = '转管加速',
@@ -1747,31 +2595,49 @@ MOD.langs = {
       ['Walking Barrage Smoke'] = '移动弹幕烟雾',
       ['Walking backwards (multiplier)'] = '后退行走(倍率)',
       ['Walking speed (m/s)'] = '弹幕推进速度（米/秒）',
+      ['War Strider'] = '战争纵步者',
       ['Warp Pack'] = '传送背包',
+      ['Warp Ship'] = '穿梭舰',
       ['Warp distance (m)'] = '跃迁距离(米)',
       ['Warp pack'] = '传送背包',
       ['Warrant'] = '法令',
+      ['Warrior'] = '武士',
+      ['Warrior acid burst'] = '战士酸液爆裂',
+      ['Watcher'] = '守望者',
+      ['Water'] = '水',
       ['Weapon stats'] = '武器数值',
       ['Weaves'] = '蛇形飞行',
+      ['What goes off when they die. Each explosion is shared by every enemy that uses it.'] = '它们死亡时引发的爆炸。每种爆炸由所有使用它的敌人共用。',
       ['Wind-down time (s)'] = '转管减速时间（秒）',
       ['Wind-down time, released (s)'] = '松开扳机后减速时间（秒）',
       ['Wind-up'] = '转管加速',
       ['Wind-up time (s)'] = '转管加速时间（秒）',
+      ['Wings'] = '翼',
+      ['Wretch'] = '悲怜体',
+      ['Xenobite Ardent'] = '炽热异噬者',
       ['Your changes are off: turn them on in Settings to edit.'] = '你的改动当前处于关闭状态：请在设置里开启后再编辑。',
       ['Your changes are off: turn them on in Settings to load a preset'] = '你的修改已关闭：请在设置中开启后再读取预设',
       ['Your values are not in the game yet: close the game, then Install.'] = '修改尚未写入游戏：请先关闭游戏，再点击“写入游戏”。',
       ['[Tutorial] Extraction'] = '【教学】撤离',
       ['a settings table moved; scanning again'] = '设置数据表已移动，正在重新扫描',
+      ['a slot is 1 (primary) or 3 (secondary)'] = '栏位为 1（主武器）或 3（副武器）',
       ['a table moved; scanning again'] = '数据表已移动，正在重新扫描',
+      ['added to every armor value, up to 10; lowered: down to 0'] = '加到每个护甲值上，最高 10；降低时最低 0',
+      ['airborne'] = '空降',
       ['also in your loadout when you bring this one'] = '携带此战略配备时也会一并获得',
       ['also the second firing mode\'s shot (the same projectile)'] = '同样适用于第二种射击模式的弹丸（同一投射物）',
       ['arc weapon'] = '电弧武器',
       ['armor passive'] = '护甲被动',
       ['armor penetration, forces, velocity, drag, gravity, pellets and explosions. Kept: this'] = '穿甲、作用力、速度、阻力、重力、弹丸数及爆炸的修改。当前武器的',
+      ['assassinate'] = '刺杀',
+      ['assault'] = '突击',
       ['attachment deltas'] = '配件修正量',
       ['attachment items'] = '配件物品',
       ['backpack charges'] = '背包使用次数',
       ['beam weapon'] = '光束武器',
+      ['body parts without their own armor use this'] = '没有自身护甲的身体部位使用此值',
+      ['breaks the hip-fire animations on two-handed weapons'] = '会破坏双手武器的腰射动画',
+      ['bull'] = '公牛',
       ['clip'] = '弹夹',
       ['could not start the download'] = '无法开始下载',
       ['current value implausible'] = '当前数值异常',
@@ -1780,17 +2646,37 @@ MOD.langs = {
       ['destruction map'] = '破坏数据映射',
       ['destruction tiers'] = '破坏等级',
       ['direct hit: the same as the first mode\'s (Damage above)'] = '直击：与第一种模式相同（见上方“伤害”）',
+      ['elite'] = '精英',
+      ['every enemy with this attack shares it'] = '所有拥有此攻击的敌人共用',
+      ['fake'] = '伪装',
       ['fire mode'] = '射击模式',
+      ['gloom'] = '幽暗',
       ['goes off on impact, but not before this'] = '撞击时引爆，但不能早于此时间',
       ['grenade assets loading'] = '正在加载投掷物资源',
+      ['gunships, Dragonroaches, Leviathans and the like, where a planet has them'] = '炮舰、蟑龙、利维坦等，视星球而定',
       ['hash correction did not verify'] = '校验值校正未通过验证',
+      ['heavycannon'] = '重炮',
       ['hellpod rack'] = '空投舱挂架',
+      ['hexagon'] = '六边形',
+      ['how long it keeps after you once you break line of sight'] = '脱离视线后它继续追击你的时长',
+      ['how much gas it takes to confuse it'] = '使其混乱所需的毒气量',
+      ['how much stun it takes to stun it'] = '使其眩晕所需的眩晕量',
+      ['how often the beam deals its damage while it touches'] = '光束接触时造成伤害的频率',
+      ['how quickly the view follows your aim at this zoom; lower it if a high zoom spins the view'] = '此倍率下视野跟随瞄准的速度；如果高倍率时视野旋转，请调低',
+      ['its height above its flight route; lower flies closer to the ground (terrain still holds it up)'] = '高于飞行路线的高度；越低越贴近地面（地形仍会托住它）',
       ['its own. - / + : fire another weapon\'s'] = '自身弹丸。- / +：改为发射其他武器的弹丸',
+      ['ivory legion assault'] = '象牙军团突击',
+      ['ivory legion tier 2'] = '象牙军团2级',
+      ['jammer'] = '干扰器',
+      ['jump'] = '跳跃',
+      ['keep it above about speed / frame rate.'] = '建议大于「初速/游戏帧率」。',
       ['laser designator'] = '激光指示器',
       ['listing stratagems, attachments and armor passives'] = '正在列出战略配备、配件和护甲被动',
       ['loaded into an empty weapon, from your spare rounds'] = '装入空枪时，从备用弹药中补充',
       ['loadout package'] = '配装包',
+      ['lower (more negative): you go deeper before drowning starts'] = '越低（越负）：开始溺水前可以潜得越深',
       ['melee weapon'] = '近战武器',
+      ['melee, guns and death explosions, shared ones included'] = '近战、武器与死亡爆炸，含共用的',
       ['min charge'] = '最少充能',
       ['mine spawner'] = '地雷生成器',
       ['mine thrower'] = '布雷器',
@@ -1801,31 +2687,55 @@ MOD.langs = {
       ['normal projectile'] = '常规弹丸',
       ['not a finite number'] = '不是有限数值',
       ['nothing to vary for the hash (edit a value with decimals in this file)'] = '没有可用于校正校验值的数据（请修改此文件中的一个小数值）',
-      ['only works with the blast angle at 360, and the radius has to be larger than one step of the round: keep it above about speed / frame rate.'] = '只在爆炸角为 360 时生效；半径要大于射弹每帧的位移，建议大于「初速/游戏帧率」。',
+      ['on the crosshair; closer or farther it lands a bit high or low. Does not change the zoom.'] = '落在准星上；更近或更远会略高或略低。不改变放大倍率。',
+      ['one kind of stratagem cannot be called within this distance while it stands'] = '在其被摧毁前，此范围内无法呼叫某一类战略配备',
+      ['outcast'] = '流放者',
       ['overcharge'] = '过充',
       ['panels, mines per panel: lower only (more than the default crashes the game)'] = '布雷批次数、每批地雷数：只能调低（高于默认值会使游戏崩溃）',
+      ['phalanx'] = '方阵',
+      ['quieter for enemies (the noise of the game\'s suppressed guns); no suppressor model, same firing sound'] = '对敌人更安静（游戏中消音武器的噪音）；无消音器模型，射击声音不变',
       ['read-back check failed'] = '写入后读回校验失败',
       ['read-back differs'] = '读回内容不一致',
       ['resolving weapons and applying saved values'] = '正在解析武器并应用已保存的数值',
+      ['scout walker rider'] = '侦察步行机驾驶员',
       ['seeking missile'] = '制导导弹',
       ['shared with'] = '共用',
+      ['shotgun'] = '霰弹枪',
       ['speedloader'] = '快速装填器',
       ['spray weapon'] = '喷射武器',
       ['stage 1: partial charge shot, stages 2-3: full charge shot'] = '第 1 阶段：部分蓄力射击；第 2-3 阶段：满蓄力射击',
       ['stage 1: uncharged shot, stages 2-3: charged shot'] = '第 1 阶段：未蓄力射击；第 2-3 阶段：蓄力射击',
+      ['standard'] = '标准',
       ['status effect'] = '状态效果',
+      ['stratagem codes and names are scrambled within this distance while it stands'] = '它存在时，此距离内的战略配备指令与名称会被打乱',
+      ['stratagems cannot be called within this distance while it stands'] = '在其被摧毁前，此范围内无法呼叫战略配备',
+      ['tcs'] = 'TCS',
+      ['tentacle'] = '触手',
       ['the armor passive file is not loaded'] = '未加载护甲被动数据文件',
+      ['the armory list it is in: 1 primary, 3 secondary'] = '它在军械库中所属的列表：1 主武器，3 副武器',
+      ['the body and every body part, bleed-out health too'] = '身体与每个部位，以及失血生命值',
       ['the download helper (shodan_hash.dll) is missing'] = '缺少下载辅助库（shodan_hash.dll）',
+      ['the faction multipliers cannot slow patrols below this: lower it with them'] = '阵营倍率无法让巡逻低于此值：请一同调低',
+      ['the force a hit needs to stagger it (hit sizes it never staggers from stay that way)'] = '使其硬直所需的命中力度（原本不会造成硬直的命中仍然不会）',
+      ['the force a hit needs to stagger them'] = '使其硬直所需的命中力度',
+      ['the game holds back reinforcements past about 100 enemies at x1; it has crashed past 200-240 enemies alive'] = '在 x1 时，游戏在约 100 名敌人后停止增援；存活敌人超过 200-240 时曾出现崩溃',
       ['the game\'s tiers: 10 small arms, 20 HMG, 30 autocannon, 40 Strider, 50 orbital, 60 Hellbomb, 250 never'] = '游戏的分级：10 轻武器、20 重机枪、30 机炮、40 蹂躏者、50 轨道、60 地狱炸弹、250 不可摧毁',
+      ['the model and its body parts; very large or small sizes may look or move oddly'] = '模型及其身体部位；过大或过小可能显示或移动异常',
       ['the shot fired from this heat on, and what it does to you'] = '从该热量值起发射的弹丸，以及它对你自己造成的效果',
       ['the spare ammo in its backpack; read when the backpack is called in'] = '背包里的备用弹药；在被投放时读取',
       ['the update helper (shodan_hash.dll) is missing'] = '缺少更新辅助库（shodan_hash.dll）',
+      ['tier 1 captive'] = '1级俘虏',
+      ['tier 2 guard'] = '2级守卫',
+      ['v2'] = 'v2',
+      ['v3'] = 'v3',
       ['waiting for the scan'] = '正在等待扫描',
+      ['walking, patrolling, searching, fighting and charging speeds together'] = '行走、巡逻、搜索、战斗与冲锋速度一起调整',
       ['weapon charge'] = '武器蓄力',
       ['weapon customization'] = '武器定制',
       ['weapon heat'] = '武器热量',
       ['weapon\'s fire rate, ammo, handling and heat. To tune the shot, edit the chosen weapon.'] = '射速、弹药、操控和热量保持不变。要调整弹丸，请编辑所选武器。',
       ['what each hit applies; the slots go in order'] = '每次命中施加的状态；状态槽需按顺序填写',
+      ['what it has left once its health is gone, lost over time'] = '生命值耗尽后剩余的部分，随时间流失',
     },
     lower = {
       ['"+ new preset" (or insert) saves your current changes as one; you name it next.'] = '“+ 新建预设”（或 Insert 键）会把当前修改存为一组，接着你可以为它命名。',
@@ -2000,6 +2910,7 @@ MOD.langs = {
       ['a/m-23 ems mortar sentry'] = 'A/M-23 电磁冲击波迫击哨戒炮',
       ['a/mg-43 machine gun sentry'] = 'A/MG-43 哨戒机枪',
       ['a/mls-4x rocket sentry'] = 'A/MLS-4X 火箭哨戒炮',
+      ['aa emplacement'] = '防空炮台',
       ['ac-8 autocannon'] = 'AC-8 机炮',
       ['acceleration (m/s2)'] = '加速度(米/秒^2)',
       ['accelerator rifle'] = '加速步枪',
@@ -2008,7 +2919,9 @@ MOD.langs = {
       ['adjudicator'] = '审判者',
       ['adreno-defibrillator'] = '肾上腺素除颤器',
       ['advanced filtration'] = '高级过滤能力',
+      ['agitator'] = '惑乱者',
       ['airburst rocket launcher'] = '空爆火箭弹发射器',
+      ['alpha commander'] = '阿尔法指挥官',
       ['also in your loadout when you bring this one'] = '携带此战略配备时也会一并获得',
       ['alternate ammunition'] = '另一种弹药',
       ['amendment'] = '修正',
@@ -2023,6 +2936,7 @@ MOD.langs = {
       ['angled foregrip'] = '倾斜前握把',
       ['angled foregrip advanced'] = '高级倾斜前握把',
       ['angled foregrip with laser'] = '激光瞄准器与倾斜前握把',
+      ['annihilator tank'] = '湮灭坦克',
       ['another copy of this weapon, not identified yet.'] = '该武器的另一份副本，尚未识别。',
       ['antenna'] = '天线',
       ['anti-air missile'] = '防空导弹',
@@ -2059,6 +2973,7 @@ MOD.langs = {
       ['arc weapon'] = '电弧武器',
       ['arc-12 blitzer'] = 'ARC-12 雷霆',
       ['arc-3 arc thrower'] = 'ARC-3 电弧发射器',
+      ['armed resupply pods'] = '武装重新补给舱',
       ['arming time (s)'] = '解除保险时间（秒）',
       ['armor'] = '护甲',
       ['armor passive'] = '护甲被动',
@@ -2068,6 +2983,7 @@ MOD.langs = {
       ['armor pen. (slight angle)'] = '穿甲等级（小角度）',
       ['armor penetration, forces, velocity, drag, gravity, pellets and explosions. kept: this'] = '穿甲、作用力、速度、阻力、重力、弹丸数及爆炸的修改。当前武器的',
       ['armors'] = '护甲',
+      ['assault raider'] = '特攻奇袭者',
       ['assault rifle'] = '突击步枪',
       ['attachment'] = '配件',
       ['attachment deltas'] = '配件修正量',
@@ -2075,6 +2991,8 @@ MOD.langs = {
       ['attachments'] = '配件',
       ['autocannon'] = '机炮',
       ['autocannon sentry'] = '自动哨戒炮',
+      ['automaton dropship'] = '机器人运输舰',
+      ['automaton mortar emplacement'] = '机器人的迫击炮台',
       ['b-1 supply pack'] = 'B-1 补给背包',
       ['b-100 portable hellbomb'] = 'B-100 便携式地狱火炸弹',
       ['b/flam-80 cremator'] = 'B/FLAM-80 焚燃者',
@@ -2086,25 +3004,36 @@ MOD.langs = {
       ['background opacity'] = '背景不透明度',
       ['backpack'] = '背包',
       ['backpack charges'] = '背包使用次数',
+      ['ballistic missile'] = '弹道导弹',
       ['ballistic padding'] = '防弹内衬',
       ['ballistic shield'] = '防弹盾',
       ['ballistic shield backpack'] = '防弹护盾背包',
       ['barrage'] = '弹幕',
+      ['barrager tank'] = '铁幕坦克',
       ['bastion mk xvi'] = '堡垒Mk XVI',
       ['beam weapon'] = '光束武器',
       ['belt-fed grenade launcher'] = '弹链式榴弹发射器',
+      ['berserker'] = '狂暴者',
+      ['big walker cannon'] = '步行机巨炮',
+      ['bile spewer'] = '胆汁喷涌虫',
+      ['bile spitter'] = '胆汁吐沫虫',
+      ['bile titan'] = '吐酸泰坦',
+      ['bile warrior'] = '胆汁武斗虫',
       ['bingus shared loader by cowboybingus'] = 'Bingus 共享加载器 · CowboyBingus',
       ['blast'] = '爆炸',
       ['blast radius'] = '爆炸半径',
       ['blitzer'] = '雷霆',
       ['block game input while open'] = '打开时屏蔽游戏输入',
+      ['blocking rock'] = '阻挡岩石',
       ['blunt-force mitigation'] = '钝击创伤缓和',
       ['body'] = '躯干',
       ['body parts'] = '身体部位',
       ['bolt pistol'] = '爆弹手枪',
       ['bonnet'] = '引擎盖',
       ['boost after the launch (s)'] = '起跳后的推进时间（秒）',
+      ['boosters'] = '强化资源',
       ['br-14 adjudicator'] = 'BR-14 审判者',
+      ['brawler'] = '乱斗者',
       ['breacher'] = '爆破者',
       ['breaching hammer'] = '破门锤',
       ['break-action shotgun'] = '中折式霰弹枪',
@@ -2112,9 +3041,12 @@ MOD.langs = {
       ['breaker incendiary'] = '高燃“破裂者”',
       ['breaker spray&pray'] = '千发百中“破裂者”',
       ['breakthrough exosuit'] = '“突破”外骨骼装甲',
+      ['brood commander'] = '虫族指挥官',
       ['bug plug'] = '虫穴封堵装置',
       ['bug thumper'] = '虫群震动诱饵',
+      ['bulk fabricator'] = '巨型构筑者',
       ['bullet storm'] = '子弹风暴',
+      ['bunker turret'] = '碉堡炮台',
       ['burn time (s)'] = '燃烧时间(秒)',
       ['burning'] = '燃烧',
       ['burning applied to you'] = '对你施加的燃烧',
@@ -2124,6 +3056,7 @@ MOD.langs = {
       ['call in destroyer'] = '呼叫驱逐舰',
       ['caltrops'] = '铁蒺藜',
       ['cancel'] = '取消',
+      ['cannon turret'] = '加农炮台',
       ['cargo container'] = '货运集装箱',
       ['carpet bombing run'] = '地毯式轰炸',
       ['carry data'] = '运送数据',
@@ -2135,8 +3068,11 @@ MOD.langs = {
       ['charge'] = '充能',
       ['charge when it comes back'] = '恢复后初始充能',
       ['charged'] = '已充能',
+      ['charger'] = '强袭虫',
+      ['charger behemoth'] = '巨兽级强袭虫',
       ['charges'] = '使用次数',
       ['charges from resupply'] = '补给箱补充的使用次数',
+      ['chemical backpack'] = '装有化学武器的背包',
       ['chest bleeding damage'] = '胸部流血伤害',
       ['chest damage taken'] = '受到胸部伤害',
       ['choose a weapon on the left.'] = '请在左侧选择武器。',
@@ -2148,14 +3084,19 @@ MOD.langs = {
       ['climb speed (m/s)'] = '爬升速度(米/秒)',
       ['climb time limit (s)'] = '爬升时限(秒)',
       ['cluster bomb'] = '集束炸弹',
+      ['cognitive disruptor'] = '感知干扰器',
       ['combat hatchet'] = '战斗短柄斧',
       ['combat scope 4x'] = '4倍战斗瞄准镜',
       ['combat walker'] = '战斗步行机甲',
       ['combat walker breacher'] = '爆破型战斗机甲',
+      ['command bunker'] = '指挥碉堡',
       ['commando'] = '突击兵',
+      ['commissar'] = '机械统帅',
+      ['concealed insertion'] = '隐蔽上阵',
       ['concussive padding (grenadier)'] = '防震内衬（掷弹兵型）',
       ['concussive padding (hazmat)'] = '防震内衬（防化型）',
       ['concussive padding (reinforced)'] = '防震内衬（强化型）',
+      ['conflagration devastator'] = '烈火蹂躏者',
       ['constitution'] = '宪法',
       ['contact mine'] = '接触式地雷',
       ['cookout'] = '野炊',
@@ -2176,8 +3117,10 @@ MOD.langs = {
       ['cqc-73 entrenchment tool'] = 'CQC-73 堑壕工具',
       ['cqc-9 defoliation tool'] = 'CQC-9 除叶工具',
       ['cremator'] = '焚燃者',
+      ['crescent overseer'] = '新月监视者',
       ['crisper'] = '迅击',
       ['cruise speed (m/s)'] = '巡航速度(米/秒)',
+      ['crusher'] = '粉碎者',
       ['current value implausible'] = '当前数值异常',
       ['cyborg carry data'] = '运送生化人数据',
       ['dagger'] = '匕首',
@@ -2190,6 +3133,7 @@ MOD.langs = {
       ['data jack'] = '数据接口',
       ['dbs-2 double freedom'] = 'DBS-2 双重自由',
       ['de-escalator'] = '缓和使者',
+      ['dead sprint'] = '死亡冲刺',
       ['deadeye'] = '鹰眼',
       ['defender'] = '防卫者',
       ['defoliation tool'] = '除叶工具',
@@ -2200,6 +3144,8 @@ MOD.langs = {
       ['desert stormer'] = '沙漠突击者',
       ['destruction map'] = '破坏数据映射',
       ['destruction tiers'] = '破坏等级',
+      ['devastator'] = '蹂躏者',
+      ['devastator jump pack'] = '蹂躏者喷射背包',
       ['diligence'] = '勤勉',
       ['diligence counter sniper'] = '反狙击“勤勉”',
       ['direct hit'] = '直击',
@@ -2212,9 +3158,11 @@ MOD.langs = {
       ['double-edge sickle'] = '双刃镰刀',
       ['down'] = '下移',
       ['drag factor'] = '阻力系数',
+      ['dragonroach'] = '蟑龙',
       ['drilling charge'] = '钻探炸药',
       ['driver gun'] = '驾驶员机枪',
       ['drone'] = '无人机',
+      ['dropship'] = '运输舰',
       ['drum magazine'] = '弹鼓',
       ['dune walker sniper scope 10x'] = '10倍狙击瞄准镜',
       ['duo sniper scope 10x'] = '“杜奥”10倍狙击瞄准镜',
@@ -2244,6 +3192,7 @@ MOD.langs = {
       ['eat-411 leveller'] = 'EAT-411 荡平者',
       ['eat-700 expendable napalm'] = 'EAT-700 消耗性凝固汽油弹',
       ['electrical conduit'] = '电路导管',
+      ['elevated overseer'] = '崇高监视者',
       ['emancipator exosuit'] = '“解放者”外骨骼装甲',
       ['emergency extraction beacon'] = '紧急撤离信标',
       ['emplacement: its cooldown, its body, then its weapon.'] = '炮台：依次为冷却时间、本体、武器。',
@@ -2264,9 +3213,11 @@ MOD.langs = {
       ['expendable anti-tank'] = '消耗性反坦克武器',
       ['expendable anti-tank (booster)'] = '消耗性反坦克武器（增强配备）',
       ['expendable napalm'] = '消耗性凝固汽油弹',
+      ['experimental infusion'] = '试验性注射剂',
       ['explodes after death (s)'] = '死亡后爆炸（秒）',
       ['exploding crossbow'] = '爆燃弩',
       ['explosion'] = '爆炸',
+      ['explosive barrel'] = '爆炸桶',
       ['explosive damage taken'] = '受到爆炸伤害',
       ['extended magazine'] = '加长弹匣',
       ['extra padding'] = '额外垫料',
@@ -2274,6 +3225,8 @@ MOD.langs = {
       ['extra stratagem (choice)'] = '额外战略配备（选择）',
       ['extraction'] = '撤离',
       ['extraction beacon'] = '撤离信标',
+      ['fabricator'] = '构筑者',
+      ['factory strider'] = '移动工厂',
       ['faf-14 spear'] = 'FAF-14 飞矛',
       ['feet first'] = '护腿为上',
       ['field depth (m)'] = '雷区纵深（米）',
@@ -2285,6 +3238,7 @@ MOD.langs = {
       ['fire panic'] = '着火恐慌',
       ['fire rate (rpm)'] = '射速(RPM)',
       ['fire/gas/acid/arc damage taken'] = '受到火焰 / 毒气 / 酸液 / 电弧伤害',
+      ['firebomb hellpods'] = '火焰炸弹绝地喷射舱',
       ['flam-40 flamethrower'] = 'FLAM-40 火焰喷射器',
       ['flam-66 torcher'] = 'FLAM-66 火炬手',
       ['flame sentry'] = '火焰喷射哨戒炮',
@@ -2293,6 +3247,7 @@ MOD.langs = {
       ['flamethrower'] = '火焰喷射器',
       ['flamethrower slow'] = '火焰喷射减速',
       ['flashlight'] = '照明',
+      ['fleshmob'] = '肉瘤体',
       ['flinch'] = '受击瞄准抖动',
       ['flinch (0 prevents it)'] = '受击瞄准抖动（0 为免疫）',
       ['folder'] = '文件夹',
@@ -2305,6 +3260,8 @@ MOD.langs = {
       ['front right cockpit'] = '右前驾驶舱',
       ['full charge'] = '充满',
       ['fuse time (s)'] = '引信时间(秒)',
+      ['fusion autocannon'] = '聚变机炮',
+      ['fusion repeater'] = '聚变连发炮',
       ['g-10 incendiary'] = 'G-10 燃烧弹',
       ['g-109 urchin'] = 'G-109 海胆',
       ['g-11 caltrops'] = 'G-11 铁蒺藜',
@@ -2334,7 +3291,9 @@ MOD.langs = {
       ['gas damage taken'] = '受到毒气伤害',
       ['gas mine deployer'] = '毒气布雷器',
       ['gas mortar sentry'] = '毒气迫击哨戒炮',
+      ['gatekeeper'] = '御门者',
       ['gatling sentry'] = '加特林哨戒炮',
+      ['gazer'] = '凝视者',
       ['generator'] = '发电机',
       ['generator pack'] = '护盾生成背包',
       ['giga grenade'] = '千兆级榴弹',
@@ -2357,6 +3316,7 @@ MOD.langs = {
       ['grenade swap'] = '手雷交换',
       ['grenade swap stopped (see the log); launchers fire their own projectiles again.'] = '已停止榴弹替换（详见日志）；发射器恢复使用自身弹丸。',
       ['grenadier battlement'] = '掷弹兵防卫墙',
+      ['grinder'] = '粉碎者',
       ['guard dog (drone)'] = '护卫犬无人机',
       ['guard dog (drone) stun'] = '电击护卫犬无人机',
       ['guard dog flamethrower (drone)'] = '火焰护卫犬无人机',
@@ -2364,9 +3324,11 @@ MOD.langs = {
       ['guidance on after (s)'] = '导引启动延迟(秒)',
       ['gun'] = '枪械',
       ['gunner frv'] = '炮手快速侦察载具',
+      ['gunship'] = '炮舰',
       ['gunslinger'] = '神枪手',
       ['halt'] = '止息',
       ['handling'] = '操控',
+      ['harvester'] = '猎杀器',
       ['hash correction did not verify'] = '校验值校正未通过验证',
       ['head'] = '头部',
       ['health'] = '生命值',
@@ -2374,6 +3336,9 @@ MOD.langs = {
       ['heat per shot'] = '每发积热',
       ['heatsinks from supply'] = '补给获得的散热器数',
       ['heavy burning'] = '重度燃烧',
+      ['heavy devastator'] = '重型蹂躏者',
+      ['heavy devastator shield'] = '重型蹂躏者盾牌',
+      ['heavy fusion cannon'] = '重型聚变炮',
       ['heavy machine gun'] = '重机枪',
       ['hellbomb'] = '地狱火炸弹',
       ['helldivers 2 is running: close it first.'] = '《绝地潜兵 2》正在运行：请先关闭游戏。',
@@ -2382,7 +3347,11 @@ MOD.langs = {
       ['high dissipation heatsink'] = '高功率散热器',
       ['high explosive'] = '高爆弹',
       ['high-velocity shrapnel'] = '高速破片',
+      ['hijack tech hub nexus machine'] = '技术中心枢纽机器',
       ['hips'] = '腰部',
+      ['hive breaker drill'] = '“虫窝破裂者”钻机',
+      ['hive guard'] = '虫窝护卫',
+      ['hive lord'] = '霸王虫',
       ['hmg emplacement'] = '重机枪部署支架',
       ['homing anti-air missile'] = '追踪式防空导弹',
       ['homing ground missile'] = '追踪式地面导弹',
@@ -2395,13 +3364,23 @@ MOD.langs = {
       ['hover time, holding height (s)'] = '悬停时间：保持高度(秒)',
       ['hoverpack backpack'] = '悬浮背包',
       ['how far away the jet starts its run. with its speed, it sets how long the eagle takes to arrive.'] = '飞鹰开始攻击航线时距目标的距离，与飞行速度共同决定抵达时间。',
+      ['hulk'] = '巨型者',
+      ['hulk bruiser'] = '巨型碾压者',
+      ['hulk firebomber'] = '巨型烈焰轰炸者',
+      ['hulk flag'] = '巨型者旗帜',
+      ['hulk jetpack'] = '巨型者喷射背包',
+      ['hulk obliterator'] = '巨型抹煞者',
+      ['hulk scorcher'] = '巨型炙炎者',
+      ['hunter'] = '追猎虫',
       ['hyena'] = '鬣狗',
       ['immediate extraction beacon'] = '立即撤离信标',
       ['immolation'] = '焚身',
       ['impact'] = '冲击弹',
       ['impact damage taken'] = '受到冲击伤害',
+      ['impaler'] = '穿刺虫',
       ['incendiary'] = '燃烧弹',
       ['incendiary impact'] = '燃烧冲击弹',
+      ['incendiary mg devastator'] = '燃烧机枪蹂躏者',
       ['incendiary mine deployer'] = '燃烧布雷器',
       ['incinerator frv'] = '炽灼型快速侦察载具',
       ['inflammable'] = '易燃易爆',
@@ -2421,8 +3400,10 @@ MOD.langs = {
       ['kinetic displacement mitigation'] = '动能位移减缓',
       ['knight'] = '骑士',
       ['knockdown chance'] = '击倒几率',
+      ['landed ship door shield'] = '着陆舰舱门护盾',
       ['large plasma bolt'] = '大型等离子弹',
       ['larger plasma container'] = '扩容等离子弹药匣',
+      ['larva container'] = '幼虫储存器',
       ['las-12 sai'] = 'LAS-12 钗',
       ['las-13 trident'] = 'LAS-13“三叉戟”',
       ['las-16 sickle'] = 'LAS-16 镰刀',
@@ -2465,6 +3446,7 @@ MOD.langs = {
       ['left track'] = '左履带',
       ['leg injury immunity (1 on)'] = '免疫腿部受伤（1 为开启）',
       ['leveller'] = '荡平者',
+      ['leviathan'] = '利维坦',
       ['liberator'] = '解放者',
       ['liberator carbine'] = '“解放者”卡宾枪',
       ['liberator concussive'] = '震荡“解放者”',
@@ -2505,6 +3487,7 @@ MOD.langs = {
       ['magazine size'] = '弹匣容量',
       ['magazines from supply'] = '补给获得的弹匣数',
       ['main gun'] = '主炮',
+      ['marauder'] = '劫掠者',
       ['marker radar scan every (s)'] = '标记雷达扫描间隔（秒）',
       ['max carried'] = '最大携带',
       ['max flight time (s)'] = '最大飞行时间(秒)',
@@ -2563,6 +3546,7 @@ MOD.langs = {
       ['nothing to vary for the hash (edit a value with decimals in this file)'] = '没有可用于校正校验值的数据（请修改此文件中的一个小数值）',
       ['nova'] = '新星',
       ['nuke'] = '核弹',
+      ['nursing spewer'] = '抚育喷涌虫',
       ['off'] = '关',
       ['off: the game\'s values everywhere; your '] = '关闭：全局使用游戏数值，你的',
       ['off: with other players, arc chain length / split use the game\'s values (else arcs can stay on screen).'] = '关闭：多人对局时电弧连锁长度 / 分裂使用游戏数值（否则电弧可留在屏幕上）。',
@@ -2602,6 +3586,8 @@ MOD.langs = {
       ['outer radius (m)'] = '外半径(米)',
       ['overcharge limit (s)'] = '过载上限(秒)',
       ['overheat threshold'] = '过热阈值',
+      ['overseer'] = '监视者',
+      ['overship'] = '统御舰',
       ['oxygenator'] = '供氧器',
       ['p-11 stim pistol'] = 'P-11 治疗剂手枪',
       ['p-113 verdict'] = 'P-113 裁决',
@@ -2638,6 +3624,8 @@ MOD.langs = {
       ['poison drill'] = '毒剂钻探装置',
       ['portable hellbomb'] = '便携式地狱火炸弹',
       ['position scatter (m)'] = '布雷位置随机偏移（米）',
+      ['pouncer'] = '猛扑虫',
+      ['predator hunter'] = '掠食追猎虫',
       ['presets'] = '预设',
       ['president rewards'] = '总统奖励',
       ['press a key (esc cancels)'] = '请按一个键(Esc 取消)',
@@ -2653,6 +3641,7 @@ MOD.langs = {
       ['punisher plasma'] = '等离子“制裁者”',
       ['purifier'] = '净化者',
       ['push force'] = '击退力',
+      ['pyro trooper'] = '炙焰装甲兵',
       ['pyrotech'] = '烟花术',
       ['quasar cannon'] = '类星体加农炮',
       ['r-2 amendment'] = 'R-2 修正',
@@ -2667,7 +3656,9 @@ MOD.langs = {
       ['r/40-k hot-shot marksman rifle'] = 'R/40-K 高能精确射手步枪',
       ['rack'] = '挂架',
       ['radar'] = '雷达',
+      ['radical'] = '激进先锋',
       ['radius (m)'] = '半径(米)',
+      ['raider'] = '奇袭者',
       ['rail cannon round'] = '轨道炮弹',
       ['railgun'] = '磁轨炮',
       ['railgun round'] = '磁轨炮弹',
@@ -2729,6 +3720,7 @@ MOD.langs = {
       ['right track'] = '右履带',
       ['rl-77 airburst rocket launcher'] = 'RL-77 空爆火箭弹发射器',
       ['rock solid'] = '坚如磐石',
+      ['rocket devastator'] = '火箭蹂躏者',
       ['rocket sentry'] = '火箭哨戒炮',
       ['round 1 blast'] = '第 1 发爆炸',
       ['round 1 blast radius'] = '第 1 发爆炸半径',
@@ -2741,14 +3733,20 @@ MOD.langs = {
       ['rounds per reload'] = '每次装填弹数',
       ['rs-422 railgun'] = 'RS-422 磁轨炮',
       ['run length (m)'] = '攻击航线长度（米）',
+      ['rupture charger'] = '爆裂强袭虫',
+      ['rupture spewer'] = '爆裂喷涌虫',
+      ['rupture warrior'] = '爆裂武斗虫',
       ['s-11 speargun'] = 'S-11 矛枪',
       ['safe below heat (%)'] = '安全热量(%)',
       ['sai'] = '钗',
       ['salvos'] = '齐射次数',
       ['save'] = '保存',
       ['save current changes here'] = '在此保存当前修改',
+      ['scavenger'] = '食腐虫',
       ['scorcher'] = '焦土',
       ['scout'] = '侦察',
+      ['scout raider'] = '侦查奇袭者',
+      ['scout strider'] = '侦察纵步者',
       ['scrambler'] = '扰频器',
       ['scythe'] = '长柄镰',
       ['seaf artillery: explosive'] = 'SEAF 火炮：高爆弹',
@@ -2758,6 +3756,7 @@ MOD.langs = {
       ['seaf artillery: smoke'] = 'SEAF 火炮：烟雾弹',
       ['seaf artillery: static field'] = 'SEAF 火炮：静电场',
       ['seaf gun'] = 'SEAF 火炮',
+      ['seaf soldier'] = '超级地球武装部队战士',
       ['seaf squad'] = 'SEAF 小队',
       ['search radius (m)'] = '搜索半径(米)',
       ['search weapons and stratagems'] = '搜索武器与战略配备',
@@ -2808,6 +3807,9 @@ MOD.langs = {
       ['shrapnel direct hit'] = '破片直击',
       ['shrapnel pieces'] = '破片数量',
       ['shrapnel projectile'] = '破片弹丸',
+      ['shredder tank'] = '碎裂坦克',
+      ['shrieker'] = '尖啸虫',
+      ['shrieker nest'] = '尖啸虫巢穴',
       ['sickle'] = '镰刀',
       ['siege-ready'] = '蓄势出击',
       ['sightliner'] = '视界者',
@@ -2834,6 +3836,13 @@ MOD.langs = {
       ['speargun'] = '矛枪',
       ['speed until it has fired (m/s)'] = '开火前飞行速度（米/秒）',
       ['spire sterilizer'] = '尖塔灭菌器',
+      ['spore burst bile titan'] = '孢裂吐酸泰坦',
+      ['spore burst hunter'] = '孢裂追猎虫',
+      ['spore burst scavenger'] = '孢裂食腐虫',
+      ['spore burst warrior'] = '孢裂武斗虫',
+      ['spore charger'] = '孢子强袭虫',
+      ['spore lung'] = '孢肺',
+      ['spore spewer'] = '孢子喷涌虫',
       ['spotting range (m)'] = '索敌距离(米)',
       ['spray weapon'] = '喷射武器',
       ['spread (horizontal)'] = '散布(水平)',
@@ -2846,6 +3855,7 @@ MOD.langs = {
       ['sta-x3 w.a.s.p. launcher'] = 'StA-X3 W.A.S.P.发射器',
       ['stage '] = '阶段 ',
       ['stagger force'] = '硬直力',
+      ['stalker'] = '追踪虫',
       ['stalwart'] = '盟友',
       ['standard drum'] = '标准弹鼓',
       ['standard heatsink'] = '标准散热器',
@@ -2861,17 +3871,22 @@ MOD.langs = {
       ['status effect'] = '状态效果',
       ['status effects'] = '状态效果',
       ['stim pistol'] = '治疗剂手枪',
+      ['stingray'] = '刺魟',
       ['stoker'] = '司炉者',
       ['stops you while firing'] = '开火时锁定移动',
       ['stratagem'] = '战略配备',
+      ['stratagem jammer'] = '战略配备干扰装置',
       ['stratagems'] = '战略配备',
       ['stun'] = '眩晕弹',
+      ['stun (illuminate) (experimental)'] = '眩晕弹（光能者）（实验性）',
       ['stun (large)'] = '眩晕弹（大）',
       ['stun (massive)'] = '眩晕弹（极大）',
+      ['stun (massive) (experimental)'] = '眩晕弹（巨大）（实验性）',
       ['stun (medium)'] = '眩晕弹（中）',
       ['stun (small)'] = '眩晕弹（小）',
       ['stun baton'] = '眩晕短棍',
       ['stun lance'] = '眩晕长矛',
+      ['stun pods'] = '眩晕喷射舱',
       ['supplementary adrenaline'] = '肾上腺素补充剂',
       ['supply backpack'] = '补给背包',
       ['supply frv'] = '补给型快速侦察载具',
@@ -2881,6 +3896,7 @@ MOD.langs = {
       ['support weapon drop; the weapon itself is under support.'] = '支援武器空投；武器本身列在“支援武器”分类下。',
       ['suppressor'] = '消音器',
       ['sure?'] = '确定？',
+      ['surplus eat allocation'] = '盈余EAT配给',
       ['surviving lethal damage'] = '致命伤害存活几率',
       ['swapping makes the shot the chosen weapon\'s, your edits to it included: damage,'] = '替换后使用所选武器的弹丸，包含你对其伤害、',
       ['sway multiplier'] = '晃动系数',
@@ -2891,6 +3907,7 @@ MOD.langs = {
       ['tank reload canister'] = '坦克霰弹补给',
       ['tank reload he'] = '坦克高爆弹补给',
       ['tcs 03 thumper'] = 'TCS 03 震动装置',
+      ['tcs support'] = 'TCS支架',
       ['td-110 maelstrom'] = 'TD-110 风暴漩涡',
       ['td-220 bastion mk xvi'] = 'TD-220 堡垒MK XVI',
       ['team weapons'] = '小队武器',
@@ -2940,6 +3957,9 @@ MOD.langs = {
       ['torcher'] = '火炬手',
       ['tracking speed'] = '跟踪速度',
       ['trigger delay (s)'] = '触发延迟(秒)',
+      ['trooper'] = '装甲兵',
+      ['trooper jump pack'] = '装甲兵喷射背包',
+      ['trooper lmg backpack'] = '装甲兵轻机枪背包',
       ['true grit'] = '坚韧不拔',
       ['tube reddot 2x'] = '2倍红点瞄准镜',
       ['tube reddot 2x legacy'] = '旧式2倍管状红点瞄准镜',
@@ -2969,6 +3989,7 @@ MOD.langs = {
       ['vehicle'] = '载具',
       ['velocity'] = '初速',
       ['velocity (m/s)'] = '初速(米/秒)',
+      ['veracitor'] = '证真者',
       ['verdict'] = '裁决',
       ['vertical grip'] = '垂直前握把',
       ['vertical grip 45 degree'] = '45度垂直前握把',
@@ -2976,14 +3997,20 @@ MOD.langs = {
       ['veto'] = '否决者',
       ['vg-70 variable'] = 'VG-70 变数',
       ['volatile plasma bolt'] = '不稳定等离子弹',
+      ['voteless'] = '无票者',
+      ['vox engine'] = '噪轰引擎',
       ['w.a.s.p. launcher'] = 'W.A.S.P.发射器',
       ['waiting for the scan'] = '正在等待扫描',
       ['walk / run speed'] = '行走 / 奔跑速度',
       ['walking barrage smoke'] = '移动弹幕烟雾',
       ['walking speed (m/s)'] = '弹幕推进速度（米/秒）',
+      ['war strider'] = '战争纵步者',
       ['warp distance (m)'] = '跃迁距离(米)',
       ['warp pack'] = '传送背包',
+      ['warp ship'] = '穿梭舰',
       ['warrant'] = '法令',
+      ['warrior'] = '武士',
+      ['watcher'] = '守望者',
       ['weapon charge'] = '武器蓄力',
       ['weapon customization'] = '武器定制',
       ['weapon heat'] = '武器热量',
@@ -2993,9 +4020,38 @@ MOD.langs = {
       ['wind-down time (s)'] = '转管减速时间（秒）',
       ['wind-up'] = '转管加速',
       ['wind-up time (s)'] = '转管加速时间（秒）',
+      ['wretch'] = '悲怜体',
+      ['xenobite ardent'] = '炽热异噬者',
       ['your changes are off: turn them on in settings to edit.'] = '你的改动当前处于关闭状态：请在设置里开启后再编辑。',
     },
     patterns = {
+      { '^Zoom level (%d) %(x%)$', '放大倍率 %1 级（x）' },
+      { '^Zeroing distance (%d) %(m%)$', '归零距离 %1（米）' },
+      { '^BODY PART (%d+)$', '身体部位 %1' },
+      { '^Attack: (.+)$', '攻击：%1' },
+      { '^Body part (%d+)$', '身体部位 %1' },
+      { '^(.+): weapon$', '%1：武器' },
+      { '^(.+): weapon (%d+)$', '%1：武器 %2' },
+      { '^(.+): bile spray$', '%1：胆汁喷射' },
+      { '^(.+): bile spray (%d+)$', '%1：胆汁喷射 %2' },
+      { '^(.+): bile mortar$', '%1：胆汁迫击' },
+      { '^(.+): bile mortar (%d+)$', '%1：胆汁迫击 %2' },
+      { '^(.+): acid spit$', '%1：酸液吐射' },
+      { '^(.+): acid spit (%d+)$', '%1：酸液吐射 %2' },
+      { '^(.+): spore spray$', '%1：孢子喷射' },
+      { '^(.+): spore spray (%d+)$', '%1：孢子喷射 %2' },
+      { '^(.+): fire breath$', '%1：火焰吐息' },
+      { '^(.+): fire breath (%d+)$', '%1：火焰吐息 %2' },
+      { '^(.+): acid spray$', '%1：酸液喷射' },
+      { '^(.+): acid spray (%d+)$', '%1：酸液喷射 %2' },
+      { '^(.+): mounted weapon$', '%1：挂载武器' },
+      { '^(.+): mounted weapon (%d+)$', '%1：挂载武器 %2' },
+      { '^(.+): primary weapon$', '%1：主武器' },
+      { '^(.+): sidearm$', '%1：副武器' },
+      { '^(.+): support weapon$', '%1：支援武器' },
+      { '^A weapon of (.+)%.$', '武器所属：%L1。' },
+      { '^(.+) (%d+) variants share these values%.$', '%1 %2 个变体共用这些数值。' },
+      { '^Spawning on (.+) missions %(every mission type%)%. Multipliers of the game\'s values%.$', '%1 任务中的敌人生成（所有任务类型）。游戏数值的倍率。' },
       { '^Unnamed: (.-)mm; (.-)/(.-) damage$', '未命名：%1毫米，伤害%2/%3' },
       { '^Unnamed: (.-)m blast$', '未命名：半径%1米' },
       { '^Unnamed: (.-)s effect$', '未命名：持续%1秒' },
@@ -3029,6 +4085,10 @@ MOD.langs = {
       { '^Updating: installing (.+)%.%.%.$', '正在更新：安装 %1...' },
       { '^Updated to (.+)%.$', '已更新到 %1。' },
       { '^Add a passive to (.+)$', '为 %1 添加被动' },
+      { '^Zoom level (%d) follow speed$', '倍率等级 %1 跟随速度' },
+      { '^(.+): Light$', '%1：轻型' },
+      { '^(.+): Medium$', '%1：中型' },
+      { '^(.+): Heavy$', '%1：重型' },
       { '^Heat level (%d+)$', '热量等级 %1' },
       { '^(.+); ammo type shared with (.+)$', '%1；弹种与以下共用：%L2' },
       { '^fires: (.+)%. The rows above stay its own$', '发射：%1。上方各行仍为其自身数值' },
@@ -3175,6 +4235,7 @@ MOD.langs = {
       { '^STATUS EFFECTS %((.+)%)$', '状态效果（%1）' },
       { '^STATUS (%d+)$', '状态 %1' },
       { '^SHODAN Stat Editor v([%d%.]+)$', 'SHODAN 数值编辑器 v%1' },
+      { '^(.+) %(([A-Z][^()]*)%)$', '%1 (%2)' },
     },
     prefix = {
       { 'PgUp/PgDn change weapon, Del resets, Ctrl+1-5 loads a weapon preset, Ctrl+Shift+1-5 saves one; ', 'PgUp/PgDn 切换武器，Del 重置，Ctrl+1-5 读取武器预设，Ctrl+Shift+1-5 保存预设；' },
@@ -3214,6 +4275,8 @@ MOD.langs = {
   { id = 'zh-Hant', name = '繁體中文', list = '、',
     fonts = { { font = '8a030b00915bbb37', atlas = '4f7e02a3f5a824ec' }, { font = '3da89f2c15b53d65', atlas = '86667f650dca00f9' } },
     exact = {
+      [' page(s):'] = ' 個頁面：',
+      [' to enemies and spawning with it.'] = '（敵人與生成）。',
       ['"+ New preset" (or Insert) saves your current changes as one; you name it next.'] = '「+ 新建預設」（或 Insert 鍵）會把當前修改存為一組，接著你可以為它命名。',
       ['(Not Used) Additional Strafing Runs'] = '（未使用）額外機槍掃射',
       ['(Not Used) Air-TO-Air Missles'] = '（未使用）空對空導彈',
@@ -3227,7 +4290,10 @@ MOD.langs = {
       ['+ Throwables (start, max)'] = '投擲物數量（初始 / 上限）',
       ['- / + steps through the stratagems by name (-- / ++: 10 at a time).'] = '- / + 按名稱切換戰略配備（-- / ++ 每次切換 10 項）。',
       ['0 = normal projectile; - / + selects a throwable grenade by name above.'] = '0 = 常規射彈；- / + 按上方名稱選擇投擲手雷。',
-      ['0: hits deal their normal damage, 1: their durable damage (the weapon\'s lower one)'] = '0：按普通傷害計算；1：按耐久傷害計算；中間值按兩者比例計算。',
+      ['0 light, 1 medium, 2 heavy'] = '0 輕型，1 中型，2 重型',
+      ['0: at once. The RL-77 waits 0.2 s, the P-34 Breacher (it sticks and burns first) 1 s.'] = '0：立即。RL-77 等待 0.2 秒，P-34 Breacher（先粘附燃燒）1 秒。',
+      ['0: hits deal their normal damage, 1: their durable damage (the weapon\'s lower one)'] = '0：命中造成普通傷害，1：造成耐久傷害（武器較低的那個）',
+      ['0: no patrols'] = '0：沒有巡邏',
       ['100kg Bomb'] = '100KG炸彈',
       ['100kg Bomb Mk2'] = '100KG炸彈MK2',
       ['100kg Bomb Mk3'] = '100KG炸彈MK3',
@@ -3299,6 +4365,7 @@ MOD.langs = {
       ['15x100mm Standard Rocket'] = '15x100mm標準火箭彈',
       ['15x100mm Thermite'] = '15x100mm鋁熱彈',
       ['15x100mm Toxic'] = '15x100mm毒氣彈',
+      ['2'] = '2',
       ['20mm APHET Rounds'] = '20mm穿甲高爆彈',
       ['20mm Flak Rounds'] = '20mm 空爆炮彈',
       ['20mm HE Cannon'] = '20mm高爆炮彈',
@@ -3380,6 +4447,8 @@ MOD.langs = {
       ['A mounted copy run by AI (emplacement-style). Not the one you carry.'] = '由 AI 操作的固定版本（炮台式）。不是你攜帶的那把。',
       ['A mounted copy. Not the one you carry.'] = '固定版本。不是你攜帶的那把。',
       ['A preset keeps every change you have made as one set, under a name you choose.'] = '預設會把你所有的修改作為一組儲存，並取一個你指定的名字。',
+      ['A preset keeps every enemy and spawning change as one custom difficulty, under a name you choose. Your weapon changes are kept apart.'] = '預設會把所有敵人與生成的改動儲存為一個自定義難度，名稱由你決定。武器改動單獨儲存。',
+      ['A value changed on an enemy\'s own page stays red: this page leaves it as it is.'] = '在敵人自己頁面上更改的數值保持紅色：此頁面不會改動它。',
       ['A/AC-8 Autocannon Sentry'] = 'A/AC-8 哨戒機炮',
       ['A/ARC-3 Tesla Tower'] = 'A/ARC-3 特斯拉塔',
       ['A/FLAM-40 Flame Sentry'] = 'A/FLAM-40 火焰火箭炮',
@@ -3390,6 +4459,7 @@ MOD.langs = {
       ['A/M-23 EMS Mortar Sentry'] = 'A/M-23 電磁干擾哨戒迫擊炮',
       ['A/MG-43 Machine Gun Sentry'] = 'A/MG-43 哨戒機槍',
       ['A/MLS-4X Rocket Sentry'] = 'A/MLS-4X 哨戒火箭炮',
+      ['AA Emplacement'] = '防空炮台',
       ['AC-8 Autocannon'] = 'AC-8 機炮',
       ['AMMO'] = '彈藥',
       ['AMW-20 Apex'] = 'AMW-20 巔峰',
@@ -3419,11 +4489,24 @@ MOD.langs = {
       ['Accelerator Rifle'] = '加速步槍',
       ['Acclimated'] = '適應自如',
       ['Acid'] = '酸液',
+      ['Acid (experimental)'] = '酸液（實驗性）',
+      ['Acid damage taken (x)'] = '受到的酸液傷害（x）',
+      ['Acid splash (experimental)'] = '酸液飛濺（實驗性）',
+      ['Acid storm (experimental)'] = '酸雨風暴（實驗性）',
       ['Adjudicator'] = '審判者',
       ['Adreno-Defibrillator'] = '腎上腺素除顫器',
       ['Advanced Filtration'] = '進階過濾',
+      ['Agitator'] = '煽動者',
       ['Aiming sway'] = '瞄準晃動',
+      ['Airborne'] = '空降',
       ['Airburst Rocket Launcher'] = '空爆火箭發射器',
+      ['All'] = '全部',
+      ['All Automatons'] = '所有機器人',
+      ['All Illuminate'] = '所有光能者',
+      ['All SEAF'] = '所有 SEAF',
+      ['All Terminids'] = '所有蟲族',
+      ['All factions'] = '所有陣營',
+      ['Alpha Commander'] = '阿爾法蟲族指揮官',
       ['Also includes'] = '同時包含',
       ['Alternate ammunition'] = '另一種彈藥',
       ['Amendment'] = '修正',
@@ -3434,9 +4517,11 @@ MOD.langs = {
       ['Ammo carried'] = '攜帶彈藥',
       ['Ammo from resupply'] = '補給箱補充彈藥',
       ['Ammunition'] = '彈藥',
+      ['Ammunition Stockpile'] = '彈藥庫',
       ['Angled Foregrip'] = '傾斜前握把',
       ['Angled Foregrip Advanced'] = '高階傾斜前握把',
       ['Angled Foregrip With Laser'] = '雷射瞄準器與傾斜前握把',
+      ['Annihilator Tank'] = '殲滅者坦克',
       ['Another copy of this weapon, not identified yet.'] = '該武器的另一份副本，尚未識別。',
       ['Antenna'] = '天線',
       ['Anti-Air Missile'] = '防空飛彈',
@@ -3459,21 +4544,32 @@ MOD.langs = {
       ['Arm armor'] = '機臂護甲',
       ['Arm durability'] = '機臂耐久',
       ['Arm health'] = '機臂生命值',
+      ['Armed Resupply Pods'] = '武裝重新補給艙',
       ['Arming distance (m)'] = '解除保險距離（米）',
       ['Arming time (s)'] = '解除保險時間（秒）',
       ['Armor'] = '護甲',
+      ['Armor (+)'] = '護甲（+）',
       ['Armor pen. (direct)'] = '穿甲等級（正面命中）',
       ['Armor pen. (extreme angle)'] = '穿甲等級（極端角度）',
       ['Armor pen. (large angle)'] = '穿甲等級（大角度）',
       ['Armor pen. (slight angle)'] = '穿甲等級（小角度）',
+      ['Armor penetration'] = '穿甲',
+      ['Armor weight'] = '護甲重量',
       ['Armors'] = '護甲',
       ['Ask'] = '詢問',
+      ['Assassinate'] = '刺殺',
+      ['Assault'] = '突擊',
+      ['Assault Raider'] = '特攻襲擊者',
       ['Assault Rifle'] = '突擊步槍',
       ['Attachment'] = '配件',
       ['Attachments'] = '配件',
+      ['Attacks'] = '攻擊',
       ['Autocannon'] = '機炮',
       ['Autocannon Sentry'] = '哨戒機炮',
       ['Automatic'] = '自動',
+      ['Automaton Dropship'] = '機器人空降艇',
+      ['Automaton Mortar Emplacement'] = '機器人迫擊炮炮台',
+      ['Automatons'] = '機器人',
       ['B-1 Supply Pack'] = 'B-1 補給背包',
       ['B-100 Portable Hellbomb'] = 'B-100 可攜式絕地彈',
       ['B/FLAM-80 Cremator'] = 'B/FLAM-80 火葬者',
@@ -3486,33 +4582,71 @@ MOD.langs = {
       ['BR-14 Adjudicator'] = 'BR-14 審判者',
       ['BURST'] = '二次爆炸',
       ['BURST RADIUS'] = '二次爆炸半徑',
-      ['Back'] = '返回',
+      ['Back'] = '背部',
+      ['Back (button)'] = '返回',
+      ['Back armor'] = '後裝甲',
+      ['Back body'] = '後身體',
       ['Back door block'] = '後艙門塊',
+      ['Back face'] = '後面',
       ['Back hatch'] = '後艙蓋',
+      ['Back hip'] = '後髖部',
       ['Back periscope side 8'] = '潛望鏡後側 8',
+      ['Back pump flamer'] = '後部噴火器泵',
       ['Background opacity'] = '背景不透明度',
       ['Backpack'] = '背包',
+      ['Ballistic Missile'] = '彈道導彈',
       ['Ballistic Padding'] = '防彈襯墊',
       ['Ballistic Shield Backpack'] = '彈道防護罩背包',
       ['Ballistic shield'] = '防彈盾',
       ['Barrage'] = '彈幕',
+      ['Barrager Tank'] = '火箭彈幕坦克',
+      ['Barrel'] = '炮管',
+      ['Base'] = '基礎',
       ['Bastion MK XVI'] = '堡壘Mk XVI',
+      ['Battery'] = '電池',
+      ['Beamer'] = '光束器',
       ['Belt-Fed Grenade Launcher'] = '彈鏈式榴彈發射器',
+      ['Berserker'] = '狂暴者',
+      ['Better stratagem bounce'] = '改進戰略配備彈跳',
+      ['Big walker cannon'] = '步行機巨炮',
+      ['Bile Spewer'] = '膽汁噴湧蟲',
+      ['Bile Spewer acid burst'] = '膽汁噴湧蟲酸液爆裂',
+      ['Bile Spitter'] = '膽汁吐沫蟲',
+      ['Bile Titan'] = '闊步蟲',
+      ['Bile Warrior'] = '膽汁武鬥蟲',
       ['Bingus Shared Loader by CowboyBingus'] = 'Bingus 共享載入器 · CowboyBingus',
       ['Blast'] = '爆炸',
       ['Blast angle (deg)'] = '爆炸角(度)',
       ['Blast delay (s)'] = '起爆延遲（秒）',
       ['Blast proximity (m)'] = '近炸觸發距離（米）',
       ['Blast radius'] = '爆炸半徑',
+      ['Bleed (experimental)'] = '流血（實驗性）',
+      ['Bleed-out health'] = '流血狀態生命值',
+      ['Blind (experimental)'] = '致盲（實驗性）',
       ['Blitzer'] = '閃擊者',
       ['Block game input while open'] = '開啟時遮蔽遊戲輸入',
+      ['Blocking rock'] = '阻擋岩石',
       ['Blunt-Force Mitigation'] = '鈍擊緩解',
       ['Body'] = '軀幹',
+      ['Body collision spine'] = '軀體脊椎',
+      ['Body default'] = '身體',
+      ['Body front'] = '身體前部',
+      ['Body head'] = '頭部',
       ['Body health'] = '軀幹生命值',
       ['Body parts'] = '身體部位',
+      ['Body rear'] = '身體後部',
       ['Bolt Pistol'] = '爆彈手槍',
       ['Bonnet'] = '引擎蓋',
       ['Boost after the launch (s)'] = '起跳後的推進時間（秒）',
+      ['Booster selection is limited due to the other boosters keeping their values in the game\'s program (game.dll), not in the data files SSEO edits. Those could only be changed while the game runs, which is currently impossible.'] = '可選的增強配備有限：其他增強配備的數值儲存在遊戲程式（game.dll）中，而不在 SSEO 修改的資料檔案裡。這些數值只能在遊戲執行時修改，而這目前無法做到。',
+      ['Boosters'] = '強化套件',
+      ['Boss'] = '核心',
+      ['Boss back'] = '核心後部',
+      ['Bottom wing'] = '下翼',
+      ['Braking height (m)'] = '制動高度（米）',
+      ['Braking speed (m/s)'] = '制動速度（米/秒）',
+      ['Braking time (s)'] = '制動時間（秒）',
+      ['Brawler'] = '鬥士',
       ['Breacher'] = '突破者',
       ['Breaching Hammer'] = '破門戰錘',
       ['Break-Action Shotgun'] = '中折式散彈槍',
@@ -3520,15 +4654,38 @@ MOD.langs = {
       ['Breaker Incendiary'] = '燃燒破裂者',
       ['Breaker Spray&Pray'] = '掃射破裂者',
       ['Breakthrough Exosuit'] = '突破外骨骼裝甲',
+      ['Brood Commander'] = '蟲族指揮官',
       ['Bug Plug'] = '蟲穴封堵裝置',
       ['Bug Thumper'] = '蟲群震動誘餌',
+      ['Bulk Fabricator'] = '巨型製造廠',
+      ['Bull'] = '公牛',
       ['Bullet Storm'] = '子彈風暴',
+      ['Bunker Turret'] = '地堡炮台',
       ['Burn time (s)'] = '燃燒時間(秒)',
       ['Burning'] = '燃燒',
       ['Burning applied to you'] = '對你施加的燃燒',
       ['Burst'] = '二次爆炸',
       ['Burst radius'] = '二次爆炸半徑',
       ['Bushwhacker'] = '游擊者',
+      ['Butt lower'] = '臀部下方',
+      ['C hex 01'] = '六邊形 01',
+      ['C hex 02'] = '六邊形 02',
+      ['C hex 03'] = '六邊形 03',
+      ['C hex 04'] = '六邊形 04',
+      ['C hex 05'] = '六邊形 05',
+      ['C hex 06'] = '六邊形 06',
+      ['C hex 07'] = '六邊形 07',
+      ['C hex 08'] = '六邊形 08',
+      ['C hex 09'] = '六邊形 09',
+      ['C hex 10'] = '六邊形 10',
+      ['C hex 12'] = '六邊形 12',
+      ['C hex 13'] = '六邊形 13',
+      ['C hex 14'] = '六邊形 14',
+      ['C hex 15'] = '六邊形 15',
+      ['C hex 16'] = '六邊形 16',
+      ['C hex 17'] = '六邊形 17',
+      ['C hex 18'] = '六邊形 18',
+      ['C hex 19'] = '六邊形 19',
       ['CB-9 Exploding Crossbow'] = 'CB-9 猛爆十字弓',
       ['CHARGE'] = '充能',
       ['CLUSTER BOMB'] = '集束炸彈',
@@ -3547,6 +4704,7 @@ MOD.langs = {
       ['Caltrops'] = '蒺藜',
       ['Camera shake radius (m)'] = '鏡頭震動半徑(米)',
       ['Cancel'] = '取消',
+      ['Cannon Turret'] = '大炮炮台',
       ['Cargo Container'] = '貨運集裝箱',
       ['Carpet Bombing Run'] = '地毯式轟炸',
       ['Carry Data'] = '運送資料',
@@ -3560,10 +4718,16 @@ MOD.langs = {
       ['Charged'] = '蓄力',
       ['Charged explosion'] = '蓄力爆炸',
       ['Charged shot'] = '蓄力射擊',
+      ['Charger'] = '衝鋒蟲',
+      ['Charger Behemoth'] = '巨型衝鋒蟲',
+      ['Charger acid burst'] = '衝鋒者酸液爆裂',
       ['Charges'] = '使用次數',
       ['Charges from resupply'] = '補給箱補充的使用次數',
+      ['Chemical Backpack'] = '化學背包',
+      ['Chest'] = '胸部',
       ['Chest bleeding damage'] = '胸部流血傷害',
       ['Chest damage taken'] = '受到胸部傷害',
+      ['Choked (experimental)'] = '窒息（實驗性）',
       ['Choose a weapon on the left.'] = '請在左側選擇武器。',
       ['Clear'] = '清除',
       ['Click again to overwrite'] = '再次點選以覆蓋',
@@ -3572,17 +4736,26 @@ MOD.langs = {
       ['Climb multiplier (vertical)'] = '槍口上揚倍率（垂直）',
       ['Climb speed (m/s)'] = '爬升速度(米/秒)',
       ['Climb time limit (s)'] = '爬升時限(秒)',
+      ['Climbing and sliding'] = '攀爬與滑行',
       ['Cluster Bomb'] = '集束炸彈',
+      ['Cognitive Disruptor'] = '認知干擾器',
+      ['Collision'] = '碰撞體',
       ['Combat Hatchet'] = '戰鬥斧',
       ['Combat Scope 4x'] = '4倍戰鬥瞄具',
       ['Combat Walker'] = '戰鬥步行機甲',
       ['Combat Walker Breacher'] = '爆破型戰鬥機甲',
+      ['Command Bunker'] = '指揮地堡',
+      ['Command bunker'] = '指揮地堡',
       ['Commando'] = '突擊兵',
+      ['Commissar'] = '統帥',
+      ['Concealed Insertion'] = '隱蔽上陣',
       ['Concealment when still, crouched / prone'] = '靜止蹲伏或臥倒時的隱蔽',
       ['Concussive Padding (Grenadier)'] = '擲彈兵防震盪襯墊',
       ['Concussive Padding (Hazmat)'] = '危害物質防震盪襯墊',
       ['Concussive Padding (Reinforced)'] = '強化防震盪襯墊',
       ['Cone angle (deg)'] = '錐角(度)',
+      ['Conflagration Devastator'] = '烈火破壞者',
+      ['Confusion (experimental)'] = '混亂（實驗性）',
       ['Constitution'] = '憲法',
       ['Consumables'] = '消耗品',
       ['Contact Mine'] = '接觸式地雷',
@@ -3595,25 +4768,39 @@ MOD.langs = {
       ['Countdown before delivery (s)'] = '投送前倒計時（秒）',
       ['Coyote'] = '郊狼',
       ['Cremator'] = '火葬者',
+      ['Crescent Overseer'] = '新月監督者',
       ['Crisper'] = '火舌',
       ['Crouched jog speed (m/s)'] = '蹲伏慢跑速度(米/秒)',
       ['Crouched speed while aiming (m/s)'] = '蹲伏瞄準時速度(米/秒)',
       ['Crouched sprint speed (m/s)'] = '蹲伏衝刺速度(米/秒)',
       ['Crouched walk speed (m/s)'] = '蹲伏步行速度(米/秒)',
+      ['Crown'] = '冠部',
       ['Cruise speed (m/s)'] = '巡航速度(米/秒)',
+      ['Crusher'] = '粉碎者',
+      ['Custom difficulties'] = '自定義難度',
       ['Cyborg Carry Data'] = '運送生化人資料',
+      ['Cyborg fire (experimental)'] = '賽博格火焰（實驗性）',
       ['DAMAGE'] = '傷害',
       ['DBS-2 Double Freedom'] = 'DBS-2 雙重自由',
       ['DEPLOYER'] = '部署艙',
       ['DIRECT HIT'] = '直擊',
       ['Dagger'] = '匕首',
       ['Damage'] = '傷害',
+      ['Damage (x)'] = '傷害（x）',
+      ['Damage passed to the body (x)'] = '傳遞給身體的傷害 (x)',
+      ['Damage taken (multiplier)'] = '受到傷害（倍率）',
       ['Damage tick (s)'] = '傷害間隔(秒)',
+      ['Damage ticks per minute'] = '每分鐘傷害次數',
       ['Damage to you'] = '對你造成的傷害',
       ['Dark Fluid Backpack'] = '暗液背包',
+      ['Dark Fluid burst'] = '暗流體爆裂',
       ['Data Jack'] = '資料介面',
       ['De-Escalator'] = '緩和使者',
+      ['Dead Sprint'] = '死亡衝刺',
       ['Deadeye'] = '鷹眼',
+      ['Deaf (experimental)'] = '失聰（實驗性）',
+      ['Death explosions'] = '死亡爆炸',
+      ['Defeat arrowhead'] = '弱點箭頭',
       ['Defender'] = '防衛者',
       ['Defoliation Tool'] = '除草器',
       ['Delete'] = '刪除',
@@ -3621,6 +4808,9 @@ MOD.langs = {
       ['Demolition force'] = '破壞力',
       ['Deployer'] = '部署艙',
       ['Desert Stormer'] = '沙塵暴之王',
+      ['Destroyed'] = '已摧毀',
+      ['Devastator'] = '破壞者',
+      ['Devastator jump pack'] = '蹂躪者噴射背包',
       ['Deviation'] = '偏移幅度',
       ['Diligence'] = '勤勉',
       ['Diligence Counter Sniper'] = '反狙擊勤勉',
@@ -3634,14 +4824,20 @@ MOD.langs = {
       ['Double-Edge Sickle'] = '雙刃鐮刀',
       ['Down'] = '下移',
       ['Drag factor'] = '阻力系數',
+      ['Dragonroach'] = '龍蟑',
+      ['Drill'] = '鑽頭',
       ['Drilling Charge'] = '鑽探炸藥',
       ['Driver gun'] = '駕駛員機槍',
       ['Drone'] = '無人機',
+      ['Dropship'] = '空降艇',
+      ['Dropship death (air)'] = '運輸艇毀滅（空中）',
+      ['Dropship death (ground)'] = '運輸艇毀滅（地面）',
+      ['Drowning depth offset (m)'] = '溺水深度偏移（米）',
       ['Drum Magazine'] = '彈鼓',
       ['Dune Walker Sniper Scope 10x'] = '10倍狙擊鏡',
       ['Duo Sniper Scope 10x'] = '「杜奧」10倍狙擊瞄準鏡',
       ['Durable damage'] = '耐久傷害',
-      ['Durable ratio (0-1)'] = '耐傷比例(0-1)',
+      ['Durable ratio (0-1)'] = '耐久比例 (0-1)',
       ['Duration (s)'] = '持續時間(秒)',
       ['Dynamite'] = '炸藥',
       ['E/AT-12 Anti-Tank Emplacement'] = 'E/AT-12 反坦克炮台',
@@ -3671,71 +4867,113 @@ MOD.langs = {
       ['Eagle Strafing Run'] = '飛鷹機槍掃射',
       ['Eagle rearm time (s)'] = '飛鷹重新武裝時間（秒）',
       ['Eagle strike. The rearm time is shared by every Eagle.'] = '飛鷹打擊。所有飛鷹共用重新武裝時間。',
+      ['Eagles cannot be called within this distance while it stands'] = '在其被摧毀前，此範圍內無法呼叫飛鷹',
       ['Edit the grenade on Throwables to tune it. Assets load before selection applies.'] = '在「投擲物」頁編輯該手雷即可調整。資源載入完成後選擇才會生效。',
+      ['Effect'] = '效果',
+      ['Egg'] = '蟲卵',
+      ['Egg cluster'] = '蟲卵簇',
+      ['Electric (experimental)'] = '電擊（實驗性）',
+      ['Electric damage taken (x)'] = '受到的電擊傷害（x）',
       ['Electrical Conduit'] = '電氣管線',
+      ['Elevated Overseer'] = '高級監督者',
+      ['Elite'] = '精英',
       ['Emancipator Exosuit'] = '解放者外骨骼裝甲',
       ['Emergency Extraction Beacon'] = '緊急撤離信標',
       ['Emplacement'] = '炮台',
       ['Emplacement: its cooldown, its body, then its weapon.'] = '炮台：依次為冷卻時間、本體、武器。',
       ['Emplacements'] = '部署設施',
+      ['Enemies and values this page changes are marked in blue in the list and on their pages.'] = '此頁面更改的敵人和數值在列表和其頁面中以藍色標出。',
+      ['Enemy Editor'] = '敵人編輯器',
+      ['Enemy cap (x)'] = '敵人數量上限 (x)',
       ['Enemy detection range'] = '敵人偵測範圍',
+      ['Enemy.'] = '敵人。',
+      ['Engine front'] = '前引擎',
+      ['Engine rear'] = '後引擎',
       ['Engineering Kit'] = '工程套組',
       ['Entrenchment Tool'] = '挖掘工具',
       ['Epoch'] = '紀元',
       ['Ergonomics'] = '人機工效',
       ['Ergonomics bonus'] = '人機工效加成',
       ['Eruptor'] = '噴發者',
+      ['Every SEAF soldier at once. Soldiers you have edited on their own page keep their values.'] = '一次調整所有 SEAF 士兵。在各自頁面修改過計程車兵保留其數值。',
       ['Every armor with this passive gets their effects too (set on their own pages).'] = '擁有此被動的所有護甲也會獲得它們的效果（在各自頁面設定）。',
       ['Every change as soon as it is pushed, before testing: it may break.'] = '每項更改一經推送即更新，未經測試：可能出錯。',
       ['Every commit'] = '每次提交',
+      ['Every enemy of this faction at once. Enemies you have edited on their own page keep their values.'] = '一次調整該陣營的所有敵人。在各自頁面修改過的敵人保留其數值。',
       ['Every helldiver in your game. Restore the game\'s files before joining other players\' lobbies.'] = '你遊戲中的所有絕地潛兵。加入其他玩家的大廳前，請先恢復遊戲檔案。',
       ['Every passive is in already.'] = '所有被動都已新增。',
       ['Evictor'] = '驅離者',
       ['Expendable Anti-Tank'] = '反坦克消耗品',
       ['Expendable Anti-Tank (Booster)'] = '消耗性反坦克武器（增強配備）',
       ['Expendable Napalm'] = '消耗型凝固汽油彈',
+      ['Experimental Infusion'] = '實驗性融合',
       ['Expiry explosion (id)'] = '存續結束時爆炸（編號）',
       ['Explodes after death (s)'] = '死亡後爆炸（秒）',
       ['Exploding Crossbow'] = '猛爆十字弓',
       ['Explosion'] = '爆炸',
       ['Explosion (expiry)'] = '爆炸（存續結束）',
       ['Explosion id'] = '爆炸編號',
+      ['Explosive Barrel'] = '爆炸桶',
       ['Explosive damage taken'] = '受到爆炸傷害',
+      ['Explosive damage taken (x)'] = '受到的爆炸傷害 (x)',
       ['Extended Magazine'] = '擴充彈匣',
       ['Extra Padding'] = '額外填充',
       ['Extra stratagem'] = '額外戰略配備',
       ['Extra stratagem (choice)'] = '額外戰略配備（選擇）',
       ['Extraction'] = '撤離',
       ['Extraction Beacon'] = '撤離信標',
+      ['Eye'] = '眼睛',
       ['FAF-14 Spear'] = 'FAF-14 長矛',
       ['FIRE'] = '開火',
       ['FLAM-40 Flamethrower'] = 'FLAM-40 火焰噴射器',
       ['FLAM-66 Torcher'] = 'FLAM-66 噴火者',
+      ['Fabricator'] = '製造廠',
+      ['Fabricator / bug hole batch size (x)'] = '構築者 / 蟲洞批次 (x)',
+      ['Fabricator / bug hole queue (x)'] = '構築者 / 蟲洞佇列 (x)',
+      ['Fabricator / bug hole refill speed (x)'] = '構築者 / 蟲洞補充速度 (x)',
+      ['Fabricator / bug hole release speed (x)'] = '構築者 / 蟲洞釋放速度 (x)',
+      ['Fabricator death'] = '製造廠毀滅',
+      ['Face'] = '面部',
+      ['Factory Strider'] = '移動工廠',
+      ['Fake'] = '偽裝',
       ['Feet First'] = '護腿優先',
+      ['Female'] = '女性',
       ['Field depth (m)'] = '雷區縱深（米）',
       ['Field width (m)'] = '雷區寬度（米）',
+      ['Fin front'] = '前鰭',
       ['Finding the stats...'] = '正在查詢數值...',
       ['Fire'] = '開火',
       ['Fire damage taken'] = '受到火焰傷害',
+      ['Fire damage taken (x)'] = '受到的火焰傷害（x）',
       ['Fire duration (s)'] = '持續開火時間（秒）',
       ['Fire panic'] = '著火恐慌',
       ['Fire rate (RPM)'] = '射速（RPM）',
       ['Fire/gas/acid/arc damage taken'] = '受到火焰 / 毒氣 / 酸液 / 電弧傷害',
+      ['Firebomb Hellpods'] = '燃燒彈絕地噴射艙',
       ['Flame Sentry'] = '火焰火箭炮',
       ['Flames'] = '火焰噴射器',
       ['Flames Mk2'] = '火焰噴射器MK2',
       ['Flamethrower'] = '火焰噴射器',
       ['Flamethrower slow'] = '火焰噴射減速',
       ['Flashlight'] = '手電筒',
+      ['Fleet ship'] = '艦隊艦船',
+      ['Fleshmob'] = '血肉暴徒',
+      ['Flight height (m)'] = '飛行高度（米）',
       ['Flinch'] = '受擊瞄準抖動',
       ['Flinch (0 prevents it)'] = '受擊瞄準抖動（0 為免疫）',
+      ['Floating depth offset (m)'] = '漂浮深度偏移（米）',
       ['Folder'] = '資料夾',
       ['Folder path copied.'] = '已複製資料夾路徑。',
+      ['Foliage pass-through'] = '穿透植被',
       ['Fortified'] = '強化',
       ['Forward share of the launch (0-1)'] = '起跳前衝佔比(0-1)',
       ['Found in the game data (not in the built-in list).'] = '在遊戲資料中找到（不在內建列表中）。',
       ['Frag'] = '破片彈',
       ['From supply'] = '來自補給',
+      ['Front'] = '前部',
+      ['Front armor'] = '前裝甲',
+      ['Front body'] = '前身體',
+      ['Front face'] = '前面',
       ['Front hull'] = '前車體',
       ['Front left cockpit'] = '左前駕駛艙',
       ['Front right cockpit'] = '右前駕駛艙',
@@ -3743,6 +4981,8 @@ MOD.langs = {
       ['Full charge explosion'] = '滿蓄力爆炸',
       ['Full charge shot'] = '滿蓄力射擊',
       ['Fuse time (s)'] = '引信時間(秒)',
+      ['Fusion Autocannon'] = '聚變機炮',
+      ['Fusion Repeater'] = '聚變連發炮',
       ['G-10 Incendiary'] = 'G-10 燃燒彈',
       ['G-109 Urchin'] = 'G-109 海膽',
       ['G-11 Caltrops'] = 'G-11 蒺藜',
@@ -3781,12 +5021,18 @@ MOD.langs = {
       ['Gas confusion'] = '毒氣混亂',
       ['Gas confusion (Sterilizer)'] = '毒氣混亂（滅菌器）',
       ['Gas damage taken'] = '受到毒氣傷害',
+      ['Gas damage taken (x)'] = '受到的毒氣傷害（x）',
+      ['Gas resistance (x)'] = '毒氣抗性（x）',
+      ['Gatekeeper'] = '守門者',
       ['Gatling Sentry'] = '哨戒格林炮',
+      ['Gazer'] = '凝視者',
       ['Generator'] = '發電機',
       ['Generator Pack'] = '護盾生成背包',
       ['Giga Grenade'] = '巨型手榴彈',
       ['GitHub'] = 'GitHub',
       ['GitHub link copied.'] = '已複製 GitHub 連結。',
+      ['Gloom'] = '幽暗',
+      ['Gloom (experimental)'] = '幽暗（實驗性）',
       ['Gravity factor'] = '重力系數',
       ['Grenade'] = '手雷',
       ['Grenade Launcher'] = '榴彈發射器',
@@ -3796,6 +5042,7 @@ MOD.langs = {
       ['Grenade swap'] = '手雷交換',
       ['Grenade swap stopped (see the log); launchers fire their own projectiles again.'] = '已停止榴彈替換（詳見日誌）；發射器恢復使用自身射彈。',
       ['Grenadier Battlement'] = '擲彈兵掩體',
+      ['Grinder'] = '粉碎者',
       ['Ground All-Terrain Extraction Rig (GATER)'] = '全地形越野鑽機（GATER）',
       ['Guard Dog (Drone)'] = '護衛犬無人機',
       ['Guard Dog (Drone) Stun'] = '電擊護衛犬無人機',
@@ -3804,33 +5051,58 @@ MOD.langs = {
       ['Guidance on after (s)'] = '導引啟動延遲(秒)',
       ['Gun'] = '槍械',
       ['Gunner FRV'] = '炮手FRV',
+      ['Gunshield'] = '炮盾',
+      ['Gunship'] = '武裝直升機',
       ['Gunslinger'] = '神槍手',
       ['HANDLING'] = '操控',
       ['HMG Emplacement'] = '重機槍炮台',
       ['Halt'] = '制止者',
       ['Handling'] = '操控',
+      ['Harvester'] = '收割機',
+      ['Harvester objective'] = '獵殺器（任務目標）',
       ['Head'] = '頭部',
+      ['Head armor'] = '頭部裝甲',
+      ['Head body'] = '頭部（本體）',
       ['Head health'] = '頭部生命值',
+      ['Head zone'] = '頭部',
       ['Health'] = '生命值',
+      ['Health (x)'] = '生命值（x）',
       ['Health Pack Rack'] = '醫療包架',
+      ['Health drain'] = '生命流失',
+      ['Hearing (x)'] = '聽覺 (x)',
       ['Heat'] = '熱量',
       ['Heat per second firing'] = '射擊時每秒積熱',
       ['Heat per shot'] = '每發積熱',
       ['Heat per warp (%)'] = '每次躍遷熱量（%）',
       ['Heatsinks from supply'] = '補給獲得的散熱器數',
+      ['Heavy Devastator'] = '重型破壞者',
+      ['Heavy Devastator shield'] = '重型蹂躪者盾牌',
+      ['Heavy Fusion Cannon'] = '重型聚變炮',
       ['Heavy Machine Gun'] = '重機槍',
+      ['Heavy armor'] = '重型護甲',
       ['Heavy burning'] = '重度燃燒',
+      ['Heavycannon'] = '重炮',
       ['Hellbomb'] = '地獄火炸彈',
       ['Helldiver'] = '絕地潛兵',
       ['Helldivers 2 is running: close it first.'] = '《絕地潛兵 2》正在執行：請先關閉遊戲。',
       ['Helldivers 2 is running: close it, then Install.'] = '《絕地潛兵 2》正在執行：請先關閉遊戲，再點選「寫入遊戲」。',
       ['Helldivers 2 is running: close it, then restore.'] = 'Helldivers 2 正在執行：請先關閉遊戲，再恢復。',
       ['Helldivers 2 is running: you can edit, but close it before you Install.'] = '《絕地潛兵 2》正在執行：可以編輯，但寫入前必須關閉遊戲。',
+      ['Hellpod: initial drop'] = '地獄艙：初始空投',
+      ['Hellpod: reinforcement'] = '地獄艙：增援',
+      ['Helmet'] = '頭盔',
+      ['Hexagon'] = '六邊形',
       ['High Capacity Heatsink'] = '大容量散熱器',
       ['High Dissipation Heatsink'] = '高效能散熱器',
       ['High Explosive'] = '高爆彈',
       ['High-Velocity Shrapnel'] = '高速破片',
+      ['Highest ledge it climbs (m)'] = '可攀爬的最高邊緣（米）',
+      ['Hijack Tech Hub Nexus Machine'] = '技術中心樞紐機器',
       ['Hips'] = '腰部',
+      ['Hips armor'] = '髖部裝甲',
+      ['Hive Breaker Drill'] = '破巢鑽',
+      ['Hive Guard'] = '守穴蟲',
+      ['Hive Lord'] = '霸王蟲',
       ['Homing Anti-Air Missile'] = '地對地飛彈',
       ['Homing Ground Missile'] = '地對地飛彈',
       ['Homing Ground Missile Mk2'] = '地對地飛彈MK2',
@@ -3842,40 +5114,71 @@ MOD.langs = {
       ['Hover time, full-speed climb (s)'] = '懸停時間：全速爬升(秒)',
       ['Hover time, holding height (s)'] = '懸停時間：保持高度(秒)',
       ['Hoverpack Backpack'] = '懸浮背包',
+      ['How close this zoom step looks: 1 is the normal view, 2 twice as close, 4 four times.'] = '這一檔的放大程度：1 為正常視野，2 拉近兩倍，4 拉近四倍。',
       ['How far away the jet starts its run. With its speed, it sets how long the Eagle takes to arrive.'] = '飛鷹開始攻擊航線時距目標的距離，與飛行速度共同決定抵達時間。',
+      ['How long the round waits after the hit (or after the blast proximity trips) before it goes off.'] = '射彈命中後（或近炸距離觸發後）等待多久才爆炸。',
+      ['How quickly the scoped view catches up when you move your aim at this zoom (0.6 on most optics).'] = '此倍率下移動瞄準時，瞄準鏡視野跟上的速度（大多數瞄具為 0.6）。',
+      ['Hulk'] = '巨型者',
+      ['Hulk Bruiser'] = '巨型殲滅者',
+      ['Hulk Firebomber'] = '巨型火焰炸彈兵',
+      ['Hulk Obliterator'] = '巨型消滅者',
+      ['Hulk Scorcher'] = '巨型灼焦者',
+      ['Hulk flag'] = '巨型者旗幟',
+      ['Hulk jetpack'] = '巨型者噴射背包',
+      ['Hull back'] = '車體後部',
+      ['Hull front'] = '車體前部',
+      ['Hunter'] = '狩獵蟲',
       ['Hyena'] = '土狼',
+      ['Illuminate'] = '光能者',
+      ['Illusionist death'] = '幻術師死亡',
       ['Immediate Extraction Beacon'] = '立即撤離信標',
       ['Immolation'] = '焚毀',
       ['Impact'] = '衝擊彈',
       ['Impact damage taken'] = '受到衝擊傷害',
       ['Impact explosion (id)'] = '命中爆炸 (ID)',
+      ['Impaler'] = '穿刺蟲',
       ['Incendiary'] = '燃燒彈',
       ['Incendiary Impact'] = '衝擊燃燒彈',
+      ['Incendiary MG Devastator'] = '燃燒機槍破壞者',
       ['Incendiary Mine Deployer'] = '燃燒佈雷器',
       ['Incinerator FRV'] = '焚燒者FRV',
       ['Inflammable'] = '易燃物',
       ['Injures you above heat (%)'] = '超過此熱量會灼傷(%)',
+      ['Inner body'] = '內身體',
       ['Inner radius (m)'] = '內半徑(米)',
+      ['Inner torso'] = '內軀幹',
+      ['Insides'] = '內部',
       ['Install into the game'] = '寫入遊戲',
       ['Installing: finding what changed...'] = '寫入中：正在查詢改動…',
       ['Installing: writing the files...'] = '寫入中：正在寫入檔案…',
       ['Integrated Explosives'] = '整合型炸藥',
       ['Interface language'] = '介面語言',
+      ['Inverted aim assist (experimental)'] = '反向瞄準輔助（實驗性）',
       ['Ion Scope 4x'] = '4倍離子瞄準鏡',
       ['Iron Sights'] = '金屬瞄具',
       ['Iron Sights Long'] = '長型機械瞄具',
+      ['Iron fleet'] = '鋼鐵艦隊',
       ['It doesn\'t take a loadout slot, but the HUD\'s stratagem list can fill up.'] = '不佔配裝欄位，但可能佔滿螢幕上的戰略配備列表。',
       ['Its effects are added to every armor with this passive.'] = '其效果會新增到擁有此被動的所有護甲上。',
       ['Its stats above apply.'] = '上方的數值生效。',
+      ['Ivory legion'] = '象牙軍團',
+      ['Ivory legion assault'] = '象牙軍團突擊',
+      ['Ivory legion tier 2'] = '象牙軍團2級',
       ['JAR-5 Dominator'] = 'JAR-5 主導者',
       ['Jammed Pinata'] = '受干擾的彩罐',
+      ['Jammer'] = '干擾器',
+      ['Jamming'] = '干擾',
+      ['Jaws'] = '顎',
       ['Jog speed (m/s)'] = '慢跑速度(米/秒)',
       ['Jogging empties it in (s)'] = '慢跑耗盡用時(秒)',
+      ['Jump'] = '跳躍',
       ['Jump Pack'] = '彈跳背包',
       ['Jump cost (share of stamina)'] = '跳躍消耗(體力佔比)',
       ['Jump pack'] = '噴射背包',
+      ['Jumppack'] = '噴射背包',
       ['Jumppack Backpack'] = '噴射背包',
       ['K-2 Throwing Knife'] = 'K-2 飛刀',
+      ['Killing it kills the enemy'] = '摧毀即擊殺敵人',
       ['Kinetic Displacement Mitigation'] = '動能緩衝',
       ['Knight'] = '騎士',
       ['Knockdown chance'] = '擊倒機率',
@@ -3895,9 +5198,12 @@ MOD.langs = {
       ['LIFT-182 Warp Pack'] = 'LIFT-182 傳送背包',
       ['LIFT-850 Jump Pack'] = 'LIFT-850 彈跳背包',
       ['LIFT-860 Hover Pack'] = 'LIFT-860 懸浮背包',
+      ['Landed ship door shield'] = '著陸艦艙門護盾',
       ['Language'] = '語言',
+      ['Large'] = '大型',
       ['Large Plasma Bolt'] = '大型電漿彈',
       ['Larger Plasma Container'] = '加大電漿匣',
+      ['Larva Container'] = '幼蟲容器',
       ['Laser'] = '雷射',
       ['Laser Cannon'] = '雷射大炮',
       ['Laser Rifle (Drone)'] = '雷射步槍無人機',
@@ -3911,43 +5217,109 @@ MOD.langs = {
       ['Launch duration (s)'] = '起跳推進時間（秒）',
       ['Launch force'] = '起跳推力',
       ['Launch speed (m/s)'] = '發射速度（米/秒）',
+      ['Lava (experimental)'] = '熔岩（實驗性）',
+      ['Lb wing'] = '左後翼',
       ['Left'] = '左',
-      ['Left arm'] = '左臂',
+      ['Left arm'] = '左手臂',
       ['Left arm health'] = '左臂生命值',
+      ['Left armor'] = '左裝甲',
+      ['Left arms'] = '左手臂',
+      ['Left back leg'] = '左後腿',
       ['Left back panel'] = '左後板',
+      ['Left back thruster'] = '左後推進器',
+      ['Left back track bar'] = '左後履帶支桿',
+      ['Left back track knee'] = '左後履帶膝部',
+      ['Left back wing'] = '左後翼',
+      ['Left body'] = '左身體',
       ['Left box 0'] = '左儲物箱 0',
       ['Left box 1'] = '左儲物箱 1',
       ['Left box 2'] = '左儲物箱 2',
+      ['Left chest'] = '左胸部',
+      ['Left claw'] = '左爪',
+      ['Left elbow'] = '左肘部',
+      ['Left extra elbow'] = '左額外肘部',
+      ['Left foot'] = '左腳',
+      ['Left foreleg wrist'] = '左前腿腕部',
       ['Left front block'] = '左前塊',
       ['Left front door'] = '左前門',
+      ['Left front face'] = '左前面',
+      ['Left front leg'] = '左前腿',
       ['Left front light'] = '左前燈',
+      ['Left front thruster'] = '左前推進器',
+      ['Left front track bar'] = '左前履帶支桿',
+      ['Left front track knee'] = '左前履帶膝部',
+      ['Left front wing flap'] = '左前襟翼',
+      ['Left gun'] = '左炮',
+      ['Left hand'] = '左手',
+      ['Left head'] = '左頭部',
+      ['Left head flap'] = '左頭部護片',
+      ['Left hip'] = '左髖部',
+      ['Left hull'] = '左車體',
       ['Left leg'] = '左腿',
       ['Left leg health'] = '左腿生命值',
+      ['Left leg shield'] = '左腿護盾',
+      ['Left legs'] = '左腿',
+      ['Left middle leg'] = '左中腿',
+      ['Left middle wing'] = '左中翼',
       ['Left mirror'] = '左後視鏡',
+      ['Left pincer'] = '左鉗',
       ['Left rear door'] = '左後門',
+      ['Left rear engine pitch'] = '左後引擎（俯仰）',
+      ['Left rear leg'] = '左後腿',
+      ['Left rocket'] = '左火箭',
+      ['Left rocketpod'] = '左火箭艙',
+      ['Left shoulder'] = '左肩部',
+      ['Left shoulder blade'] = '左肩刀刃',
+      ['Left shoulderplate'] = '左肩甲',
       ['Left side panel 0'] = '左側板 0',
       ['Left side panel 1'] = '左側板 1',
+      ['Left speaker'] = '左揚聲器',
+      ['Left spine1 leg'] = '第1節左腿',
+      ['Left spine2 leg'] = '第2節左腿',
+      ['Left spine3 leg'] = '第3節左腿',
+      ['Left spine4 leg'] = '第4節左腿',
+      ['Left spine5 leg'] = '第5節左腿',
+      ['Left tentacle'] = '左觸手',
       ['Left top block'] = '左上塊',
+      ['Left torso'] = '左軀幹',
       ['Left track'] = '左履帶',
+      ['Left tracks'] = '左履帶',
+      ['Left weapon bay'] = '左武器艙',
+      ['Left wing'] = '左翼',
+      ['Left wrist blade'] = '左腕刀刃',
       ['Leg injury immunity (1 on)'] = '免疫腿部受傷（1 為開啟）',
       ['Leveller'] = '夷平者',
+      ['Leviathan'] = '利維坦',
+      ['Leviathan bomb'] = '利維坦炸彈',
+      ['Leviathan cannon'] = '利維坦火炮',
+      ['Lf wing'] = '左前翼',
       ['Liberator'] = '解放者',
       ['Liberator Carbine'] = '卡賓槍解放者',
       ['Liberator Concussive'] = '震盪解放者',
       ['Liberator Legacy'] = '解放者「榮光」',
       ['Liberator Penetrator'] = '穿甲解放者',
       ['Lifetime (s)'] = '存續時間(秒)',
+      ['Light armor'] = '輕型護甲',
+      ['Light, medium or heavy, per armor (every armor set with that name).'] = '每件護甲的輕型、中型或重型（同名的所有護甲套裝）。',
       ['Limb health'] = '四肢生命值',
       ['Limb injury avoidance'] = '避免肢體受傷的機率',
       ['Load'] = '讀取',
+      ['Loadout'] = '裝備配置',
       ['Log file'] = '日誌檔案',
       ['Log file path copied.'] = '已複製日誌檔案路徑。',
       ['Logs'] = '日誌',
       ['Logs and Presets'] = '日誌與預設',
       ['Loses its target past (deg)'] = '超出此角度丟失目標(度)',
+      ['Lower back'] = '下背部',
+      ['Lower it if a high zoom spins the view.'] = '如果高倍率時視野旋轉，請調低。',
+      ['Lower spine'] = '下脊椎',
+      ['Lowest patrol frequency (x)'] = '最低巡邏頻率 (x)',
+      ['Lowest rates'] = '最低頻率',
+      ['Lowest reinforcement frequency (x)'] = '最低增援頻率 (x)',
       ['Loyalist'] = '忠誠者',
       ['Lumberer Exosuit'] = '伐木工外骨骼裝甲',
       ['Lure Mine'] = '誘餌地雷',
+      ['M tentacle'] = '中觸手',
       ['M-1000 Maxigun'] = 'M-1000 麥西極槍',
       ['M-102 Gunner FRV'] = 'M-102 炮手FRV',
       ['M-103 Supply FRV'] = 'M-103 補給FRV',
@@ -3960,6 +5332,7 @@ MOD.langs = {
       ['M7S SMG'] = 'M7S 衝鋒槍',
       ['M90A Shotgun'] = 'M90A 霰彈槍',
       ['MA5C Assault Rifle'] = 'MA5C 突擊步槍',
+      ['MG Emplacement'] = '機槍部署支架',
       ['MG-206 Heavy Machine Gun'] = 'MG-206 重機槍',
       ['MG-206 Heavy Machine Gun (mounted B)'] = 'MG-206 重機槍（固定式 B）',
       ['MG-43 Machine Gun'] = 'MG-43 機槍',
@@ -3978,7 +5351,10 @@ MOD.langs = {
       ['Maelstrom'] = '風暴渦旋',
       ['Magazine size'] = '彈匣容量',
       ['Magazines from supply'] = '補給獲得的彈匣數',
+      ['Main'] = '主體',
+      ['Main body'] = '主身體',
       ['Main gun'] = '主炮',
+      ['Marauder'] = '掠奪者',
       ['Marker radar scan every (s)'] = '標記雷達掃描間隔（秒）',
       ['Mass (kg)'] = '質量(千克)',
       ['Max carried'] = '最大攜帶',
@@ -3992,6 +5368,7 @@ MOD.langs = {
       ['Med-Kit'] = '醫療套組',
       ['Medic Backpack'] = '醫療背包',
       ['Medium Plasma Bolt'] = '中型電漿彈',
+      ['Medium armor'] = '中型護甲',
       ['Melee damage'] = '近戰傷害',
       ['Melta Mine'] = '熱熔地雷',
       ['Meltagun'] = '熱熔槍',
@@ -4006,18 +5383,28 @@ MOD.langs = {
       ['Missile'] = '導彈',
       ['Missile Pistol'] = '飛彈手槍',
       ['Missile flight'] = '導彈飛行',
+      ['Mission'] = '任務',
       ['Missions'] = '任務',
       ['Missions clan station'] = '空間站任務',
       ['Mist'] = '迷霧',
       ['Mobile Comms Relay'] = '行動通訊中繼器',
+      ['Modifier patrol frequency (x)'] = '修正巡邏頻率 (x)',
+      ['Modifier patrol size (x)'] = '修正巡邏規模 (x)',
       ['Mortar Sentry'] = '哨戒迫擊炮',
+      ['Mouth'] = '口部',
       ['Move while reloading'] = '換彈時可移動',
       ['Movement'] = '移動',
+      ['Movement speed (multiplier)'] = '移動速度（倍率）',
+      ['Movement speed (x)'] = '移動速度 (x)',
       ['Muzzle'] = '槍口',
       ['Muzzle brake'] = '槍口制退器',
       ['Napalm Bomb'] = '凝固汽油彈',
       ['Napalm Bomb Mk2'] = '凝固汽油彈MK2',
       ['Napalm Bomb Mk3'] = '凝固汽油彈MK3',
+      ['Navigation'] = '導航',
+      ['Neck'] = '頸部',
+      ['Neck armor'] = '頸部裝甲',
+      ['Neck body'] = '頸部（本體）',
       ['No changes: loading it puts every value back to the game\'s.'] = '沒有修改：讀取它會把所有數值恢復為遊戲原值。',
       ['No presets yet.'] = '還沒有預設。',
       ['Noise'] = '噪音',
@@ -4029,9 +5416,11 @@ MOD.langs = {
       ['Nothing to install: your values are the game\'s own.'] = '無需寫入：所有數值均為遊戲原值。',
       ['Nova'] = '新星',
       ['Nuke'] = '核彈',
+      ['Nursing Spewer'] = '噴射蟲',
       ['OFFLINE  -  edits the game\'s files; they apply when the game starts'] = '離線  -  編輯遊戲檔案；遊戲啟動時生效',
       ['OK'] = '確定',
       ['ORBITAL BEAM'] = '軌道光束',
+      ['Objective'] = '任務目標',
       ['Off'] = '關',
       ['Off: its stats above are left out; only the passives below apply.'] = '關閉：上方的數值不生效；只有下方的被動生效。',
       ['Off: the game\'s values everywhere; your '] = '關閉：全域性使用遊戲數值，你的',
@@ -4041,10 +5430,15 @@ MOD.langs = {
       ['On'] = '開',
       ['On: a loadout can take more than one exosuit, FRV or tank.'] = '開啟：單次配裝可攜帶多台 外骨骼裝甲、FRV 或坦克。',
       ['On: in your armory / stratagem list.'] = '開啟：出現在你的軍械庫 / 戰略配備列表中。',
+      ['On: sniper rifles show a crosshair when you aim in third person.'] = '開啟：以第三人稱瞄準時，狙擊步槍顯示準星。',
+      ['On: stratagem balls stick on more surfaces instead of bouncing off.'] = '開啟：戰略配備信標可粘附在更多表面上，而不會彈開。',
       ['On: your '] = '開啟：你的',
       ['On: your arc chain length / split apply with other players too (arcs can stay on screen).'] = '開啟：你的電弧連鎖長度 / 分裂對其他玩家同樣生效（電弧可留在螢幕上）。',
+      ['On: your rockets, launcher rounds and stratagem ordnance fly through tree canopies and bushes.'] = '開啟：你的火箭彈、發射器彈藥和戰略配備彈藥可穿過樹冠和灌木。',
       ['One True Flag'] = '唯一真旗',
       ['One-Two'] = '雙響',
+      ['One-handed'] = '單手持握',
+      ['Only works with the blast angle at 360, and the distance has to be larger than one step of the round:'] = '只在爆炸角為 360 時生效，且距離要大於射彈每幀的位移：',
       ['Open'] = '開啟',
       ['Open / close key'] = '開啟 / 關閉熱鍵',
       ['Opened the GitHub page in your browser.'] = '已在瀏覽器中開啟 GitHub 頁面。',
@@ -4071,9 +5465,14 @@ MOD.langs = {
       ['Orbital strike.'] = '軌道打擊。',
       ['Other'] = '其他',
       ['Other players are in your game: arc chain length / split use the game\'s values.'] = '你的對局中存在其他玩家：電弧連鎖長度 / 分裂將使用遊戲數值。',
+      ['Outcast'] = '流放者',
       ['Outer radius (m)'] = '外半徑(米)',
+      ['Outpost garrison size (x)'] = '前哨駐軍規模 (x)',
+      ['Outposts and spawners'] = '前哨與生成點',
       ['Overcharge limit (s)'] = '過載上限(秒)',
       ['Overheat threshold'] = '過熱閾值',
+      ['Overseer'] = '監督者',
+      ['Overship'] = '統領艦',
       ['Own effects'] = '自身效果',
       ['Oxygenator'] = '氧合器',
       ['P-11 Stim Pistol'] = 'P-11 治療槍',
@@ -4109,18 +5508,27 @@ MOD.langs = {
       ['Partial charge shot'] = '部分蓄力射擊',
       ['Passive'] = '被動',
       ['Patriot Exosuit'] = '愛國者外骨骼裝甲',
+      ['Patrol frequency (x)'] = '巡邏頻率 (x)',
+      ['Patrols'] = '巡邏',
+      ['Patrols at once (x)'] = '同時巡邏數 (x)',
       ['Peacemaker'] = '和平製造者',
       ['Peak Physique'] = '巔峰體態',
+      ['Pelvis'] = '骨盆',
       ['Pen.'] = '穿甲',
       ['Penetration slowdown'] = '穿透後速度衰減',
+      ['Phalanx'] = '方陣',
       ['Physical shield'] = '實體護盾',
+      ['Pilot seat'] = '駕駛座',
       ['Pineapple'] = '鳳梨',
       ['Plasma Pistol. Canister Extended'] = '等離子手槍：擴容彈藥罐',
       ['Plasma Pistol. Canister Pistol'] = '等離子手槍：標準彈藥罐',
       ['Point of interest range'] = '興趣點探測範圍',
+      ['Poison (experimental)'] = '中毒（實驗性）',
       ['Poison Drill'] = '毒劑鑽探裝置',
       ['Portable Hellbomb'] = '可攜式絕地彈',
       ['Position scatter (m)'] = '佈雷位置隨機偏移（米）',
+      ['Pouncer'] = '食腐蟲',
+      ['Predator Hunter'] = '掠食者狩獵蟲',
       ['Presets'] = '預設',
       ['President rewards'] = '總統獎勵',
       ['Press a key (Esc cancels)'] = '請按一個鍵(Esc 取消)',
@@ -4138,6 +5546,7 @@ MOD.langs = {
       ['Punisher Plasma'] = '電漿制裁者',
       ['Purifier'] = '淨化者',
       ['Push force'] = '擊退力',
+      ['Pyro Trooper'] = '焰火騎兵',
       ['Pyrotech'] = '煙火表演',
       ['Quasar Cannon'] = '類星體大砲',
       ['R-2 Amendment'] = 'R-2 修正',
@@ -4160,8 +5569,12 @@ MOD.langs = {
       ['RS-422 Railgun'] = 'RS-422 磁軌炮',
       ['Rack'] = '掛架',
       ['Radar'] = '雷達',
+      ['Radiation (heavy) (experimental)'] = '輻射（重度）（實驗性）',
+      ['Radiation (light) (experimental)'] = '輻射（輕度）（實驗性）',
+      ['Radical'] = '激進份子',
       ['Radius'] = '半徑',
       ['Radius (m)'] = '半徑(米)',
+      ['Raider'] = '襲擊者',
       ['Rail Cannon Round'] = '軌道炮彈',
       ['Railgun'] = '磁軌炮',
       ['Railgun Round'] = '磁軌炮彈',
@@ -4171,6 +5584,7 @@ MOD.langs = {
       ['Range'] = '射程',
       ['Range (m)'] = '射程(米)',
       ['Rapid Heatsink'] = '快速散熱器',
+      ['Rb wing'] = '右後翼',
       ['Re-Educator'] = '思想改造',
       ['Reach downward (m)'] = '向下觸及(米)',
       ['Reach upward (m)'] = '向上觸及(米)',
@@ -4193,10 +5607,14 @@ MOD.langs = {
       ['Refills crouched in (s)'] = '蹲伏恢復用時(秒)',
       ['Refills prone in (s)'] = '臥倒恢復用時(秒)',
       ['Refills standing in (s)'] = '站立恢復用時(秒)',
-      ['Regeneration (health/s)'] = '再生(生命/秒)',
+      ['Regeneration (health/s)'] = '再生 (生命值/秒)',
       ['Regeneration delay after damage (s)'] = '受傷後再生延遲（秒）',
       ['Reinforced Epaulettes'] = '強化護肩',
       ['Reinforcement Beacon'] = '增援信標',
+      ['Reinforcement frequency (x)'] = '增援頻率 (x)',
+      ['Reinforcement size (x)'] = '增援規模 (x)',
+      ['Reinforcements'] = '增援',
+      ['Reinforcements (flares, breaches, drops)'] = '增援 (訊號彈、蟲潮、空投)',
       ['Releases'] = '正式版',
       ['Reload allowed below (rounds)'] = '允許裝填的剩餘彈數上限',
       ['Reload time (s)'] = '裝填時間（秒）',
@@ -4207,35 +5625,92 @@ MOD.langs = {
       ['Rename'] = '重新命名',
       ['Reprimand'] = '懲戒',
       ['Reset all values'] = '重置全部數值',
+      ['Reset booster'] = '重置增強配備',
+      ['Reset enemy'] = '重置敵人',
       ['Reset helldiver'] = '重置潛兵',
       ['Reset passive'] = '重置被動',
       ['Reset record'] = '重置記錄',
+      ['Reset spawning'] = '重置生成',
       ['Reset weapon'] = '重置武器',
       ['Resets all values from the current preset to default.'] = '將當前預設的全部數值恢復為預設值。',
       ['Restore the game\'s files'] = '恢復遊戲原始檔案',
       ['Restoring the game\'s files...'] = '正在恢復遊戲原始檔案...',
       ['Resupply'] = '重新補給',
+      ['Rf wing'] = '右前翼',
       ['Rifle Justice. Short '] = '「正義」步槍：短彈匣',
       ['Right'] = '右',
-      ['Right arm'] = '右臂',
+      ['Right arm'] = '右手臂',
       ['Right arm health'] = '右臂生命值',
+      ['Right armor'] = '右裝甲',
+      ['Right arms'] = '右手臂',
+      ['Right back leg'] = '右後腿',
       ['Right back panel'] = '右後板',
+      ['Right back thruster'] = '右後推進器',
+      ['Right back track bar'] = '右後履帶支桿',
+      ['Right back track knee'] = '右後履帶膝部',
+      ['Right back wing'] = '右後翼',
+      ['Right body'] = '右身體',
       ['Right box 0'] = '右儲物箱 0',
       ['Right box 1'] = '右儲物箱 1',
       ['Right box 2'] = '右儲物箱 2',
+      ['Right claw'] = '右爪',
+      ['Right elbow'] = '右肘部',
+      ['Right extra elbow'] = '右額外肘部',
+      ['Right foot'] = '右腳',
+      ['Right foreleg shoulder'] = '右前腿肩部',
       ['Right front block'] = '右前塊',
       ['Right front door'] = '右前門',
+      ['Right front face'] = '右前面',
+      ['Right front leg'] = '右前腿',
       ['Right front light'] = '右前燈',
+      ['Right front track bar'] = '右前履帶支桿',
+      ['Right front track knee'] = '右前履帶膝部',
+      ['Right front wing flap'] = '右前襟翼',
+      ['Right gun'] = '右炮',
+      ['Right hand'] = '右手',
+      ['Right head'] = '右頭部',
+      ['Right head flap'] = '右頭部護片',
+      ['Right hindleg wrist'] = '右後腿腕部',
+      ['Right hip'] = '右髖部',
+      ['Right hull'] = '右車體',
       ['Right leg'] = '右腿',
       ['Right leg health'] = '右腿生命值',
+      ['Right leg shield'] = '右腿護盾',
+      ['Right legs'] = '右腿',
+      ['Right middle leg'] = '右中腿',
+      ['Right middle wing'] = '右中翼',
       ['Right mirror'] = '右後視鏡',
+      ['Right pincer'] = '右鉗',
       ['Right rear door'] = '右後門',
+      ['Right rear engine pitch'] = '右後引擎（俯仰）',
+      ['Right rear leg'] = '右後腿',
+      ['Right rocket'] = '右火箭',
+      ['Right rocketpod'] = '右火箭艙',
+      ['Right shoulder'] = '右肩部',
+      ['Right shoulder blade'] = '右肩刀刃',
+      ['Right shoulderplate'] = '右肩甲',
       ['Right side panel 0'] = '右側板 0',
       ['Right side panel 1'] = '右側板 1',
+      ['Right speaker'] = '右揚聲器',
+      ['Right spine1 leg'] = '第1節右腿',
+      ['Right spine2 leg'] = '第2節右腿',
+      ['Right spine3 leg'] = '第3節右腿',
+      ['Right spine4 leg'] = '第4節右腿',
+      ['Right spine5 leg'] = '第5節右腿',
+      ['Right tentacle'] = '右觸手',
       ['Right top block'] = '右上塊',
+      ['Right torso'] = '右軀幹',
       ['Right track'] = '右履帶',
+      ['Right tracks'] = '右履帶',
+      ['Right weapon bay'] = '右武器艙',
+      ['Right wing'] = '右翼',
+      ['Right wrist blade'] = '右腕刀刃',
       ['Rock Solid'] = '堅如磐石',
+      ['Rocket Devastator'] = '火箭炮破壞者',
       ['Rocket Sentry'] = '哨戒火箭炮',
+      ['Rocket pods'] = '火箭艙',
+      ['Rooted (experimental)'] = '定身（實驗性）',
+      ['Rotator'] = '轉子',
       ['Round 1 blast'] = '第 1 發爆炸',
       ['Round 1 blast radius'] = '第 1 發爆炸半徑',
       ['Round 1 projectile'] = '第 1 發射彈',
@@ -4246,13 +5721,24 @@ MOD.langs = {
       ['Rounds loaded'] = '已裝填彈數',
       ['Rounds per reload'] = '每次裝填彈數',
       ['Run length (m)'] = '攻擊航線長度（米）',
+      ['Rupture Charger'] = '裂破衝鋒蟲',
+      ['Rupture Spewer'] = '裂破嘔吐蟲',
+      ['Rupture Warrior'] = '裂破武鬥蟲',
       ['S-11 Speargun'] = 'S-11 矛槍',
+      ['SEAF'] = 'SEAF',
       ['SEAF Artillery: Explosive'] = 'SEAF 火炮：高爆彈',
       ['SEAF Artillery: HIGH-YIELD EXPLOSIVE'] = 'SEAF 火炮：高當量爆炸彈',
       ['SEAF Artillery: Mini Nuke'] = 'SEAF 火炮：微型核彈',
       ['SEAF Artillery: Napalm'] = 'SEAF 火炮：凝固汽油彈',
       ['SEAF Artillery: Smoke'] = 'SEAF 火炮：煙霧彈',
       ['SEAF Artillery: Static Field'] = 'SEAF 火炮：靜電場',
+      ['SEAF Leader'] = 'SEAF 指揮官',
+      ['SEAF Medic'] = 'SEAF 醫療兵',
+      ['SEAF Soldier'] = 'SEAF士兵',
+      ['SEAF Specialist'] = 'SEAF 專家',
+      ['SEAF reinforcement cooldown (x)'] = 'SEAF 增援冷卻 (x)',
+      ['SEAF soldier: an ally.'] = 'SEAF 士兵：友軍。',
+      ['SEAF wave cooldown (x)'] = 'SEAF 波次冷卻 (x)',
       ['SECOND MODE'] = '第二模式',
       ['SG-20 Halt'] = 'SG-20 制止者',
       ['SG-22 Bushwhacker'] = 'SG-22 游擊者',
@@ -4270,6 +5756,7 @@ MOD.langs = {
       ['SH-51 Directional Shield'] = 'SH-51 定向護盾',
       ['SHARED WITH'] = '共用',
       ['SHIELD'] = '護盾',
+      ['SHODAN ENEMY EDITOR'] = 'SHODAN 敵人編輯器',
       ['SHODAN STAT EDITOR'] = 'SHODAN 數值編輯器',
       ['SHODAN weapon mods are running too: they put their own values back every 5 s'] = '檢測到 SHODAN 武器 mod 同時執行：它們每 5 秒會把數值改回自己的設定',
       ['SHRAPNEL'] = '破片',
@@ -4291,12 +5778,19 @@ MOD.langs = {
       ['Salvos'] = '齊射次數',
       ['Save'] = '儲存',
       ['Save current changes here'] = '在此儲存當前修改',
+      ['Scavenger'] = '清掃蟲',
+      ['Scavenger acid burst'] = '清道夫酸液爆裂',
+      ['Scope'] = '瞄準鏡',
       ['Scorcher'] = '焦土',
       ['Scout'] = '偵察兵',
+      ['Scout Raider'] = '偵查襲擊者',
+      ['Scout Strider'] = '偵察闊步者',
+      ['Scout walker rider'] = '偵察步行機駕駛員',
       ['Scrambler'] = '擾頻器',
       ['Scythe'] = '長柄鐮',
       ['Seaf Gun'] = 'SEAF 火炮',
       ['Seaf Squad'] = 'SEAF 小隊',
+      ['Search enemies'] = '搜尋敵人',
       ['Search radius (m)'] = '搜尋半徑(米)',
       ['Search weapons and stratagems'] = '搜尋武器與戰略配備',
       ['Second ammo'] = '第二彈種',
@@ -4310,6 +5804,7 @@ MOD.langs = {
       ['Seeker'] = '追擊者',
       ['Seismic Probe'] = '地震探針',
       ['Senator'] = '參議員',
+      ['Senses'] = '感知',
       ['Sentry'] = '哨戒炮',
       ['Sentry: its cooldown, its body, then its weapon.'] = '哨戒炮：依次為冷卻時間、本體、武器。',
       ['Servo-Assisted'] = '伺服輔助',
@@ -4326,11 +5821,14 @@ MOD.langs = {
       ['Shield arm zone armor'] = '護盾臂部位護甲',
       ['Shield capacity'] = '護盾容量',
       ['Shield emitter'] = '護盾發生器',
+      ['Shield forcefield'] = '護盾力場',
       ['Shield plate armor'] = '護盾板護甲',
       ['Shield plate health'] = '護盾板生命值',
+      ['Shield zone'] = '護盾',
       ['Ship upgrades that make support weapons and sentries launch at once skip it (tested).'] = '讓支援武器和哨戒炮立即發射的艦船升級會跳過此倒計時（已由作者測試）。',
       ['Shockwave radius (m)'] = '衝擊波半徑(米)',
       ['Short Magazine'] = '短型彈匣',
+      ['Shotgun'] = '霰彈槍',
       ['Shoulder Mounted Camera'] = '肩載攝像機',
       ['Shrapnel'] = '榴散彈',
       ['Shrapnel blast radius'] = '破片爆炸半徑',
@@ -4339,25 +5837,65 @@ MOD.langs = {
       ['Shrapnel pieces'] = '破片數量',
       ['Shrapnel projectile'] = '破片射彈',
       ['Shrapnel projectile (id)'] = '破片射彈（編號）',
+      ['Shredder Tank'] = '撕裂者坦克',
+      ['Shrieker'] = '尖叫蟲',
+      ['Shrieker Nest'] = '尖叫蟲巢穴',
       ['Sickle'] = '鐮刀',
+      ['Side'] = '側面',
       ['Siege-Ready'] = '圍攻準備完畢',
+      ['Sight cone height (degrees)'] = '視野錐高度 (度)',
+      ['Sight cone width (degrees)'] = '視野錐寬度 (度)',
+      ['Sight range (m)'] = '視野距離 (米)',
+      ['Sight range (x)'] = '視野範圍（x）',
       ['Sightliner'] = '視界者',
       ['Silo'] = '發射井',
       ['Simo Iron Sights'] = '「西莫」機械瞄具',
+      ['Size'] = '體型',
+      ['Size (x)'] = '體型 (x)',
       ['Slide speed / duration'] = '滑行速度 / 持續時間',
+      ['Slope slide ends at (degrees)'] = '斜坡滑行結束角度（度）',
+      ['Slope slide starts at (degrees)'] = '斜坡滑行起始角度（度）',
+      ['Slot (choice)'] = '欄位（選擇）',
+      ['Slot: 1 primary or 3 secondary.'] = '欄位：1 主武器或 3 副武器。',
+      ['Slot: Primary'] = '欄位：主武器',
+      ['Slot: Secondary'] = '欄位：副武器',
+      ['Slowed (experimental)'] = '減速（實驗性）',
       ['Slugger'] = '制裁者散彈槍',
       ['Small Plasma Bolt'] = '小型電漿彈',
       ['Smoke'] = '煙霧彈',
+      ['Smoke radius, edge (m)'] = '煙霧半徑，邊緣(米)',
+      ['Smoke radius, full (m)'] = '煙霧半徑，濃密(米)',
       ['Smokescreen'] = '煙幕',
       ['Sniper Scope 10x'] = '10倍狙擊鏡',
       ['Sniper Scope 10x Helghast'] = '10倍狙擊鏡',
+      ['Sniper crosshair in third person'] = '第三人稱狙擊步槍準星',
       ['Solo Silo'] = '單發導彈筒',
       ['Sos Beacon'] = '求救信標',
+      ['Spawn height (m)'] = '生成高度（米）',
+      ['Spawner death'] = '刷怪點毀滅',
+      ['Spawning'] = '敵人生成',
+      ['Spawning limits every faction shares.'] = '所有陣營共用的生成限制。',
       ['Spear'] = '長矛',
       ['Speargun'] = '矛槍',
       ['Speed until it has fired (m/s)'] = '開火前飛行速度（米/秒）',
       ['Speed while aiming (m/s)'] = '瞄準時速度(米/秒)',
+      ['Spine lower'] = '下脊椎',
+      ['Spine plate'] = '脊椎甲板',
+      ['Spine roll back'] = '脊椎後部',
+      ['Spine0'] = '脊椎 0',
+      ['Spine1'] = '脊椎 1',
+      ['Spine2'] = '脊椎 2',
+      ['Spine3'] = '脊椎 3',
+      ['Spine4'] = '脊椎 4',
+      ['Spine5'] = '脊椎 5',
       ['Spire Sterilizer'] = '尖塔滅菌器',
+      ['Spore Burst Bile Titan'] = '孢裂吐酸泰坦',
+      ['Spore Burst Hunter'] = '孢裂狩獵蟲',
+      ['Spore Burst Scavenger'] = '孢裂清掃蟲',
+      ['Spore Burst Warrior'] = '孢裂武鬥蟲',
+      ['Spore Charger'] = '孢子強襲蟲',
+      ['Spore Lung'] = '孢肺',
+      ['Spore Spewer'] = '逸孢巢',
       ['Spotting range (m)'] = '索敵距離(米)',
       ['Spread (horizontal)'] = '散佈(水平)',
       ['Spread (vertical)'] = '散佈(垂直)',
@@ -4372,8 +5910,11 @@ MOD.langs = {
       ['StA-X3 W.A.S.P. Launcher'] = 'StA-X3 W.A.S.P.火箭發射器',
       ['Stage '] = '階段 ',
       ['Stagger force'] = '硬直力',
+      ['Stagger resistance (x)'] = '硬直抗性（x）',
+      ['Stalker'] = '跟蹤蟲',
       ['Stalwart'] = '盟友',
       ['Stamina'] = '體力',
+      ['Standard'] = '標準',
       ['Standard Drum'] = '標準彈鼓',
       ['Standard Heatsink'] = '標準散熱器',
       ['Standard Plasma Container'] = '標準電漿匣',
@@ -4382,22 +5923,37 @@ MOD.langs = {
       ['Starting heatsinks'] = '初始備用散熱器數',
       ['Starting magazines'] = '初始備用彈匣數',
       ['Starting rounds'] = '初始備用彈數',
+      ['Starting speed (m/s)'] = '初始速度（米/秒）',
       ['Starts at heat'] = '初始熱量',
+      ['Stat Editor'] = '屬性編輯器',
       ['Stationary Shroud'] = '定點匿蹤',
       ['Status'] = '狀態',
       ['Status effects'] = '狀態效果',
+      ['Statuses'] = '狀態效果',
       ['Stim Pistol'] = '治療槍',
+      ['Stingray'] = '魟艦',
       ['Stoker'] = '爆燃者',
+      ['Stomach zone'] = '腹部',
       ['Stops you while firing'] = '開火時鎖定移動',
       ['Stratagem'] = '戰略配備',
+      ['Stratagem Jammer'] = '戰略配備干擾器',
+      ['Stratagem Scrambler (convoy)'] = '戰略配備擾亂器（車隊）',
+      ['Stratagem jamming radius (m)'] = '戰略配備干擾半徑（米）',
+      ['Stratagem scrambling radius (m)'] = '戰略配備擾亂半徑（米）',
       ['Stratagems'] = '戰略配備',
+      ['Structure.'] = '建築。',
       ['Stun'] = '暈眩彈',
+      ['Stun (Illuminate) (experimental)'] = '暈眩彈（光能者）（實驗性）',
       ['Stun (large)'] = '暈眩彈（大）',
       ['Stun (massive)'] = '暈眩彈（極大）',
+      ['Stun (massive) (experimental)'] = '暈眩彈（巨大）（實驗性）',
       ['Stun (medium)'] = '暈眩彈（中）',
       ['Stun (small)'] = '暈眩彈（小）',
       ['Stun Baton'] = '暈眩棍',
       ['Stun Lance'] = '暈眩長槍',
+      ['Stun Pods'] = '暈眩噴射艙',
+      ['Stun and gas resistance (x)'] = '眩暈與毒氣抗性（x）',
+      ['Stun resistance (x)'] = '眩暈抗性（x）',
       ['Stun rounds'] = '眩暈彈',
       ['Stun rounds fire (id)'] = '眩暈彈發射的射彈（編號）',
       ['Supplementary Adrenaline'] = '腎上腺素補劑',
@@ -4407,14 +5963,17 @@ MOD.langs = {
       ['Support'] = '支援武器',
       ['Support reload speed'] = '支援武器裝填速度',
       ['Support weapon drop; the weapon itself is under Support.'] = '支援武器空投；武器本身列在「支援武器」分類下。',
+      ['Suppressed'] = '消音',
       ['Suppressor'] = '消音器',
       ['Sure?'] = '確定？',
+      ['Surplus EAT Allocation'] = '剩餘EAT配給',
       ['Surviving lethal damage'] = '致命傷害存活機率',
       ['Swapping makes the shot the chosen weapon\'s, your edits to it included: damage,'] = '替換後使用所選武器的射彈，包含你對其傷害、',
       ['Sway multiplier'] = '晃動係數',
       ['Sweeper'] = '掃蕩者',
       ['Swim speed (m/s)'] = '游泳速度(米/秒)',
       ['TCS 03 Thumper'] = 'TCS 03 震動裝置',
+      ['TCS support'] = 'TCS支架',
       ['TD-110 Maelstrom'] = 'TD-110 風暴渦旋',
       ['TD-220 Bastion MK XVI'] = 'TD-220 堡壘MK XVI',
       ['TED-63 Dynamite'] = 'TED-63 炸藥',
@@ -4427,10 +5986,14 @@ MOD.langs = {
       ['Tank Reload AT'] = '坦克反坦克彈補給',
       ['Tank Reload Canister'] = '坦克霰彈補給',
       ['Tank Reload HE'] = '坦克高爆彈補給',
+      ['Tank turret'] = '坦克炮塔',
       ['Target search interval, max (s)'] = '索敵間隔，最大（秒）',
       ['Target search interval, min (s)'] = '索敵間隔，最小（秒）',
+      ['Tcs'] = 'TCS',
       ['Team weapons'] = '小隊武器',
       ['Tenderizer'] = '肉錘',
+      ['Tentacle'] = '觸手',
+      ['Terminids'] = '蟲族',
       ['Tesla Tower'] = '特斯拉塔',
       ['Tested releases only.'] = '僅限經過測試的正式版。',
       ['That did not work; see the log.'] = '操作失敗，請檢視日誌。',
@@ -4447,6 +6010,7 @@ MOD.langs = {
       ['The beacon\'s countdown before the delivery is sent.'] = '信標啟動後、開始投送前的倒計時。',
       ['The beacon\'s timer still counts down the usual time (tested).'] = '信標仍顯示原本的倒計時（已由作者測試）。',
       ['The charge backpack, the charge and its blast. Cooldown: Stratagems tab.'] = '炸藥背包、炸藥包及其爆炸。冷卻時間見「戰略配備」頁。',
+      ['The explosion the round sets off when it hits something. 0: no explosion.'] = '射彈命中物體時引發的爆炸。0：不爆炸。',
       ['The flamethrower you carry.'] = '你攜帶的火焰噴射器。',
       ['The game holds at most 2048 rounds in a magazine.'] = '遊戲中一個彈匣最多容納 2048 發。',
       ['The game\'s own files are already in place.'] = '當前已是遊戲原始檔案。',
@@ -4456,12 +6020,15 @@ MOD.langs = {
       ['The one you carry. The CQC-20 Breaching Hammer is listed under Support.'] = '你攜帶的那一把。CQC-20 破拆錘列在「支援武器」下。',
       ['The one you carry. The CQC-72 support version is listed under Support.'] = '你攜帶的那一把。CQC-72 支援版本列在「支援武器」下。',
       ['The pistol you carry. The One-Two\'s launcher is listed under the One-Two.'] = '你攜帶的手槍。「么二」的發射器列在「么二」下。',
+      ['The range the sights are set for at this step (you switch steps in game). At that range the shot lands'] = '這一檔瞄具歸零的距離（在遊戲中切換檔位）。在該距離子彈正好',
       ['The recharge time is 0: set it above 0 first.'] = '充能時間為 0：請先設為大於 0 的值。',
       ['The rifle you carry. The grenade launcher is listed separately.'] = '你攜帶的步槍。榴彈發射器單獨列出。',
       ['The rifle you carry. The underbarrel shotgun is listed separately.'] = '你攜帶的步槍。下掛霰彈槍單獨列出。',
+      ['The round goes off when it passes this close to an enemy, without hitting it. 0: off (the RL-77 uses 2 m).'] = '射彈從敵人這麼近的距離經過時即使沒有命中也會爆炸。0：關閉（RL-77 為 2 米）。',
       ['The support hammer delivered by hellpod. The game data files it next to the Machete.'] = '由空投艙投送的支援錘。遊戲資料將它列在砍刀旁邊。',
       ['The support weapon. The CQC-73 is listed under Secondary.'] = '支援武器。CQC-73 列在「副武器」下。',
       ['Thermite'] = '鋁熱彈',
+      ['Thermite (experimental)'] = '鋁熱（實驗性）',
       ['Throw range'] = '投擲距離',
       ['Throw spread (degrees)'] = '投擲散佈(度)',
       ['Throw velocity, max (m/s)'] = '投擲速度上限(米/秒)',
@@ -4470,15 +6037,37 @@ MOD.langs = {
       ['Throwable launching is supported in solo missions only.'] = '發射投擲物僅支援單人任務。',
       ['Throwables'] = '投擲物',
       ['Throwing Knife'] = '飛刀',
+      ['Tier 1'] = '1 級',
+      ['Tier 1 captive'] = '1級俘虜',
+      ['Tier 2'] = '2 級',
+      ['Tier 2 guard'] = '2級守衛',
+      ['Tier2'] = '2 級',
+      ['Time before drowning (s)'] = '溺水前時間（秒）',
       ['Time between bombs (s)'] = '投彈間隔(秒)',
       ['Time between salvos (s)'] = '齊射間隔(秒)',
       ['Time between shells (s)'] = '炮彈發射間隔（秒）',
+      ['Time deployed (s)'] = '部署持續時間（秒）',
+      ['Top'] = '頂部',
       ['Top left hatch'] = '左上艙蓋',
       ['Top right hatch'] = '右上艙蓋',
+      ['Top wing'] = '上翼',
       ['Torcher'] = '噴火者',
+      ['Tornado stun (experimental)'] = '龍捲風眩暈（實驗性）',
+      ['Torso'] = '軀幹',
+      ['Torso armor'] = '軀幹裝甲',
+      ['Torso inside'] = '軀幹內部',
+      ['Torso outside'] = '軀幹外部',
+      ['Torso underside'] = '軀幹底部',
+      ['Toughness'] = '耐久',
       ['Tracer rounds'] = '曳光彈',
+      ['Tracking after losing sight (x)'] = '失去視線後的追蹤（x）',
       ['Tracking speed'] = '跟蹤速度',
+      ['Tracks'] = '履帶',
+      ['Tremor (experimental)'] = '震顫（實驗性）',
       ['Trigger delay (s)'] = '觸發延遲(秒)',
+      ['Trooper'] = '騎兵',
+      ['Trooper LMG backpack'] = '裝甲兵輕機槍背包',
+      ['Trooper jump pack'] = '裝甲兵噴射背包',
       ['True Grit'] = '堅毅不屈',
       ['Tube Reddot 2x'] = '2倍紅點瞄具',
       ['Tube Reddot 2x Legacy'] = '舊式2倍管狀紅點瞄準鏡',
@@ -4513,13 +6102,24 @@ MOD.langs = {
       ['Urchin'] = '海膽',
       ['Uses per mission'] = '每次任務使用次數',
       ['Uses per rearm'] = '每次重新武裝後的可用次數',
+      ['V2'] = 'v2',
+      ['V3'] = 'v3',
       ['VEHICLE'] = '載具',
       ['VG-70 Variable'] = 'VG-70 變數',
       ['Variable'] = '變數',
       ['Vehicle'] = '載具',
+      ['Vehicle death (huge)'] = '載具毀滅（巨型）',
+      ['Vehicle death (large, air)'] = '載具毀滅（大型，空中）',
+      ['Vehicle death (large, ground)'] = '載具毀滅（大型，地面）',
+      ['Vehicle death (medium)'] = '載具毀滅（中型）',
+      ['Vehicle death (medium, ground)'] = '載具毀滅（中型，地面）',
       ['Vehicle. The weapons it carries are listed under it.'] = '載具。其搭載的武器列在它下方。',
       ['Velocity'] = '初速',
       ['Velocity (m/s)'] = '初速(米/秒)',
+      ['Vent back bar'] = '通風口後支桿',
+      ['Vent sarcophagus'] = '石棺通風口',
+      ['Vent under'] = '下通風口',
+      ['Veracitor'] = '真實者',
       ['Verdict'] = '判官',
       ['Vertical Grip'] = '直立前握把',
       ['Vertical Grip 45 Degree'] = '45度角直立前握把',
@@ -4527,6 +6127,8 @@ MOD.langs = {
       ['Vertical Grip Flashlight'] = '垂直前握把帶照明',
       ['Veto'] = '否決者',
       ['Volatile Plasma Bolt'] = '不穩定等離子彈',
+      ['Voteless'] = '無權者',
+      ['Vox Engine'] = '噪轟引擎',
       ['W.A.S.P. Launcher'] = 'W.A.S.P.火箭發射器',
       ['WEAPON STATS'] = '武器數值',
       ['WIND-UP'] = '轉管加速',
@@ -4535,31 +6137,49 @@ MOD.langs = {
       ['Walking Barrage Smoke'] = '移動彈幕煙霧',
       ['Walking backwards (multiplier)'] = '後退行走(倍率)',
       ['Walking speed (m/s)'] = '彈幕推進速度（米/秒）',
+      ['War Strider'] = '戰爭闊步者',
       ['Warp Pack'] = '傳送背包',
+      ['Warp Ship'] = '傳送艇',
       ['Warp distance (m)'] = '躍遷距離(米)',
       ['Warp pack'] = '傳送背包',
       ['Warrant'] = '搜查令',
+      ['Warrior'] = '戰士',
+      ['Warrior acid burst'] = '戰士酸液爆裂',
+      ['Watcher'] = '看守者',
+      ['Water'] = '水',
       ['Weapon stats'] = '武器數值',
       ['Weaves'] = '蛇形飛行',
+      ['What goes off when they die. Each explosion is shared by every enemy that uses it.'] = '它們死亡時引發的爆炸。每種爆炸由所有使用它的敵人共用。',
       ['Wind-down time (s)'] = '轉管減速時間（秒）',
       ['Wind-down time, released (s)'] = '鬆開扳機後減速時間（秒）',
       ['Wind-up'] = '轉管加速',
       ['Wind-up time (s)'] = '轉管加速時間（秒）',
+      ['Wings'] = '翼',
+      ['Wretch'] = '哀惡者',
+      ['Xenobite Ardent'] = '熾燃地獄使者',
       ['Your changes are off: turn them on in Settings to edit.'] = '你的改動當前處於關閉狀態：請在設定裡開啟後再編輯。',
       ['Your changes are off: turn them on in Settings to load a preset'] = '你的修改已關閉：請在設定中開啟後再讀取預設',
       ['Your values are not in the game yet: close the game, then Install.'] = '修改尚未寫入遊戲：請先關閉遊戲，再點選「寫入遊戲」。',
       ['[Tutorial] Extraction'] = '【教學】撤離',
       ['a settings table moved; scanning again'] = '設定資料表已移動，正在重新掃描',
+      ['a slot is 1 (primary) or 3 (secondary)'] = '欄位為 1（主武器）或 3（副武器）',
       ['a table moved; scanning again'] = '資料表已移動，正在重新掃描',
+      ['added to every armor value, up to 10; lowered: down to 0'] = '加到每個護甲值上，最高 10；降低時最低 0',
+      ['airborne'] = '空降',
       ['also in your loadout when you bring this one'] = '攜帶此戰略配備時也會一併獲得',
       ['also the second firing mode\'s shot (the same projectile)'] = '同樣適用於第二種射擊模式的射彈（同一投射物）',
       ['arc weapon'] = '電弧武器',
       ['armor passive'] = '護甲被動',
       ['armor penetration, forces, velocity, drag, gravity, pellets and explosions. Kept: this'] = '穿甲、作用力、速度、阻力、重力、射彈數及爆炸的修改。當前武器的',
+      ['assassinate'] = '刺殺',
+      ['assault'] = '突擊',
       ['attachment deltas'] = '配件修正量',
       ['attachment items'] = '配件物品',
       ['backpack charges'] = '背包使用次數',
       ['beam weapon'] = '光束武器',
+      ['body parts without their own armor use this'] = '沒有自身護甲的身體部位使用此值',
+      ['breaks the hip-fire animations on two-handed weapons'] = '會破壞雙手武器的腰射動畫',
+      ['bull'] = '公牛',
       ['clip'] = '彈夾',
       ['could not start the download'] = '無法開始下載',
       ['current value implausible'] = '當前數值異常',
@@ -4568,17 +6188,37 @@ MOD.langs = {
       ['destruction map'] = '破壞資料對映',
       ['destruction tiers'] = '破壞等級',
       ['direct hit: the same as the first mode\'s (Damage above)'] = '直擊：與第一種模式相同（見上方「傷害」）',
+      ['elite'] = '精英',
+      ['every enemy with this attack shares it'] = '所有擁有此攻擊的敵人共用',
+      ['fake'] = '偽裝',
       ['fire mode'] = '射擊模式',
+      ['gloom'] = '幽暗',
       ['goes off on impact, but not before this'] = '撞擊時引爆，但不能早於此時間',
       ['grenade assets loading'] = '正在載入投擲物資源',
+      ['gunships, Dragonroaches, Leviathans and the like, where a planet has them'] = '炮艦、蟑龍、利維坦等，視星球而定',
       ['hash correction did not verify'] = '校驗值校正未透過驗證',
+      ['heavycannon'] = '重炮',
       ['hellpod rack'] = '空投艙掛架',
+      ['hexagon'] = '六邊形',
+      ['how long it keeps after you once you break line of sight'] = '脫離視線後它繼續追擊你的時長',
+      ['how much gas it takes to confuse it'] = '使其混亂所需的毒氣量',
+      ['how much stun it takes to stun it'] = '使其眩暈所需的眩暈量',
+      ['how often the beam deals its damage while it touches'] = '光束接觸時造成傷害的頻率',
+      ['how quickly the view follows your aim at this zoom; lower it if a high zoom spins the view'] = '此倍率下視野跟隨瞄準的速度；如果高倍率時視野旋轉，請調低',
+      ['its height above its flight route; lower flies closer to the ground (terrain still holds it up)'] = '高於飛行路線的高度；越低越貼近地面（地形仍會托住它）',
       ['its own. - / + : fire another weapon\'s'] = '自身射彈。- / +：改為發射其他武器的射彈',
+      ['ivory legion assault'] = '象牙軍團突擊',
+      ['ivory legion tier 2'] = '象牙軍團2級',
+      ['jammer'] = '干擾器',
+      ['jump'] = '跳躍',
+      ['keep it above about speed / frame rate.'] = '建議大於「初速/遊戲幀率」。',
       ['laser designator'] = '雷射指示器',
       ['listing stratagems, attachments and armor passives'] = '正在列出戰略配備、配件和護甲被動',
       ['loaded into an empty weapon, from your spare rounds'] = '裝入空槍時，從備用彈藥中補充',
       ['loadout package'] = '配裝包',
+      ['lower (more negative): you go deeper before drowning starts'] = '越低（越負）：開始溺水前可以潛得越深',
       ['melee weapon'] = '近戰武器',
+      ['melee, guns and death explosions, shared ones included'] = '近戰、武器與死亡爆炸，含共用的',
       ['min charge'] = '最少充能',
       ['mine spawner'] = '地雷生成器',
       ['mine thrower'] = '佈雷器',
@@ -4589,31 +6229,55 @@ MOD.langs = {
       ['normal projectile'] = '常規射彈',
       ['not a finite number'] = '不是有限數值',
       ['nothing to vary for the hash (edit a value with decimals in this file)'] = '沒有可用於校正校驗值的資料（請修改此檔案中的一個小數值）',
-      ['only works with the blast angle at 360, and the radius has to be larger than one step of the round: keep it above about speed / frame rate.'] = '只在爆炸角為 360 時生效；半徑要大於射彈每幀的位移，建議大於「初速/遊戲幀率」。',
+      ['on the crosshair; closer or farther it lands a bit high or low. Does not change the zoom.'] = '落在準星上；更近或更遠會略高或略低。不改變放大倍率。',
+      ['one kind of stratagem cannot be called within this distance while it stands'] = '在其被摧毀前，此範圍內無法呼叫某一類戰略配備',
+      ['outcast'] = '流放者',
       ['overcharge'] = '過充',
       ['panels, mines per panel: lower only (more than the default crashes the game)'] = '佈雷批次數、每批地雷數：只能調低（高於預設值會使遊戲崩潰）',
+      ['phalanx'] = '方陣',
+      ['quieter for enemies (the noise of the game\'s suppressed guns); no suppressor model, same firing sound'] = '對敵人更安靜（遊戲中消音武器的噪音）；無消音器模型，射擊聲音不變',
       ['read-back check failed'] = '寫入後讀回校驗失敗',
       ['read-back differs'] = '讀回內容不一致',
       ['resolving weapons and applying saved values'] = '正在解析武器並應用已儲存的數值',
+      ['scout walker rider'] = '偵察步行機駕駛員',
       ['seeking missile'] = '制導導彈',
       ['shared with'] = '共用',
+      ['shotgun'] = '霰彈槍',
       ['speedloader'] = '快速裝填器',
       ['spray weapon'] = '噴射武器',
       ['stage 1: partial charge shot, stages 2-3: full charge shot'] = '第 1 階段：部分蓄力射擊；第 2-3 階段：滿蓄力射擊',
       ['stage 1: uncharged shot, stages 2-3: charged shot'] = '第 1 階段：未蓄力射擊；第 2-3 階段：蓄力射擊',
+      ['standard'] = '標準',
       ['status effect'] = '狀態效果',
+      ['stratagem codes and names are scrambled within this distance while it stands'] = '它存在時，此距離內的戰略配備指令與名稱會被打亂',
+      ['stratagems cannot be called within this distance while it stands'] = '在其被摧毀前，此範圍內無法呼叫戰略配備',
+      ['tcs'] = 'TCS',
+      ['tentacle'] = '觸手',
       ['the armor passive file is not loaded'] = '未載入護甲被動資料檔案',
+      ['the armory list it is in: 1 primary, 3 secondary'] = '它在軍械庫中所屬的列表：1 主武器，3 副武器',
+      ['the body and every body part, bleed-out health too'] = '身體與每個部位，以及失血生命值',
       ['the download helper (shodan_hash.dll) is missing'] = '缺少下載輔助庫（shodan_hash.dll）',
+      ['the faction multipliers cannot slow patrols below this: lower it with them'] = '陣營倍率無法讓巡邏低於此值：請一同調低',
+      ['the force a hit needs to stagger it (hit sizes it never staggers from stay that way)'] = '使其硬直所需的命中力度（原本不會造成硬直的命中仍然不會）',
+      ['the force a hit needs to stagger them'] = '使其硬直所需的命中力度',
+      ['the game holds back reinforcements past about 100 enemies at x1; it has crashed past 200-240 enemies alive'] = '在 x1 時，遊戲在約 100 名敵人後停止增援；存活敵人超過 200-240 時曾出現崩潰',
       ['the game\'s tiers: 10 small arms, 20 HMG, 30 autocannon, 40 Strider, 50 orbital, 60 Hellbomb, 250 never'] = '遊戲的分級：10 輕武器、20 重機槍、30 機炮、40 蹂躪者、50 軌道、60 地獄炸彈、250 不可摧毀',
+      ['the model and its body parts; very large or small sizes may look or move oddly'] = '模型及其身體部位；過大或過小可能顯示或移動異常',
       ['the shot fired from this heat on, and what it does to you'] = '從該熱量值起發射的射彈，以及它對你自己造成的效果',
       ['the spare ammo in its backpack; read when the backpack is called in'] = '背包裡的備用彈藥；在被投放時讀取',
       ['the update helper (shodan_hash.dll) is missing'] = '缺少更新輔助庫（shodan_hash.dll）',
+      ['tier 1 captive'] = '1級俘虜',
+      ['tier 2 guard'] = '2級守衛',
+      ['v2'] = 'v2',
+      ['v3'] = 'v3',
       ['waiting for the scan'] = '正在等待掃描',
+      ['walking, patrolling, searching, fighting and charging speeds together'] = '行走、巡邏、搜尋、戰鬥與衝鋒速度一起調整',
       ['weapon charge'] = '武器蓄力',
       ['weapon customization'] = '武器定製',
       ['weapon heat'] = '武器熱量',
       ['weapon\'s fire rate, ammo, handling and heat. To tune the shot, edit the chosen weapon.'] = '射速、彈藥、操控和熱量保持不變。要調整射彈，請編輯所選武器。',
       ['what each hit applies; the slots go in order'] = '每次命中施加的狀態；狀態槽需按順序填寫',
+      ['what it has left once its health is gone, lost over time'] = '生命值耗盡後剩餘的部分，隨時間流失',
     },
     lower = {
       ['"+ new preset" (or insert) saves your current changes as one; you name it next.'] = '「+ 新建預設」（或 Insert 鍵）會把當前修改存為一組，接著你可以為它命名。',
@@ -4788,6 +6452,7 @@ MOD.langs = {
       ['a/m-23 ems mortar sentry'] = 'A/M-23 電磁干擾哨戒迫擊炮',
       ['a/mg-43 machine gun sentry'] = 'A/MG-43 哨戒機槍',
       ['a/mls-4x rocket sentry'] = 'A/MLS-4X 哨戒火箭炮',
+      ['aa emplacement'] = '防空炮台',
       ['ac-8 autocannon'] = 'AC-8 機炮',
       ['acceleration (m/s2)'] = '加速度(米/秒^2)',
       ['accelerator rifle'] = '加速步槍',
@@ -4796,7 +6461,9 @@ MOD.langs = {
       ['adjudicator'] = '審判者',
       ['adreno-defibrillator'] = '腎上腺素除顫器',
       ['advanced filtration'] = '進階過濾',
+      ['agitator'] = '煽動者',
       ['airburst rocket launcher'] = '空爆火箭發射器',
+      ['alpha commander'] = '阿爾法蟲族指揮官',
       ['also in your loadout when you bring this one'] = '攜帶此戰略配備時也會一併獲得',
       ['alternate ammunition'] = '另一種彈藥',
       ['amendment'] = '修正',
@@ -4811,6 +6478,7 @@ MOD.langs = {
       ['angled foregrip'] = '傾斜前握把',
       ['angled foregrip advanced'] = '高階傾斜前握把',
       ['angled foregrip with laser'] = '雷射瞄準器與傾斜前握把',
+      ['annihilator tank'] = '殲滅者坦克',
       ['another copy of this weapon, not identified yet.'] = '該武器的另一份副本，尚未識別。',
       ['antenna'] = '天線',
       ['anti-air missile'] = '防空飛彈',
@@ -4847,6 +6515,7 @@ MOD.langs = {
       ['arc weapon'] = '電弧武器',
       ['arc-12 blitzer'] = 'ARC-12 閃擊者',
       ['arc-3 arc thrower'] = 'ARC-3 電弧發射器',
+      ['armed resupply pods'] = '武裝重新補給艙',
       ['arming time (s)'] = '解除保險時間（秒）',
       ['armor'] = '護甲',
       ['armor passive'] = '護甲被動',
@@ -4856,6 +6525,7 @@ MOD.langs = {
       ['armor pen. (slight angle)'] = '穿甲等級（小角度）',
       ['armor penetration, forces, velocity, drag, gravity, pellets and explosions. kept: this'] = '穿甲、作用力、速度、阻力、重力、射彈數及爆炸的修改。當前武器的',
       ['armors'] = '護甲',
+      ['assault raider'] = '特攻襲擊者',
       ['assault rifle'] = '突擊步槍',
       ['attachment'] = '配件',
       ['attachment deltas'] = '配件修正量',
@@ -4863,6 +6533,8 @@ MOD.langs = {
       ['attachments'] = '配件',
       ['autocannon'] = '機炮',
       ['autocannon sentry'] = '哨戒機炮',
+      ['automaton dropship'] = '機器人空降艇',
+      ['automaton mortar emplacement'] = '機器人迫擊炮炮台',
       ['b-1 supply pack'] = 'B-1 補給背包',
       ['b-100 portable hellbomb'] = 'B-100 可攜式絕地彈',
       ['b/flam-80 cremator'] = 'B/FLAM-80 火葬者',
@@ -4874,25 +6546,36 @@ MOD.langs = {
       ['background opacity'] = '背景不透明度',
       ['backpack'] = '背包',
       ['backpack charges'] = '背包使用次數',
+      ['ballistic missile'] = '彈道導彈',
       ['ballistic padding'] = '防彈襯墊',
       ['ballistic shield'] = '防彈盾',
       ['ballistic shield backpack'] = '彈道防護罩背包',
       ['barrage'] = '彈幕',
+      ['barrager tank'] = '火箭彈幕坦克',
       ['bastion mk xvi'] = '堡壘Mk XVI',
       ['beam weapon'] = '光束武器',
       ['belt-fed grenade launcher'] = '彈鏈式榴彈發射器',
+      ['berserker'] = '狂暴者',
+      ['big walker cannon'] = '步行機巨炮',
+      ['bile spewer'] = '膽汁噴湧蟲',
+      ['bile spitter'] = '膽汁吐沫蟲',
+      ['bile titan'] = '闊步蟲',
+      ['bile warrior'] = '膽汁武鬥蟲',
       ['bingus shared loader by cowboybingus'] = 'Bingus 共享載入器 · CowboyBingus',
       ['blast'] = '爆炸',
       ['blast radius'] = '爆炸半徑',
       ['blitzer'] = '閃擊者',
       ['block game input while open'] = '開啟時遮蔽遊戲輸入',
+      ['blocking rock'] = '阻擋岩石',
       ['blunt-force mitigation'] = '鈍擊緩解',
       ['body'] = '軀幹',
       ['body parts'] = '身體部位',
       ['bolt pistol'] = '爆彈手槍',
       ['bonnet'] = '引擎蓋',
       ['boost after the launch (s)'] = '起跳後的推進時間（秒）',
+      ['boosters'] = '強化套件',
       ['br-14 adjudicator'] = 'BR-14 審判者',
+      ['brawler'] = '鬥士',
       ['breacher'] = '突破者',
       ['breaching hammer'] = '破門戰錘',
       ['break-action shotgun'] = '中折式散彈槍',
@@ -4900,9 +6583,12 @@ MOD.langs = {
       ['breaker incendiary'] = '燃燒破裂者',
       ['breaker spray&pray'] = '掃射破裂者',
       ['breakthrough exosuit'] = '突破外骨骼裝甲',
+      ['brood commander'] = '蟲族指揮官',
       ['bug plug'] = '蟲穴封堵裝置',
       ['bug thumper'] = '蟲群震動誘餌',
+      ['bulk fabricator'] = '巨型製造廠',
       ['bullet storm'] = '子彈風暴',
+      ['bunker turret'] = '地堡炮台',
       ['burn time (s)'] = '燃燒時間(秒)',
       ['burning'] = '燃燒',
       ['burning applied to you'] = '對你施加的燃燒',
@@ -4912,6 +6598,7 @@ MOD.langs = {
       ['call in destroyer'] = '呼叫驅逐艦',
       ['caltrops'] = '蒺藜',
       ['cancel'] = '取消',
+      ['cannon turret'] = '大炮炮台',
       ['cargo container'] = '貨運集裝箱',
       ['carpet bombing run'] = '地毯式轟炸',
       ['carry data'] = '運送資料',
@@ -4923,8 +6610,11 @@ MOD.langs = {
       ['charge'] = '充能',
       ['charge when it comes back'] = '恢復後初始充能',
       ['charged'] = '已充能',
+      ['charger'] = '衝鋒蟲',
+      ['charger behemoth'] = '巨型衝鋒蟲',
       ['charges'] = '使用次數',
       ['charges from resupply'] = '補給箱補充的使用次數',
+      ['chemical backpack'] = '化學背包',
       ['chest bleeding damage'] = '胸部流血傷害',
       ['chest damage taken'] = '受到胸部傷害',
       ['choose a weapon on the left.'] = '請在左側選擇武器。',
@@ -4936,14 +6626,19 @@ MOD.langs = {
       ['climb speed (m/s)'] = '爬升速度(米/秒)',
       ['climb time limit (s)'] = '爬升時限(秒)',
       ['cluster bomb'] = '集束炸彈',
+      ['cognitive disruptor'] = '認知干擾器',
       ['combat hatchet'] = '戰鬥斧',
       ['combat scope 4x'] = '4倍戰鬥瞄具',
       ['combat walker'] = '戰鬥步行機甲',
       ['combat walker breacher'] = '爆破型戰鬥機甲',
+      ['command bunker'] = '指揮地堡',
       ['commando'] = '突擊兵',
+      ['commissar'] = '統帥',
+      ['concealed insertion'] = '隱蔽上陣',
       ['concussive padding (grenadier)'] = '擲彈兵防震盪襯墊',
       ['concussive padding (hazmat)'] = '危害物質防震盪襯墊',
       ['concussive padding (reinforced)'] = '強化防震盪襯墊',
+      ['conflagration devastator'] = '烈火破壞者',
       ['constitution'] = '憲法',
       ['contact mine'] = '接觸式地雷',
       ['cookout'] = '燎原',
@@ -4964,8 +6659,10 @@ MOD.langs = {
       ['cqc-73 entrenchment tool'] = 'CQC-73 挖掘工具',
       ['cqc-9 defoliation tool'] = 'CQC-9 除草器',
       ['cremator'] = '火葬者',
+      ['crescent overseer'] = '新月監督者',
       ['crisper'] = '火舌',
       ['cruise speed (m/s)'] = '巡航速度(米/秒)',
+      ['crusher'] = '粉碎者',
       ['current value implausible'] = '當前數值異常',
       ['cyborg carry data'] = '運送生化人資料',
       ['dagger'] = '匕首',
@@ -4978,6 +6675,7 @@ MOD.langs = {
       ['data jack'] = '資料介面',
       ['dbs-2 double freedom'] = 'DBS-2 雙重自由',
       ['de-escalator'] = '緩和使者',
+      ['dead sprint'] = '死亡衝刺',
       ['deadeye'] = '鷹眼',
       ['defender'] = '防衛者',
       ['defoliation tool'] = '除草器',
@@ -4988,6 +6686,8 @@ MOD.langs = {
       ['desert stormer'] = '沙塵暴之王',
       ['destruction map'] = '破壞資料對映',
       ['destruction tiers'] = '破壞等級',
+      ['devastator'] = '破壞者',
+      ['devastator jump pack'] = '蹂躪者噴射背包',
       ['diligence'] = '勤勉',
       ['diligence counter sniper'] = '反狙擊勤勉',
       ['direct hit'] = '直擊',
@@ -5000,9 +6700,11 @@ MOD.langs = {
       ['double-edge sickle'] = '雙刃鐮刀',
       ['down'] = '下移',
       ['drag factor'] = '阻力系數',
+      ['dragonroach'] = '龍蟑',
       ['drilling charge'] = '鑽探炸藥',
       ['driver gun'] = '駕駛員機槍',
       ['drone'] = '無人機',
+      ['dropship'] = '空降艇',
       ['drum magazine'] = '彈鼓',
       ['dune walker sniper scope 10x'] = '10倍狙擊鏡',
       ['duo sniper scope 10x'] = '「杜奧」10倍狙擊瞄準鏡',
@@ -5032,6 +6734,7 @@ MOD.langs = {
       ['eat-411 leveller'] = 'EAT-411 夷平者',
       ['eat-700 expendable napalm'] = 'EAT-700 消耗型凝固汽油彈',
       ['electrical conduit'] = '電氣管線',
+      ['elevated overseer'] = '高級監督者',
       ['emancipator exosuit'] = '解放者外骨骼裝甲',
       ['emergency extraction beacon'] = '緊急撤離信標',
       ['emplacement: its cooldown, its body, then its weapon.'] = '炮台：依次為冷卻時間、本體、武器。',
@@ -5052,9 +6755,11 @@ MOD.langs = {
       ['expendable anti-tank'] = '反坦克消耗品',
       ['expendable anti-tank (booster)'] = '消耗性反坦克武器（增強配備）',
       ['expendable napalm'] = '消耗型凝固汽油彈',
+      ['experimental infusion'] = '實驗性融合',
       ['explodes after death (s)'] = '死亡後爆炸（秒）',
       ['exploding crossbow'] = '猛爆十字弓',
       ['explosion'] = '爆炸',
+      ['explosive barrel'] = '爆炸桶',
       ['explosive damage taken'] = '受到爆炸傷害',
       ['extended magazine'] = '擴充彈匣',
       ['extra padding'] = '額外填充',
@@ -5062,6 +6767,8 @@ MOD.langs = {
       ['extra stratagem (choice)'] = '額外戰略配備（選擇）',
       ['extraction'] = '撤離',
       ['extraction beacon'] = '撤離信標',
+      ['fabricator'] = '製造廠',
+      ['factory strider'] = '移動工廠',
       ['faf-14 spear'] = 'FAF-14 長矛',
       ['feet first'] = '護腿優先',
       ['field depth (m)'] = '雷區縱深（米）',
@@ -5073,6 +6780,7 @@ MOD.langs = {
       ['fire panic'] = '著火恐慌',
       ['fire rate (rpm)'] = '射速(RPM)',
       ['fire/gas/acid/arc damage taken'] = '受到火焰 / 毒氣 / 酸液 / 電弧傷害',
+      ['firebomb hellpods'] = '燃燒彈絕地噴射艙',
       ['flam-40 flamethrower'] = 'FLAM-40 火焰噴射器',
       ['flam-66 torcher'] = 'FLAM-66 噴火者',
       ['flame sentry'] = '火焰火箭炮',
@@ -5081,6 +6789,7 @@ MOD.langs = {
       ['flamethrower'] = '火焰噴射器',
       ['flamethrower slow'] = '火焰噴射減速',
       ['flashlight'] = '手電筒',
+      ['fleshmob'] = '血肉暴徒',
       ['flinch'] = '受擊瞄準抖動',
       ['flinch (0 prevents it)'] = '受擊瞄準抖動（0 為免疫）',
       ['folder'] = '資料夾',
@@ -5093,6 +6802,8 @@ MOD.langs = {
       ['front right cockpit'] = '右前駕駛艙',
       ['full charge'] = '充滿',
       ['fuse time (s)'] = '引信時間(秒)',
+      ['fusion autocannon'] = '聚變機炮',
+      ['fusion repeater'] = '聚變連發炮',
       ['g-10 incendiary'] = 'G-10 燃燒彈',
       ['g-109 urchin'] = 'G-109 海膽',
       ['g-11 caltrops'] = 'G-11 蒺藜',
@@ -5122,7 +6833,9 @@ MOD.langs = {
       ['gas damage taken'] = '受到毒氣傷害',
       ['gas mine deployer'] = '毒氣佈雷器',
       ['gas mortar sentry'] = '毒氣迫擊哨戒炮',
+      ['gatekeeper'] = '守門者',
       ['gatling sentry'] = '哨戒格林炮',
+      ['gazer'] = '凝視者',
       ['generator'] = '發電機',
       ['generator pack'] = '護盾生成背包',
       ['giga grenade'] = '巨型手榴彈',
@@ -5145,6 +6858,7 @@ MOD.langs = {
       ['grenade swap'] = '手雷交換',
       ['grenade swap stopped (see the log); launchers fire their own projectiles again.'] = '已停止榴彈替換（詳見日誌）；發射器恢復使用自身射彈。',
       ['grenadier battlement'] = '擲彈兵掩體',
+      ['grinder'] = '粉碎者',
       ['guard dog (drone)'] = '護衛犬無人機',
       ['guard dog (drone) stun'] = '電擊護衛犬無人機',
       ['guard dog flamethrower (drone)'] = '火焰護衛犬無人機',
@@ -5152,9 +6866,11 @@ MOD.langs = {
       ['guidance on after (s)'] = '導引啟動延遲(秒)',
       ['gun'] = '槍械',
       ['gunner frv'] = '炮手FRV',
+      ['gunship'] = '武裝直升機',
       ['gunslinger'] = '神槍手',
       ['halt'] = '制止者',
       ['handling'] = '操控',
+      ['harvester'] = '收割機',
       ['hash correction did not verify'] = '校驗值校正未透過驗證',
       ['head'] = '頭部',
       ['health'] = '生命值',
@@ -5162,6 +6878,9 @@ MOD.langs = {
       ['heat per shot'] = '每發積熱',
       ['heatsinks from supply'] = '補給獲得的散熱器數',
       ['heavy burning'] = '重度燃燒',
+      ['heavy devastator'] = '重型破壞者',
+      ['heavy devastator shield'] = '重型蹂躪者盾牌',
+      ['heavy fusion cannon'] = '重型聚變炮',
       ['heavy machine gun'] = '重機槍',
       ['hellbomb'] = '地獄火炸彈',
       ['helldivers 2 is running: close it first.'] = '《絕地潛兵 2》正在執行：請先關閉遊戲。',
@@ -5170,7 +6889,11 @@ MOD.langs = {
       ['high dissipation heatsink'] = '高效能散熱器',
       ['high explosive'] = '高爆彈',
       ['high-velocity shrapnel'] = '高速破片',
+      ['hijack tech hub nexus machine'] = '技術中心樞紐機器',
       ['hips'] = '腰部',
+      ['hive breaker drill'] = '破巢鑽',
+      ['hive guard'] = '守穴蟲',
+      ['hive lord'] = '霸王蟲',
       ['hmg emplacement'] = '重機槍炮台',
       ['homing anti-air missile'] = '地對地飛彈',
       ['homing ground missile'] = '地對地飛彈',
@@ -5183,13 +6906,23 @@ MOD.langs = {
       ['hover time, holding height (s)'] = '懸停時間：保持高度(秒)',
       ['hoverpack backpack'] = '懸浮背包',
       ['how far away the jet starts its run. with its speed, it sets how long the eagle takes to arrive.'] = '飛鷹開始攻擊航線時距目標的距離，與飛行速度共同決定抵達時間。',
+      ['hulk'] = '巨型者',
+      ['hulk bruiser'] = '巨型殲滅者',
+      ['hulk firebomber'] = '巨型火焰炸彈兵',
+      ['hulk flag'] = '巨型者旗幟',
+      ['hulk jetpack'] = '巨型者噴射背包',
+      ['hulk obliterator'] = '巨型消滅者',
+      ['hulk scorcher'] = '巨型灼焦者',
+      ['hunter'] = '狩獵蟲',
       ['hyena'] = '土狼',
       ['immediate extraction beacon'] = '立即撤離信標',
       ['immolation'] = '焚毀',
       ['impact'] = '衝擊彈',
       ['impact damage taken'] = '受到衝擊傷害',
+      ['impaler'] = '穿刺蟲',
       ['incendiary'] = '燃燒彈',
       ['incendiary impact'] = '衝擊燃燒彈',
+      ['incendiary mg devastator'] = '燃燒機槍破壞者',
       ['incendiary mine deployer'] = '燃燒佈雷器',
       ['incinerator frv'] = '焚燒者FRV',
       ['inflammable'] = '易燃物',
@@ -5209,8 +6942,10 @@ MOD.langs = {
       ['kinetic displacement mitigation'] = '動能緩衝',
       ['knight'] = '騎士',
       ['knockdown chance'] = '擊倒機率',
+      ['landed ship door shield'] = '著陸艦艙門護盾',
       ['large plasma bolt'] = '大型電漿彈',
       ['larger plasma container'] = '加大電漿匣',
+      ['larva container'] = '幼蟲容器',
       ['las-12 sai'] = 'LAS-12 釵',
       ['las-13 trident'] = 'LAS-13 三叉戟',
       ['las-16 sickle'] = 'LAS-16 鐮刀',
@@ -5253,6 +6988,7 @@ MOD.langs = {
       ['left track'] = '左履帶',
       ['leg injury immunity (1 on)'] = '免疫腿部受傷（1 為開啟）',
       ['leveller'] = '夷平者',
+      ['leviathan'] = '利維坦',
       ['liberator'] = '解放者',
       ['liberator carbine'] = '卡賓槍解放者',
       ['liberator concussive'] = '震盪解放者',
@@ -5293,6 +7029,7 @@ MOD.langs = {
       ['magazine size'] = '彈匣容量',
       ['magazines from supply'] = '補給獲得的彈匣數',
       ['main gun'] = '主炮',
+      ['marauder'] = '掠奪者',
       ['marker radar scan every (s)'] = '標記雷達掃描間隔（秒）',
       ['max carried'] = '最大攜帶',
       ['max flight time (s)'] = '最大飛行時間(秒)',
@@ -5351,6 +7088,7 @@ MOD.langs = {
       ['nothing to vary for the hash (edit a value with decimals in this file)'] = '沒有可用於校正校驗值的資料（請修改此檔案中的一個小數值）',
       ['nova'] = '新星',
       ['nuke'] = '核彈',
+      ['nursing spewer'] = '噴射蟲',
       ['off'] = '關',
       ['off: the game\'s values everywhere; your '] = '關閉：全域性使用遊戲數值，你的',
       ['off: with other players, arc chain length / split use the game\'s values (else arcs can stay on screen).'] = '關閉：多人對局時電弧連鎖長度 / 分裂使用遊戲數值（否則電弧可留在螢幕上）。',
@@ -5390,6 +7128,8 @@ MOD.langs = {
       ['outer radius (m)'] = '外半徑(米)',
       ['overcharge limit (s)'] = '過載上限(秒)',
       ['overheat threshold'] = '過熱閾值',
+      ['overseer'] = '監督者',
+      ['overship'] = '統領艦',
       ['oxygenator'] = '氧合器',
       ['p-11 stim pistol'] = 'P-11 治療槍',
       ['p-113 verdict'] = 'P-113 判官',
@@ -5426,6 +7166,8 @@ MOD.langs = {
       ['poison drill'] = '毒劑鑽探裝置',
       ['portable hellbomb'] = '可攜式絕地彈',
       ['position scatter (m)'] = '佈雷位置隨機偏移（米）',
+      ['pouncer'] = '食腐蟲',
+      ['predator hunter'] = '掠食者狩獵蟲',
       ['presets'] = '預設',
       ['president rewards'] = '總統獎勵',
       ['press a key (esc cancels)'] = '請按一個鍵(Esc 取消)',
@@ -5441,6 +7183,7 @@ MOD.langs = {
       ['punisher plasma'] = '電漿制裁者',
       ['purifier'] = '淨化者',
       ['push force'] = '擊退力',
+      ['pyro trooper'] = '焰火騎兵',
       ['pyrotech'] = '煙火表演',
       ['quasar cannon'] = '類星體大砲',
       ['r-2 amendment'] = 'R-2 修正',
@@ -5455,7 +7198,9 @@ MOD.langs = {
       ['r/40-k hot-shot marksman rifle'] = 'R/40-K 火燙神射手步槍',
       ['rack'] = '掛架',
       ['radar'] = '雷達',
+      ['radical'] = '激進份子',
       ['radius (m)'] = '半徑(米)',
+      ['raider'] = '襲擊者',
       ['rail cannon round'] = '軌道炮彈',
       ['railgun'] = '磁軌炮',
       ['railgun round'] = '磁軌炮彈',
@@ -5517,6 +7262,7 @@ MOD.langs = {
       ['right track'] = '右履帶',
       ['rl-77 airburst rocket launcher'] = 'RL-77 空爆火箭發射器',
       ['rock solid'] = '堅如磐石',
+      ['rocket devastator'] = '火箭炮破壞者',
       ['rocket sentry'] = '哨戒火箭炮',
       ['round 1 blast'] = '第 1 發爆炸',
       ['round 1 blast radius'] = '第 1 發爆炸半徑',
@@ -5529,14 +7275,20 @@ MOD.langs = {
       ['rounds per reload'] = '每次裝填彈數',
       ['rs-422 railgun'] = 'RS-422 磁軌炮',
       ['run length (m)'] = '攻擊航線長度（米）',
+      ['rupture charger'] = '裂破衝鋒蟲',
+      ['rupture spewer'] = '裂破嘔吐蟲',
+      ['rupture warrior'] = '裂破武鬥蟲',
       ['s-11 speargun'] = 'S-11 矛槍',
       ['safe below heat (%)'] = '安全熱量(%)',
       ['sai'] = '釵',
       ['salvos'] = '齊射次數',
       ['save'] = '儲存',
       ['save current changes here'] = '在此儲存當前修改',
+      ['scavenger'] = '清掃蟲',
       ['scorcher'] = '焦土',
       ['scout'] = '偵察兵',
+      ['scout raider'] = '偵查襲擊者',
+      ['scout strider'] = '偵察闊步者',
       ['scrambler'] = '擾頻器',
       ['scythe'] = '長柄鐮',
       ['seaf artillery: explosive'] = 'SEAF 火炮：高爆彈',
@@ -5546,6 +7298,7 @@ MOD.langs = {
       ['seaf artillery: smoke'] = 'SEAF 火炮：煙霧彈',
       ['seaf artillery: static field'] = 'SEAF 火炮：靜電場',
       ['seaf gun'] = 'SEAF 火炮',
+      ['seaf soldier'] = 'SEAF士兵',
       ['seaf squad'] = 'SEAF 小隊',
       ['search radius (m)'] = '搜尋半徑(米)',
       ['search weapons and stratagems'] = '搜尋武器與戰略配備',
@@ -5596,6 +7349,9 @@ MOD.langs = {
       ['shrapnel direct hit'] = '破片直擊',
       ['shrapnel pieces'] = '破片數量',
       ['shrapnel projectile'] = '破片射彈',
+      ['shredder tank'] = '撕裂者坦克',
+      ['shrieker'] = '尖叫蟲',
+      ['shrieker nest'] = '尖叫蟲巢穴',
       ['sickle'] = '鐮刀',
       ['siege-ready'] = '圍攻準備完畢',
       ['sightliner'] = '視界者',
@@ -5622,6 +7378,13 @@ MOD.langs = {
       ['speargun'] = '矛槍',
       ['speed until it has fired (m/s)'] = '開火前飛行速度（米/秒）',
       ['spire sterilizer'] = '尖塔滅菌器',
+      ['spore burst bile titan'] = '孢裂吐酸泰坦',
+      ['spore burst hunter'] = '孢裂狩獵蟲',
+      ['spore burst scavenger'] = '孢裂清掃蟲',
+      ['spore burst warrior'] = '孢裂武鬥蟲',
+      ['spore charger'] = '孢子強襲蟲',
+      ['spore lung'] = '孢肺',
+      ['spore spewer'] = '逸孢巢',
       ['spotting range (m)'] = '索敵距離(米)',
       ['spray weapon'] = '噴射武器',
       ['spread (horizontal)'] = '散佈(水平)',
@@ -5634,6 +7397,7 @@ MOD.langs = {
       ['sta-x3 w.a.s.p. launcher'] = 'StA-X3 W.A.S.P.火箭發射器',
       ['stage '] = '階段 ',
       ['stagger force'] = '硬直力',
+      ['stalker'] = '跟蹤蟲',
       ['stalwart'] = '盟友',
       ['standard drum'] = '標準彈鼓',
       ['standard heatsink'] = '標準散熱器',
@@ -5649,17 +7413,22 @@ MOD.langs = {
       ['status effect'] = '狀態效果',
       ['status effects'] = '狀態效果',
       ['stim pistol'] = '治療槍',
+      ['stingray'] = '魟艦',
       ['stoker'] = '爆燃者',
       ['stops you while firing'] = '開火時鎖定移動',
       ['stratagem'] = '戰略配備',
+      ['stratagem jammer'] = '戰略配備干擾器',
       ['stratagems'] = '戰略配備',
       ['stun'] = '暈眩彈',
+      ['stun (illuminate) (experimental)'] = '暈眩彈（光能者）（實驗性）',
       ['stun (large)'] = '暈眩彈（大）',
       ['stun (massive)'] = '暈眩彈（極大）',
+      ['stun (massive) (experimental)'] = '暈眩彈（巨大）（實驗性）',
       ['stun (medium)'] = '暈眩彈（中）',
       ['stun (small)'] = '暈眩彈（小）',
       ['stun baton'] = '暈眩棍',
       ['stun lance'] = '暈眩長槍',
+      ['stun pods'] = '暈眩噴射艙',
       ['supplementary adrenaline'] = '腎上腺素補劑',
       ['supply backpack'] = '補給背包',
       ['supply frv'] = '補給FRV',
@@ -5669,6 +7438,7 @@ MOD.langs = {
       ['support weapon drop; the weapon itself is under support.'] = '支援武器空投；武器本身列在「支援武器」分類下。',
       ['suppressor'] = '消音器',
       ['sure?'] = '確定？',
+      ['surplus eat allocation'] = '剩餘EAT配給',
       ['surviving lethal damage'] = '致命傷害存活機率',
       ['swapping makes the shot the chosen weapon\'s, your edits to it included: damage,'] = '替換後使用所選武器的射彈，包含你對其傷害、',
       ['sway multiplier'] = '晃動係數',
@@ -5679,6 +7449,7 @@ MOD.langs = {
       ['tank reload canister'] = '坦克霰彈補給',
       ['tank reload he'] = '坦克高爆彈補給',
       ['tcs 03 thumper'] = 'TCS 03 震動裝置',
+      ['tcs support'] = 'TCS支架',
       ['td-110 maelstrom'] = 'TD-110 風暴渦旋',
       ['td-220 bastion mk xvi'] = 'TD-220 堡壘MK XVI',
       ['team weapons'] = '小隊武器',
@@ -5728,6 +7499,9 @@ MOD.langs = {
       ['torcher'] = '噴火者',
       ['tracking speed'] = '跟蹤速度',
       ['trigger delay (s)'] = '觸發延遲(秒)',
+      ['trooper'] = '騎兵',
+      ['trooper jump pack'] = '裝甲兵噴射背包',
+      ['trooper lmg backpack'] = '裝甲兵輕機槍背包',
       ['true grit'] = '堅毅不屈',
       ['tube reddot 2x'] = '2倍紅點瞄具',
       ['tube reddot 2x legacy'] = '舊式2倍管狀紅點瞄準鏡',
@@ -5757,6 +7531,7 @@ MOD.langs = {
       ['vehicle'] = '載具',
       ['velocity'] = '初速',
       ['velocity (m/s)'] = '初速(米/秒)',
+      ['veracitor'] = '真實者',
       ['verdict'] = '判官',
       ['vertical grip'] = '直立前握把',
       ['vertical grip 45 degree'] = '45度角直立前握把',
@@ -5764,14 +7539,20 @@ MOD.langs = {
       ['veto'] = '否決者',
       ['vg-70 variable'] = 'VG-70 變數',
       ['volatile plasma bolt'] = '不穩定等離子彈',
+      ['voteless'] = '無權者',
+      ['vox engine'] = '噪轟引擎',
       ['w.a.s.p. launcher'] = 'W.A.S.P.火箭發射器',
       ['waiting for the scan'] = '正在等待掃描',
       ['walk / run speed'] = '行走 / 奔跑速度',
       ['walking barrage smoke'] = '移動彈幕煙霧',
       ['walking speed (m/s)'] = '彈幕推進速度（米/秒）',
+      ['war strider'] = '戰爭闊步者',
       ['warp distance (m)'] = '躍遷距離(米)',
       ['warp pack'] = '傳送背包',
+      ['warp ship'] = '傳送艇',
       ['warrant'] = '搜查令',
+      ['warrior'] = '戰士',
+      ['watcher'] = '看守者',
       ['weapon charge'] = '武器蓄力',
       ['weapon customization'] = '武器定製',
       ['weapon heat'] = '武器熱量',
@@ -5781,9 +7562,38 @@ MOD.langs = {
       ['wind-down time (s)'] = '轉管減速時間（秒）',
       ['wind-up'] = '轉管加速',
       ['wind-up time (s)'] = '轉管加速時間（秒）',
+      ['wretch'] = '哀惡者',
+      ['xenobite ardent'] = '熾燃地獄使者',
       ['your changes are off: turn them on in settings to edit.'] = '你的改動當前處於關閉狀態：請在設定裡開啟後再編輯。',
     },
     patterns = {
+      { '^Zoom level (%d) %(x%)$', '放大倍率 %1 級（x）' },
+      { '^Zeroing distance (%d) %(m%)$', '歸零距離 %1（米）' },
+      { '^BODY PART (%d+)$', '身體部位 %1' },
+      { '^Attack: (.+)$', '攻擊：%1' },
+      { '^Body part (%d+)$', '身體部位 %1' },
+      { '^(.+): weapon$', '%1：武器' },
+      { '^(.+): weapon (%d+)$', '%1：武器 %2' },
+      { '^(.+): bile spray$', '%1：膽汁噴射' },
+      { '^(.+): bile spray (%d+)$', '%1：膽汁噴射 %2' },
+      { '^(.+): bile mortar$', '%1：膽汁迫擊' },
+      { '^(.+): bile mortar (%d+)$', '%1：膽汁迫擊 %2' },
+      { '^(.+): acid spit$', '%1：酸液吐射' },
+      { '^(.+): acid spit (%d+)$', '%1：酸液吐射 %2' },
+      { '^(.+): spore spray$', '%1：孢子噴射' },
+      { '^(.+): spore spray (%d+)$', '%1：孢子噴射 %2' },
+      { '^(.+): fire breath$', '%1：火焰吐息' },
+      { '^(.+): fire breath (%d+)$', '%1：火焰吐息 %2' },
+      { '^(.+): acid spray$', '%1：酸液噴射' },
+      { '^(.+): acid spray (%d+)$', '%1：酸液噴射 %2' },
+      { '^(.+): mounted weapon$', '%1：掛載武器' },
+      { '^(.+): mounted weapon (%d+)$', '%1：掛載武器 %2' },
+      { '^(.+): primary weapon$', '%1：主武器' },
+      { '^(.+): sidearm$', '%1：副武器' },
+      { '^(.+): support weapon$', '%1：支援武器' },
+      { '^A weapon of (.+)%.$', '武器所屬：%L1。' },
+      { '^(.+) (%d+) variants share these values%.$', '%1 %2 個變體共用這些數值。' },
+      { '^Spawning on (.+) missions %(every mission type%)%. Multipliers of the game\'s values%.$', '%1 任務中的敵人生成（所有任務型別）。遊戲數值的倍率。' },
       { '^Unnamed: (.-)mm; (.-)/(.-) damage$', '未命名：%1毫米，傷害%2/%3' },
       { '^Unnamed: (.-)m blast$', '未命名：半徑%1米' },
       { '^Unnamed: (.-)s effect$', '未命名：持續%1秒' },
@@ -5817,6 +7627,10 @@ MOD.langs = {
       { '^Updating: installing (.+)%.%.%.$', '正在更新：安裝 %1...' },
       { '^Updated to (.+)%.$', '已更新到 %1。' },
       { '^Add a passive to (.+)$', '為 %1 新增被動' },
+      { '^Zoom level (%d) follow speed$', '倍率等級 %1 跟隨速度' },
+      { '^(.+): Light$', '%1：輕型' },
+      { '^(.+): Medium$', '%1：中型' },
+      { '^(.+): Heavy$', '%1：重型' },
       { '^Heat level (%d+)$', '熱量等級 %1' },
       { '^(.+); ammo type shared with (.+)$', '%1；彈種與以下共用：%L2' },
       { '^fires: (.+)%. The rows above stay its own$', '發射：%1。上方各行仍為其自身數值' },
@@ -5963,6 +7777,7 @@ MOD.langs = {
       { '^STATUS EFFECTS %((.+)%)$', '狀態效果（%1）' },
       { '^STATUS (%d+)$', '狀態 %1' },
       { '^SHODAN Stat Editor v([%d%.]+)$', 'SHODAN 數值編輯器 v%1' },
+      { '^(.+) %(([A-Z][^()]*)%)$', '%1 (%2)' },
     },
     prefix = {
       { 'PgUp/PgDn change weapon, Del resets, Ctrl+1-5 loads a weapon preset, Ctrl+Shift+1-5 saves one; ', 'PgUp/PgDn 切換武器，Del 重置，Ctrl+1-5 讀取武器預設，Ctrl+Shift+1-5 儲存預設；' },
@@ -6002,6 +7817,8 @@ MOD.langs = {
   { id = 'ru', name = 'Русский', list = ', ',
     fonts = { { font = 'abf8b5ba1469879a', atlas = '6b02f70a77aafd2d' }, { font = 'e6944ade8a140216', atlas = '529a0ff67a1c8a0b' } },
     exact = {
+      [' page(s):'] = ' стр.:',
+      [' to enemies and spawning with it.'] = ' врагов и их появления.',
       ['"+ New preset" (or Insert) saves your current changes as one; you name it next.'] = '«+ Новый пресет» (или Insert) сохраняет текущие изменения как пресет; затем вы даете ему имя.',
       ['+ Add passive'] = '+ Добавить эффект',
       ['+ Armor rating'] = '+ Рейтинг брони',
@@ -6012,7 +7829,10 @@ MOD.langs = {
       ['+ Stims (start, max)'] = '+ Стимы (в начале, макс.)',
       ['+ Throwables (start, max)'] = '+ Метательное (в начале, макс.)',
       ['0 = normal projectile; - / + selects a throwable grenade by name above.'] = '0 = обычный снаряд; - / + выбирает гранату по названию выше.',
-      ['0: hits deal their normal damage, 1: their durable damage (the weapon\'s lower one)'] = '0: попадания наносят обычный урон, 1: урон по прочным (меньший у оружия)',
+      ['0 light, 1 medium, 2 heavy'] = '0 лёгкая, 1 средняя, 2 тяжёлая',
+      ['0: at once. The RL-77 waits 0.2 s, the P-34 Breacher (it sticks and burns first) 1 s.'] = '0: сразу. RL-77 ждёт 0,2 с, P-34 Breacher (сначала прилипает и горит) 1 с.',
+      ['0: hits deal their normal damage, 1: their durable damage (the weapon\'s lower one)'] = '0: попадания наносят обычный урон, 1: урон по прочным целям (меньший у оружия)',
+      ['0: no patrols'] = '0: без патрулей',
       ['100kg Bomb'] = 'Бомба (100 кг)',
       ['100kg Bomb Mk2'] = 'Бомба Mk2 (100 кг)',
       ['100kg Bomb Mk3'] = 'Бомба Mk3 (100 кг)',
@@ -6084,6 +7904,7 @@ MOD.langs = {
       ['15x100mm Standard Rocket'] = 'Стандартная ракета 15x100 мм',
       ['15x100mm Thermite'] = 'Термитные 15x100 мм',
       ['15x100mm Toxic'] = 'Ядовитые 15x100 мм',
+      ['2'] = '2',
       ['20mm APHET Rounds'] = 'Бронебойно-фугасные снаряды 20 мм',
       ['20mm Flak Rounds'] = 'Зенитный снаряд 20 мм',
       ['20mm HE Cannon'] = 'ОФ пушка 20 мм',
@@ -6164,6 +7985,8 @@ MOD.langs = {
       ['A mounted copy run by AI (emplacement-style). Not the one you carry.'] = 'Станковая копия под управлением ИИ (как огневая позиция). Не то, что вы носите.',
       ['A mounted copy. Not the one you carry.'] = 'Станковая копия. Не то, что вы носите.',
       ['A preset keeps every change you have made as one set, under a name you choose.'] = 'Пресет хранит все ваши изменения одним набором под выбранным вами именем.',
+      ['A preset keeps every enemy and spawning change as one custom difficulty, under a name you choose. Your weapon changes are kept apart.'] = 'Пресет хранит все изменения врагов и их появления как свой уровень сложности под выбранным вами именем. Изменения оружия хранятся отдельно.',
+      ['A value changed on an enemy\'s own page stays red: this page leaves it as it is.'] = 'Значение, изменённое на странице самого врага, остаётся красным: эта страница его не трогает.',
       ['A/AC-8 Autocannon Sentry'] = 'A/AC-8 «Турель с автопушкой»',
       ['A/ARC-3 Tesla Tower'] = 'A/ARC-3 «Тесла-башня»',
       ['A/FLAM-40 Flame Sentry'] = 'A/FLAM-40 Турель-огнемет',
@@ -6174,6 +7997,7 @@ MOD.langs = {
       ['A/M-23 EMS Mortar Sentry'] = 'A/M-23 «Турель с ЭМ-минометом»',
       ['A/MG-43 Machine Gun Sentry'] = 'A/MG-43 «Пулеметная турель»',
       ['A/MLS-4X Rocket Sentry'] = 'A/MLS-4X «Ракетная турель»',
+      ['AA Emplacement'] = 'Орудия ПВО',
       ['AC-8 Autocannon'] = 'AC-8 «Автопушка»',
       ['AMMO'] = 'БОЕПРИПАСЫ',
       ['AMW-20 Apex'] = 'AMW-20 «Апогей»',
@@ -6203,11 +8027,24 @@ MOD.langs = {
       ['Accelerator Rifle'] = 'Акселераторная винтовка',
       ['Acclimated'] = 'Акклиматизированный',
       ['Acid'] = 'Кислота',
+      ['Acid (experimental)'] = 'Кислота (эксперимент.)',
+      ['Acid damage taken (x)'] = 'Получаемый урон от кислоты (x)',
+      ['Acid splash (experimental)'] = 'Брызги кислоты (эксперимент.)',
+      ['Acid storm (experimental)'] = 'Кислотный шторм (эксперимент.)',
       ['Adjudicator'] = '«Эксперт»',
       ['Adreno-Defibrillator'] = 'Адрено-дефибрилятор',
       ['Advanced Filtration'] = 'Продвинутая фильтрация',
+      ['Agitator'] = 'Подстрекатель',
       ['Aiming sway'] = 'Покачивание при прицеливании',
+      ['Airborne'] = 'десант',
       ['Airburst Rocket Launcher'] = '«Ракетница с подрывом в воздухе»',
+      ['All'] = 'Всё',
+      ['All Automatons'] = 'Все автоматоны',
+      ['All Illuminate'] = 'Все светороды',
+      ['All SEAF'] = 'Все SEAF',
+      ['All Terminids'] = 'Все терминиды',
+      ['All factions'] = 'Все фракции',
+      ['Alpha Commander'] = 'Альфа-командир',
       ['Also includes'] = 'Также включает',
       ['Alternate ammunition'] = 'Альтернативные боеприпасы',
       ['Amendment'] = 'Поправка',
@@ -6217,9 +8054,11 @@ MOD.langs = {
       ['Ammo carried'] = 'Боеприпасы при себе',
       ['Ammo from resupply'] = 'Боеприпасы из пополнения',
       ['Ammunition'] = 'Боеприпасы',
+      ['Ammunition Stockpile'] = 'Склад боеприпасов',
       ['Angled Foregrip'] = 'Угловая рукоять',
       ['Angled Foregrip Advanced'] = 'Улучшенная угловая рукоять',
       ['Angled Foregrip With Laser'] = 'Угловая рукоять с лазерным прицелом',
+      ['Annihilator Tank'] = 'Танк «Аннигилятор»',
       ['Another copy of this weapon, not identified yet.'] = 'Еще одна копия этого оружия, пока не опознана.',
       ['Antenna'] = 'Антенна',
       ['Anti-Air Missile'] = 'Ракета ПВО',
@@ -6239,21 +8078,32 @@ MOD.langs = {
       ['Arm armor'] = 'Броня руки',
       ['Arm durability'] = 'Прочность руки',
       ['Arm health'] = 'Здоровье руки',
+      ['Armed Resupply Pods'] = 'Вооруженные капсулы «Пополнения запасов»',
       ['Arming distance (m)'] = 'Дистанция взведения (м)',
       ['Arming time (s)'] = 'Время взведения (с)',
       ['Armor'] = 'Броня',
+      ['Armor (+)'] = 'Броня (+)',
       ['Armor pen. (direct)'] = 'Пробив. брони (прямо)',
       ['Armor pen. (extreme angle)'] = 'Пробив. брони (предельный угол)',
       ['Armor pen. (large angle)'] = 'Пробив. брони (большой угол)',
       ['Armor pen. (slight angle)'] = 'Пробив. брони (малый угол)',
+      ['Armor penetration'] = 'Бронепробиваемость',
+      ['Armor weight'] = 'Вес брони',
       ['Armors'] = 'Броня',
       ['Ask'] = 'Спрашивать',
+      ['Assassinate'] = 'убийца',
+      ['Assault'] = 'штурм',
+      ['Assault Raider'] = 'Налетчик-штурмовик',
       ['Assault Rifle'] = 'Штурмовая винтовка',
       ['Attachment'] = 'Модуль',
       ['Attachments'] = 'Модули',
+      ['Attacks'] = 'Атаки',
       ['Autocannon'] = '«Автопушка»',
       ['Autocannon Sentry'] = '«Турель с автопушкой»',
       ['Automatic'] = 'Автоматически',
+      ['Automaton Dropship'] = 'Десантный корабль автоматонов',
+      ['Automaton Mortar Emplacement'] = 'Минометная позиция автоматонов',
+      ['Automatons'] = 'Автоматоны',
       ['B-1 Supply Pack'] = 'B-1 «Рюкзак: боеприпасы»',
       ['B-100 Portable Hellbomb'] = 'B-100 Переносная Адская бомба',
       ['B/FLAM-80 Cremator'] = 'B/FLAM-80 Крематорий',
@@ -6266,32 +8116,71 @@ MOD.langs = {
       ['BR-14 Adjudicator'] = 'BR-14 «Эксперт»',
       ['BURST'] = 'РАЗРЫВ',
       ['BURST RADIUS'] = 'РАДИУС РАЗРЫВА',
-      ['Back'] = 'Назад',
+      ['Back'] = 'Спина',
+      ['Back (button)'] = 'Назад',
+      ['Back armor'] = 'Задняя броня',
+      ['Back body'] = 'Заднее тело',
       ['Back door block'] = 'Блок задней двери',
+      ['Back face'] = 'Задняя грань',
       ['Back hatch'] = 'Задний люк',
+      ['Back hip'] = 'Заднее бедро',
       ['Back periscope side 8'] = 'Задний перископ, сторона 8',
+      ['Back pump flamer'] = 'Задний насос огнемёта',
       ['Background opacity'] = 'Непрозрачность фона',
       ['Backpack'] = 'Рюкзак',
+      ['Ballistic Missile'] = 'Баллистическая ракета',
       ['Ballistic Padding'] = 'Баллистическая подкладка',
       ['Ballistic Shield Backpack'] = '«Рюкзак: баллистический щит»',
       ['Ballistic shield'] = 'Баллистический щит',
       ['Barrage'] = 'Залп',
+      ['Barrager Tank'] = 'Танк «Заграждение»',
+      ['Barrel'] = 'Ствол',
+      ['Base'] = 'базовый',
       ['Bastion MK XVI'] = 'Mk-XVI «Бастион»',
+      ['Battery'] = 'Батарея',
+      ['Beamer'] = 'Излучатель',
       ['Belt-Fed Grenade Launcher'] = 'Ленточный гранатомет',
+      ['Berserker'] = 'Берсерк',
+      ['Better stratagem bounce'] = 'Улучшенный отскок стратагем',
+      ['Big walker cannon'] = 'Пушка шатуна',
+      ['Bile Spewer'] = 'Желчный блевун',
+      ['Bile Spewer acid burst'] = 'Кислотный выплеск желчного блевуна',
+      ['Bile Spitter'] = 'Желчный плеватель',
+      ['Bile Titan'] = 'Желчный титан',
+      ['Bile Warrior'] = 'Желчный воин',
       ['Bingus Shared Loader by CowboyBingus'] = 'Bingus Shared Loader от CowboyBingus',
       ['Blast'] = 'Взрыв',
       ['Blast angle (deg)'] = 'Угол взрыва (град)',
       ['Blast delay (s)'] = 'Задержка взрыва (с)',
       ['Blast proximity (m)'] = 'Дистанция подрыва (м)',
       ['Blast radius'] = 'Радиус взрыва',
+      ['Bleed (experimental)'] = 'Кровотечение (эксперимент.)',
+      ['Bleed-out health'] = 'Здоровье при истекании кровью',
+      ['Blind (experimental)'] = 'Ослепление (эксперимент.)',
       ['Blitzer'] = '«Налетчик»',
       ['Block game input while open'] = 'Блокировать ввод в игре',
+      ['Blocking rock'] = 'Преграждающая скала',
       ['Blunt-Force Mitigation'] = 'Уменьшение дробящего урона',
+      ['Body'] = 'Тело',
+      ['Body collision spine'] = 'Хребет корпуса',
+      ['Body default'] = 'Тело',
+      ['Body front'] = 'Передняя часть тела',
+      ['Body head'] = 'Голова',
       ['Body health'] = 'Здоровье туловища',
       ['Body parts'] = 'Части корпуса',
+      ['Body rear'] = 'Задняя часть тела',
       ['Bolt Pistol'] = 'Болтострел',
       ['Bonnet'] = 'Капот',
       ['Boost after the launch (s)'] = 'Ускорение после пуска (с)',
+      ['Booster selection is limited due to the other boosters keeping their values in the game\'s program (game.dll), not in the data files SSEO edits. Those could only be changed while the game runs, which is currently impossible.'] = 'Выбор усилений ограничен: остальные усиления хранят свои значения в программе игры (game.dll), а не в файлах данных, которые меняет SSEO. Их можно было бы изменить только во время работы игры, что сейчас невозможно.',
+      ['Boosters'] = 'Двигатели',
+      ['Boss'] = 'Ядро',
+      ['Boss back'] = 'Задняя часть ядра',
+      ['Bottom wing'] = 'Нижнее крыло',
+      ['Braking height (m)'] = 'Высота торможения (м)',
+      ['Braking speed (m/s)'] = 'Скорость торможения (м/с)',
+      ['Braking time (s)'] = 'Время торможения (с)',
+      ['Brawler'] = 'Буян',
       ['Breacher'] = 'Прорывник',
       ['Breaching Hammer'] = 'Штурмовой молот',
       ['Break-Action Shotgun'] = 'Дробовик-переломка',
@@ -6299,13 +8188,36 @@ MOD.langs = {
       ['Breaker Incendiary'] = '«Зажигательный крушитель»',
       ['Breaker Spray&Pray'] = '«Крушитель ураган»',
       ['Breakthrough Exosuit'] = 'Экзокостюм «Прорыв»',
+      ['Brood Commander'] = 'Командир роя',
+      ['Bulk Fabricator'] = 'Массовый изготовитель',
+      ['Bull'] = 'бык',
       ['Bullet Storm'] = '«Шквал пуль»',
+      ['Bunker Turret'] = 'Бункерная турель',
       ['Burn time (s)'] = 'Время горения (с)',
       ['Burning'] = 'Горение',
       ['Burning applied to you'] = 'Горение, наносимое вам',
       ['Burst'] = 'Разрыв',
       ['Burst radius'] = 'Радиус разрыва',
       ['Bushwhacker'] = '«Партизан»',
+      ['Butt lower'] = 'Нижняя часть зада',
+      ['C hex 01'] = 'Шестигранник 01',
+      ['C hex 02'] = 'Шестигранник 02',
+      ['C hex 03'] = 'Шестигранник 03',
+      ['C hex 04'] = 'Шестигранник 04',
+      ['C hex 05'] = 'Шестигранник 05',
+      ['C hex 06'] = 'Шестигранник 06',
+      ['C hex 07'] = 'Шестигранник 07',
+      ['C hex 08'] = 'Шестигранник 08',
+      ['C hex 09'] = 'Шестигранник 09',
+      ['C hex 10'] = 'Шестигранник 10',
+      ['C hex 12'] = 'Шестигранник 12',
+      ['C hex 13'] = 'Шестигранник 13',
+      ['C hex 14'] = 'Шестигранник 14',
+      ['C hex 15'] = 'Шестигранник 15',
+      ['C hex 16'] = 'Шестигранник 16',
+      ['C hex 17'] = 'Шестигранник 17',
+      ['C hex 18'] = 'Шестигранник 18',
+      ['C hex 19'] = 'Шестигранник 19',
       ['CB-9 Exploding Crossbow'] = 'CB-9 «Взрывной арбалет»',
       ['CHARGE'] = 'ЗАРЯД',
       ['CLUSTER BOMB'] = 'КЛАСТЕРНАЯ БОМБА',
@@ -6323,6 +8235,7 @@ MOD.langs = {
       ['Caltrops'] = 'Проволочные силки',
       ['Camera shake radius (m)'] = 'Радиус тряски камеры (м)',
       ['Cancel'] = 'Отмена',
+      ['Cannon Turret'] = 'Пушка-турель',
       ['Censor'] = 'Цензор',
       ['Chain length'] = 'Длина цепи',
       ['Chain reaction delay (s)'] = 'Задержка цепной реакции (с)',
@@ -6333,10 +8246,16 @@ MOD.langs = {
       ['Charged'] = 'Заряженный',
       ['Charged explosion'] = 'Заряженный взрыв',
       ['Charged shot'] = 'Заряженный выстрел',
+      ['Charger'] = 'Громила',
+      ['Charger Behemoth'] = 'Громила-чудище',
+      ['Charger acid burst'] = 'Кислотный выплеск громилы',
       ['Charges'] = 'Заряды',
       ['Charges from resupply'] = 'Заряды из пополнения',
+      ['Chemical Backpack'] = 'Рюкзак с химикатами',
+      ['Chest'] = 'Грудь',
       ['Chest bleeding damage'] = 'Урон от кровотечения в груди',
       ['Chest damage taken'] = 'Получаемый урон в грудь',
+      ['Choked (experimental)'] = 'Удушье (эксперимент.)',
       ['Choose a weapon on the left.'] = 'Выберите оружие слева.',
       ['Clear'] = 'Очистить',
       ['Click again to overwrite'] = 'Нажмите еще раз, чтобы перезаписать',
@@ -6345,15 +8264,24 @@ MOD.langs = {
       ['Climb multiplier (vertical)'] = 'Множитель подъема (по вертикали)',
       ['Climb speed (m/s)'] = 'Скорость подъема (м/с)',
       ['Climb time limit (s)'] = 'Предел времени подъема (с)',
+      ['Climbing and sliding'] = 'Лазание и скольжение',
       ['Cluster Bomb'] = 'Кластерная бомба',
+      ['Cognitive Disruptor'] = 'Искажатель разума',
+      ['Collision'] = 'Корпус',
       ['Combat Hatchet'] = 'Боевой топорик',
       ['Combat Scope 4x'] = 'Боевой прицел (4х)',
+      ['Command Bunker'] = 'Командный бункер',
+      ['Command bunker'] = 'Командный бункер',
       ['Commando'] = '«Коммандос»',
+      ['Commissar'] = 'Комиссар',
+      ['Concealed Insertion'] = 'Скрытное внедрение',
       ['Concealment when still, crouched / prone'] = 'Скрытность без движения, присев / лёжа',
       ['Concussive Padding (Grenadier)'] = 'Противовзрывная подкладка, гренадер',
       ['Concussive Padding (Hazmat)'] = 'Противовзрывная подкладка, химзащита',
       ['Concussive Padding (Reinforced)'] = 'Противовзрывная подкладка, усиленная',
       ['Cone angle (deg)'] = 'Угол конуса (град)',
+      ['Conflagration Devastator'] = 'Пламенный разрушитель',
+      ['Confusion (experimental)'] = 'Замешательство (эксперимент.)',
       ['Constitution'] = '«Конституция»',
       ['Consumables'] = 'Расходники',
       ['Contact Mine'] = 'Контактная мина',
@@ -6365,22 +8293,36 @@ MOD.langs = {
       ['Copy'] = 'Копир.',
       ['Coyote'] = 'Койот',
       ['Cremator'] = 'Крематорий',
+      ['Crescent Overseer'] = 'Серповидный надзиратель',
       ['Crisper'] = '«Фритюр»',
       ['Crouched jog speed (m/s)'] = 'Скорость бега трусцой пригнувшись (м/с)',
       ['Crouched speed while aiming (m/s)'] = 'Скорость прицеливания пригнувшись (м/с)',
       ['Crouched sprint speed (m/s)'] = 'Скорость спринта пригнувшись (м/с)',
       ['Crouched walk speed (m/s)'] = 'Скорость шага пригнувшись (м/с)',
+      ['Crown'] = 'Корона',
       ['Cruise speed (m/s)'] = 'Крейсерская скорость (м/с)',
+      ['Crusher'] = 'Крушитель',
+      ['Custom difficulties'] = 'Свои уровни сложности',
+      ['Cyborg fire (experimental)'] = 'Огонь киборгов (эксперимент.)',
       ['DAMAGE'] = 'УРОН',
       ['DBS-2 Double Freedom'] = 'DBS-2 Двойная свобода',
       ['DEPLOYER'] = 'УСТАНОВЩИК',
       ['DIRECT HIT'] = 'ПРЯМОЕ ПОПАДАНИЕ',
       ['Dagger'] = '«Кинжал»',
       ['Damage'] = 'Урон',
+      ['Damage (x)'] = 'Урон (x)',
+      ['Damage passed to the body (x)'] = 'Урон, передаваемый телу (x)',
+      ['Damage taken (multiplier)'] = 'Получаемый урон (множитель)',
       ['Damage tick (s)'] = 'Такт урона (с)',
+      ['Damage ticks per minute'] = 'Тиков урона в минуту',
       ['Damage to you'] = 'Урон вам',
+      ['Dark Fluid burst'] = 'Выплеск тёмной жидкости',
       ['De-Escalator'] = 'Деэскалатор',
+      ['Dead Sprint'] = 'Смертельный рывок',
       ['Deadeye'] = 'Меткий стрелок',
+      ['Deaf (experimental)'] = 'Оглушение звуком (эксперимент.)',
+      ['Death explosions'] = 'Взрывы при гибели',
+      ['Defeat arrowhead'] = 'Уязвимый наконечник',
       ['Defender'] = 'Защитник',
       ['Defoliation Tool'] = 'Дефолиатор',
       ['Delete'] = 'Удалить',
@@ -6388,6 +8330,9 @@ MOD.langs = {
       ['Demolition force'] = 'Сила разрушения',
       ['Deployer'] = 'Установщик',
       ['Desert Stormer'] = 'Пустынный штурмовик',
+      ['Destroyed'] = 'уничтожено',
+      ['Devastator'] = 'Разрушитель',
+      ['Devastator jump pack'] = 'Реактивный ранец разрушителя',
       ['Deviation'] = 'Отклонение',
       ['Diligence'] = '«Рвение»',
       ['Diligence Counter Sniper'] = '«Рвение антиснайпер»',
@@ -6399,12 +8344,18 @@ MOD.langs = {
       ['Double-Edge Sickle'] = 'Обоюдоострый серп',
       ['Down'] = 'Вниз',
       ['Drag factor'] = 'Коэффициент сопротивления',
+      ['Dragonroach'] = 'Дракоракан',
+      ['Drill'] = 'Бур',
       ['Driver gun'] = 'Орудие водителя',
       ['Drone'] = 'Дрон',
+      ['Dropship'] = 'Десантный корабль',
+      ['Dropship death (air)'] = 'Гибель десантного корабля (в воздухе)',
+      ['Dropship death (ground)'] = 'Гибель десантного корабля (на земле)',
+      ['Drowning depth offset (m)'] = 'Смещение глубины утопления (м)',
       ['Drum Magazine'] = 'Барабанный магазин',
       ['Dune Walker Sniper Scope 10x'] = 'Снайперский прицел (10х)',
       ['Durable damage'] = 'Урон по прочным целям',
-      ['Durable ratio (0-1)'] = 'Доля урона по прочным (0-1)',
+      ['Durable ratio (0-1)'] = 'Доля прочности (0-1)',
       ['Duration (s)'] = 'Длительность (с)',
       ['Dynamite'] = 'Динамит',
       ['E/AT-12 Anti-Tank Emplacement'] = 'E/AT-12 Противотанковое орудие',
@@ -6433,62 +8384,104 @@ MOD.langs = {
       ['Eagle Strafing Run'] = '«Орел: бреющий полет»',
       ['Eagle rearm time (s)'] = 'Время перевооружения «Орла» (с)',
       ['Eagle strike. The rearm time is shared by every Eagle.'] = 'Удар «Орла». Время перевооружения общее для всех ударов «Орла».',
+      ['Eagles cannot be called within this distance while it stands'] = 'пока объект цел, в этом радиусе нельзя вызывать «Орлов»',
       ['Edit the grenade on Throwables to tune it. Assets load before selection applies.'] = 'Настраивайте гранату во вкладке «Метательное». Выбор применяется после загрузки ресурсов.',
+      ['Effect'] = 'Эффект',
+      ['Egg'] = 'Яйцо',
+      ['Egg cluster'] = 'Кладка яиц',
+      ['Electric (experimental)'] = 'Электричество (эксперимент.)',
+      ['Electric damage taken (x)'] = 'Получаемый урон от электричества (x)',
       ['Electrical Conduit'] = 'Электропроводник',
+      ['Elevated Overseer'] = 'Возвышенный надзиратель',
+      ['Elite'] = 'элита',
       ['Emancipator Exosuit'] = 'Экзокостюм «Благодетель»',
       ['Emplacement'] = 'Огневая позиция',
       ['Emplacement: its cooldown, its body, then its weapon.'] = 'Огневая позиция: перезарядка, корпус, затем оружие.',
+      ['Enemies and values this page changes are marked in blue in the list and on their pages.'] = 'Враги и значения, изменённые этой страницей, отмечены синим в списке и на их страницах.',
+      ['Enemy Editor'] = 'Редактор врагов',
+      ['Enemy cap (x)'] = 'Предел числа врагов (x)',
       ['Enemy detection range'] = 'Дальность обнаружения врагов',
+      ['Enemy.'] = 'Враг.',
+      ['Engine front'] = 'Передний двигатель',
+      ['Engine rear'] = 'Задний двигатель',
       ['Engineering Kit'] = 'Инженерный комплект',
       ['Entrenchment Tool'] = 'Орудие окапывания',
       ['Epoch'] = 'Эпоха',
       ['Ergonomics'] = 'Эргономика',
       ['Ergonomics bonus'] = 'Бонус эргономики',
       ['Eruptor'] = '«Извергатель»',
+      ['Every SEAF soldier at once. Soldiers you have edited on their own page keep their values.'] = 'Все солдаты SEAF сразу. Солдаты, изменённые на своей странице, сохраняют свои значения.',
       ['Every armor with this passive gets their effects too (set on their own pages).'] = 'Вся броня с этим эффектом получает и их эффекты (настраиваются на их страницах).',
       ['Every change as soon as it is pushed, before testing: it may break.'] = 'Каждое изменение сразу после публикации, без проверки: возможны ошибки.',
       ['Every commit'] = 'Каждый коммит',
+      ['Every enemy of this faction at once. Enemies you have edited on their own page keep their values.'] = 'Все враги фракции сразу. Враги, изменённые на своей странице, сохраняют свои значения.',
       ['Every helldiver in your game. Restore the game\'s files before joining other players\' lobbies.'] = 'Все десантники в вашей игре. Восстановите файлы игры, прежде чем заходить в лобби других игроков.',
       ['Every passive is in already.'] = 'Все пассивные эффекты уже добавлены.',
       ['Evictor'] = 'Вытеснитель',
       ['Expendable Anti-Tank'] = '«Одноразовый бронебой»',
       ['Expendable Napalm'] = 'Одноразовый напалм',
+      ['Experimental Infusion'] = 'Экспериментальная инъекция',
       ['Expiry explosion (id)'] = 'Взрыв по истечении (ID)',
       ['Explodes after death (s)'] = 'Взрывается после гибели (с)',
       ['Exploding Crossbow'] = '«Взрывной арбалет»',
       ['Explosion'] = 'Взрыв',
       ['Explosion (expiry)'] = 'Взрыв (по истечении)',
       ['Explosion id'] = 'ID взрыва',
+      ['Explosive Barrel'] = 'Взрывающаяся бочка',
       ['Explosive damage taken'] = 'Получаемый урон от взрывов',
+      ['Explosive damage taken (x)'] = 'Получаемый урон от взрывов (x)',
       ['Extended Magazine'] = 'Увеличенный магазин',
       ['Extra Padding'] = 'Экстра-уплотнение',
+      ['Eye'] = 'Глаз',
       ['FAF-14 Spear'] = 'FAF-14 Копье',
       ['FIRE'] = 'ОГОНЬ',
       ['FLAM-40 Flamethrower'] = 'FLAM-40 «Огнемет»',
       ['FLAM-66 Torcher'] = 'FLAM-66 «Сжигатель»',
+      ['Fabricator'] = 'Изготовитель',
+      ['Fabricator / bug hole batch size (x)'] = 'Партия изготовителя / норы (x)',
+      ['Fabricator / bug hole queue (x)'] = 'Очередь изготовителя / норы (x)',
+      ['Fabricator / bug hole refill speed (x)'] = 'Пополнение изготовителя / норы (x)',
+      ['Fabricator / bug hole release speed (x)'] = 'Выпуск изготовителя / норы (x)',
+      ['Fabricator death'] = 'Гибель фабрикатора',
+      ['Face'] = 'Лицо',
+      ['Factory Strider'] = 'Шатун-завод',
+      ['Fake'] = 'ложный',
       ['Feet First'] = 'Вперед ногами',
+      ['Female'] = 'женская',
       ['Field depth (m)'] = 'Глубина поля (м)',
       ['Field width (m)'] = 'Ширина поля (м)',
+      ['Fin front'] = 'Передний плавник',
       ['Finding the stats...'] = 'Поиск характеристик...',
       ['Fire'] = 'Огонь',
       ['Fire damage taken'] = 'Получаемый урон от огня',
+      ['Fire damage taken (x)'] = 'Получаемый урон от огня (x)',
       ['Fire duration (s)'] = 'Длительность огня (с)',
       ['Fire rate (RPM)'] = 'Скорострельность (выстр./мин)',
       ['Fire/gas/acid/arc damage taken'] = 'Получаемый урон от огня/газа/кислоты/дуги',
+      ['Firebomb Hellpods'] = 'Зажигательные Адские Капсулы',
       ['Flame Sentry'] = 'Турель-огнемет',
       ['Flames'] = 'Горючая смесь',
       ['Flames Mk2'] = 'Горючая смесь Mk2',
       ['Flamethrower'] = '«Огнемет»',
       ['Flashlight'] = 'Фонарик',
+      ['Fleet ship'] = 'Корабль флота',
+      ['Fleshmob'] = 'Плотеформер',
+      ['Flight height (m)'] = 'Высота полёта (м)',
       ['Flinch'] = 'Вздрагивание',
       ['Flinch (0 prevents it)'] = 'Вздрагивание (0 — нет)',
+      ['Floating depth offset (m)'] = 'Смещение глубины всплытия (м)',
       ['Folder'] = 'Папка',
       ['Folder path copied.'] = 'Путь к папке скопирован.',
+      ['Foliage pass-through'] = 'Пролёт сквозь листву',
       ['Fortified'] = 'Укрепление',
       ['Forward share of the launch (0-1)'] = 'Доля толчка вперед (0-1)',
       ['Found in the game data (not in the built-in list).'] = 'Найдено в данных игры (нет во встроенном списке).',
       ['Frag'] = '«Осколочная»',
       ['From supply'] = 'Из снабжения',
+      ['Front'] = 'Передняя часть',
+      ['Front armor'] = 'Передняя броня',
+      ['Front body'] = 'Переднее тело',
+      ['Front face'] = 'Передняя грань',
       ['Front hull'] = 'Передняя часть корпуса',
       ['Front left cockpit'] = 'Кабина спереди слева',
       ['Front right cockpit'] = 'Кабина спереди справа',
@@ -6496,6 +8489,8 @@ MOD.langs = {
       ['Full charge explosion'] = 'Взрыв с полным зарядом',
       ['Full charge shot'] = 'Выстрел с полным зарядом',
       ['Fuse time (s)'] = 'Время запала (с)',
+      ['Fusion Autocannon'] = 'Термоядерная автопушка',
+      ['Fusion Repeater'] = 'Термоядерный повторитель',
       ['G-10 Incendiary'] = 'G-10 «Зажигательная»',
       ['G-109 Urchin'] = 'G-109 Озорник',
       ['G-11 Caltrops'] = 'G-11 Проволочные силки',
@@ -6530,11 +8525,17 @@ MOD.langs = {
       ['Gas'] = 'Газовая',
       ['Gas Mortar Sentry'] = 'Турель с газовым минометом',
       ['Gas damage taken'] = 'Получаемый урон от газа',
+      ['Gas damage taken (x)'] = 'Получаемый урон от газа (x)',
+      ['Gas resistance (x)'] = 'Устойчивость к газу (x)',
+      ['Gatekeeper'] = 'Сторож',
       ['Gatling Sentry'] = '«Турель Гатлинга»',
+      ['Gazer'] = 'Наблюдатель',
       ['Generator'] = 'Генератор',
       ['Giga Grenade'] = 'Гигаграната',
       ['GitHub'] = 'GitHub',
       ['GitHub link copied.'] = 'Ссылка на GitHub скопирована.',
+      ['Gloom'] = 'Мгла',
+      ['Gloom (experimental)'] = 'Мрак (эксперимент.)',
       ['Gravity factor'] = 'Коэффициент гравитации',
       ['Grenade'] = 'Граната',
       ['Grenade Launcher'] = '«Гранатомет»',
@@ -6544,35 +8545,61 @@ MOD.langs = {
       ['Grenade swap'] = 'Замена гранаты',
       ['Grenade swap stopped (see the log); launchers fire their own projectiles again.'] = 'Замена гранат остановлена (см. журнал); гранатометы снова стреляют своими снарядами.',
       ['Grenadier Battlement'] = 'Амбразура гранатометчика',
+      ['Grinder'] = 'Измельчитель',
       ['Ground All-Terrain Extraction Rig (GATER)'] = 'Аппарат быстрой откачки ресурсов (ЗАБОР)',
       ['Guidance on after (s)'] = 'Наведение включается через (с)',
       ['Gun'] = 'Орудие',
       ['Gunner FRV'] = 'МТР «Стрелок»',
+      ['Gunshield'] = 'Щиток орудия',
+      ['Gunship'] = 'Штурмовик',
       ['Gunslinger'] = 'Стрелок',
       ['HANDLING'] = 'УПРАВЛЕНИЕ',
       ['HMG Emplacement'] = '«Огневая позиция: тяжелый пулемет»',
       ['Halt'] = 'Стоп',
       ['Handling'] = 'Управление',
+      ['Harvester'] = 'Жнец',
+      ['Harvester objective'] = 'Жнец (цель задания)',
       ['Head'] = 'Голова',
+      ['Head armor'] = 'Броня головы',
+      ['Head body'] = 'Голова (тело)',
       ['Head health'] = 'Здоровье головы',
+      ['Head zone'] = 'Голова',
       ['Health'] = 'Здоровье',
+      ['Health (x)'] = 'Здоровье (x)',
       ['Health Pack Rack'] = 'Стойка с аптечками',
+      ['Health drain'] = 'Потеря здоровья',
+      ['Hearing (x)'] = 'Слух (x)',
       ['Heat'] = 'Нагрев',
       ['Heat per second firing'] = 'Нагрев за секунду стрельбы',
       ['Heat per shot'] = 'Нагрев за выстрел',
       ['Heat per warp (%)'] = 'Нагрев за варп (%)',
       ['Heatsinks from supply'] = 'Радиаторы из снабжения',
+      ['Heavy Devastator'] = 'Тяжелый разрушитель',
+      ['Heavy Devastator shield'] = 'Щит тяжелого разрушителя',
+      ['Heavy Fusion Cannon'] = 'Тяжелая термоядерная пушка',
       ['Heavy Machine Gun'] = '«Тяжелый пулемет»',
+      ['Heavy armor'] = 'Тяжёлая броня',
       ['Heavy burning'] = 'Сильное горение',
+      ['Heavycannon'] = 'тяжелая пушка',
       ['Helldiver'] = 'Адский десантник',
       ['Helldivers 2 is running: close it, then Install.'] = 'Helldivers 2 запущена: закройте её, затем нажмите «Установить в игру».',
       ['Helldivers 2 is running: close it, then restore.'] = 'Helldivers 2 запущена: закройте её, затем верните файлы.',
       ['Helldivers 2 is running: you can edit, but close it before you Install.'] = 'Helldivers 2 запущена: редактировать можно, но перед установкой закройте её.',
+      ['Hellpod: initial drop'] = 'Адская капсула: первая высадка',
+      ['Hellpod: reinforcement'] = 'Адская капсула: подкрепление',
+      ['Helmet'] = 'Шлем',
+      ['Hexagon'] = 'шестигранник',
       ['High Capacity Heatsink'] = 'Высокоемкий радиатор',
       ['High Dissipation Heatsink'] = 'Высокоэффективный радиатор',
       ['High Explosive'] = '«Фугасная»',
       ['High-Velocity Shrapnel'] = 'Высокоскоростной снаряд со шрапнелью',
+      ['Highest ledge it climbs (m)'] = 'Макс. высота уступа для подъёма (м)',
+      ['Hijack Tech Hub Nexus Machine'] = 'Машина узла техцентра',
       ['Hips'] = 'Таз',
+      ['Hips armor'] = 'Броня бёдер',
+      ['Hive Breaker Drill'] = 'Бур «Крушитель ульев»',
+      ['Hive Guard'] = 'Страж улья',
+      ['Hive Lord'] = 'Властелин улья',
       ['Homing Anti-Air Missile'] = 'Самонаводящаяся ракета ПВО',
       ['Homing Ground Missile'] = 'Самонаводящаяся ракета «воздух-земля»',
       ['Homing Ground Missile Mk2'] = 'Самонаводящаяся ракета «воздух-земля» Mk2',
@@ -6583,32 +8610,63 @@ MOD.langs = {
       ['Hover speed (m/s)'] = 'Скорость парения (м/с)',
       ['Hover time, full-speed climb (s)'] = 'Парение: быстрый подъем (с)',
       ['Hover time, holding height (s)'] = 'Парение: удержание высоты (с)',
+      ['How close this zoom step looks: 1 is the normal view, 2 twice as close, 4 four times.'] = 'Насколько приближает эта ступень: 1 обычный вид, 2 в два раза ближе, 4 в четыре раза.',
+      ['How long the round waits after the hit (or after the blast proximity trips) before it goes off.'] = 'Сколько снаряд ждёт после попадания (или после срабатывания дистанции подрыва), прежде чем взорваться.',
+      ['How quickly the scoped view catches up when you move your aim at this zoom (0.6 on most optics).'] = 'Как быстро вид в прицеле догоняет наведение на этом увеличении (0,6 у большинства прицелов).',
+      ['Hulk'] = 'Глыба',
+      ['Hulk Bruiser'] = 'Глыба-крушитель',
+      ['Hulk Firebomber'] = 'Огненная глыба',
+      ['Hulk Obliterator'] = 'Глыба-уничтожитель',
+      ['Hulk Scorcher'] = 'Глыба-поджигатель',
+      ['Hulk flag'] = 'Флаг глыбы',
+      ['Hulk jetpack'] = 'Реактивный ранец глыбы',
+      ['Hull back'] = 'Задняя часть корпуса',
+      ['Hull front'] = 'Передняя часть корпуса',
+      ['Hunter'] = 'Охотник',
       ['Hyena'] = 'Гиена',
+      ['Illuminate'] = 'Светороды',
+      ['Illusionist death'] = 'Гибель иллюзиониста',
       ['Immolation'] = 'Испепелитель',
       ['Impact'] = '«Ударная»',
       ['Impact damage taken'] = 'Получаемый урон от ударов',
       ['Impact explosion (id)'] = 'Взрыв при попадании (ID)',
+      ['Impaler'] = 'Пронзатель',
       ['Incendiary'] = '«Зажигательная»',
       ['Incendiary Impact'] = 'Зажигательная ударная',
+      ['Incendiary MG Devastator'] = 'Зажигательный пулеметчик-разрушитель',
       ['Incinerator FRV'] = 'Огнеметная МТР',
       ['Inflammable'] = 'Огнеопасный',
       ['Injures you above heat (%)'] = 'Ранит вас при нагреве выше (%)',
+      ['Inner body'] = 'Внутреннее тело',
       ['Inner radius (m)'] = 'Внутренний радиус (м)',
+      ['Inner torso'] = 'Внутренний торс',
+      ['Insides'] = 'Внутренности',
       ['Install into the game'] = 'Установить в игру',
       ['Installing: finding what changed...'] = 'Установка: поиск изменений...',
       ['Installing: writing the files...'] = 'Установка: запись файлов...',
       ['Integrated Explosives'] = 'Встроенная взрывчатка',
       ['Interface language'] = 'Язык интерфейса',
+      ['Inverted aim assist (experimental)'] = 'Обратная помощь прицеливания (эксперимент.)',
       ['Iron Sights'] = 'Механический прицел',
+      ['Iron fleet'] = 'Железный флот',
       ['Its effects are added to every armor with this passive.'] = 'Его эффекты добавляются всей броне с этим пассивным эффектом.',
       ['Its stats above apply.'] = 'Его характеристики выше действуют.',
+      ['Ivory legion'] = 'Костяной легион',
+      ['Ivory legion assault'] = 'Костяной легион, штурм',
+      ['Ivory legion tier 2'] = 'Костяной легион, уровень 2',
       ['JAR-5 Dominator'] = 'JAR-5 «Угнетатель»',
+      ['Jammer'] = 'глушилка',
+      ['Jamming'] = 'Глушение',
+      ['Jaws'] = 'Челюсти',
       ['Jog speed (m/s)'] = 'Скорость бега трусцой (м/с)',
       ['Jogging empties it in (s)'] = 'Бег трусцой расходует её за (с)',
+      ['Jump'] = 'прыжок',
       ['Jump Pack'] = '«Реактивный ранец»',
       ['Jump cost (share of stamina)'] = 'Цена прыжка (доля выносливости)',
-      ['Jump pack'] = 'Реактивный ранец',
+      ['Jump pack'] = 'реактивный ранец',
+      ['Jumppack'] = 'реактивный ранец',
       ['K-2 Throwing Knife'] = 'K-2 Метательный нож',
+      ['Killing it kills the enemy'] = 'Уничтожение убивает врага',
       ['Kinetic Displacement Mitigation'] = 'Кинетическое демпфирование',
       ['Knight'] = 'Рыцарь',
       ['Knockdown chance'] = 'Шанс сбить с ног',
@@ -6628,9 +8686,12 @@ MOD.langs = {
       ['LIFT-182 Warp Pack'] = 'LIFT-182 Варп-ранец',
       ['LIFT-850 Jump Pack'] = 'LIFT-850 «Реактивный ранец»',
       ['LIFT-860 Hover Pack'] = 'LIFT-860 Ранец для парения',
+      ['Landed ship door shield'] = 'Щит двери севшего корабля',
       ['Language'] = 'Язык',
+      ['Large'] = 'большой',
       ['Large Plasma Bolt'] = 'Большой заряд плазмы',
       ['Larger Plasma Container'] = 'Увеличенный контейнер для плазмы',
+      ['Larva Container'] = 'Контейнер для личинки',
       ['Laser'] = 'Лазер',
       ['Laser Cannon'] = '«Лазерная пушка»',
       ['Laser Sentry'] = 'Лазерная турель',
@@ -6643,43 +8704,109 @@ MOD.langs = {
       ['Launch duration (s)'] = 'Длительность толчка (с)',
       ['Launch force'] = 'Сила толчка',
       ['Launch speed (m/s)'] = 'Скорость пуска (м/с)',
+      ['Lava (experimental)'] = 'Лава (эксперимент.)',
+      ['Lb wing'] = 'Левое заднее крыло',
       ['Left'] = 'Слева',
       ['Left arm'] = 'Левая рука',
       ['Left arm health'] = 'Здоровье левой руки',
+      ['Left armor'] = 'Левая броня',
+      ['Left arms'] = 'Левые руки',
+      ['Left back leg'] = 'Левая задняя нога',
       ['Left back panel'] = 'Левая задняя панель',
+      ['Left back thruster'] = 'Левый задний двигатель',
+      ['Left back track bar'] = 'Левая задняя штанга гусеницы',
+      ['Left back track knee'] = 'Левое заднее колено гусеницы',
+      ['Left back wing'] = 'Левое заднее крыло',
+      ['Left body'] = 'Левое тело',
       ['Left box 0'] = 'Левый ящик 0',
       ['Left box 1'] = 'Левый ящик 1',
       ['Left box 2'] = 'Левый ящик 2',
+      ['Left chest'] = 'Левая грудь',
+      ['Left claw'] = 'Левая клешня',
+      ['Left elbow'] = 'Левый локоть',
+      ['Left extra elbow'] = 'Левый дополнительный локоть',
+      ['Left foot'] = 'Левая ступня',
+      ['Left foreleg wrist'] = 'Запястье левой передней ноги',
       ['Left front block'] = 'Левый передний блок',
       ['Left front door'] = 'Левая передняя дверь',
+      ['Left front face'] = 'Левая передняя грань',
+      ['Left front leg'] = 'Левая передняя нога',
       ['Left front light'] = 'Левая передняя фара',
+      ['Left front thruster'] = 'Левый передний двигатель',
+      ['Left front track bar'] = 'Левая передняя штанга гусеницы',
+      ['Left front track knee'] = 'Левое переднее колено гусеницы',
+      ['Left front wing flap'] = 'Левый передний закрылок',
+      ['Left gun'] = 'Левое орудие',
+      ['Left hand'] = 'Левая кисть',
+      ['Left head'] = 'левая голова',
+      ['Left head flap'] = 'Левый щиток головы',
+      ['Left hip'] = 'Левое бедро',
+      ['Left hull'] = 'Левый корпус',
       ['Left leg'] = 'Левая нога',
       ['Left leg health'] = 'Здоровье левой ноги',
+      ['Left leg shield'] = 'Щит левой ноги',
+      ['Left legs'] = 'Левые ноги',
+      ['Left middle leg'] = 'Левая средняя нога',
+      ['Left middle wing'] = 'Левое среднее крыло',
       ['Left mirror'] = 'Левое зеркало',
+      ['Left pincer'] = 'Левая клешня',
       ['Left rear door'] = 'Левая задняя дверь',
+      ['Left rear engine pitch'] = 'Левый задний двигатель (наклон)',
+      ['Left rear leg'] = 'Левая задняя нога',
+      ['Left rocket'] = 'Левая ракета',
+      ['Left rocketpod'] = 'Левый ракетный блок',
+      ['Left shoulder'] = 'Левое плечо',
+      ['Left shoulder blade'] = 'Клинок на левом плече',
+      ['Left shoulderplate'] = 'Левый наплечник',
       ['Left side panel 0'] = 'Левая боковая панель 0',
       ['Left side panel 1'] = 'Левая боковая панель 1',
+      ['Left speaker'] = 'Левый динамик',
+      ['Left spine1 leg'] = 'Левая нога сегмента 1',
+      ['Left spine2 leg'] = 'Левая нога сегмента 2',
+      ['Left spine3 leg'] = 'Левая нога сегмента 3',
+      ['Left spine4 leg'] = 'Левая нога сегмента 4',
+      ['Left spine5 leg'] = 'Левая нога сегмента 5',
+      ['Left tentacle'] = 'Левое щупальце',
       ['Left top block'] = 'Левый верхний блок',
+      ['Left torso'] = 'Левый торс',
       ['Left track'] = 'Левая гусеница',
+      ['Left tracks'] = 'Левые гусеницы',
+      ['Left weapon bay'] = 'Левый оружейный отсек',
+      ['Left wing'] = 'Левое крыло',
+      ['Left wrist blade'] = 'Клинок на левом запястье',
       ['Leg injury immunity (1 on)'] = 'Иммунитет к ранению ног (1 — вкл.)',
       ['Leveller'] = 'Уравнитель',
+      ['Leviathan'] = 'Левиафан',
+      ['Leviathan bomb'] = 'Бомба левиафана',
+      ['Leviathan cannon'] = 'Пушка левиафана',
+      ['Lf wing'] = 'Левое переднее крыло',
       ['Liberator'] = '«Освободитель»',
       ['Liberator Carbine'] = 'Карабин «Освободитель»',
       ['Liberator Concussive'] = '«Сотрясающий освободитель»',
       ['Liberator Legacy'] = '«Классический освободитель»',
       ['Liberator Penetrator'] = '«Пробойный освободитель»',
       ['Lifetime (s)'] = 'Время жизни (с)',
+      ['Light armor'] = 'Лёгкая броня',
+      ['Light, medium or heavy, per armor (every armor set with that name).'] = 'Лёгкая, средняя или тяжёлая, для каждой брони (все комплекты с этим названием).',
       ['Limb health'] = 'Здоровье конечностей',
       ['Limb injury avoidance'] = 'Защита конечностей от ранений',
       ['Load'] = 'Загрузить',
+      ['Loadout'] = 'Снаряжение',
       ['Log file'] = 'Файл журнала',
       ['Log file path copied.'] = 'Путь к файлу журнала скопирован.',
       ['Logs'] = 'Журналы',
       ['Logs and Presets'] = 'Журналы и пресеты',
       ['Loses its target past (deg)'] = 'Теряет цель за пределами (град.)',
+      ['Lower back'] = 'Нижняя спина',
+      ['Lower it if a high zoom spins the view.'] = 'Уменьшите, если на большом увеличении вид крутится.',
+      ['Lower spine'] = 'Нижний хребет',
+      ['Lowest patrol frequency (x)'] = 'Минимальная частота патрулей (x)',
+      ['Lowest rates'] = 'Нижние пределы частоты',
+      ['Lowest reinforcement frequency (x)'] = 'Минимальная частота подкреплений (x)',
       ['Loyalist'] = 'Верный',
       ['Lumberer Exosuit'] = 'Экзокостюм «Лесоруб»',
       ['Lure Mine'] = 'Мина-приманка',
+      ['M tentacle'] = 'Среднее щупальце',
       ['M-1000 Maxigun'] = 'M-1000 Максиган',
       ['M-102 Gunner FRV'] = 'M-102 МТР «Стрелок»',
       ['M-103 Supply FRV'] = 'M-103 МТР снабжения',
@@ -6692,6 +8819,7 @@ MOD.langs = {
       ['M7S SMG'] = 'M7S Пистолет-пулемет',
       ['M90A Shotgun'] = 'M90A Дробовик',
       ['MA5C Assault Rifle'] = 'MA5C Штурмовая винтовка',
+      ['MG Emplacement'] = 'Пулеметная позиция',
       ['MG-206 Heavy Machine Gun'] = 'MG-206 «Тяжелый пулемет»',
       ['MG-206 Heavy Machine Gun (mounted B)'] = 'MG-206 «Тяжелый пулемет» (станковый B)',
       ['MG-43 Machine Gun'] = 'MG-43 «Пулемет»',
@@ -6709,7 +8837,10 @@ MOD.langs = {
       ['Maelstrom'] = 'Водоворот',
       ['Magazine size'] = 'Размер магазина',
       ['Magazines from supply'] = 'Магазины из снабжения',
+      ['Main'] = 'Основа',
+      ['Main body'] = 'Основное тело',
       ['Main gun'] = 'Основное орудие',
+      ['Marauder'] = 'Хищник',
       ['Marker radar scan every (s)'] = 'Радарное сканирование меток каждые (с)',
       ['Mass (kg)'] = 'Масса (кг)',
       ['Max carried'] = 'Макс. при себе',
@@ -6722,6 +8853,7 @@ MOD.langs = {
       ['Mechas'] = 'Техника',
       ['Med-Kit'] = 'Аптечка',
       ['Medium Plasma Bolt'] = 'Средний заряд плазмы',
+      ['Medium armor'] = 'Средняя броня',
       ['Melee damage'] = 'Урон в ближнем бою',
       ['Melta Mine'] = 'Плавкомина',
       ['Meltagun'] = 'Плавкопушка',
@@ -6736,15 +8868,25 @@ MOD.langs = {
       ['Missile'] = 'Ракета',
       ['Missile Pistol'] = 'Ракетный пистолет',
       ['Missile flight'] = 'Полет ракеты',
+      ['Mission'] = 'задание',
       ['Mist'] = '«Дымка»',
+      ['Modifier patrol frequency (x)'] = 'Частота патрулей модификатора (x)',
+      ['Modifier patrol size (x)'] = 'Размер патрулей модификатора (x)',
       ['Mortar Sentry'] = '«Турель с минометом»',
+      ['Mouth'] = 'Пасть',
       ['Move while reloading'] = 'Движение при перезарядке',
       ['Movement'] = 'Передвижение',
+      ['Movement speed (multiplier)'] = 'Скорость движения (множитель)',
+      ['Movement speed (x)'] = 'Скорость передвижения (x)',
       ['Muzzle'] = 'Дуло',
       ['Muzzle brake'] = 'Дульный тормоз',
       ['Napalm Bomb'] = 'Напалмовая бомба',
       ['Napalm Bomb Mk2'] = 'Напалмовая бомба Mk2',
       ['Napalm Bomb Mk3'] = 'Напалмовая бомба Mk3',
+      ['Navigation'] = 'Навигация',
+      ['Neck'] = 'Шея',
+      ['Neck armor'] = 'Броня шеи',
+      ['Neck body'] = 'Шея (тело)',
       ['No changes: loading it puts every value back to the game\'s.'] = 'Изменений нет: загрузка вернет все значения игры.',
       ['No presets yet.'] = 'Пресетов пока нет.',
       ['Noise'] = 'Шум',
@@ -6755,9 +8897,11 @@ MOD.langs = {
       ['Nothing to install: your values are the game\'s own.'] = 'Устанавливать нечего: ваши значения совпадают с игровыми.',
       ['Nova'] = '«Нова»',
       ['Nuke'] = 'Ядерная бомба',
+      ['Nursing Spewer'] = 'Кормящий блевун',
       ['OFFLINE  -  edits the game\'s files; they apply when the game starts'] = 'ОФЛАЙН  -  меняет файлы игры; изменения действуют при запуске игры',
       ['OK'] = 'ОК',
       ['ORBITAL BEAM'] = 'ОРБИТАЛЬНЫЙ ЛУЧ',
+      ['Objective'] = 'цель задания',
       ['Off'] = 'Выкл',
       ['Off: its stats above are left out; only the passives below apply.'] = 'Выкл.: его характеристики выше не действуют; действуют только эффекты ниже.',
       ['Off: the game\'s values everywhere; your '] = 'Выкл: везде значения игры; ваши ',
@@ -6766,10 +8910,15 @@ MOD.langs = {
       ['On'] = 'Вкл',
       ['On: a loadout can take more than one exosuit, FRV or tank.'] = 'Вкл: в снаряжение можно взять больше одного экзокостюма, МТР или танка.',
       ['On: in your armory / stratagem list.'] = 'Вкл: в вашем арсенале / списке стратагем.',
+      ['On: sniper rifles show a crosshair when you aim in third person.'] = 'Вкл.: снайперские винтовки показывают прицел при прицеливании от третьего лица.',
+      ['On: stratagem balls stick on more surfaces instead of bouncing off.'] = 'Вкл.: маяки стратагем прилипают к большему числу поверхностей, а не отскакивают.',
       ['On: your '] = 'Вкл: ваши ',
       ['On: your arc chain length / split apply with other players too (arcs can stay on screen).'] = 'Вкл: ваши длина и разветвление цепи дуги действуют и с другими игроками (дуги могут оставаться на экране).',
+      ['On: your rockets, launcher rounds and stratagem ordnance fly through tree canopies and bushes.'] = 'Вкл.: ваши ракеты, снаряды и боеприпасы стратагем пролетают сквозь кроны деревьев и кусты.',
       ['One True Flag'] = 'Один истинный флаг',
       ['One-Two'] = 'Двоечка',
+      ['One-handed'] = 'Одной рукой',
+      ['Only works with the blast angle at 360, and the distance has to be larger than one step of the round:'] = 'Работает только при угле взрыва 360, и дистанция должна быть больше шага снаряда за кадр:',
       ['Open'] = 'Открыть',
       ['Open / close key'] = 'Клавиша открытия / закрытия',
       ['Opened the GitHub page in your browser.'] = 'Страница GitHub открыта в браузере.',
@@ -6792,9 +8941,14 @@ MOD.langs = {
       ['Orbital beam'] = 'Орбитальный луч',
       ['Orbital strike.'] = 'Орбитальный удар.',
       ['Other players are in your game: arc chain length / split use the game\'s values.'] = 'В вашей игре другие игроки: длина и разветвление цепи дуги берутся из игры.',
+      ['Outcast'] = 'изгой',
       ['Outer radius (m)'] = 'Внешний радиус (м)',
+      ['Outpost garrison size (x)'] = 'Размер гарнизона аванпоста (x)',
+      ['Outposts and spawners'] = 'Аванпосты и источники врагов',
       ['Overcharge limit (s)'] = 'Предел перезаряда (с)',
       ['Overheat threshold'] = 'Порог перегрева',
+      ['Overseer'] = 'Надзиратель',
+      ['Overship'] = 'Иерарх',
       ['Own effects'] = 'Свои эффекты',
       ['Oxygenator'] = 'Аэратор',
       ['P-11 Stim Pistol'] = 'P-11 Стим-пистолет',
@@ -6830,17 +8984,26 @@ MOD.langs = {
       ['Partial charge shot'] = 'Выстрел с частичным зарядом',
       ['Passive'] = 'Пассивный эффект',
       ['Patriot Exosuit'] = 'Экзокостюм «Патриот»',
+      ['Patrol frequency (x)'] = 'Частота патрулей (x)',
+      ['Patrols'] = 'Патрули',
+      ['Patrols at once (x)'] = 'Патрулей одновременно (x)',
       ['Peacemaker'] = '«Миротворец»',
       ['Peak Physique'] = 'Пик формы',
+      ['Pelvis'] = 'Таз',
       ['Pen.'] = 'Проб.',
       ['Penetration slowdown'] = 'Замедление при пробитии',
+      ['Phalanx'] = 'фаланга',
       ['Physical shield'] = 'Физический щит',
+      ['Pilot seat'] = 'Кресло пилота',
       ['Pineapple'] = 'Лимонка',
       ['Plasma Pistol. Canister Extended'] = 'Плазменный пистолет. Увеличенный баллон',
       ['Plasma Pistol. Canister Pistol'] = 'Плазменный пистолет. Стандартный баллон',
       ['Point of interest range'] = 'Дальность точек интереса',
+      ['Poison (experimental)'] = 'Яд (эксперимент.)',
       ['Portable Hellbomb'] = 'Переносная Адская бомба',
       ['Position scatter (m)'] = 'Разброс позиции (м)',
+      ['Pouncer'] = 'Прыгун',
+      ['Predator Hunter'] = 'Хищный охотник',
       ['Presets'] = 'Пресеты',
       ['Press a key (Esc cancels)'] = 'Нажмите клавишу (Esc — отмена)',
       ['Press the key that should open and close the panel: F1-F12, Insert, Home, End, Pause or Scroll Lock. Esc cancels.'] = 'Нажмите клавишу для открытия и закрытия панели: F1-F12, Insert, Home, End, Pause или Scroll Lock. Esc — отмена.',
@@ -6856,6 +9019,7 @@ MOD.langs = {
       ['Punisher Plasma'] = '«Плазменный каратель»',
       ['Purifier'] = '«Очиститель»',
       ['Push force'] = 'Сила толчка',
+      ['Pyro Trooper'] = 'Пирокавалерист',
       ['Pyrotech'] = 'Пиротех',
       ['Quasar Cannon'] = 'Пушка «Квазар»',
       ['R-2 Amendment'] = 'R-2 Поправка',
@@ -6878,8 +9042,12 @@ MOD.langs = {
       ['RS-422 Railgun'] = 'RS-422 «Рельсотрон»',
       ['Rack'] = 'Стойка',
       ['Radar'] = 'Радар',
+      ['Radiation (heavy) (experimental)'] = 'Радиация (сильная) (эксперимент.)',
+      ['Radiation (light) (experimental)'] = 'Радиация (слабая) (эксперимент.)',
+      ['Radical'] = 'Радикал',
       ['Radius'] = 'Радиус',
       ['Radius (m)'] = 'Радиус (м)',
+      ['Raider'] = 'Налетчик',
       ['Rail Cannon Round'] = 'Выстрел рельсотрона',
       ['Railgun'] = '«Рельсотрон»',
       ['Railgun Round'] = 'Снаряд рельсотрона',
@@ -6887,6 +9055,7 @@ MOD.langs = {
       ['Range'] = 'Дальность',
       ['Range (m)'] = 'Дальность (м)',
       ['Rapid Heatsink'] = 'Быстрый радиатор',
+      ['Rb wing'] = 'Правое заднее крыло',
       ['Re-Educator'] = 'Реформатор',
       ['Reach downward (m)'] = 'Досягаемость вниз (м)',
       ['Reach upward (m)'] = 'Досягаемость вверх (м)',
@@ -6910,7 +9079,12 @@ MOD.langs = {
       ['Refills prone in (s)'] = 'Восстановление лёжа за (с)',
       ['Refills standing in (s)'] = 'Восстановление стоя за (с)',
       ['Regeneration (health/s)'] = 'Регенерация (здоровье/с)',
+      ['Regeneration delay after damage (s)'] = 'Задержка регенерации после урона (с)',
       ['Reinforced Epaulettes'] = 'Армированные эполеты',
+      ['Reinforcement frequency (x)'] = 'Частота подкреплений (x)',
+      ['Reinforcement size (x)'] = 'Размер подкреплений (x)',
+      ['Reinforcements'] = 'Подкрепления',
+      ['Reinforcements (flares, breaches, drops)'] = 'Подкрепления (сигнальные ракеты, прорывы, десанты)',
       ['Releases'] = 'Релизы',
       ['Reload allowed below (rounds)'] = 'Перезарядка разрешена ниже (патронов)',
       ['Reload time (s)'] = 'Время перезарядки (с)',
@@ -6920,35 +9094,92 @@ MOD.langs = {
       ['Rename'] = 'Переимен.',
       ['Reprimand'] = 'Взыскание',
       ['Reset all values'] = 'Сбросить все значения',
+      ['Reset booster'] = 'Сбросить усиление',
+      ['Reset enemy'] = 'Сбросить врага',
       ['Reset helldiver'] = 'Сбросить десантника',
       ['Reset passive'] = 'Сброс эффекта',
       ['Reset record'] = 'Сбросить запись',
+      ['Reset spawning'] = 'Сбросить появление',
       ['Reset weapon'] = 'Сброс оружия',
       ['Resets all values from the current preset to default.'] = 'Сбрасывает все значения текущего пресета к значениям по умолчанию.',
       ['Restore the game\'s files'] = 'Вернуть файлы игры',
       ['Restoring the game\'s files...'] = 'Возврат исходных файлов игры...',
       ['Resupply'] = '«Пополнение запасов»',
+      ['Rf wing'] = 'Правое переднее крыло',
       ['Rifle Justice. Short '] = 'Винтовка «Правосудие». Короткий магазин',
       ['Right'] = 'Справа',
       ['Right arm'] = 'Правая рука',
       ['Right arm health'] = 'Здоровье правой руки',
+      ['Right armor'] = 'Правая броня',
+      ['Right arms'] = 'Правые руки',
+      ['Right back leg'] = 'Правая задняя нога',
       ['Right back panel'] = 'Правая задняя панель',
+      ['Right back thruster'] = 'Правый задний двигатель',
+      ['Right back track bar'] = 'Правая задняя штанга гусеницы',
+      ['Right back track knee'] = 'Правое заднее колено гусеницы',
+      ['Right back wing'] = 'Правое заднее крыло',
+      ['Right body'] = 'Правое тело',
       ['Right box 0'] = 'Правый ящик 0',
       ['Right box 1'] = 'Правый ящик 1',
       ['Right box 2'] = 'Правый ящик 2',
+      ['Right claw'] = 'Правая клешня',
+      ['Right elbow'] = 'Правый локоть',
+      ['Right extra elbow'] = 'Правый дополнительный локоть',
+      ['Right foot'] = 'Правая ступня',
+      ['Right foreleg shoulder'] = 'Плечо правой передней ноги',
       ['Right front block'] = 'Правый передний блок',
       ['Right front door'] = 'Правая передняя дверь',
+      ['Right front face'] = 'Правая передняя грань',
+      ['Right front leg'] = 'Правая передняя нога',
       ['Right front light'] = 'Правая передняя фара',
+      ['Right front track bar'] = 'Правая передняя штанга гусеницы',
+      ['Right front track knee'] = 'Правое переднее колено гусеницы',
+      ['Right front wing flap'] = 'Правый передний закрылок',
+      ['Right gun'] = 'Правое орудие',
+      ['Right hand'] = 'Правая кисть',
+      ['Right head'] = 'правая голова',
+      ['Right head flap'] = 'Правый щиток головы',
+      ['Right hindleg wrist'] = 'Запястье правой задней ноги',
+      ['Right hip'] = 'Правое бедро',
+      ['Right hull'] = 'Правый корпус',
       ['Right leg'] = 'Правая нога',
       ['Right leg health'] = 'Здоровье правой ноги',
+      ['Right leg shield'] = 'Щит правой ноги',
+      ['Right legs'] = 'Правые ноги',
+      ['Right middle leg'] = 'Правая средняя нога',
+      ['Right middle wing'] = 'Правое среднее крыло',
       ['Right mirror'] = 'Правое зеркало',
+      ['Right pincer'] = 'Правая клешня',
       ['Right rear door'] = 'Правая задняя дверь',
+      ['Right rear engine pitch'] = 'Правый задний двигатель (наклон)',
+      ['Right rear leg'] = 'Правая задняя нога',
+      ['Right rocket'] = 'Правая ракета',
+      ['Right rocketpod'] = 'Правый ракетный блок',
+      ['Right shoulder'] = 'Правое плечо',
+      ['Right shoulder blade'] = 'Клинок на правом плече',
+      ['Right shoulderplate'] = 'Правый наплечник',
       ['Right side panel 0'] = 'Правая боковая панель 0',
       ['Right side panel 1'] = 'Правая боковая панель 1',
+      ['Right speaker'] = 'Правый динамик',
+      ['Right spine1 leg'] = 'Правая нога сегмента 1',
+      ['Right spine2 leg'] = 'Правая нога сегмента 2',
+      ['Right spine3 leg'] = 'Правая нога сегмента 3',
+      ['Right spine4 leg'] = 'Правая нога сегмента 4',
+      ['Right spine5 leg'] = 'Правая нога сегмента 5',
+      ['Right tentacle'] = 'Правое щупальце',
       ['Right top block'] = 'Правый верхний блок',
+      ['Right torso'] = 'Правый торс',
       ['Right track'] = 'Правая гусеница',
+      ['Right tracks'] = 'Правые гусеницы',
+      ['Right weapon bay'] = 'Правый оружейный отсек',
+      ['Right wing'] = 'Правое крыло',
+      ['Right wrist blade'] = 'Клинок на правом запястье',
       ['Rock Solid'] = 'Кремень',
+      ['Rocket Devastator'] = 'Разрушитель-ракетчик',
       ['Rocket Sentry'] = '«Ракетная турель»',
+      ['Rocket pods'] = 'Ракетные блоки',
+      ['Rooted (experimental)'] = 'Обездвиживание (эксперимент.)',
+      ['Rotator'] = 'Ротор',
       ['Round 1 blast'] = 'Взрыв выстрела 1',
       ['Round 1 blast radius'] = 'Радиус взрыва выстрела 1',
       ['Round 1 projectile'] = 'Снаряд выстрела 1',
@@ -6959,7 +9190,18 @@ MOD.langs = {
       ['Rounds loaded'] = 'Патронов заряжено',
       ['Rounds per reload'] = 'Патронов за перезарядку',
       ['Run length (m)'] = 'Длина захода (м)',
+      ['Rupture Charger'] = 'Прорывной громила',
+      ['Rupture Spewer'] = 'Прорывной рассеиватель',
+      ['Rupture Warrior'] = 'Прорывной воин',
       ['S-11 Speargun'] = 'S-11 Гарпун',
+      ['SEAF'] = 'СЕАФ',
+      ['SEAF Leader'] = 'Командир SEAF',
+      ['SEAF Medic'] = 'Медик SEAF',
+      ['SEAF Soldier'] = 'Солдат ВССЗ',
+      ['SEAF Specialist'] = 'Специалист SEAF',
+      ['SEAF reinforcement cooldown (x)'] = 'Перезарядка подкреплений СЕАФ (x)',
+      ['SEAF soldier: an ally.'] = 'Солдат SEAF: союзник.',
+      ['SEAF wave cooldown (x)'] = 'Перезарядка волн СЕАФ (x)',
       ['SECOND MODE'] = 'ВТОРОЙ РЕЖИМ',
       ['SG-20 Halt'] = 'SG-20 Стоп',
       ['SG-22 Bushwhacker'] = 'SG-22 «Партизан»',
@@ -6977,6 +9219,7 @@ MOD.langs = {
       ['SH-51 Directional Shield'] = 'SH-51 Щит направленного действия',
       ['SHARED WITH'] = 'ОБЩЕЕ С',
       ['SHIELD'] = 'ЩИТ',
+      ['SHODAN ENEMY EDITOR'] = 'SHODAN: РЕДАКТОР ВРАГОВ',
       ['SHODAN STAT EDITOR'] = 'РЕДАКТОР ХАРАКТЕРИСТИК SHODAN',
       ['SHODAN weapon mods are running too: they put their own values back every 5 s'] = 'Также работают оружейные моды SHODAN: они возвращают свои значения каждые 5 с',
       ['SHRAPNEL'] = 'ОСКОЛКИ',
@@ -6998,9 +9241,16 @@ MOD.langs = {
       ['Salvos'] = 'Залпы',
       ['Save'] = 'Сохранить',
       ['Save current changes here'] = 'Сохранить изменения сюда',
+      ['Scavenger'] = 'Мусорщик',
+      ['Scavenger acid burst'] = 'Кислотный выплеск падальщика',
+      ['Scope'] = 'Прицел',
       ['Scorcher'] = '«Поджигатель»',
       ['Scout'] = 'Разведчик',
+      ['Scout Raider'] = 'Налетчик-разведчик',
+      ['Scout Strider'] = 'Шатун-разведчик',
+      ['Scout walker rider'] = 'пилот шатуна-разведчика',
       ['Scythe'] = '«Коса»',
+      ['Search enemies'] = 'Поиск врагов',
       ['Search radius (m)'] = 'Радиус поиска (м)',
       ['Search weapons and stratagems'] = 'Поиск оружия и стратагем',
       ['Second ammo'] = 'Второй тип боеприпасов',
@@ -7013,6 +9263,7 @@ MOD.langs = {
       ['Secondary reload speed'] = 'Перезарядка доп. оружия',
       ['Seeker'] = 'Искатель',
       ['Senator'] = 'Сенатор',
+      ['Senses'] = 'Чувства',
       ['Sentry'] = 'Турель',
       ['Sentry: its cooldown, its body, then its weapon.'] = 'Турель: перезарядка, корпус, затем оружие.',
       ['Servo-Assisted'] = 'Сервопривод',
@@ -7028,10 +9279,13 @@ MOD.langs = {
       ['Shield arm zone armor'] = 'Броня зоны руки со щитом',
       ['Shield capacity'] = 'Емкость щита',
       ['Shield emitter'] = 'Излучатель щита',
+      ['Shield forcefield'] = 'Защитное поле',
       ['Shield plate armor'] = 'Броня щита',
       ['Shield plate health'] = 'Здоровье щита',
+      ['Shield zone'] = 'Щит',
       ['Shockwave radius (m)'] = 'Радиус ударной волны (м)',
       ['Short Magazine'] = 'Короткий магазин',
+      ['Shotgun'] = 'дробовик',
       ['Shrapnel'] = 'Шрапнель',
       ['Shrapnel blast radius'] = 'Радиус взрыва осколков',
       ['Shrapnel direct hit'] = 'Прямое попадание осколков',
@@ -7039,21 +9293,61 @@ MOD.langs = {
       ['Shrapnel pieces'] = 'Число осколков',
       ['Shrapnel projectile'] = 'Снаряд осколков',
       ['Shrapnel projectile (id)'] = 'Снаряд осколков (ID)',
+      ['Shredder Tank'] = 'Танк «Пильщик»',
+      ['Shrieker'] = 'Крикун',
+      ['Shrieker Nest'] = 'Гнездо крикунов',
       ['Sickle'] = '«Серп»',
+      ['Side'] = 'сбоку',
       ['Siege-Ready'] = 'К осаде готов',
+      ['Sight cone height (degrees)'] = 'Высота конуса зрения (градусы)',
+      ['Sight cone width (degrees)'] = 'Ширина конуса зрения (градусы)',
+      ['Sight range (m)'] = 'Дальность зрения (м)',
+      ['Sight range (x)'] = 'Дальность обзора (x)',
       ['Sightliner'] = '«Целенаводчик»',
       ['Silo'] = 'Шахта',
+      ['Size'] = 'Размер',
+      ['Size (x)'] = 'Размер (x)',
       ['Slide speed / duration'] = 'Скорость / длительность скольжения',
+      ['Slope slide ends at (degrees)'] = 'Скольжение по склону до (градусов)',
+      ['Slope slide starts at (degrees)'] = 'Скольжение по склону с (градусов)',
+      ['Slot (choice)'] = 'Слот (выбор)',
+      ['Slot: 1 primary or 3 secondary.'] = 'Слот: 1 основное или 3 дополнительное.',
+      ['Slot: Primary'] = 'Слот: основное',
+      ['Slot: Secondary'] = 'Слот: дополнительное',
+      ['Slowed (experimental)'] = 'Замедление (эксперимент.)',
       ['Slugger'] = '«Крушила»',
       ['Small Plasma Bolt'] = 'Малый заряд плазмы',
       ['Smoke'] = '«Дымовая»',
+      ['Smoke radius, edge (m)'] = 'Радиус дыма, край (м)',
+      ['Smoke radius, full (m)'] = 'Радиус дыма, плотный (м)',
       ['Smokescreen'] = 'Дымовая завеса',
       ['Sniper Scope 10x'] = 'Снайперский прицел (10х)',
       ['Sniper Scope 10x Helghast'] = 'Снайперский прицел (10х)',
+      ['Sniper crosshair in third person'] = 'Снайперский прицел от 3-го лица',
       ['Solo Silo'] = 'Одиночная пусковая шахта',
+      ['Spawn height (m)'] = 'Высота появления (м)',
+      ['Spawner death'] = 'Гибель источника врагов',
+      ['Spawning'] = 'Появление врагов',
+      ['Spawning limits every faction shares.'] = 'Ограничения появления, общие для всех фракций.',
       ['Spear'] = 'Копье',
       ['Speargun'] = 'Гарпун',
       ['Speed while aiming (m/s)'] = 'Скорость при прицеливании (м/с)',
+      ['Spine lower'] = 'Нижний хребет',
+      ['Spine plate'] = 'Пластина хребта',
+      ['Spine roll back'] = 'Задняя часть хребта',
+      ['Spine0'] = 'Хребет 0',
+      ['Spine1'] = 'Хребет 1',
+      ['Spine2'] = 'Хребет 2',
+      ['Spine3'] = 'Хребет 3',
+      ['Spine4'] = 'Хребет 4',
+      ['Spine5'] = 'Хребет 5',
+      ['Spore Burst Bile Titan'] = 'Желчный титан-споровик',
+      ['Spore Burst Hunter'] = 'Охотник-споровик',
+      ['Spore Burst Scavenger'] = 'Мусорщик-споровик',
+      ['Spore Burst Warrior'] = 'Воин-споровик',
+      ['Spore Charger'] = 'Громила-споровик',
+      ['Spore Lung'] = 'Споровое легкое',
+      ['Spore Spewer'] = 'Рассеиватель спор',
       ['Spotting range (m)'] = 'Дальность обнаружения (м)',
       ['Spread (horizontal)'] = 'Разброс (по горизонтали)',
       ['Spread (vertical)'] = 'Разброс (по вертикали)',
@@ -7068,8 +9362,11 @@ MOD.langs = {
       ['StA-X3 W.A.S.P. Launcher'] = 'StA-X3 Ракетомет W.A.S.P.',
       ['Stage '] = 'Этап ',
       ['Stagger force'] = 'Сила ошеломления',
+      ['Stagger resistance (x)'] = 'Устойчивость к ошеломлению (x)',
+      ['Stalker'] = 'Следопыт',
       ['Stalwart'] = '«Доблесть»',
       ['Stamina'] = 'Выносливость',
+      ['Standard'] = 'стандартный',
       ['Standard Drum'] = 'Стандартный барабанный магазин',
       ['Standard Heatsink'] = 'Стандартный радиатор',
       ['Standard Plasma Container'] = 'Стандартный контейнер для плазмы',
@@ -7078,20 +9375,35 @@ MOD.langs = {
       ['Starting heatsinks'] = 'Радиаторы в начале',
       ['Starting magazines'] = 'Магазины в начале',
       ['Starting rounds'] = 'Патроны в начале',
+      ['Starting speed (m/s)'] = 'Начальная скорость (м/с)',
       ['Starts at heat'] = 'Начинается при нагреве',
+      ['Stat Editor'] = 'Характеристики',
       ['Stationary Shroud'] = 'Неподвижный покров',
+      ['Statuses'] = 'Эффекты',
       ['Stim Pistol'] = 'Стим-пистолет',
+      ['Stingray'] = 'Хвостокол',
       ['Stoker'] = 'Топка',
+      ['Stomach zone'] = 'Брюхо',
       ['Stops you while firing'] = 'Останавливает при стрельбе',
       ['Stratagem'] = 'Стратагема',
+      ['Stratagem Jammer'] = 'Глушилка стратагем',
+      ['Stratagem Scrambler (convoy)'] = 'Шифратор стратагем (конвой)',
+      ['Stratagem jamming radius (m)'] = 'Радиус глушения стратагем (м)',
+      ['Stratagem scrambling radius (m)'] = 'Радиус шифрования стратагем (м)',
       ['Stratagems'] = 'Стратагемы',
+      ['Structure.'] = 'Сооружение.',
       ['Stun'] = '«Оглушающая»',
+      ['Stun (Illuminate) (experimental)'] = 'Оглушение (Иллюминаты) (эксперимент.)',
       ['Stun (large)'] = 'Оглушение (сильное)',
       ['Stun (massive)'] = 'Оглушение (огромное)',
+      ['Stun (massive) (experimental)'] = 'Оглушение (огромное) (эксперимент.)',
       ['Stun (medium)'] = 'Оглушение (среднее)',
       ['Stun (small)'] = 'Оглушение (слабое)',
       ['Stun Baton'] = 'Оглушающая дубинка',
       ['Stun Lance'] = 'Оглушающее копье',
+      ['Stun Pods'] = 'Оглушающие капсулы',
+      ['Stun and gas resistance (x)'] = 'Устойчивость к оглушению и газу (x)',
+      ['Stun resistance (x)'] = 'Устойчивость к оглушению (x)',
       ['Stun rounds'] = 'Оглушающие боеприпасы',
       ['Stun rounds fire (id)'] = 'Выстрел оглушающими (id)',
       ['Supplementary Adrenaline'] = 'Добавки-адреналин',
@@ -7100,12 +9412,15 @@ MOD.langs = {
       ['Support'] = 'Поддерж.',
       ['Support reload speed'] = 'Перезарядка оружия поддержки',
       ['Support weapon drop; the weapon itself is under Support.'] = 'Сброс оружия поддержки; само оружие — во вкладке «Поддержка».',
+      ['Suppressed'] = 'С глушителем',
       ['Suppressor'] = 'Подавитель',
       ['Sure?'] = 'Уверены?',
+      ['Surplus EAT Allocation'] = 'Выдача излишков «ОБ»',
       ['Surviving lethal damage'] = 'Выживание при смертельном уроне',
       ['Sway multiplier'] = 'Множитель колебания',
       ['Sweeper'] = 'Чистильщик',
       ['Swim speed (m/s)'] = 'Скорость плавания (м/с)',
+      ['TCS support'] = 'Опора TCS',
       ['TD-110 Maelstrom'] = 'TD-110 Водоворот',
       ['TD-220 Bastion MK XVI'] = 'TD-220 Mk-XVI «БАСТИОН»',
       ['TED-63 Dynamite'] = 'TED-63 Динамит',
@@ -7114,9 +9429,14 @@ MOD.langs = {
       ['TX-41 Sterilizer'] = 'TX-41 Стерилизатор',
       ['Tabs shown'] = 'Показывать вкладки',
       ['Talon'] = 'Коготь',
+      ['Tank'] = 'Танк',
+      ['Tank turret'] = 'Башня танка',
       ['Target search interval, max (s)'] = 'Интервал поиска цели, макс. (с)',
       ['Target search interval, min (s)'] = 'Интервал поиска цели, мин. (с)',
+      ['Tcs'] = 'TCS',
       ['Tenderizer'] = '«Размягчитель»',
+      ['Tentacle'] = 'щупальце',
+      ['Terminids'] = 'Терминиды',
       ['Tesla Tower'] = '«Тесла-башня»',
       ['Tested releases only.'] = 'Только проверенные релизы.',
       ['That did not work; see the log.'] = 'Не получилось; см. журнал.',
@@ -7130,6 +9450,7 @@ MOD.langs = {
       ['The Stoker\'s underbarrel flamer, not the SMG itself.'] = 'Подствольный огнемет «Топки», а не сам пистолет-пулемет.',
       ['The armor passives could not be stacked'] = 'Не удалось объединить пассивные эффекты брони',
       ['The charge backpack, the charge and its blast. Cooldown: Stratagems tab.'] = 'Рюкзак с зарядом, сам заряд и его взрыв. Перезарядка: вкладка «Стратагемы».',
+      ['The explosion the round sets off when it hits something. 0: no explosion.'] = 'Взрыв, который снаряд вызывает при попадании во что-либо. 0: без взрыва.',
       ['The flamethrower you carry.'] = 'Огнемет, который вы носите.',
       ['The game holds at most 2048 rounds in a magazine.'] = 'Игра вмещает в магазин не более 2048 патронов.',
       ['The game\'s own files are already in place.'] = 'Исходные файлы игры уже на месте.',
@@ -7139,12 +9460,15 @@ MOD.langs = {
       ['The one you carry. The CQC-20 Breaching Hammer is listed under Support.'] = 'То, что вы носите. CQC-20 Штурмовой молот — во вкладке «Поддержка».',
       ['The one you carry. The CQC-72 support version is listed under Support.'] = 'То, что вы носите. Версия поддержки CQC-72 — во вкладке «Поддержка».',
       ['The pistol you carry. The One-Two\'s launcher is listed under the One-Two.'] = 'Пистолет, который вы носите. Гранатомет «Двоечки» указан у «Двоечки».',
+      ['The range the sights are set for at this step (you switch steps in game). At that range the shot lands'] = 'Дальность, на которую выставлен прицел на этой ступени (ступени переключаются в игре). На этой дальности',
       ['The recharge time is 0: set it above 0 first.'] = 'Время восстановления равно 0: сначала задайте больше 0.',
       ['The rifle you carry. The grenade launcher is listed separately.'] = 'Винтовка, которую вы носите. Гранатомет указан отдельно.',
       ['The rifle you carry. The underbarrel shotgun is listed separately.'] = 'Винтовка, которую вы носите. Подствольный дробовик указан отдельно.',
+      ['The round goes off when it passes this close to an enemy, without hitting it. 0: off (the RL-77 uses 2 m).'] = 'Снаряд взрывается, когда пролетает так близко от врага, не попав в него. 0: выкл. (у RL-77 2 м).',
       ['The support hammer delivered by hellpod. The game data files it next to the Machete.'] = 'Молот поддержки, доставляемый Адской капсулой. В данных игры он лежит рядом с Мачете.',
       ['The support weapon. The CQC-73 is listed under Secondary.'] = 'Оружие поддержки. CQC-73 — во вкладке «Дополнительное».',
       ['Thermite'] = '«Термитная»',
+      ['Thermite (experimental)'] = 'Термит (эксперимент.)',
       ['Throw range'] = 'Дальность броска',
       ['Throw spread (degrees)'] = 'Разброс броска (град.)',
       ['Throw velocity, max (m/s)'] = 'Скорость броска, макс. (м/с)',
@@ -7153,22 +9477,44 @@ MOD.langs = {
       ['Throwable launching is supported in solo missions only.'] = 'Запуск метательного работает только в одиночных миссиях.',
       ['Throwables'] = 'Метательное',
       ['Throwing Knife'] = 'Метательный нож',
+      ['Tier 1'] = 'уровень 1',
+      ['Tier 1 captive'] = 'уровень 1, пленный',
+      ['Tier 2'] = 'уровень 2',
+      ['Tier 2 guard'] = 'уровень 2, охрана',
+      ['Tier2'] = 'уровень 2',
+      ['Time before drowning (s)'] = 'Время до утопления (с)',
       ['Time between bombs (s)'] = 'Время между бомбами (с)',
       ['Time between salvos (s)'] = 'Время между залпами (с)',
       ['Time between shells (s)'] = 'Время между снарядами (с)',
+      ['Time deployed (s)'] = 'Время работы (с)',
+      ['Top'] = 'сверху',
       ['Top left hatch'] = 'Верхний левый люк',
       ['Top right hatch'] = 'Верхний правый люк',
+      ['Top wing'] = 'Верхнее крыло',
       ['Torcher'] = '«Сжигатель»',
+      ['Tornado stun (experimental)'] = 'Оглушение торнадо (эксперимент.)',
+      ['Torso'] = 'Торс',
+      ['Torso armor'] = 'Броня торса',
+      ['Torso inside'] = 'Внутренняя часть торса',
+      ['Torso outside'] = 'Внешняя часть торса',
+      ['Torso underside'] = 'Низ торса',
+      ['Toughness'] = 'Живучесть',
       ['Tracer rounds'] = 'Трассирующие боеприпасы',
+      ['Tracking after losing sight (x)'] = 'Преследование вне видимости (x)',
       ['Tracking speed'] = 'Скорость слежения',
+      ['Tracks'] = 'Гусеницы',
+      ['Tremor (experimental)'] = 'Толчки (эксперимент.)',
       ['Trigger delay (s)'] = 'Задержка срабатывания (с)',
+      ['Trooper'] = 'Кавалерист',
+      ['Trooper LMG backpack'] = 'Рюкзак с пулеметом кавалериста',
+      ['Trooper jump pack'] = 'Реактивный ранец кавалериста',
       ['True Grit'] = 'Железная хватка',
       ['Tube Reddot 2x'] = 'Трубчатый коллиматор (2x)',
       ['Turn speed at cruise'] = 'Скорость поворота на крейсерской',
       ['Turn speed at slowest'] = 'Скорость поворота на минимальной',
       ['Turn speed, horizontal (deg/s)'] = 'Скорость поворота, по горизонтали (град./с)',
       ['Turn speed, vertical (deg/s)'] = 'Скорость поворота, по вертикали (град./с)',
-      ['Turret'] = 'Турель',
+      ['Turret'] = 'Башня',
       ['Type the name: Enter keeps it, Esc cancels. The game sees these keys too, so name presets from a menu.'] = 'Введите имя: Enter — сохранить, Esc — отмена. Игра тоже видит эти клавиши, поэтому называйте пресеты из меню.',
       ['Type the percent (%d-%d): Enter sets it, Esc cancels.'] = 'Введите процент (%d-%d): Enter — задать, Esc — отмена.',
       ['Type the value: Enter sets it, Esc cancels. Values out of range are set to the nearest allowed one.'] = 'Введите значение: Enter — задать, Esc — отмена. Значения вне диапазона заменяются ближайшим допустимым.',
@@ -7190,13 +9536,24 @@ MOD.langs = {
       ['Urchin'] = 'Озорник',
       ['Uses per mission'] = 'Применений за миссию',
       ['Uses per rearm'] = 'Применений за перевооружение',
+      ['V2'] = 'v2',
+      ['V3'] = 'v3',
       ['VEHICLE'] = 'ТЕХНИКА',
       ['VG-70 Variable'] = 'VG-70 Изменяемый',
       ['Variable'] = 'Изменяемый',
       ['Vehicle'] = 'Техника',
+      ['Vehicle death (huge)'] = 'Гибель техники (огромная)',
+      ['Vehicle death (large, air)'] = 'Гибель техники (большая, в воздухе)',
+      ['Vehicle death (large, ground)'] = 'Гибель техники (большая, на земле)',
+      ['Vehicle death (medium)'] = 'Гибель техники (средняя)',
+      ['Vehicle death (medium, ground)'] = 'Гибель техники (средняя, на земле)',
       ['Vehicle. The weapons it carries are listed under it.'] = 'Техника. Ее оружие указано под ней.',
       ['Velocity'] = 'Скорость',
       ['Velocity (m/s)'] = 'Скорость (м/с)',
+      ['Vent back bar'] = 'Задняя штанга вентиляции',
+      ['Vent sarcophagus'] = 'Вентиляция саркофага',
+      ['Vent under'] = 'Нижняя вентиляция',
+      ['Veracitor'] = 'Удостоверитель',
       ['Verdict'] = '«Вердикт»',
       ['Vertical Grip'] = 'Вертикальная рукоять',
       ['Vertical Grip 45 Degree'] = 'Вертикальная рукоять под 45 градусов',
@@ -7204,6 +9561,8 @@ MOD.langs = {
       ['Vertical Grip Flashlight'] = 'Вертикальная рукоять с фонариком',
       ['Veto'] = 'Вето',
       ['Volatile Plasma Bolt'] = 'Заряд нестабильной плазмы',
+      ['Voteless'] = 'Неизбиратели',
+      ['Vox Engine'] = 'Глас-двигатель',
       ['W.A.S.P. Launcher'] = 'Ракетомет W.A.S.P.',
       ['WEAPON STATS'] = 'ХАРАКТЕРИСТИКИ ОРУЖИЯ',
       ['WIND-UP'] = 'РАСКРУТКА',
@@ -7211,40 +9570,102 @@ MOD.langs = {
       ['Walk speed (m/s)'] = 'Скорость шага (м/с)',
       ['Walking backwards (multiplier)'] = 'Ходьба назад (множитель)',
       ['Walking speed (m/s)'] = 'Скорость ходьбы (м/с)',
+      ['War Strider'] = 'Боевой шатун',
       ['Warp Pack'] = 'Варп-ранец',
+      ['Warp Ship'] = 'Варп-корабль',
       ['Warp distance (m)'] = 'Дальность варпа (м)',
       ['Warp pack'] = 'Варп-ранец',
       ['Warrant'] = 'Ордер',
+      ['Warrior'] = 'Воин',
+      ['Warrior acid burst'] = 'Кислотный выплеск воина',
+      ['Watcher'] = 'Смотритель',
+      ['Water'] = 'Вода',
       ['Weapon stats'] = 'Характеристики оружия',
       ['Weaves'] = 'Петляет',
+      ['What goes off when they die. Each explosion is shared by every enemy that uses it.'] = 'Что взрывается при их гибели. Каждый взрыв общий для всех врагов, которые его используют.',
       ['Wind-down time (s)'] = 'Время замедления (с)',
       ['Wind-down time, released (s)'] = 'Время замедления после отпускания (с)',
       ['Wind-up'] = 'Раскрутка',
       ['Wind-up time (s)'] = 'Время раскрутки (с)',
+      ['Wings'] = 'Крылья',
+      ['Wretch'] = 'Паскуда',
+      ['Xenobite Ardent'] = 'Ксенобит-приверженец',
       ['Your changes are off: turn them on in Settings to edit.'] = 'Ваши изменения выключены: включите их в Настройках, чтобы редактировать.',
       ['Your changes are off: turn them on in Settings to load a preset'] = 'Ваши изменения выключены: включите их в Настройках, чтобы загрузить пресет',
       ['Your values are not in the game yet: close the game, then Install.'] = 'Ваши значения ещё не в игре: закройте игру и нажмите «Установить в игру».',
+      ['a slot is 1 (primary) or 3 (secondary)'] = 'слот: 1 (основное) или 3 (дополнительное)',
+      ['added to every armor value, up to 10; lowered: down to 0'] = 'прибавляется ко всей броне, до 10; при снижении — до 0',
+      ['airborne'] = 'десант',
       ['also the second firing mode\'s shot (the same projectile)'] = 'также выстрел второго режима (тот же снаряд)',
+      ['assassinate'] = 'убийца',
+      ['assault'] = 'штурм',
+      ['body parts without their own armor use this'] = 'используется частями тела без своей брони',
+      ['breaks the hip-fire animations on two-handed weapons'] = 'ломает анимации стрельбы от бедра у двуручного оружия',
+      ['bull'] = 'бык',
       ['clip'] = 'обойма',
       ['damage: the same as the other rounds (Damage above)'] = 'урон: как у остальных выстрелов («Урон» выше)',
       ['direct hit: the same as the first mode\'s (Damage above)'] = 'прямое попадание: как в первом режиме («Урон» выше)',
+      ['elite'] = 'элита',
+      ['every enemy with this attack shares it'] = 'общее для всех врагов с этой атакой',
+      ['fake'] = 'ложный',
+      ['gloom'] = 'Мгла',
+      ['gunships, Dragonroaches, Leviathans and the like, where a planet has them'] = 'штурмовики, дракораканы, левиафаны и т. п., где они есть на планете',
+      ['heavycannon'] = 'тяжелая пушка',
+      ['hexagon'] = 'шестигранник',
+      ['how long it keeps after you once you break line of sight'] = 'как долго он преследует вас после потери из виду',
+      ['how much gas it takes to confuse it'] = 'сколько газа нужно, чтобы его дезориентировать',
+      ['how much stun it takes to stun it'] = 'сколько оглушения нужно, чтобы его оглушить',
+      ['how often the beam deals its damage while it touches'] = 'как часто луч наносит урон при касании',
+      ['how quickly the view follows your aim at this zoom; lower it if a high zoom spins the view'] = 'как быстро прицел следует за наведением на этом увеличении; уменьшите, если на большом увеличении прицел крутится',
+      ['its height above its flight route; lower flies closer to the ground (terrain still holds it up)'] = 'высота над маршрутом полёта; ниже — ближе к земле (рельеф всё равно не даёт опуститься)',
       ['its own. - / + : fire another weapon\'s'] = 'свой. - / + : стрелять снарядом другого оружия',
+      ['ivory legion assault'] = 'Костяной легион, штурм',
+      ['ivory legion tier 2'] = 'Костяной легион, уровень 2',
+      ['jammer'] = 'глушилка',
+      ['jump'] = 'прыжок',
+      ['keep it above about speed / frame rate.'] = 'держите её выше примерно скорости / частоты кадров.',
       ['loaded into an empty weapon, from your spare rounds'] = 'заряжается в пустое оружие из запасных патронов',
+      ['lower (more negative): you go deeper before drowning starts'] = 'ниже (отрицательнее): глубже, прежде чем начнёте тонуть',
+      ['melee, guns and death explosions, shared ones included'] = 'ближний бой, оружие и взрывы при гибели, включая общие',
       ['min charge'] = 'мин. заряд',
       ['no shrapnel'] = 'без осколков',
       ['none (no explosion)'] = 'нет (без взрыва)',
       ['none (no projectile)'] = 'нет (без снаряда)',
       ['normal projectile'] = 'обычный снаряд',
-      ['only works with the blast angle at 360, and the radius has to be larger than one step of the round: keep it above about speed / frame rate.'] = 'работает только при угле взрыва 360; радиус должен быть больше шага снаряда за кадр — держите его выше скорости / частоты кадров.',
+      ['on the crosshair; closer or farther it lands a bit high or low. Does not change the zoom.'] = 'выстрел попадает в перекрестие; ближе или дальше чуть выше или ниже. Не меняет увеличение.',
+      ['one kind of stratagem cannot be called within this distance while it stands'] = 'пока объект цел, в этом радиусе нельзя вызывать стратагемы одного типа',
+      ['outcast'] = 'изгой',
       ['overcharge'] = 'перезаряд',
       ['panels, mines per panel: lower only (more than the default crashes the game)'] = 'секции, мины на секцию: только уменьшать (больше значения по умолчанию — вылет игры)',
+      ['phalanx'] = 'фаланга',
+      ['quieter for enemies (the noise of the game\'s suppressed guns); no suppressor model, same firing sound'] = 'тише для врагов (шум оружия с глушителем из игры); без модели глушителя, звук выстрела тот же',
+      ['scout walker rider'] = 'пилот шатуна-разведчика',
       ['shared with'] = 'общее с',
+      ['shotgun'] = 'дробовик',
       ['speedloader'] = 'скорозарядник',
       ['stage 1: partial charge shot, stages 2-3: full charge shot'] = 'этап 1: выстрел с частичным зарядом, этапы 2-3: выстрел с полным зарядом',
       ['stage 1: uncharged shot, stages 2-3: charged shot'] = 'этап 1: выстрел без заряда, этапы 2-3: заряженный выстрел',
+      ['standard'] = 'стандартный',
+      ['stratagem codes and names are scrambled within this distance while it stands'] = 'пока объект цел, в этом радиусе коды и названия стратагем перемешаны',
+      ['stratagems cannot be called within this distance while it stands'] = 'пока объект цел, в этом радиусе нельзя вызывать стратагемы',
+      ['tcs'] = 'TCS',
+      ['tentacle'] = 'щупальце',
+      ['the armory list it is in: 1 primary, 3 secondary'] = 'в каком списке арсенала: 1 основное, 3 дополнительное',
+      ['the body and every body part, bleed-out health too'] = 'тело и все части тела, а также здоровье при кровотечении',
+      ['the faction multipliers cannot slow patrols below this: lower it with them'] = 'множители фракций не замедлят патрули ниже этого: снижайте вместе с ними',
+      ['the force a hit needs to stagger it (hit sizes it never staggers from stay that way)'] = 'сила удара, нужная, чтобы его ошеломить (удары, от которых он не ошеломляется, так и остаются)',
+      ['the force a hit needs to stagger them'] = 'сила удара, нужная, чтобы их ошеломить',
+      ['the game holds back reinforcements past about 100 enemies at x1; it has crashed past 200-240 enemies alive'] = 'при x1 игра сдерживает подкрепления после ~100 врагов; при 200-240 живых врагах бывали вылеты',
       ['the game\'s tiers: 10 small arms, 20 HMG, 30 autocannon, 40 Strider, 50 orbital, 60 Hellbomb, 250 never'] = 'уровни игры: 10 стрелковое, 20 тяжелый пулемет, 30 автопушка, 40 Страйдер, 50 орбитальный удар, 60 Адская бомба, 250 никогда',
+      ['the model and its body parts; very large or small sizes may look or move oddly'] = 'модель и части тела; очень большие или маленькие размеры могут выглядеть или двигаться странно',
       ['the shot fired from this heat on, and what it does to you'] = 'выстрел начиная с этого нагрева и его действие на вас',
       ['the spare ammo in its backpack; read when the backpack is called in'] = 'запас боеприпасов в его рюкзаке; читается при вызове рюкзака',
+      ['tier 1 captive'] = 'уровень 1, пленный',
+      ['tier 2 guard'] = 'уровень 2, охрана',
+      ['v2'] = 'v2',
+      ['v3'] = 'v3',
+      ['walking, patrolling, searching, fighting and charging speeds together'] = 'скорости ходьбы, патрулирования, поиска, боя и рывка вместе',
+      ['what it has left once its health is gone, lost over time'] = 'остаток после потери здоровья, убывает со временем',
     },
     lower = {
       ['100kg bomb'] = 'Бомба (100 кг)',
@@ -7399,18 +9820,22 @@ MOD.langs = {
       ['a/m-23 ems mortar sentry'] = 'A/M-23 «Турель с ЭМ-минометом»',
       ['a/mg-43 machine gun sentry'] = 'A/MG-43 «Пулеметная турель»',
       ['a/mls-4x rocket sentry'] = 'A/MLS-4X «Ракетная турель»',
+      ['aa emplacement'] = 'Орудия ПВО',
       ['ac-8 autocannon'] = 'AC-8 «Автопушка»',
       ['accelerator rifle'] = 'Акселераторная винтовка',
       ['acclimated'] = 'Акклиматизированный',
       ['adjudicator'] = '«Эксперт»',
       ['adreno-defibrillator'] = 'Адрено-дефибрилятор',
       ['advanced filtration'] = 'Продвинутая фильтрация',
+      ['agitator'] = 'Подстрекатель',
       ['airburst rocket launcher'] = '«Ракетница с подрывом в воздухе»',
+      ['alpha commander'] = 'Альфа-командир',
       ['amendment'] = 'Поправка',
       ['amw-20 apex'] = 'AMW-20 «Апогей»',
       ['angled foregrip'] = 'Угловая рукоять',
       ['angled foregrip advanced'] = 'Улучшенная угловая рукоять',
       ['angled foregrip with laser'] = 'Угловая рукоять с лазерным прицелом',
+      ['annihilator tank'] = 'Танк «Аннигилятор»',
       ['anti-air missile'] = 'Ракета ПВО',
       ['anti-materiel rifle'] = '«Крупнокалиберная винтовка»',
       ['anti-tank emplacement'] = 'Противотанковое орудие',
@@ -7433,20 +9858,35 @@ MOD.langs = {
       ['arc thrower'] = '«Дуговой метатель»',
       ['arc-12 blitzer'] = 'ARC-12 «Налетчик»',
       ['arc-3 arc thrower'] = 'ARC-3 «Дуговой метатель»',
+      ['armed resupply pods'] = 'Вооруженные капсулы «Пополнения запасов»',
+      ['assault raider'] = 'Налетчик-штурмовик',
       ['assault rifle'] = 'Штурмовая винтовка',
       ['autocannon'] = '«Автопушка»',
       ['autocannon sentry'] = '«Турель с автопушкой»',
+      ['automaton dropship'] = 'Десантный корабль автоматонов',
+      ['automaton mortar emplacement'] = 'Минометная позиция автоматонов',
       ['b-1 supply pack'] = 'B-1 «Рюкзак: боеприпасы»',
       ['b-100 portable hellbomb'] = 'B-100 Переносная Адская бомба',
       ['b/flam-80 cremator'] = 'B/FLAM-80 Крематорий',
+      ['ballistic missile'] = 'Баллистическая ракета',
       ['ballistic padding'] = 'Баллистическая подкладка',
       ['ballistic shield backpack'] = '«Рюкзак: баллистический щит»',
+      ['barrager tank'] = 'Танк «Заграждение»',
       ['bastion mk xvi'] = 'Mk-XVI «Бастион»',
       ['belt-fed grenade launcher'] = 'Ленточный гранатомет',
+      ['berserker'] = 'Берсерк',
+      ['big walker cannon'] = 'Пушка шатуна',
+      ['bile spewer'] = 'Желчный блевун',
+      ['bile spitter'] = 'Желчный плеватель',
+      ['bile titan'] = 'Желчный титан',
+      ['bile warrior'] = 'Желчный воин',
       ['blitzer'] = '«Налетчик»',
+      ['blocking rock'] = 'Преграждающая скала',
       ['blunt-force mitigation'] = 'Уменьшение дробящего урона',
       ['bolt pistol'] = 'Болтострел',
+      ['boosters'] = 'Двигатели',
       ['br-14 adjudicator'] = 'BR-14 «Эксперт»',
+      ['brawler'] = 'Буян',
       ['breacher'] = 'Прорывник',
       ['breaching hammer'] = 'Штурмовой молот',
       ['break-action shotgun'] = 'Дробовик-переломка',
@@ -7454,18 +9894,30 @@ MOD.langs = {
       ['breaker incendiary'] = '«Зажигательный крушитель»',
       ['breaker spray&pray'] = '«Крушитель ураган»',
       ['breakthrough exosuit'] = 'Экзокостюм «Прорыв»',
+      ['brood commander'] = 'Командир роя',
+      ['bulk fabricator'] = 'Массовый изготовитель',
       ['bullet storm'] = '«Шквал пуль»',
+      ['bunker turret'] = 'Бункерная турель',
       ['bushwhacker'] = '«Партизан»',
       ['caltrops'] = 'Проволочные силки',
+      ['cannon turret'] = 'Пушка-турель',
       ['cb-9 exploding crossbow'] = 'CB-9 «Взрывной арбалет»',
       ['censor'] = 'Цензор',
+      ['charger'] = 'Громила',
+      ['charger behemoth'] = 'Громила-чудище',
+      ['chemical backpack'] = 'Рюкзак с химикатами',
       ['cluster bomb'] = 'КЛАСТЕРНАЯ БОМБА',
+      ['cognitive disruptor'] = 'Искажатель разума',
       ['combat hatchet'] = 'Боевой топорик',
       ['combat scope 4x'] = 'Боевой прицел (4х)',
+      ['command bunker'] = 'Командный бункер',
       ['commando'] = '«Коммандос»',
+      ['commissar'] = 'Комиссар',
+      ['concealed insertion'] = 'Скрытное внедрение',
       ['concussive padding (grenadier)'] = 'Противовзрывная подкладка, гренадер',
       ['concussive padding (hazmat)'] = 'Противовзрывная подкладка, химзащита',
       ['concussive padding (reinforced)'] = 'Противовзрывная подкладка, усиленная',
+      ['conflagration devastator'] = 'Пламенный разрушитель',
       ['constitution'] = '«Конституция»',
       ['contact mine'] = 'Контактная мина',
       ['cookout'] = '«Барбекю»',
@@ -7481,21 +9933,28 @@ MOD.langs = {
       ['cqc-73 entrenchment tool'] = 'CQC-73 Орудие окапывания',
       ['cqc-9 defoliation tool'] = 'CQC-9 Дефолиатор',
       ['cremator'] = 'Крематорий',
+      ['crescent overseer'] = 'Серповидный надзиратель',
       ['crisper'] = '«Фритюр»',
+      ['crusher'] = 'Крушитель',
       ['dagger'] = '«Кинжал»',
       ['dbs-2 double freedom'] = 'DBS-2 Двойная свобода',
       ['de-escalator'] = 'Деэскалатор',
+      ['dead sprint'] = 'Смертельный рывок',
       ['deadeye'] = 'Меткий стрелок',
       ['defender'] = 'Защитник',
       ['defoliation tool'] = 'Дефолиатор',
       ['democracy protects'] = 'Демократия защищает',
       ['desert stormer'] = 'Пустынный штурмовик',
+      ['devastator'] = 'Разрушитель',
+      ['devastator jump pack'] = 'Реактивный ранец разрушителя',
       ['diligence'] = '«Рвение»',
       ['diligence counter sniper'] = '«Рвение антиснайпер»',
       ['directional shield'] = 'Щит направленного действия',
       ['dominator'] = '«Угнетатель»',
       ['double freedom'] = 'Двойная свобода',
       ['double-edge sickle'] = 'Обоюдоострый серп',
+      ['dragonroach'] = 'Дракоракан',
+      ['dropship'] = 'Десантный корабль',
       ['drum magazine'] = 'Барабанный магазин',
       ['dune walker sniper scope 10x'] = 'Снайперский прицел (10х)',
       ['dynamite'] = 'Динамит',
@@ -7514,6 +9973,7 @@ MOD.langs = {
       ['eat-411 leveller'] = 'EAT-411 Уравнитель',
       ['eat-700 expendable napalm'] = 'EAT-700 Одноразовый напалм',
       ['electrical conduit'] = 'Электропроводник',
+      ['elevated overseer'] = 'Возвышенный надзиратель',
       ['emancipator exosuit'] = 'Экзокостюм «Благодетель»',
       ['ems mortar sentry'] = '«Турель с ЭМ-минометом»',
       ['engineering kit'] = 'Инженерный комплект',
@@ -7527,11 +9987,16 @@ MOD.langs = {
       ['exo-55 breakthrough exosuit'] = 'EXO-55 Экзокостюм «Прорыв»',
       ['expendable anti-tank'] = '«Одноразовый бронебой»',
       ['expendable napalm'] = 'Одноразовый напалм',
+      ['experimental infusion'] = 'Экспериментальная инъекция',
       ['exploding crossbow'] = '«Взрывной арбалет»',
+      ['explosive barrel'] = 'Взрывающаяся бочка',
       ['extended magazine'] = 'Увеличенный магазин',
       ['extra padding'] = 'Экстра-уплотнение',
+      ['fabricator'] = 'Изготовитель',
+      ['factory strider'] = 'Шатун-завод',
       ['faf-14 spear'] = 'FAF-14 Копье',
       ['feet first'] = 'Вперед ногами',
+      ['firebomb hellpods'] = 'Зажигательные Адские Капсулы',
       ['flam-40 flamethrower'] = 'FLAM-40 «Огнемет»',
       ['flam-66 torcher'] = 'FLAM-66 «Сжигатель»',
       ['flame sentry'] = 'Турель-огнемет',
@@ -7539,8 +10004,11 @@ MOD.langs = {
       ['flames mk2'] = 'Горючая смесь Mk2',
       ['flamethrower'] = '«Огнемет»',
       ['flashlight'] = 'Фонарик',
+      ['fleshmob'] = 'Плотеформер',
       ['fortified'] = 'Укрепление',
       ['frag'] = '«Осколочная»',
+      ['fusion autocannon'] = 'Термоядерная автопушка',
+      ['fusion repeater'] = 'Термоядерный повторитель',
       ['g-10 incendiary'] = 'G-10 «Зажигательная»',
       ['g-109 urchin'] = 'G-109 Озорник',
       ['g-11 caltrops'] = 'G-11 Проволочные силки',
@@ -7565,7 +10033,9 @@ MOD.langs = {
       ['gallant'] = '«Кавалер»',
       ['gas'] = 'Газовая',
       ['gas mortar sentry'] = 'Турель с газовым минометом',
+      ['gatekeeper'] = 'Сторож',
       ['gatling sentry'] = '«Турель Гатлинга»',
+      ['gazer'] = 'Наблюдатель',
       ['giga grenade'] = 'Гигаграната',
       ['gl-15 evictor'] = 'GL-15 Вытеснитель',
       ['gl-21 grenade launcher'] = 'GL-21 «Гранатомет»',
@@ -7577,25 +10047,45 @@ MOD.langs = {
       ['grenade launcher'] = '«Гранатомет»',
       ['grenade pistol'] = '«Пистолет-гранатомет»',
       ['grenadier battlement'] = 'Амбразура гранатометчика',
+      ['grinder'] = 'Измельчитель',
       ['gunner frv'] = 'МТР «Стрелок»',
+      ['gunship'] = 'Штурмовик',
       ['gunslinger'] = 'Стрелок',
       ['halt'] = 'Стоп',
+      ['harvester'] = 'Жнец',
+      ['heavy devastator'] = 'Тяжелый разрушитель',
+      ['heavy devastator shield'] = 'Щит тяжелого разрушителя',
+      ['heavy fusion cannon'] = 'Тяжелая термоядерная пушка',
       ['heavy machine gun'] = '«Тяжелый пулемет»',
       ['high capacity heatsink'] = 'Высокоемкий радиатор',
       ['high dissipation heatsink'] = 'Высокоэффективный радиатор',
       ['high explosive'] = '«Фугасная»',
       ['high-velocity shrapnel'] = 'Высокоскоростной снаряд со шрапнелью',
+      ['hijack tech hub nexus machine'] = 'Машина узла техцентра',
+      ['hive breaker drill'] = 'Бур «Крушитель ульев»',
+      ['hive guard'] = 'Страж улья',
+      ['hive lord'] = 'Властелин улья',
       ['hmg emplacement'] = '«Огневая позиция: тяжелый пулемет»',
       ['homing anti-air missile'] = 'Самонаводящаяся ракета ПВО',
       ['homing ground missile'] = 'Самонаводящаяся ракета «воздух-земля»',
       ['homing ground missile mk2'] = 'Самонаводящаяся ракета «воздух-земля» Mk2',
       ['hot-shot marksman rifle'] = 'Марксманская винтовка «Лихач»',
       ['hover pack'] = 'Ранец для парения',
+      ['hulk'] = 'Глыба',
+      ['hulk bruiser'] = 'Глыба-крушитель',
+      ['hulk firebomber'] = 'Огненная глыба',
+      ['hulk flag'] = 'Флаг глыбы',
+      ['hulk jetpack'] = 'Реактивный ранец глыбы',
+      ['hulk obliterator'] = 'Глыба-уничтожитель',
+      ['hulk scorcher'] = 'Глыба-поджигатель',
+      ['hunter'] = 'Охотник',
       ['hyena'] = 'Гиена',
       ['immolation'] = 'Испепелитель',
       ['impact'] = '«Ударная»',
+      ['impaler'] = 'Пронзатель',
       ['incendiary'] = '«Зажигательная»',
       ['incendiary impact'] = 'Зажигательная ударная',
+      ['incendiary mg devastator'] = 'Зажигательный пулеметчик-разрушитель',
       ['incinerator frv'] = 'Огнеметная МТР',
       ['inflammable'] = 'Огнеопасный',
       ['integrated explosives'] = 'Встроенная взрывчатка',
@@ -7605,8 +10095,10 @@ MOD.langs = {
       ['k-2 throwing knife'] = 'K-2 Метательный нож',
       ['kinetic displacement mitigation'] = 'Кинетическое демпфирование',
       ['knight'] = 'Рыцарь',
+      ['landed ship door shield'] = 'Щит двери севшего корабля',
       ['large plasma bolt'] = 'Большой заряд плазмы',
       ['larger plasma container'] = 'Увеличенный контейнер для плазмы',
+      ['larva container'] = 'Контейнер для личинки',
       ['las-12 sai'] = 'LAS-12 Сай',
       ['las-13 trident'] = 'LAS-13 «Трезубец»',
       ['las-16 sickle'] = 'LAS-16 «Серп»',
@@ -7625,6 +10117,7 @@ MOD.langs = {
       ['laser sight flashlight'] = 'Лазерный прицел с фонариком',
       ['laser. standard prism'] = 'Стандартная призма',
       ['leveller'] = 'Уравнитель',
+      ['leviathan'] = 'Левиафан',
       ['liberator'] = '«Освободитель»',
       ['liberator carbine'] = 'Карабин «Освободитель»',
       ['liberator concussive'] = '«Сотрясающий освободитель»',
@@ -7645,6 +10138,7 @@ MOD.langs = {
       ['machine gun'] = '«Пулемет»',
       ['machine gun sentry'] = '«Пулеметная турель»',
       ['maelstrom'] = 'Водоворот',
+      ['marauder'] = 'Хищник',
       ['maxigun'] = 'Максиган',
       ['med-kit'] = 'Аптечка',
       ['medium plasma bolt'] = 'Средний заряд плазмы',
@@ -7664,6 +10158,7 @@ MOD.langs = {
       ['napalm bomb mk3'] = 'Напалмовая бомба Mk3',
       ['nova'] = '«Нова»',
       ['nuke'] = 'Ядерная бомба',
+      ['nursing spewer'] = 'Кормящий блевун',
       ['ombudsman'] = 'Омбудсмен',
       ['one true flag'] = 'Один истинный флаг',
       ['one-two'] = 'Двоечка',
@@ -7679,6 +10174,8 @@ MOD.langs = {
       ['orbital railcannon strike'] = '«Орбитальный рельсотронный залп»',
       ['orbital smoke strike'] = '«Орбитальная дымовая завеса»',
       ['orbital walking barrage'] = '«Орбитальный огневой вал»',
+      ['overseer'] = 'Надзиратель',
+      ['overship'] = 'Иерарх',
       ['oxygenator'] = 'Аэратор',
       ['p-11 stim pistol'] = 'P-11 Стим-пистолет',
       ['p-113 verdict'] = 'P-113 «Вердикт»',
@@ -7705,9 +10202,12 @@ MOD.langs = {
       ['plas-39 accelerator rifle'] = 'PLAS-39 Акселераторная винтовка',
       ['plas-45 epoch'] = 'PLAS-45 Эпоха',
       ['portable hellbomb'] = 'Переносная Адская бомба',
+      ['pouncer'] = 'Прыгун',
+      ['predator hunter'] = 'Хищный охотник',
       ['punisher'] = '«Каратель»',
       ['punisher plasma'] = '«Плазменный каратель»',
       ['purifier'] = '«Очиститель»',
+      ['pyro trooper'] = 'Пирокавалерист',
       ['pyrotech'] = 'Пиротех',
       ['quasar cannon'] = 'Пушка «Квазар»',
       ['r-2 amendment'] = 'R-2 Поправка',
@@ -7720,6 +10220,8 @@ MOD.langs = {
       ['r-63cs diligence counter sniper'] = 'R-63CS «Рвение антиснайпер»',
       ['r-72 censor'] = 'R-72 Цензор',
       ['r/40-k hot-shot marksman rifle'] = 'R/40-K Марксманская винтовка «Лихач»',
+      ['radical'] = 'Радикал',
+      ['raider'] = 'Налетчик',
       ['rail cannon round'] = 'Выстрел рельсотрона',
       ['railgun'] = '«Рельсотрон»',
       ['railgun round'] = 'Снаряд рельсотрона',
@@ -7733,13 +10235,21 @@ MOD.langs = {
       ['reprimand'] = 'Взыскание',
       ['rl-77 airburst rocket launcher'] = 'RL-77 «Ракетница с подрывом в воздухе»',
       ['rock solid'] = 'Кремень',
+      ['rocket devastator'] = 'Разрушитель-ракетчик',
       ['rocket sentry'] = '«Ракетная турель»',
       ['rs-422 railgun'] = 'RS-422 «Рельсотрон»',
+      ['rupture charger'] = 'Прорывной громила',
+      ['rupture spewer'] = 'Прорывной рассеиватель',
+      ['rupture warrior'] = 'Прорывной воин',
       ['s-11 speargun'] = 'S-11 Гарпун',
       ['sai'] = 'Сай',
+      ['scavenger'] = 'Мусорщик',
       ['scorcher'] = '«Поджигатель»',
       ['scout'] = 'Разведчик',
+      ['scout raider'] = 'Налетчик-разведчик',
+      ['scout strider'] = 'Шатун-разведчик',
       ['scythe'] = '«Коса»',
+      ['seaf soldier'] = 'Солдат ВССЗ',
       ['secondary'] = 'дополнительное',
       ['seeker'] = 'Искатель',
       ['senator'] = 'Сенатор',
@@ -7763,6 +10273,9 @@ MOD.langs = {
       ['shield generator pack'] = '«Генератор щита»',
       ['short magazine'] = 'Короткий магазин',
       ['shrapnel'] = 'Шрапнель',
+      ['shredder tank'] = 'Танк «Пильщик»',
+      ['shrieker'] = 'Крикун',
+      ['shrieker nest'] = 'Гнездо крикунов',
       ['sickle'] = '«Серп»',
       ['siege-ready'] = 'К осаде готов',
       ['sightliner'] = '«Целенаводчик»',
@@ -7781,26 +10294,39 @@ MOD.langs = {
       ['solo silo'] = 'Одиночная пусковая шахта',
       ['spear'] = 'Копье',
       ['speargun'] = 'Гарпун',
+      ['spore burst bile titan'] = 'Желчный титан-споровик',
+      ['spore burst hunter'] = 'Охотник-споровик',
+      ['spore burst scavenger'] = 'Мусорщик-споровик',
+      ['spore burst warrior'] = 'Воин-споровик',
+      ['spore charger'] = 'Громила-споровик',
+      ['spore lung'] = 'Споровое легкое',
+      ['spore spewer'] = 'Рассеиватель спор',
       ['sta-11 smg'] = 'StA-11 Пистолет-пулемет',
       ['sta-52 assault rifle'] = 'StA-52 Штурмовая винтовка',
       ['sta-x3 w.a.s.p. launcher'] = 'StA-X3 Ракетомет W.A.S.P.',
+      ['stalker'] = 'Следопыт',
       ['stalwart'] = '«Доблесть»',
       ['standard drum'] = 'Стандартный барабанный магазин',
       ['standard heatsink'] = 'Стандартный радиатор',
       ['standard plasma container'] = 'Стандартный контейнер для плазмы',
       ['stationary shroud'] = 'Неподвижный покров',
       ['stim pistol'] = 'Стим-пистолет',
+      ['stingray'] = 'Хвостокол',
       ['stoker'] = 'Топка',
+      ['stratagem jammer'] = 'Глушилка стратагем',
       ['stun'] = '«Оглушающая»',
       ['stun baton'] = 'Оглушающая дубинка',
       ['stun lance'] = 'Оглушающее копье',
+      ['stun pods'] = 'Оглушающие капсулы',
       ['supplementary adrenaline'] = 'Добавки-адреналин',
       ['supply frv'] = 'МТР снабжения',
       ['supply pack'] = '«Рюкзак: боеприпасы»',
       ['support'] = 'поддержка',
       ['suppressor'] = 'Подавитель',
+      ['surplus eat allocation'] = 'Выдача излишков «ОБ»',
       ['sweeper'] = 'Чистильщик',
       ['talon'] = 'Коготь',
+      ['tcs support'] = 'Опора TCS',
       ['td-110 maelstrom'] = 'TD-110 Водоворот',
       ['td-220 bastion mk xvi'] = 'TD-220 Mk-XVI «БАСТИОН»',
       ['ted-63 dynamite'] = 'TED-63 Динамит',
@@ -7810,6 +10336,9 @@ MOD.langs = {
       ['throwing knife'] = 'Метательный нож',
       ['tm-1 lure mine'] = 'TM-1 Мина-приманка',
       ['torcher'] = '«Сжигатель»',
+      ['trooper'] = 'Кавалерист',
+      ['trooper jump pack'] = 'Реактивный ранец кавалериста',
+      ['trooper lmg backpack'] = 'Рюкзак с пулеметом кавалериста',
       ['true grit'] = 'Железная хватка',
       ['tube reddot 2x'] = 'Трубчатый коллиматор (2x)',
       ['tx-41 sterilizer'] = 'TX-41 Стерилизатор',
@@ -7817,6 +10346,7 @@ MOD.langs = {
       ['unflinching'] = 'Непоколебимый',
       ['urchin'] = 'Озорник',
       ['variable'] = 'Изменяемый',
+      ['veracitor'] = 'Удостоверитель',
       ['verdict'] = '«Вердикт»',
       ['vertical grip'] = 'Вертикальная рукоять',
       ['vertical grip 45 degree'] = 'Вертикальная рукоять под 45 градусов',
@@ -7824,11 +10354,47 @@ MOD.langs = {
       ['veto'] = 'Вето',
       ['vg-70 variable'] = 'VG-70 Изменяемый',
       ['volatile plasma bolt'] = 'Заряд нестабильной плазмы',
+      ['voteless'] = 'Неизбиратели',
+      ['vox engine'] = 'Глас-двигатель',
       ['w.a.s.p. launcher'] = 'Ракетомет W.A.S.P.',
+      ['war strider'] = 'Боевой шатун',
       ['warp pack'] = 'Варп-ранец',
+      ['warp ship'] = 'Варп-корабль',
       ['warrant'] = 'Ордер',
+      ['warrior'] = 'Воин',
+      ['watcher'] = 'Смотритель',
+      ['wretch'] = 'Паскуда',
+      ['xenobite ardent'] = 'Ксенобит-приверженец',
     },
     patterns = {
+      { '^Zoom level (%d) %(x%)$', 'Увеличение, уровень %1 (x)' },
+      { '^Zeroing distance (%d) %(m%)$', 'Пристрелка, дистанция %1 (м)' },
+      { '^PgUp/PgDn change weapon, Del resets, Ctrl%+1%-5 loads a weapon preset, Ctrl%+Shift%+1%-5 saves one; (%d+) value%(s%) changed%.$', 'PgUp/PgDn — листать, Del — сброс, Ctrl(+Shift)+1-5 — пресеты; изменено значений: %1.' },
+      { '^BODY PART (%d+)$', 'Часть тела %1' },
+      { '^Attack: (.+)$', 'Атака: %1' },
+      { '^Body part (%d+)$', 'Часть тела %1' },
+      { '^(.+): weapon$', '%1: оружие' },
+      { '^(.+): weapon (%d+)$', '%1: оружие %2' },
+      { '^(.+): bile spray$', '%1: струя желчи' },
+      { '^(.+): bile spray (%d+)$', '%1: струя желчи %2' },
+      { '^(.+): bile mortar$', '%1: желчная мортира' },
+      { '^(.+): bile mortar (%d+)$', '%1: желчная мортира %2' },
+      { '^(.+): acid spit$', '%1: кислотный плевок' },
+      { '^(.+): acid spit (%d+)$', '%1: кислотный плевок %2' },
+      { '^(.+): spore spray$', '%1: струя спор' },
+      { '^(.+): spore spray (%d+)$', '%1: струя спор %2' },
+      { '^(.+): fire breath$', '%1: огненное дыхание' },
+      { '^(.+): fire breath (%d+)$', '%1: огненное дыхание %2' },
+      { '^(.+): acid spray$', '%1: струя кислоты' },
+      { '^(.+): acid spray (%d+)$', '%1: струя кислоты %2' },
+      { '^(.+): mounted weapon$', '%1: установленное оружие' },
+      { '^(.+): mounted weapon (%d+)$', '%1: установленное оружие %2' },
+      { '^(.+): primary weapon$', '%1: основное оружие' },
+      { '^(.+): sidearm$', '%1: пистолет' },
+      { '^(.+): support weapon$', '%1: оружие поддержки' },
+      { '^A weapon of (.+)%.$', 'Оружие: %L1.' },
+      { '^(.+) (%d+) variants share these values%.$', '%1 Эти значения общие для %2 вариантов.' },
+      { '^Spawning on (.+) missions %(every mission type%)%. Multipliers of the game\'s values%.$', 'Появление врагов в заданиях против: %1 (все типы заданий). Множители значений игры.' },
       { '^(.-) SHRAPNEL$', '%1: ОСКОЛКИ' },
       { '^(.-) EXPLOSION ID$', '%1: ID ВЗРЫВА' },
       { '^projectile (%d+) %(not in this game build%)$', 'снаряд %1 (нет в этой сборке игры)' },
@@ -7859,6 +10425,10 @@ MOD.langs = {
       { '^Updated to (.+)%.$', 'Обновлено до %1.' },
       { '^Add a passive to (.+)$', 'Добавить пассивный эффект к %1' },
       { '^Not installed: the armor passives could not be stacked %((.+)%)%. Nothing was changed%.$', 'Не установлено: не удалось объединить пассивные эффекты брони (%1). Ничего не изменено.' },
+      { '^Zoom level (%d) follow speed$', 'Увеличение, уровень %1: скорость следования' },
+      { '^(.+): Light$', '%1: лёгкая' },
+      { '^(.+): Medium$', '%1: средняя' },
+      { '^(.+): Heavy$', '%1: тяжёлая' },
       { '^Heat level (%d+)$', 'Уровень нагрева %1' },
       { '^(.+); ammo type shared with (.+)$', '%1; тип боеприпасов общий с: %L2' },
       { '^fires: (.+)%. The rows above stay its own$', 'стреляет: %1. Строки выше остаются его собственными' },
@@ -7881,7 +10451,6 @@ MOD.langs = {
       { '^Deleted "(.+)"$', 'Удален «%1»' },
       { '^Again to overwrite "(.+)"$', 'Еще раз — перезаписать «%1»' },
       { '^Again to delete "(.+)"$', 'Еще раз — удалить «%1»' },
-      { '^PgUp/PgDn change weapon, Del resets, Ctrl%+1%-5 loads a weapon preset, Ctrl%+Shift%+1%-5 saves one; (%d+) value%(s%) changed%.$', 'PgUp/PgDn — смена оружия, Del — сброс, Ctrl+1-5 — загрузить пресет оружия, Ctrl+Shift+1-5 — сохранить; изменено значений: %1.' },
       { '^Overwriting and deleting ask twice%. Changes apply at once and are saved; (%d+) value%(s%) changed%.$', 'Перезапись и удаление требуют подтверждения. Изменения применяются сразу и сохраняются; изменено значений: %1.' },
       { '^The panel now opens and closes with (.+)%.$', 'Теперь панель открывается и закрывается клавишей %1.' },
       { '^Saved as StatEditor\\preset_(%d+)%.txt %(copy it to share the set%)%.$', 'Сохранено как StatEditor\\preset_%1.txt (скопируйте файл, чтобы поделиться набором).' },
@@ -7966,6 +10535,7 @@ MOD.langs = {
       { '^Stat (%d+)$', 'Параметр %1' },
       { '^Part (%d+)$', 'Часть %1' },
       { '^Weapon (%d+)$', 'Оружие %1' },
+      { '^(.+) %(([A-Z][^()]*)%)$', '%1 (%2)' },
     },
     prefix = {
       { 'PgUp/PgDn change weapon, Del resets, Ctrl+1-5 loads a weapon preset, Ctrl+Shift+1-5 saves one; ', 'PgUp/PgDn — смена оружия, Del — сброс, Ctrl+1-5 — загрузить пресет оружия, Ctrl+Shift+1-5 — сохранить; ' },
@@ -8983,6 +11553,47 @@ KINDS[TYPES.seeking] = { name = 'seeking missile', stride = 272, keyed = true }
 KINDS[TYPES.laser] = { name = 'laser designator', stride = 64, keyed = true }
 -- AvatarComponentData (the helldiver's): its move info's speeds and stamina (offsets in MOVE)
 KINDS[TYPES.avatar] = { name = 'avatar', stride = 852, keyed = true }
+-- (from SHODAN Offline Integration, ayakamods 5593) DrownableComponentData: the helldiver's drowning (+4 drowning
+-- depth offset, +8 floating offset, +12 time before drowning); HellpodComponentData (104 bytes): the player pods'
+-- descent (+8 spawn height, +20 initial speed, +24 braking height, +28 braking speed, +32 braking time);
+-- HellpodPayloadComponentData (12 bytes): a deployed payload's +4 life time (the sentries')
+TYPES.drown, TYPES.hellpod, TYPES.payload = 0x726A4F6B, 0x7EF5CC55, 0xDDB5C03F
+KINDS[TYPES.drown] = { name = 'drownable', stride = 64, keyed = true }
+KINDS[TYPES.hellpod] = { name = 'hellpod', stride = 104, keyed = true }
+KINDS[TYPES.payload] = { name = 'hellpod payload', stride = 12, keyed = true }
+-- EquipmentComponentData (232 bytes): +196 one-handed (bool byte). HelldiverCustomizationKit (one block per
+-- armor, helmet or cape): +16 name (text id), +40 kit type (0 armor), +48 body types (pointer, count; 24 bytes:
+-- +8 pieces, pointer, count; 112 bytes: +8 slot (2 torso), +12 piece type, +16 weight 0 light / 1 medium / 2 heavy)
+TYPES.equipment, TYPES.kit = 0x5357A825, 0xD9A55AA0
+KINDS[TYPES.equipment] = { name = 'equipment', stride = 232, keyed = true }
+KINDS[TYPES.kit] = { name = 'armor kit', stride = 1, groups = true, list = {} }
+KINDS[TYPES.kit].group_key = function(blob)
+    return string.format('armor kit %08X %08X %08X %d', u32(blob, 0) or 0, u32(blob, 4) or 0, u32(blob, 16) or 0, #blob)
+end
+KINDS[TYPES.kit].parse = function(blob, stride, spec, address)
+    local function at(o)   -- a pointer: an offset in the payload (offline), or an address (in game)
+        local lo, hi = u32(blob, o), u32(blob, o + 4)
+        local v = lo and hi and lo + hi * 4294967296
+        if v and v >= #blob then v = v - address - HEADER_BYTES end
+        return v and v >= 0 and v < #blob and v or nil
+    end
+    local index = { name = u32(blob, 16), type = u32(blob, 40), pieces = {} }
+    local bodies, count = at(48), u32(blob, 56)
+    if not (index.name and index.type and count) or count > 8 then return nil, 'armor kit layout does not match this build' end
+    if index.type ~= 0 or count == 0 then return index, 0 end
+    if not bodies then return nil, 'armor kit layout does not match this build' end
+    for b = 0, count - 1 do
+        local list, n = at(bodies + b * 24 + 8), u32(blob, bodies + b * 24 + 16)
+        if not (list and n) or n > 64 or list + n * 112 > #blob then return nil, 'armor kit layout does not match this build' end
+        for q = 0, n - 1 do
+            local piece = list + q * 112
+            local slot, weight = u32(blob, piece + 8), u32(blob, piece + 16)
+            if not weight or weight > 2 then return nil, 'armor kit layout does not match this build' end
+            index.pieces[#index.pieces + 1] = { offset = piece + 16, torso = slot == 2 and u32(blob, piece + 12) == 0, weight = weight }
+        end
+    end
+    return index, #index.pieces
+end
 -- the tables the panel waits for (stratagem groups are taken as they come)
 local KIND_ORDER = { T_WEAPON, T_MAGAZINE, T_ROUNDS, T_FIRE, T_PROJECTILE, T_DAMAGE, T_BEAM_WEAPON, T_BEAM,
                      T_EXPLOSION, T_ORBITAL, T_HEAT, T_SPRAY, T_STATUS, T_MELEE, TYPES.arc_weapon, TYPES.arc,
@@ -9309,6 +11920,9 @@ local function read_field(f)
     if f.storage == 'grenade' then
         return KINDS[TYPES.throwable].read_entity(api.read(entry.copies[1] + HEADER_BYTES + f.offset, 8))
     end
+    if f.storage == 'gun' then   -- an enemy's weapon: the chosen entity's number (MOD.enemy.gun_choices)
+        return MOD.enemy.gun_id(api.read(entry.copies[1] + HEADER_BYTES + f.offset, 8))
+    end
     if f.storage == 'flag' then   -- a bool byte
         local b = api.read(entry.copies[1] + HEADER_BYTES + f.offset, 1)
         b = b and b:byte()
@@ -9324,6 +11938,7 @@ end
 
 local function encode(f, value)
     if f.storage == 'grenade' then return KINDS[TYPES.throwable].entity_bytes(value) end
+    if f.storage == 'gun' then local g = MOD.enemy.gun_choices().by_id[value]; return g and g.key end
     if f.storage == 'f32' then return f32_bytes(value) end
     if f.storage == 'flag' then return value >= 0.5 and string.char(1) or string.char(0) end
     return u32_bytes(math.floor(value + 0.5))
@@ -9346,12 +11961,14 @@ local function write_field(f, value)
     if not entry then return false, 'table not found' end
     if read_field(f) == nil then return false, 'current value implausible' end
     if type(value) == 'number' and not MOD.parse_number(value) then return false, 'not a finite number' end
+    if f.allowed and not f.allowed[value] then return false, f.allowed.why end   -- (the Slot row: 1 or 3)
     default_of(f)
     if f.most and value > f.most then value = f.most end
     local bytes, done = nil, {}
     if f.storage == 'tier' then bytes = KINDS[TYPES.destruction].bytes(f, value, read_field(f))
     else bytes = encode(f, value) end
-    if not bytes then return false, f.storage == 'tier' and 'no demolition tier there' or 'unknown grenade selection' end
+    if not bytes then return false, f.storage == 'tier' and 'no demolition tier there' or f.storage == 'gun' and 'unknown weapon'
+                                    or 'unknown grenade selection' end
     if f.storage == 'grenade' and value ~= 0 then
         local ok, why = KINDS[TYPES.throwable].ensure_launch()
         if not ok then return false, why end
@@ -9528,7 +12145,9 @@ KINDS[TYPES.items].words = function(t, r)
                 local offset, size, data = peek4(d + at[3] + x * 12), peek4(d + at[3] + x * 12 + 4), peek4(d + at[3] + x * 12 + 8)
                 if renumbered and comp == 236 and offset >= 488 then offset = offset - 8 end
                 for w = 0, size - 4, 4 do
-                    if (comp ~= 236 or (offset + w >= 956 and offset + w < 1020)) and (comp ~= 113 or offset + w == 56) then
+                    local o = offset + w   -- the weapon's: stat bonuses (+956), and an optic's zoom (+116), follow speed (+316) and zeroing (+340)
+                    if (comp ~= 236 or (o >= 956 and o < 1020) or (o >= 116 and o <= 124) or (o >= 316 and o <= 324) or (o >= 340 and o <= 348))
+                       and (comp ~= 113 or o == 56) then
                         out[comp .. ':' .. (offset + w)] = at[4] + data + w
                     end
                 end
@@ -9712,9 +12331,13 @@ KINDS[TYPES.items].build = function()
         for _, r in ipairs(t.order) do
             local lo, hi, n = peek4(top + r + 48), peek4(top + r + 52), peek4(top + r + 56)
             local slot = lo and hi and n and n > 0 and n < 8 and peek4(lo + hi * 4294967296)
-            local mods = kinds[slot] and spec.mods(spec.words(t, r))
+            local words = kinds[slot] and spec.words(t, r)
+            local mods = words and spec.mods(words)
             local any = false
             for _, m in ipairs(spec.MODS) do any = any or (mods and mods[m[1]] ~= nil) end
+            -- an optic's zoom levels and zeroing distances (the weapon's +116 / +340, three each)
+            local scope = slot == 2 and words and (words['236:116'] or words['236:340']) and words
+            any = any or scope ~= nil and scope ~= false
             local id = peek4(top + r + 8)
             local hash = any and string.format('FFFFFFFF%08X', id)
             local own = t.names[r]:find('custom') and owner[id]
@@ -9729,7 +12352,7 @@ KINDS[TYPES.items].build = function()
                                     note = own and ('Muzzle. Only the ' .. own .. ' comes with it.')
                                            or slot >= 6 and (kinds[slot] .. '. Its modifiers apply to every weapon loaded with it.')
                                            or (kinds[slot] .. '. Its modifiers apply to every weapon fitted with it.'),
-                                    attachment = { mods = mods, order = slot == 2 and 1 or slot == 1 and 2 or slot == 4 and 3 or 4 } }
+                                    attachment = { mods = mods, scope = scope or nil, order = slot == 2 and 1 or slot == 1 and 2 or slot == 4 and 3 or 4 } }
                 by_hash[hash] = list[#list]
             end
         end
@@ -9771,6 +12394,57 @@ KINDS[TYPES.passive].build = function()
     log('armor passives: ' .. #list .. ' listed')
 end
 
+-- Armor weight: one page on the Armors tab, a row per armor (every armor set of that name), its weight on every
+-- piece of it (the torso's shown); speed and stamina follow it (tested in game, issue #89).
+MOD.kits = { HASH = 'FFFFFFF900000001', NAMES = { [0] = 'Light', [1] = 'Medium', [2] = 'Heavy' } }
+function MOD.kits.build()
+    local old = by_hash[MOD.kits.HASH]
+    for k = #weapons, 1, -1 do if weapons[k] == old then table.remove(weapons, k) end end
+    by_hash[MOD.kits.HASH] = nil
+    local any = false
+    for _, group in ipairs(KINDS[TYPES.kit].list) do any = any or #tables[group].index.pieces > 0 end
+    if not any then return end
+    by_hash[MOD.kits.HASH] = { name = 'Armor weight', slot = 'Armors', hash = MOD.kits.HASH, key = hash_key(MOD.kits.HASH),
+                               rows = {}, by_id = {}, kits = true,
+                               note = 'Light, medium or heavy, per armor (every armor set with that name).' }
+    weapons[#weapons + 1] = by_hash[MOD.kits.HASH]
+end
+function MOD.kits.resolve(entry)
+    local by_name, order = {}, {}
+    for _, group in ipairs(KINDS[TYPES.kit].list) do
+        local index = tables[group].index
+        if #index.pieces > 0 and MOD.kit_names and MOD.kit_names[index.name] then   -- (unnamed: not in the game yet)
+            if not by_name[index.name] then by_name[index.name] = {}; order[#order + 1] = index.name end
+            table.insert(by_name[index.name], { group = group, index = index })
+        end
+    end
+    local function name_of(id) return MOD.kit_names[id] end
+    table.sort(order, function(a, b) return name_of(a):lower() < name_of(b):lower() end)
+    local rows = { {}, {}, {} }
+    for _, id in ipairs(order) do
+        local row_id, parts, first = string.format('weight_%08X', id), {}, nil
+        for _, kit in ipairs(by_name[id]) do
+            for _, piece in ipairs(kit.index.pieces) do
+                local p = part(row_id .. '_' .. (#parts + 1), kit.group, piece.offset, 'u32', 2)
+                if piece.torso and not first then first = #parts + 1 end
+                parts[#parts + 1] = p
+            end
+        end
+        if first then table.insert(parts, 1, table.remove(parts, first)) end
+        parts[1].id = row_id
+        local w = default_of(parts[1].field)
+        if w and rows[w + 1] then rows[w + 1][#rows[w + 1] + 1] = { row_id, name_of(id), parts } end
+    end
+    for w, list in ipairs(rows) do
+        for _, r in ipairs(list) do
+            local row = add_row(entry, MOD.kits.NAMES[w - 1] .. ' armor', r[1], r[2], 'u32', r[3], 0, 2, 1, 1)
+            row.choice = 'weight'
+            row.label_of = function() return r[2] .. ': ' .. (MOD.kits.NAMES[read_field(r[3][1].field) or -1] or '?') end
+            row.note = '0 light, 1 medium, 2 heavy'
+        end
+    end
+end
+
 -- The helldiver: its health component (main health +0, each named zone's health +232; zones of 552 bytes from +520,
 -- the name at +96) and its avatar's move info (MOVE: section, id, label, offset, max, small / big step).
 KINDS[TYPES.avatar].ENTITY = '4D1C334D294DFA97'   -- content/fac_helldivers/cha_avatar/avatar_helldiver
@@ -9794,7 +12468,13 @@ KINDS[TYPES.avatar].MOVE = {
     { 'Stamina', 'recover_prone', 'Refills prone in (s)', 68, 600, 0.5, 2 },
     { 'Stamina', 'recover_delay', 'Refill starts after (s)', 72, 60, 0.1, 0.5 },
     { 'Stamina', 'cost_jump', 'Jump cost (share of stamina)', 76, 1, 0.05, 0.1 },
-    { 'Stamina', 'cost_dive', 'Dive cost (share of stamina)', 80, 1, 0.05, 0.1 } }
+    { 'Stamina', 'cost_dive', 'Dive cost (share of stamina)', 80, 1, 0.05, 0.1 },
+    -- (Consistent Vaulting's fields, via SHODAN Offline Integration)
+    { 'Climbing and sliding', 'slide_enter', 'Slope slide starts at (degrees)', 152, 89, 1, 5 },
+    { 'Climbing and sliding', 'slide_exit', 'Slope slide ends at (degrees)', 172, 89, 1, 5 },
+    { 'Climbing and sliding', 'climb_height', 'Highest ledge it climbs (m)', 260, 10, 0.05, 0.25 } }
+-- the player hellpods (initial drop, reinforcements): entity, label
+KINDS[TYPES.avatar].PODS = { { 'E58163E71928D3E2', 'Initial drop' }, { 'EF9EB729A9D6D849', 'Reinforcement' } }
 KINDS[TYPES.avatar].resolve = function(entry)
     local A, ht, at = KINDS[TYPES.avatar], tables[TYPES.health], tables[TYPES.avatar]
     local h = ht and ht.index[entry.key]
@@ -9818,6 +12498,40 @@ KINDS[TYPES.avatar].resolve = function(entry)
     if m then
         for _, f in ipairs(A.MOVE) do
             add_row(entry, f[1], f[2], f[3], 'f32', { part(f[2], TYPES.avatar, m + f[4], 'f32', 100000) }, 0, f[5], f[6], f[7])
+        end
+    end
+    -- water (Shallow Water Diving's fields): the two depth offsets are below the water line (negative)
+    local dt = tables[TYPES.drown]
+    local d = dt and dt.index[entry.key]
+    if d then
+        for _, f in ipairs({ { 'drown_depth', 'Drowning depth offset (m)', 4, -5, 0 }, { 'float_depth', 'Floating depth offset (m)', 8, -5, 0 },
+                             { 'drown_time', 'Time before drowning (s)', 12, 0.1, 3600 } }) do
+            local p = part(f[1], TYPES.drown, d + f[3], 'f32', 3600)
+            p.field.signed = f[4] < 0 or nil   -- (before the first read: negative values are refused otherwise)
+            local v = default_of(p.field)
+            if v and v >= f[4] and v <= f[5] then
+                local r = add_row(entry, 'Water', f[1], f[2], 'f32', { p }, f[4], f[5], 0.1, f[3] == 12 and 5 or 0.5)
+                if f[3] == 4 then r.note = 'lower (more negative): you go deeper before drowning starts' end
+            end
+        end
+    end
+    -- the hellpods' descent (Hellpod Control's fields: higher and slower gives more time to steer)
+    local hp = tables[TYPES.hellpod]
+    for _, pod in ipairs(hp and A.PODS or {}) do
+        local at = hp.index[hash_key(pod[1])]
+        if at then
+            local section = 'Hellpod: ' .. pod[2]:lower()
+            local prefix = 'pod' .. (pod[2] == 'Initial drop' and 1 or 2) .. '_'
+            for _, f in ipairs({ { 'height', 'Spawn height (m)', 8, 10000, 10, 50 }, { 'speed', 'Starting speed (m/s)', 20, 10000, 5, 25 },
+                                 { 'brake_height', 'Braking height (m)', 24, 10000, 5, 25 }, { 'brake_speed', 'Braking speed (m/s)', 28, 10000, 1, 5 },
+                                 { 'brake_time', 'Braking time (s)', 32, 60, 0.1, 0.5 } }) do
+                local p = part(prefix .. f[1], TYPES.hellpod, at + f[3], 'f32', 100000)
+                local v = default_of(p.field)
+                if v and v == v and math.abs(v) < 100000 then
+                    p.field.signed = v < 0 or nil
+                    add_row(entry, section, prefix .. f[1], f[2], 'f32', { p }, v < 0 and -f[4] or 0, f[4], f[5], f[6])
+                end
+            end
         end
     end
 end
@@ -9884,6 +12598,16 @@ MOD.status = { choices = {
     { 38, 'Stun (small)', 10 }, { 39, 'Stun (medium)', 50 }, { 40, 'Stun (large)', 25 },
     { 43, 'Gas', 100 }, { 45, 'Gas confusion', 100 }, { 44, 'Gas (Sterilizer)', 1 }, { 46, 'Gas confusion (Sterilizer)', 1 },
 }, by = {} }
+-- more, from SHODAN Offline Integration (HD2Runtime's catalogue; this build's numbers, checked against the records'
+-- damage and durations): statuses enemies and hazards apply; a player weapon may or may not pass them on
+for _, c in ipairs({ { 2, 'Bleed', 10 }, { 1, 'Blind', 10 }, { 3, 'Deaf', 10 }, { 4, 'Confusion', 100 }, { 7, 'Lava', 10 },
+                     { 8, 'Slowed', 10 }, { 9, 'Rooted', 10 }, { 10, 'Acid splash', 10 }, { 11, 'Acid', 10 },
+                     { 12, 'Thermite', 10 }, { 13, 'Cyborg fire', 10 }, { 14, 'Choked', 100 }, { 34, 'Radiation (light)', 10 },
+                     { 35, 'Radiation (heavy)', 10 }, { 36, 'Electric', 10 }, { 41, 'Stun (massive)', 25 },
+                     { 42, 'Stun (Illuminate)', 25 }, { 47, 'Inverted aim assist', 10 }, { 53, 'Tremor', 10 },
+                     { 56, 'Acid storm', 10 }, { 58, 'Tornado stun', 25 }, { 69, 'Gloom', 10 }, { 71, 'Poison', 10 } }) do
+    MOD.status.choices[#MOD.status.choices + 1] = { c[1], c[2] .. ' (experimental)', c[3] }
+end
 for n, c in ipairs(MOD.status.choices) do MOD.status.by[c[1]] = { n = n, type = c[1], name = c[2], strength = c[3] } end
 function MOD.status.name(kind)
     if kind == 0 then return 'none' end
@@ -9898,7 +12622,10 @@ end
 -- why slot `row.slot` of `row.drow` can't take `target` (a gap in the slots, a status not offered), or nil
 function MOD.status.refused(row, target)
     if target ~= 0 and not MOD.status.by[target] and target ~= default_of(row.parts[1].field) then
-        return 'Status effect ' .. tostring(target) .. ' is not one player weapons apply.'
+        return 'Status effect ' .. tostring(target) .. ' is not one of the choices.'
+    end
+    if target ~= 0 and not (tables[T_STATUS] and tables[T_STATUS].index[target]) then
+        return 'Status effect ' .. tostring(target) .. ' is not in this game build.'
     end
     local function at(i) return i >= 0 and i <= 3 and read_field(field_at(T_DAMAGE, row.drow + 44 + i * 8, 'u32', 100000)) or 0 end
     if target ~= 0 and row.slot > 0 and at(row.slot - 1) == 0 then
@@ -9929,14 +12656,9 @@ local function status_rows(entry, section, prefix, drow, per)
             ;(first or duration).note = 'every ' .. name:lower() .. ' source shares ' .. (qrow and 'these ' or 'this ') .. by
         end
     end
-    -- which status each slot applies: the used ones and the next empty one
-    local used = 0
-    for i = 0, 3 do
-        local f = field_at(T_DAMAGE, drow + 44 + i * 8, 'u32', 100000)
-        if (default_of(f) or 0) ~= 0 or (read_field(f) or 0) ~= 0 then used = i + 1 end
-    end
+    -- which status each of the four slots applies (SHODAN Offline Integration: all four shown, filled in order)
     local own = section == 'Damage' and 'Status effects' or ('Status effects (' .. section .. ')')
-    for i = 0, math.min(3, used) do
+    for i = 0, 3 do
         local id = prefix .. 'slot' .. (i + 1)
         local row = add_row(entry, own, id, 'Status effect ' .. (i + 1) .. ' (choice)', 'u32',
                             { part(id, T_DAMAGE, drow + 44 + i * 8, 'u32', 100000) }, 0, 100000, 1, 1)
@@ -10048,6 +12770,11 @@ local function resolve_gun(weapon, key)
     if spray then
         local id = read_field(field_at(T_SPRAY, spray + 200, 'u32', 100000))
         drow = id and tables[T_DAMAGE] and tables[T_DAMAGE].index[id]
+        -- none of its own (the enemies' bile and acid sprays): its projectile's (+196 projectile type, that +60)
+        local pt = not drow and read_field(field_at(T_SPRAY, spray + 196, 'u32', 100000))
+        local pr = pt and pt > 0 and tables[T_PROJECTILE] and tables[T_PROJECTILE].index[pt]
+        id = pr and read_field(field_at(T_PROJECTILE, pr + 60, 'u32', 100000))
+        drow = drow or id and id > 0 and tables[T_DAMAGE] and tables[T_DAMAGE].index[id]
     end
     -- melee weapons: melee component (+12 damage row), damage per strike
     local melee = not drow and record(T_MELEE)
@@ -10072,6 +12799,15 @@ local function resolve_gun(weapon, key)
         damage_rows(weapon, 'Damage', '', drow)
     end
     if drow then status_rows(weapon, 'Damage', '', drow, 'hit') end
+    -- a beam's damage ticks per minute (BeamWeaponComponentData +104; SHODAN Offline Integration: 60 on the Laser
+    -- Cannon and Laser Sentry)
+    local tick = beam and field_at(T_BEAM_WEAPON, beam + 104, 'u32', 6000)
+    local ticks = tick and default_of(tick)
+    if ticks and ticks > 0 and ticks <= 6000 then
+        add_row(weapon, 'Damage', 'beam_ticks', 'Damage ticks per minute', 'u32',
+                { part('beam_ticks', T_BEAM_WEAPON, beam + 104, 'u32', 6000) }, 1, 6000, 10, 60).note =
+            'how often the beam deals its damage while it touches'
+    end
     local damage_to = #weapon.rows
     if arow then
         add_row(weapon, 'Arc', 'arc_range', 'Range (m)', 'f32', { part('arc_range', TYPES.arc, arow + 8, 'f32', 100000) },
@@ -10135,13 +12871,14 @@ local function resolve_gun(weapon, key)
         local impact_row = impact and blast_id('impact_explosion', 'Impact explosion (id)', 144)
         if impact_row then
             impact_row.note = function() return 'sets off: ' .. MOD.records.label(T_EXPLOSION, read_field(impact_row.parts[1].field)) end
+            impact_row.tip = MOD.records.TIPS.impact
         end
         if impact and impact > 0 then
             for _, f in ipairs({ { 'fuse_proximity', 'Blast proximity (m)', 148, 200, 0.1, 1 },
                                  { 'fuse_delay', 'Blast delay (s)', 152, 30, 0.05, 0.5 } }) do
                 local row = add_row(weapon, idsec, idp .. f[1], f[2], 'f32', { part(idp .. f[1], T_PROJECTILE, p + f[3], 'f32', 100000) },
                                     0, f[4], f[5], f[6])
-                if f[1] == 'fuse_proximity' then row.note = MOD.records.NOTES.proximity end
+                row.tip = f[1] == 'fuse_proximity' and MOD.records.TIPS.proximity or MOD.records.TIPS.delay
             end
             -- the blast angle (+136): 80 or 90 on most rounds, 360 on the airburst ones (RL-77, the large plasma bolt)
             local angle = add_row(weapon, idsec, idp .. 'blast_angle', 'Blast angle (deg)', 'f32',
@@ -10416,9 +13153,9 @@ local function resolve_gun(weapon, key)
             -- the game keeps at most 2048 rounds in a magazine (more drops to 2048 at the first shot): rows stop
             -- there, and going past it says why (row.limit)
             for _, m in ipairs(magazine and { { 'capacity', 'Magazine size', 136, 1, 2048, 10 },
-                                              not weapon.sealed and { 'mags_start', 'Starting magazines', 140, 0, 999, 5 } or nil,
-                                              not weapon.sealed and { 'mags_supply', 'Magazines from supply', 144, 0, 999, 5 } or nil,
-                                              not weapon.sealed and { 'mags_max', 'Max spare magazines', 148, 0, 999, 5 } or nil } or {}) do
+                                              not weapon.sealed and { 'mags_start', 'Starting magazines', 140, 0, 100000, 50 } or nil,
+                                              not weapon.sealed and { 'mags_supply', 'Magazines from supply', 144, 0, 100000, 50 } or nil,
+                                              not weapon.sealed and { 'mags_max', 'Max spare magazines', 148, 0, 100000, 50 } or nil } or {}) do
                 local r = row('Ammo', m[1], m[2], 'u32', get(m[1], '5:' .. m[3], T_MAGAZINE, magazine + m[3], 'u32', 100000), m[4], m[5], 1, m[6])
                 if r and m[1] == 'capacity' then r.limit = 'The game holds at most 2048 rounds in a magazine.' end
             end
@@ -10576,7 +13313,25 @@ local function resolve_gun(weapon, key)
         add_row(weapon, 'Handling', 'spread_v', 'Spread (vertical)', 'f32', { w('spread_v', 88) }, 0, 5000, 1, 10)
         add_row(weapon, 'Handling', 'sway', 'Sway multiplier', 'f32', { w('sway', 104) }, 0, 100, 0.1, 0.5)
         add_row(weapon, 'Handling', 'ergonomics', 'Ergonomics', 'f32', { w('ergonomics', 356) }, 0, 1000, 1, 5)
+        -- suppressed (SHODAN Offline Integration): +112 the flag, +132 the firing noise template (the four suppressed
+        -- guns: 1 and 10; others 0 and 0 / 6-9 / 14 / 15); no suppressor model, the firing sound stays
+        local quiet, noise = part('suppressed', T_WEAPON, data + 112, 'flag', 1), part('suppressed_noise', T_WEAPON, data + 132, 'u32', 15)
+        local fv, nv = default_of(quiet.field), default_of(noise.field)
+        if (fv == 0 or fv == 1) and ({ [0] = true, [6] = true, [7] = true, [8] = true, [9] = true, [10] = true, [14] = true, [15] = true })[nv] then
+            local r = add_row(weapon, 'Handling', 'suppressed', 'Suppressed', 'flag', { quiet, noise }, 0, 1, 1, 1)
+            r.lead, r.suppression = true, true
+            r.note = "quieter for enemies (the noise of the game's suppressed guns); no suppressor model, same firing sound"
+        end
         MOD.spin_rows(weapon, data, record(TYPES.windup))
+    end
+    local equipment = weapon.key == key and record(TYPES.equipment)
+    if equipment then
+        local p = part('one_handed', TYPES.equipment, equipment + 196, 'flag', 1)
+        local v = default_of(p.field)
+        if v == 0 or v == 1 then
+            add_row(weapon, 'Handling', 'one_handed', 'One-handed', 'flag', { p }, 0, 1, 1, 1).note =
+                'breaks the hip-fire animations on two-handed weapons'
+        end
     end
     if weapon.key == key and weapon.slot == 'Support' then
         local pack = KINDS[TYPES.rack].pack(key)
@@ -10668,7 +13423,7 @@ end
 -- carry its vehicle kind, 0x00100000 exosuit, 0x00200000 FRV, 0x00400000 tank, and the loadout takes one
 -- stratagem of each kind; on clears those bits (in memory), off puts them back. `original`: by stratagem
 -- id, the flags as the game had them (kept across rescans).
-MOD.vehicles = { on = true, original = {}, defs = {}, BITS = 1048576 }
+MOD.vehicles = { on = false, original = {}, defs = {}, BITS = 1048576 }
 function MOD.vehicles.collect(defs)
     local V = MOD.vehicles
     V.defs = {}
@@ -10696,6 +13451,8 @@ end
 -- Settings switches that change a field in many rows (off by default; off puts the game's values back):
 --   bounce: stratagem balls stick on more surfaces: StratagemInfo +368 bit 0x02 cleared on every stratagem
 --     that has it
+--   reticle: sniper rifles show a crosshair in third person: WeaponData crosshair type (+404; +400 before game
+--     build 25988413) 3 (the sniper rifles': none in third person) -> 0 (default), as the HD2 Equipment mod does
 --   foliage: player rockets, launcher rounds and stratagem ordnance fly through tree canopies and bushes:
 --     ProjectileInfo +248 raycast template 0 (damage) -> 3 (damage without foliage, what plasma bolts use) on
 --     the impact-exploding player projectiles, by type and name hash (+8); game build 26088801 (build
@@ -10703,6 +13460,7 @@ end
 -- `original`: by row, the value the game had (kept across rescans).
 MOD.tweaks = {
     bounce = { on = false, original = {}, rows = {} },
+    reticle = { on = false, original = {}, rows = {} },
     foliage = { on = false, original = {}, rows = {}, NO_FOLIAGE = 3, TARGETS = {
         [6] = 0x84F1CDC4, [11] = 0xF73287FE, [12] = 0x6B55E559, [14] = 0xF516C1C8, [17] = 0xA1701744,
         [18] = 0xFD691A89, [27] = 0xF796A3E6, [30] = 0xE3FF617D, [32] = 0x0B3CE509, [37] = 0xCB119C6D,
@@ -10737,6 +13495,16 @@ function MOD.tweaks.collect(defs)
             B.rows[#B.rows + 1] = { kind = def.kind, off = def.off + 368, size = 1, game = flags, want = flags - 2 }
         end
     end
+    local R, wt = MOD.tweaks.reticle, tables[T_WEAPON]
+    R.rows = {}
+    local xoff = KINDS[T_WEAPON].stride == 1240 and 404 or 400
+    for key, off in pairs(wt and wt.index or {}) do
+        local kind = R.original[key] or peek4(wt.copies[1] + HEADER_BYTES + off + xoff)
+        if kind == 3 then
+            R.original[key] = kind
+            R.rows[#R.rows + 1] = { kind = T_WEAPON, off = off + xoff, size = 4, game = 3, want = 0 }
+        end
+    end
     F.rows = {}
     local pt = tables[T_PROJECTILE]
     for ptype, name in pairs(F.TARGETS) do
@@ -10748,12 +13516,12 @@ function MOD.tweaks.collect(defs)
             F.rows[#F.rows + 1] = { kind = T_PROJECTILE, off = off + 248, size = 4, game = 0, want = F.NO_FOLIAGE }
         end
     end
-    log(string.format('switches: stratagem bounce %d stratagems, foliage pass-through %d of %d projectiles',
-        #B.rows, #F.rows, (function() local n = 0 for _ in pairs(F.TARGETS) do n = n + 1 end return n end)()))
+    log(string.format('switches: stratagem bounce %d stratagems, sniper crosshair %d weapons, foliage pass-through %d of %d projectiles',
+        #B.rows, #R.rows, #F.rows, (function() local n = 0 for _ in pairs(F.TARGETS) do n = n + 1 end return n end)()))
     MOD.tweaks.apply()
 end
 function MOD.tweaks.apply()
-    for _, name in ipairs({ 'bounce', 'foliage' }) do
+    for _, name in ipairs({ 'bounce', 'reticle', 'foliage' }) do
         local T = MOD.tweaks[name]
         for _, r in ipairs(T.rows) do
             local value = T.on and r.want or r.game
@@ -10927,7 +13695,7 @@ end
 
 -- A sentry's or emplacement's body (issue #44), by its entity (`key`): health +0 (with each zone that has a
 -- pool of its own the same size: the emplacements' one zone, 1000 of the HMG's 1000), the durable ratio
--- (+268, with the zones that have the same), then for each destruction level the demolition force that
+-- (+268, with the zones that have the same), the armor (+280, zones +216; sentries and emplacements), then for each destruction level the demolition force that
 -- destroys it (its tier; direct hits: the level's own when set).
 KINDS[TYPES.destruction].body_rows = function(entry, key, section, prefix)
     local ht = tables[TYPES.health]
@@ -10951,6 +13719,9 @@ KINDS[TYPES.destruction].body_rows = function(entry, key, section, prefix)
     local durable = add_row(entry, section, prefix .. 'durable', 'Durable ratio (0-1)', 'f32', follow('durable', 268, 204, 'f32', 1),
                             0, 1, 0.05, 0.1)
     durable.note = "0: hits deal their normal damage, 1: their durable damage (the weapon's lower one)"
+    if prefix == 'unit_' then   -- (issue #86; the deployers have their own Armor row) +280, with the zones that match
+        add_row(entry, section, prefix .. 'armor', 'Armor', 'u32', follow('armor', 280, 216, 'u32', 10), 0, 10, 1, 1)
+    end
     local spec = KINDS[TYPES.destruction]
     local n = spec.ready() and tables[TYPES.destruction_map].index[key]
     local block = n and spec.found[n + 1]
@@ -11419,6 +14190,105 @@ function MOD.extra.row(entry, def)
     row.after_h = #row.after * 16 + 6
 end
 
+-- Call-in code: StratagemInfo +64 the code (the host resolves it to the array's address: a u32 per arrow, 1 up,
+-- 2 right, 3 down, 4 left), +72 the arrow count. Offline only: the host writes the codes at Install (a longer
+-- one is appended to its table, hostdata.lua M.codes). The row's value is the code as a number, an arrow per
+-- base-5 digit (Up Right = 12 in base 5 = 7), so it is saved, preset and reset like any other value.
+-- Recorded with the arrow keys or WASD, like the game's own entry.
+MOD.code = { ARROWS = { '↑', '→', '↓', '←' }, MAX = 9 }
+function MOD.code.native(def)
+    local b = api.read(def.at + 64, 16)
+    if not b then return nil end
+    local at, count = u32(b, 0) + u32(b, 4) * 4294967296, u32(b, 8)
+    if at < 65536 or count < 1 or count > MOD.code.MAX then return nil end
+    local arrows = {}
+    for k = 1, count do
+        local a = peek4(at + (k - 1) * 4)
+        if not a or a < 1 or a > 4 then return nil end
+        arrows[k] = a
+    end
+    return arrows
+end
+function MOD.code.number(arrows)
+    local v = 0
+    for _, a in ipairs(arrows) do v = v * 5 + a end
+    return v
+end
+function MOD.code.arrows(v)
+    local out = {}
+    v = math.floor((v or 0) + 0.5)
+    while v > 0 do
+        local a = v % 5
+        if a == 0 then return nil end
+        table.insert(out, 1, a)
+        v = (v - a) / 5
+    end
+    return #out > 0 and #out <= MOD.code.MAX and out or nil
+end
+function MOD.code.text(v, arrows, gap)
+    arrows = arrows or MOD.code.arrows(v)
+    if not arrows then return '?' end
+    local out = {}
+    for k, a in ipairs(arrows) do out[k] = MOD.code.ARROWS[a] end
+    return table.concat(out, gap or ' ')
+end
+function MOD.code.field(def) return fields[def.kind .. ':code' .. def.off] end
+-- the stratagem's code as it stands (edited or the game's)
+function MOD.code.current(def)
+    local f = MOD.code.field(def)
+    return f and MOD.code.arrows(read_field(f)) or MOD.code.native(def)
+end
+-- In every mission: a code that clashes with theirs is refused. Clashes with what a loadout can hold are
+-- pointed out; the mission, tutorial and unused ones are not checked.
+MOD.code.ALWAYS = { ['Reinforcement Beacon'] = true, ['Resupply'] = true, ['Sos Beacon'] = true }
+MOD.code.LOADOUT = { orbital = true, eagle = true, support = true, backpack = true, sentry = true, emplacements = true,
+                     vehicles = true }
+-- arrows for def: nil, why (refused) or true, warning (a clash with a stratagem you may bring along)
+function MOD.code.check(def, arrows)
+    local list = MOD.extra.choices()
+    local own = peek4(def.at)
+    local function starts(a, b)   -- a begins with the whole of b
+        if #b > #a then return false end
+        for k = 1, #b do if a[k] ~= b[k] then return false end end
+        return true
+    end
+    local same, under, over = {}, {}, {}
+    for _, c in ipairs(list) do
+        local other = c.type ~= own and (MOD.code.ALWAYS[c.name] or MOD.code.LOADOUT[c.family]) and MOD.code.current(c.def)
+        if other then
+            local hit = (#other == #arrows and starts(arrows, other) and same)
+                        or (starts(other, arrows) and under)   -- theirs begins with this one
+                        or (starts(arrows, other) and over)    -- this one begins with theirs
+            if hit then
+                if MOD.code.ALWAYS[c.name] then
+                    local name = c.name == 'Reinforcement Beacon' and 'Reinforce' or c.name == 'Sos Beacon' and 'SOS Beacon' or c.name
+                    if hit == same then return nil, 'Same code as ' .. name .. ', which is in every mission: not set.' end
+                    if hit == under then return nil, name .. "'s code starts with that one, and it is in every mission: not set." end
+                    return nil, 'That code starts with ' .. name .. "'s, which is in every mission: not set."
+                end
+                hit[#hit + 1] = c.name
+            end
+        end
+    end
+    local function names(t) return table.concat(t, ', ', 1, math.min(#t, 3)) .. (#t > 3 and ' and others' or '') end
+    if #same > 0 then return true, 'Same code as ' .. names(same) .. ': bring only one of them.' end
+    if #under > 0 then return true, names(under) .. " can't be called while this one is ready: their codes start with it." end
+    if #over > 0 then return true, "This one can't be called while " .. names(over) .. ' is ready: its code starts with theirs.' end
+    return true
+end
+function MOD.code.row(entry, def)
+    if not MOD.offline then return end   -- (live, the HUD keeps the arrows it drew: offline only)
+    local native = MOD.code.native(def)
+    if not native then return end
+    local f = field_at(def.kind, 'code' .. def.off, 'virtual', 1e7)
+    f.default, f.def = MOD.code.number(native), def
+    local row = add_row(entry, 'Stratagem', 'code', 'Call-in code', 'u32', { { id = 'code', field = f } }, 1, 1953124, 1, 1)
+    row.code = true
+    row.tip = { 'The arrows you enter to call it in: click Record (or press Enter on this row), then enter',
+                'the new code with the arrow keys or WASD, 1 to 9 arrows. Enter keeps it, Backspace takes one back,',
+                'Esc cancels. The HUD shows the new code too.' }
+end
+
 -- Call-in (issue #43), StratagemInfo +84 spawn_time: the beacon's countdown before the delivery is sent (every
 -- stratagem; ship upgrades take some off). The hellpod's fall (4.75 s), a Pelican's flight and an Eagle's are the
 -- game's own; +96 extra_travel_time and +100 (vehicles 10.5) change neither (tested in game). With every ship
@@ -11442,6 +14312,7 @@ local function resolve_stratagem(entry)
             add_row(entry, 'Stratagem', 'uses', s.family == 'eagle' and 'Uses per rearm' or 'Uses per mission', 'u32',
                     { part('uses', def.kind, def.off + 80, 'u32', 999) }, 0, 999, 1, 5)
         end
+        MOD.code.row(entry, def)
         if s.family ~= 'eagle' then MOD.callin_rows(entry, { def }) end
         if s.family ~= 'eagle' and MOD.extra.FAMILIES[s.family] then MOD.extra.row(entry, def) end
     end
@@ -11730,6 +14601,791 @@ KINDS[TYPES.seeking].silo_rows = function(weapon)
     return true
 end
 
+-- Boosters (the Boosters tab): the ones whose values are in the data files. The rest keep theirs in a
+-- table in game.dll (HD2Runtime's booster research, docs/booster-authoring.md), out of reach offline.
+-- Each finds its rows the way the game picks them: a status effect by its debug name (+8), an explosion
+-- among candidate ids by what it looks like (smoke: no damage and no shockwave; it moved 400 -> 401 in
+-- 25988413), the Armed Resupply Pods' turret by its entity, Surplus EAT's one-shot EAT by its stratagem id.
+-- { enum value (the entry's hash), name, note, kind, what }
+MOD.boosters = { LIST = {
+    { 11, 'Experimental Infusion', 'Stims give this effect instead of the normal one.', 'status', 'Stim Combat Drugs' },
+    { 12, 'Firebomb Hellpods', 'Every hellpod sets this off where it lands.', 'blast', { 83 }, 5 },
+    { 14, 'Dead Sprint', 'Sprinting out of stamina costs health instead.', 'drain', 'Death March' },
+    { 15, 'Armed Resupply Pods', 'The machine gun turret on each resupply pod.', 'turret', '73681FFD58FA1A90' },
+    { 17, 'Stun Pods', 'Every hellpod sets this off where it lands.', 'blast', { 335 }, 41 },
+    { 18, 'Concealed Insertion', 'Every hellpod leaves this smoke where it lands.', 'smoke', { 401, 400 } },
+    { 20, 'Surplus EAT Allocation', 'The free one-shot EAT it adds to your stratagems.', 'eat', 0xDFB589B2 } } }
+
+MOD.boosters.WHY = "Booster selection is limited due to the other boosters keeping their values in the game's program " ..
+                   '(game.dll), not in the data files SSEO edits. Those could only be changed while the game runs, which ' ..
+                   'is currently impossible.'
+
+-- A pointer in a status row: an address in game, a payload offset offline (the host leaves this table's as they are).
+function MOD.boosters.at(t, lo, hi)
+    local v = lo and hi and lo + hi * 4294967296
+    if not v or v == 0 then return nil end
+    return v < t.payload and t.copies[1] + HEADER_BYTES + v or v
+end
+
+-- A status effect's row by its debug name, or nil.
+function MOD.boosters.status(name)
+    local t = tables[T_STATUS]
+    if not t then return nil end
+    for id, off in pairs(t.index) do
+        local top = t.copies[1] + HEADER_BYTES
+        if type(id) == 'number' and read_text(MOD.boosters.at(t, peek4(top + off + 8), peek4(top + off + 12))) == name then return off end
+    end
+end
+
+-- The first candidate explosion that fits: `status` (its damage row's first status), or none for smoke.
+function MOD.boosters.blast(ids, status)
+    local t = tables[T_EXPLOSION]
+    for _, id in ipairs(ids) do
+        local xrow = t and t.index[id]
+        local did = xrow and default_of(field_at(T_EXPLOSION, xrow + 4, 'u32', 100000))
+        local qrow = did and did > 0 and tables[T_DAMAGE] and tables[T_DAMAGE].index[did]
+        if status and qrow and default_of(field_at(T_DAMAGE, qrow + 44, 'u32', 100000)) == status then return xrow, qrow end
+        if not status and xrow and did == 0 and default_of(field_at(T_EXPLOSION, xrow + 24, 'f32', 100000)) == 0 then return xrow end
+    end
+end
+
+-- The list: the boosters this game build has, after the stratagems.
+function MOD.boosters.build()
+    for k = #weapons, 1, -1 do
+        if weapons[k].booster then by_hash[weapons[k].hash] = nil; table.remove(weapons, k) end
+    end
+    local list = {}
+    for _, b in ipairs(MOD.boosters.LIST) do
+        local hash = string.format('FFFFFFFD%08X', b[1])
+        list[#list + 1] = { name = b[2], slot = 'Boosters', hash = hash, rows = {}, by_id = {}, booster = b,
+                            note = 'Booster. ' .. b[3] }
+        by_hash[hash] = list[#list]
+    end
+    table.sort(list, function(a, b) return a.name:lower() < b.name:lower() end)
+    for _, entry in ipairs(list) do weapons[#weapons + 1] = entry end
+end
+
+function MOD.boosters.resolve(entry)
+    local b = entry.booster
+    local kind = b[4]
+    if kind == 'status' then
+        local srow = MOD.boosters.status(b[5])
+        if not srow then return end
+        add_row(entry, 'Effect', 'duration', 'Duration (s)', 'f32', { part('duration', T_STATUS, srow + 40, 'f32', 100000) }, 0, 600, 0.5, 5)
+        add_row(entry, 'Effect', 'speed', 'Movement speed (multiplier)', 'f32',
+                { part('speed', T_STATUS, srow + 36, 'f32', 100) }, 0, 10, 0.05, 0.25)
+        -- its stat modifiers (+112 list, +120 count; 8 bytes each: stat, value): stat 2 = damage taken
+        local t = tables[T_STATUS]
+        local top = t.copies[1] + HEADER_BYTES
+        local list, n = MOD.boosters.at(t, peek4(top + srow + 112), peek4(top + srow + 116)), peek4(top + srow + 120)
+        local at = list and n and n > 0 and n <= 8 and list - top
+        for k = 0, at and n - 1 or -1 do
+            if peek4(top + at + k * 8) == 2 then
+                add_row(entry, 'Effect', 'damage_taken', 'Damage taken (multiplier)', 'f32',
+                        { part('damage_taken', T_STATUS, at + k * 8 + 4, 'f32', 100) }, 0, 10, 0.05, 0.25)
+            end
+        end
+    elseif kind == 'drain' then
+        local srow = MOD.boosters.status(b[5])
+        local did = srow and default_of(field_at(T_STATUS, srow + 44, 'u32', 100000))
+        local qrow = did and did > 0 and tables[T_DAMAGE] and tables[T_DAMAGE].index[did]
+        if qrow then damage_rows(entry, 'Health drain', 'drain_', qrow, nil, 2) end
+    elseif kind == 'blast' or kind == 'smoke' then
+        local xrow, qrow = MOD.boosters.blast(b[5], b[6])
+        if not xrow then return end
+        if qrow then
+            damage_rows(entry, 'Explosion', 'x_', qrow, 'Explosion')
+            status_rows(entry, 'Explosion', 'x_', qrow, 'blast')
+        end
+        local radii = kind == 'smoke' and { { 'inner', 'Smoke radius, full (m)', 16 }, { 'outer', 'Smoke radius, edge (m)', 20 } }
+                      or { { 'inner', 'Inner radius (m)', 16 }, { 'outer', 'Outer radius (m)', 20 }, { 'shockwave', 'Shockwave radius (m)', 24 } }
+        for _, r in ipairs(radii) do
+            add_row(entry, kind == 'smoke' and 'Smoke' or 'Explosion', 'x_' .. r[1], r[2], 'f32',
+                    { part('x_' .. r[1], T_EXPLOSION, xrow + r[3], 'f32', 100000) }, 0, 200, 0.1, 1)
+        end
+    elseif kind == 'turret' then
+        resolve_gun(entry, hash_key(b[5]))
+    elseif kind == 'eat' then
+        for _, group in ipairs(stratagem_groups) do
+            local off = tables[group] and tables[group].index[b[5]]
+            if off then
+                add_row(entry, 'Stratagem', 'uses', 'Uses per mission', 'u32', { part('uses', group, off + 80, 'u32', 999) }, 0, 999, 1, 5)
+                break
+            end
+        end
+    end
+end
+
+-- ---------------------------------------------------------------- the Enemy Editor
+-- The Enemy Editor button turns the panel into the enemies' editor (its own tabs, red): one page per enemy
+-- and structure of MOD.ENEMY_LIST (HD2Runtime's enemy catalogue: faction, kind, name, variant, entity, zone
+-- names), and a Spawning page per faction. Saved and installed with everything else.
+-- Variants of one enemy whose health records are the same share a page (every one is written).
+MOD.enemy = { on = false, TABS = { 'Terminids', 'Automatons', 'Illuminate', 'SEAF', 'Spawning' },
+              FACTIONS = { terminids = 'Terminids', automatons = 'Automatons', illuminate = 'Illuminate', seaf = 'SEAF' },
+              ZONE = 552, ZONES = 520 }
+
+-- 'leg_right' -> 'Right leg', 'l_wrist' -> 'Left wrist'
+function MOD.enemy.zone_name(name)
+    if not name or name == '' then return nil end
+    local words = {}
+    for w in name:gsub('_', ' '):gmatch('%S+') do words[#words + 1] = w end
+    local side = { l = 'left', r = 'right', left = 'left', right = 'right' }
+    for k = #words, 2, -1 do
+        if side[words[k]] then table.insert(words, 1, side[table.remove(words, k)]) end
+    end
+    if side[words[1]] then words[1] = side[words[1]] end
+    local text = table.concat(words, ' ')
+    return text:sub(1, 1):upper() .. text:sub(2)
+end
+
+-- The pages: per faction and name, the variants with the same health record together.
+function MOD.enemy.build()
+    for k = #weapons, 1, -1 do
+        if weapons[k].enemy then by_hash[weapons[k].hash] = nil; table.remove(weapons, k) end
+    end
+    local ht = tables[TYPES.health]
+    if not ht then return end
+    local top = ht.copies[1] + HEADER_BYTES
+    local groups, order = {}, {}
+    for _, e in ipairs(MOD.ENEMY_LIST or {}) do
+        local key = hash_key(e[5])
+        local at = ht.index[key]
+        -- or none: a structure that only jams (the Stratagem Jammer's health is on another entity)
+        if at or (tables[TYPES.jammer] and tables[TYPES.jammer].index[key])
+              or (tables[TYPES.scrambler] and tables[TYPES.scrambler].index[key]) then
+            local id = e[1] .. '|' .. e[2] .. '|' .. e[3]
+            if not groups[id] then groups[id] = {}; order[#order + 1] = id end
+            local bytes = at and api.read(top + at, KINDS[TYPES.health].stride) or ''
+            local into
+            for _, b in ipairs(groups[id]) do if b.bytes == bytes then into = b; break end end
+            if not into then into = { bytes = bytes, members = {} }; table.insert(groups[id], into) end
+            into.members[#into.members + 1] = { e = e, key = key, at = at }
+        end
+    end
+    local list = {}
+    for _, id in ipairs(order) do
+        local buckets = groups[id]
+        for _, b in ipairs(buckets) do
+            local first = b.members[1].e
+            -- the variant's words that differ from the others' (all start 'Conscript ...': 'Shotgun')
+            local label = nil
+            if #buckets > 1 then
+                local best = first[4]
+                for _, m in ipairs(b.members) do if m.e[4] ~= '' and (#m.e[4] < #best or best == '') then best = m.e[4] end end
+                label = best ~= '' and best:gsub('^Entry (%d+)$', 'variant %1') or nil
+            end
+            local name = first[3] .. (label and (' (' .. label .. ')') or '')
+            local hash = first[5]
+            -- every variant's attacks, once each
+            local attacks, had = {}, {}
+            for _, m in ipairs(b.members) do
+                for a in (m.e[7] or ''):gmatch('[^;]+') do
+                    if not had[a] then had[a] = true; attacks[#attacks + 1] = a end
+                end
+            end
+            list[#list + 1] = { name = name, slot = MOD.enemy.FACTIONS[first[1]], hash = hash, rows = {}, by_id = {},
+                                enemy = { members = b.members, zones = first[6], attacks = table.concat(attacks, ';'), structure = first[2] == 'structure' },
+                                note = (first[2] == 'structure' and 'Structure.' or first[1] == 'seaf' and 'SEAF soldier: an ally.' or 'Enemy.') ..
+                                       (#b.members > 1 and (' ' .. #b.members .. ' variants share these values.') or '') }
+        end
+    end
+    -- the same name twice (two variants named alike): numbered
+    local seen = {}
+    for _, entry in ipairs(list) do
+        local k = entry.slot .. entry.name
+        seen[k] = (seen[k] or 0) + 1
+        if seen[k] > 1 then entry.name = entry.name .. ' ' .. seen[k] end
+    end
+    table.sort(list, function(a, b)
+        if a.enemy.structure ~= b.enemy.structure then return not a.enemy.structure end
+        return a.name:lower() < b.name:lower()
+    end)
+    for _, entry in ipairs(list) do weapons[#weapons + 1] = entry; by_hash[entry.hash] = entry end
+    MOD.enemy.guns_build(list)
+    MOD.enemy.spawning_build()
+end
+
+-- Enemy guns: each enemy's own gun (its entity has a weapon record: the Hulk's arms), the ones it mounts
+-- (MountComponent: 5 x 24 bytes, +0 the mounted entity; two levels, tank -> turret -> gun) and carries
+-- (InventoryComponent +0 / +8 / +16: primary, sidearm, support). A page per gun, after the first enemy that
+-- has it; its rows are a weapon's (resolve_gun). A gun that is the enemy itself gets a page hash of its own
+-- (the entity's halves swapped), so the enemy page keeps its own.
+MOD.enemy.GUN_KINDS = { T_WEAPON, T_BEAM_WEAPON, T_SPRAY }
+-- An enemy's weapon page without the rows an AI has no use for (a player gun's handling and resupply; spread
+-- stays). SEAF soldiers carry real player weapons: theirs are kept whole.
+MOD.enemy.GUN_DROP = { recoil_h = true, recoil_v = true, sway = true, ergonomics = true, mags_start = true,
+                       mags_supply = true, mags_max = true, suppressed = true }
+function MOD.enemy.gun_tidy(weapon)
+    if weapon.slot == 'SEAF' then return end
+    local kept = {}
+    for _, r in ipairs(weapon.rows) do
+        if MOD.enemy.GUN_DROP[r.id] then
+            for _, p in ipairs(r.parts) do
+                if weapon.by_id[p.id] == p then weapon.by_id[p.id] = nil end
+                local users = p.field.users
+                for k = #users, 1, -1 do if users[k] == weapon then table.remove(users, k) end end
+            end
+        else kept[#kept + 1] = r end
+    end
+    -- nothing but spread and a magazine (a body's empty gun part): no page
+    local real = false
+    for _, r in ipairs(kept) do if r.section ~= 'Handling' and r.section ~= 'Ammo' then real = true end end
+    weapon.rows = real and kept or {}
+end
+
+-- The Terminids' attacks by their page's first name -> what it is (the page's number stays: saved values keep applying)
+MOD.enemy.GUN_NAMES = {
+    ['Bile Spewer (Base): mounted weapon 1'] = 'bile spray', ['Bile Spewer (Base): mounted weapon 2'] = 'bile mortar',
+    ['Bile Spitter: weapon'] = 'acid spit', ['Bile Titan: weapon'] = 'bile spray', ['Spore Burst Bile Titan: weapon'] = 'spore spray',
+    ['Dragonroach: mounted weapon'] = 'fire breath', ['Hive Lord: mounted weapon 1'] = 'acid spit 1',
+    ['Hive Lord: mounted weapon 2'] = 'acid spit 2', ['Nursing Spewer: mounted weapon 1'] = 'bile spray',
+    ['Predator Hunter: mounted weapon'] = 'acid spray',
+}
+
+function MOD.enemy.guns_build(list)
+    local mt, it = tables[TYPES.mount], tables[TYPES.inventory]
+    local top = function(t) return t.copies[1] + HEADER_BYTES end
+    local function is_gun(key)
+        for _, kind in ipairs(MOD.enemy.GUN_KINDS) do
+            if tables[kind] and tables[kind].index[key] then return true end
+        end
+        return false
+    end
+    local function hex(key)
+        local out = {}
+        for k = #key, 1, -1 do out[#out + 1] = string.format('%02X', key:byte(k)) end
+        return table.concat(out)
+    end
+    local seen, added = {}, {}
+    for _, entry in ipairs(list) do
+        local guns = {}
+        local function add(key, label)
+            if key and key ~= string.rep('\0', 8) and is_gun(key) and not guns[key] then
+                guns[key] = true
+                guns[#guns + 1] = { key = key, label = label }
+            end
+        end
+        local function mounts(key, depth)
+            local at = mt and mt.index[key]
+            if not at then return end
+            local bytes = api.read(top(mt) + at, 120)
+            for m = 0, 4 do
+                local sub = bytes:sub(m * 24 + 1, m * 24 + 8)
+                if sub ~= string.rep('\0', 8) then
+                    add(sub, 'Mounted weapon')
+                    if depth < 2 then mounts(sub, depth + 1) end
+                end
+            end
+        end
+        for _, m in ipairs(entry.enemy.members) do
+            add(m.key, 'Weapon')
+            mounts(m.key, 1)
+            local at = it and it.index[m.key]
+            if at then
+                local bytes = api.read(top(it) + at, 24)
+                add(bytes:sub(1, 8), 'Primary weapon')
+                add(bytes:sub(9, 16), 'Sidearm')
+                add(bytes:sub(17, 24), 'Support weapon')
+            end
+        end
+        local count = {}
+        for _, g in ipairs(guns) do count[g.label] = (count[g.label] or 0) + 1 end
+        local n = {}
+        for _, g in ipairs(guns) do
+            if seen[g.key] then
+                local page = seen[g.key]
+                page.users = page.users .. ', ' .. entry.name
+            else
+                n[g.label] = (n[g.label] or 0) + 1
+                local h = hex(g.key)
+                if g.key == entry.enemy.members[1].key or by_hash[h] then
+                    h = h:sub(9) .. h:sub(1, 8)
+                end
+                local name = entry.name .. ': ' .. g.label:lower() .. (count[g.label] > 1 and (' ' .. n[g.label]) or '')
+                local page = { name = MOD.enemy.GUN_NAMES[name] and (entry.name .. ': ' .. MOD.enemy.GUN_NAMES[name]) or name,
+                               slot = entry.slot, hash = h, key = g.key, rows = {}, by_id = {},
+                               enemy = { gun = true, structure = entry.enemy.structure }, users = entry.name }
+                seen[g.key] = page
+                added[#added + 1] = { page = page, after = entry }
+            end
+        end
+    end
+    -- each after its enemy
+    for _, a in ipairs(added) do
+        local at = #weapons + 1
+        for k, w in ipairs(weapons) do if w == a.after then at = k + 1 end end
+        while weapons[at] and weapons[at].enemy and weapons[at].enemy.gun do at = at + 1 end
+        table.insert(weapons, at, a.page)
+        by_hash[a.page.hash] = a.page
+        a.page.note = 'A weapon of ' .. a.page.users .. '.'
+    end
+end
+
+-- An enemy's rows: its health component (every variant on the page written): health +0, armor +280 (the
+-- body's, where no zone has its own), durable ratio +268, explosive damage share +388, bleed-out health
+-- (constitution) +24, regeneration +4 / delay +12; then each named zone (+520, 552 bytes; +96 its name):
+-- health +232 (-1: the body's), armor +216, durable ratio +204, explosive share +324 (unset: FLT_MAX),
+-- damage passed to the body +248, fatal +244 (byte).
+function MOD.enemy.resolve(entry)
+    local members = entry.enemy.members
+    if not members[1].at then MOD.enemy.more_rows(entry); return end
+    local function parts(id, offset, storage, limit)
+        local out = {}
+        for n, m in ipairs(members) do out[n] = part(n == 1 and id or (id .. '_' .. n), TYPES.health, m.at + offset, storage, limit) end
+        return out
+    end
+    local function row(section, id, label, offset, storage, limit, max, small, big, note)
+        local p = parts(id, offset, storage, limit)
+        if read_field(p[1].field) == nil then return nil end
+        local r = add_row(entry, section, id, label, storage, p, 0, max, small, big)
+        r.lead = #p > 1 or nil   -- (same values: the first stands for all)
+        r.note = note
+        return r
+    end
+    row('Health', 'health', 'Health', 0, 'u32', 10000000, 1000000, 10, 100)
+    row('Health', 'armor', 'Armor', 280, 'u32', 100, 10, 1, 1, 'body parts without their own armor use this')
+    row('Health', 'durable', 'Durable ratio (0-1)', 268, 'f32', 1, 1, 0.05, 0.1,
+        "0: hits deal their normal damage, 1: their durable damage (the weapon's lower one)")
+    row('Health', 'explosive', 'Explosive damage taken (x)', 388, 'f32', 100, 100, 0.05, 0.25)
+    row('Health', 'bleed', 'Bleed-out health', 24, 'u32', 10000000, 1000000, 10, 100,
+        'what it has left once its health is gone, lost over time')
+    row('Health', 'regen', 'Regeneration (health/s)', 4, 'f32', 1000000, 100000, 1, 10)
+    row('Health', 'regen_delay', 'Regeneration delay after damage (s)', 12, 'f32', 3600, 600, 0.1, 1)
+    local names = {}
+    for z, n in (entry.enemy.zones or ''):gmatch('(%d+)=([^;]*)') do names[tonumber(z)] = n end
+    local ht = tables[TYPES.health]
+    local top = ht.copies[1] + HEADER_BYTES
+    local count = 0
+    for z = 0, 37 do
+        local base = MOD.enemy.ZONES + z * MOD.enemy.ZONE
+        if (peek4(top + members[1].at + base + 96) or 0) ~= 0 then
+            count = count + 1
+            local section = MOD.enemy.zone_name(names[z]) or ('Body part ' .. count)
+            local id = 'zone' .. z
+            row(section, id .. '_health', 'Health', base + 232, 'u32', 10000000, 1000000, 10, 100)
+            row(section, id .. '_armor', 'Armor', base + 216, 'u32', 100, 10, 1, 1)
+            row(section, id .. '_durable', 'Durable ratio (0-1)', base + 204, 'f32', 1, 1, 0.05, 0.1)
+            row(section, id .. '_explosive', 'Explosive damage taken (x)', base + 324, 'f32', 100, 100, 0.05, 0.25)
+            row(section, id .. '_to_body', 'Damage passed to the body (x)', base + 248, 'f32', 100, 100, 0.05, 0.25)
+            row(section, id .. '_fatal', 'Killing it kills the enemy', base + 244, 'flag', 1, 1, 1, 1)
+        end
+    end
+    MOD.enemy.more_rows(entry)
+end
+
+-- The status rows (StatusEffectSusceptibilityType kinds; +144 / +148 the buildup thresholds, +168 damage taken)
+MOD.enemy.STATUSES = {
+    { id = 'stun_resist', label = 'Stun resistance (x)', kinds = { [22] = true, [23] = true }, offsets = { 144, 148 },
+      note = 'how much stun it takes to stun it' },
+    { id = 'gas_resist', label = 'Gas resistance (x)', kinds = { [27] = true, [28] = true }, offsets = { 144, 148 },
+      note = 'how much gas it takes to confuse it' },
+    { id = 'fire_taken', label = 'Fire damage taken (x)', kinds = { [6] = true, [12] = true }, offsets = { 168 } },
+    { id = 'acid_taken', label = 'Acid damage taken (x)', kinds = { [10] = true }, offsets = { 168 } },
+    { id = 'electric_taken', label = 'Electric damage taken (x)', kinds = { [20] = true }, offsets = { 168 } },
+    { id = 'gas_taken', label = 'Gas damage taken (x)', kinds = { [27] = true, [28] = true }, offsets = { 168 } },
+}
+
+-- The rest of an enemy's page, from its other components (each variant on the page written):
+-- Movement: AiEnemy (736 bytes in this build) state speeds guard +0, patrol +36, investigate +60, combat +100,
+-- strafe +124, drift +152, retreat +244, charge +276; AiCharacter +0 preferred / +4 maximum speed.
+-- Senses: SensorEye +0 sight distance, +12 / +16 cone angles; SensorEar +4 hearing multiplier.
+-- Size: Unit +8 / +12 scale. Attacks: its melee damage rows (MOD.ENEMY_LIST's 7th field).
+MOD.enemy.SPEEDS = { 0, 36, 60, 100, 124, 152, 244, 276 }
+function MOD.enemy.more_rows(entry)
+    local members = entry.enemy.members
+    local function at(kind, m) return tables[kind] and tables[kind].index[m.key] end
+    -- rows over every variant's record of `kind` that has one
+    local function row(kind, section, id, label, offsets, storage, limit, min, max, small, big, note)
+        local p = {}
+        for n, m in ipairs(members) do
+            local base = at(kind, m)
+            if base then
+                for k, off in ipairs(offsets) do
+                    local pid = id .. (n > 1 and ('_' .. n) or '') .. (k > 1 and ('_' .. k) or '')
+                    p[#p + 1] = part(#p == 0 and id or pid, kind, base + off, storage, limit)
+                end
+            end
+        end
+        if #p == 0 or read_field(p[1].field) == nil then return nil end
+        local r = add_row(entry, section, id, label, storage, p, min, max, small, big)
+        r.lead = #p > 1 or nil
+        r.note = note
+        return r
+    end
+    -- movement: one multiplier over every speed the enemy has (0: a state it doesn't use)
+    local fields = {}
+    for _, m in ipairs(members) do
+        local ai, ch = at(TYPES.ai_enemy, m), at(TYPES.ai_character, m)
+        if ai then
+            for _, off in ipairs(MOD.enemy.SPEEDS) do
+                local v = read_field(field_at(TYPES.ai_enemy, ai + off, 'f32', 1000))
+                if v and v > 0 and v < 1000 then fields[#fields + 1] = { TYPES.ai_enemy, ai + off } end
+            end
+        end
+        if ch then fields[#fields + 1] = { TYPES.ai_character, ch }; fields[#fields + 1] = { TYPES.ai_character, ch + 4 } end
+    end
+    if #fields > 0 then
+        MOD.enemy.mult_row(entry, 'Movement', 'speed', 'Movement speed (x)', fields, 10, nil,
+                           'walking, patrolling, searching, fighting and charging speeds together')
+    end
+    row(TYPES.sensor, 'Senses', 'sight', 'Sight range (m)', { 0 }, 'f32', 10000, 0, 1000, 1, 10)
+    -- the weapons it carries (inventory +0 / +8 / +16): SEAF only, a SEAF or player weapon instead
+    -- (an enemy's gun in SEAF hands crashed the game; enemies keep theirs)
+    for _, slot in ipairs(entry.slot == 'SEAF' and { { 0, 'gun_primary', 'Primary weapon' }, { 8, 'gun_sidearm', 'Sidearm' }, { 16, 'gun_support', 'Support weapon' } } or {}) do
+        local p = {}
+        for n, m in ipairs(members) do
+            local base = at(TYPES.inventory, m)
+            local bytes = base and api.read(tables[TYPES.inventory].copies[1] + HEADER_BYTES + base + slot[1], 8)
+            if bytes and bytes ~= string.rep('\0', 8) then
+                p[#p + 1] = part(#p == 0 and slot[2] or (slot[2] .. '_' .. n), TYPES.inventory, base + slot[1], 'gun', 4294967295)
+            end
+        end
+        if #p > 0 and read_field(p[1].field) then
+            local r = add_row(entry, 'Weapons carried', slot[2], slot[3], 'gun', p, 1, 4294967295, 1, 10)
+            r.choice = 'gun'
+            r.label_of = function()
+                local g = MOD.enemy.gun_choices().by_id[read_field(p[1].field) or 0]
+                return slot[3] .. ': ' .. (g and g.label or '?')
+            end
+        end
+    end
+    -- how long it keeps tracking you out of sight (target retention +16: how fast it forgets; x2: half as fast)
+    local keep = {}
+    for _, m in ipairs(members) do
+        local r = at(TYPES.retention, m)
+        if r and (read_field(field_at(TYPES.retention, r + 16, 'f32', 1000)) or 0) > 0 then keep[#keep + 1] = { TYPES.retention, r + 16 } end
+    end
+    -- statuses: per kind (StatusEffectReceiver), the buildup it needs (thresholds) or the damage it takes (x)
+    for _, st in ipairs(MOD.enemy.STATUSES) do
+        local fields = {}
+        for _, m in ipairs(members) do
+            local rx = at(TYPES.status_rx, m)
+            for z = 0, rx and 7 or -1 do
+                for k = 0, 32 do
+                    local e = rx + z * 5816 + 8 + k * 176
+                    local kind = read_field(field_at(TYPES.status_rx, e + 140, 'u32', 1000))
+                    if kind and st.kinds[kind] then
+                        for _, off in ipairs(st.offsets) do
+                            local v = read_field(field_at(TYPES.status_rx, e + off, 'f32', 100000))
+                            if v and v > 0 then fields[#fields + 1] = { TYPES.status_rx, e + off } end
+                        end
+                    end
+                end
+            end
+        end
+        if #fields > 0 then MOD.enemy.mult_row(entry, 'Statuses', st.id, st.label, fields, 20, nil, st.note) end
+    end
+    -- how hard a hit must be to stagger it (each hit size's force threshold)
+    local hold = {}
+    for _, m in ipairs(members) do
+        local h = at(TYPES.hitreact, m)
+        if h then
+            for k = 0, 5 do
+                local size = read_field(field_at(TYPES.hitreact, h + 4 + k * 36, 'u32', 100))
+                local need = read_field(field_at(TYPES.hitreact, h + 8 + k * 36, 'u32', 100000))
+                if size and size >= 1 and size <= 4 and need and need > 0 then hold[#hold + 1] = { TYPES.hitreact, h + 8 + k * 36, 'u32' } end
+            end
+        end
+    end
+    if #hold > 0 then
+        MOD.enemy.mult_row(entry, 'Health', 'stagger_resist', 'Stagger resistance (x)', hold, 20, nil,
+                           'the force a hit needs to stagger it (hit sizes it never staggers from stay that way)')
+    end
+    if #keep > 0 then
+        MOD.enemy.mult_row(entry, 'Senses', 'retention', 'Tracking after losing sight (x)', keep, 20, true,
+                           'how long it keeps after you once you break line of sight')
+    end
+    row(TYPES.sensor, 'Senses', 'sight_h', 'Sight cone width (degrees)', { 12 }, 'f32', 360, 0, 360, 1, 10)
+    row(TYPES.sensor, 'Senses', 'sight_v', 'Sight cone height (degrees)', { 16 }, 'f32', 360, 0, 360, 1, 10)
+    row(TYPES.ear, 'Senses', 'hearing', 'Hearing (x)', { 4 }, 'f32', 100, 0, 100, 0.05, 0.25)
+    row(TYPES.unit, 'Size', 'scale', 'Size (x)', { 8, 12 }, 'f32', 100, 0.1, 10, 0.05, 0.25,
+        'the model and its body parts; very large or small sizes may look or move oddly')
+    local jam_note = 'stratagems cannot be called within this distance while it stands'
+    for _, m in ipairs(members) do   -- the kind it blocks (+0): 7 every kind, 0 Eagles
+        local j = at(TYPES.jammer, m)
+        if j then
+            local kind = read_field(field_at(TYPES.jammer, j, 'u32', 100))
+            if kind == 0 then jam_note = 'Eagles cannot be called within this distance while it stands'
+            elseif kind and kind ~= 7 then jam_note = 'one kind of stratagem cannot be called within this distance while it stands' end
+            break
+        end
+    end
+    -- 0 (or less) is no limit in the game: it jams the whole map, so 0.1 m is the least
+    row(TYPES.jammer, 'Jamming', 'jam_radius', 'Stratagem jamming radius (m)', { 12 }, 'f32', 100000, 0.1, 10000, 5, 25, jam_note)
+    row(TYPES.scrambler, 'Jamming', 'scramble_radius', 'Stratagem scrambling radius (m)', { 12 }, 'f32', 100000, 0.1, 10000, 5, 25,
+        'stratagem codes and names are scrambled within this distance while it stands')
+    row(TYPES.curve, 'Movement', 'flight_height', 'Flight height (m)', { 52 }, 'f32', 10000, 0, 1000, 1, 5,
+        'its height above its flight route; lower flies closer to the ground (terrain still holds it up)')
+    -- its energy shield (ShieldComponentData, as the player's shields)
+    row(TYPES.shield, 'Shield', 'shield_capacity', 'Shield capacity', { 76 }, 'f32', 1000000, 0, 1000000, 50, 250)
+    row(TYPES.shield, 'Shield', 'shield_delay', 'Recharge delay (s)', { 88 }, 'f32', 600, 0, 600, 1, 5)
+    row(TYPES.shield, 'Shield', 'shield_broken', 'Recharge delay once broken (s)', { 92 }, 'f32', 600, 0, 600, 1, 5)
+    row(TYPES.shield, 'Shield', 'shield_rate', 'Recharge rate (per s)', { 96 }, 'f32', 1000000, 0, 1000000, 10, 50)
+    for drow_id, label in (entry.enemy.attacks or ''):gmatch('(%d+)=([^;]*)') do
+        local drow = tables[T_DAMAGE] and tables[T_DAMAGE].index[tonumber(drow_id)]
+        if drow then
+            local section = 'Attack: ' .. label
+            local prefix = 'atk' .. drow_id .. '_'
+            for _, s in ipairs({ { 'damage', 'Damage', 4, 1, 10 }, { 'durable', 'Durable damage', 8, 1, 10 },
+                                 { 'ap', 'Armor penetration', 12, 1, 1 }, { 'stagger', 'Stagger force', 32, 1, 10 },
+                                 { 'push', 'Push force', 36, 1, 10 } }) do
+                local r = add_row(entry, section, prefix .. s[1], s[2], 'u32',
+                                  { part(prefix .. s[1], T_DAMAGE, drow + s[3], 'u32', 1000000) }, 0,
+                                  s[1] == 'ap' and 10 or 100000, s[4], s[5])
+                if s[1] == 'damage' then r.note = 'every enemy with this attack shares it' end
+            end
+        end
+    end
+end
+
+-- Spawning (HiveMindComponentData, one record per mission type, +0 faction: 2 Terminids, 4 Illuminate, 8
+-- Automatons; FileDiver's names, the fields Little Enemy Kontrol and HD2Runtime 0.40 tested): multipliers over
+-- every record of the faction. Each scales the 4 player-count multipliers (1-4 players) of a mission-difficulty
+-- modifier; rows marked `inverse` hold a duration (shown as how often: 2 = twice as often).
+MOD.enemy.SPAWN = {
+    { 'Reinforcements', 'reinf_on', 'Reinforcements (flares, breaches, drops)', 1077, 'flag' },
+    { 'Reinforcements', 'reinf_budget', 'Reinforcement size (x)', 316 },
+    { 'Reinforcements', 'reinf_rate', 'Reinforcement frequency (x)', 376 },
+    { 'Reinforcements', 'cap', 'Enemy cap (x)', 128, 'one',
+      'the game holds back reinforcements past about 100 enemies at x1; it has crashed past 200-240 enemies alive' },
+    { 'Patrols', 'patrol_rate', 'Patrol frequency (x)', 496 },
+    { 'Patrols', 'patrol_max', 'Patrols at once (x)', 436, nil, '0: no patrols' },
+    { 'Patrols', 'traveler_rate', 'Modifier patrol frequency (x)', 976, 'inverse',
+      'gunships, Dragonroaches, Leviathans and the like, where a planet has them' },
+    { 'Patrols', 'traveler_size', 'Modifier patrol size (x)', 1036 },
+    { 'Outposts and spawners', 'guard', 'Outpost garrison size (x)', 856 },
+    { 'Outposts and spawners', 'spawner_queue', 'Fabricator / bug hole queue (x)', 556 },
+    { 'Outposts and spawners', 'spawner_count', 'Fabricator / bug hole batch size (x)', 676 },
+    { 'Outposts and spawners', 'spawner_production', 'Fabricator / bug hole refill speed (x)', 616 },
+    { 'Outposts and spawners', 'spawner_release', 'Fabricator / bug hole release speed (x)', 796 },
+}
+MOD.enemy.FACTION_IDS = { Terminids = 2, Automatons = 8, Illuminate = 4, SEAF = 16 }
+
+function MOD.enemy.spawning_build()
+    for _, name in ipairs({ 'Terminids', 'Automatons', 'Illuminate' }) do
+        local hash = string.format('FFFFFFFC%08X', MOD.enemy.FACTION_IDS[name])
+        local entry = { name = name, slot = 'Spawning', hash = hash, rows = {}, by_id = {},
+                        enemy = { spawning = MOD.enemy.FACTION_IDS[name] },
+                        note = 'Spawning on ' .. name .. ' missions (every mission type). Multipliers of the game\'s values.' }
+        weapons[#weapons + 1] = entry
+        by_hash[hash] = entry
+    end
+    local hash = 'FFFFFFFC000000FF'
+    local entry = { name = 'All factions', slot = 'Spawning', hash = hash, rows = {}, by_id = {}, enemy = { floors = true },
+                    note = 'Spawning limits every faction shares.' }
+    weapons[#weapons + 1] = entry
+    by_hash[hash] = entry
+    -- a faction-wide page, first in each faction's list (MOD.enemy.faction_refresh writes its rows)
+    for _, name in ipairs({ 'Terminids', 'Automatons', 'Illuminate', 'SEAF' }) do
+        local h = string.format('FFFFFFFB%08X', MOD.enemy.FACTION_IDS[name])
+        local page = { name = 'All ' .. name, slot = name, hash = h, rows = {}, by_id = {}, enemy = { faction = name },
+                       note = name == 'SEAF' and 'Every SEAF soldier at once. Soldiers you have edited on their own page keep their values.'
+                              or 'Every enemy of this faction at once. Enemies you have edited on their own page keep their values.' }
+        local at = #weapons + 1
+        for k, w in ipairs(weapons) do if w.slot == name then at = k; break end end
+        table.insert(weapons, at, page)
+        by_hash[h] = page
+        -- its death explosions, after the enemies (before the structures)
+        local blasts = MOD.enemy.BLASTS[name]
+        if blasts then
+            local bh = string.format('FFFFFFFA%08X', MOD.enemy.FACTION_IDS[name])
+            local bp = { name = 'Death explosions', slot = name, hash = bh, rows = {}, by_id = {}, enemy = { blasts = blasts, structure = true },
+                         note = 'What goes off when they die. Each explosion is shared by every enemy that uses it.' }
+            local spot = #weapons + 1
+            for k, w in ipairs(weapons) do if w.slot == name and w.enemy and w.enemy.structure then spot = k; break end end
+            table.insert(weapons, spot, bp)
+            by_hash[bh] = bp
+        end
+    end
+end
+
+-- The weapons SEAF can carry: the player weapons' SEAF versions, then SEAF's own guns; a choice's number
+-- is its entity's lower 32 bits, so saved choices outlast changes to the list. gun_id: 8 entity bytes -> number.
+function MOD.enemy.gun_choices()
+    local c = MOD.enemy.choices
+    if c then return c end
+    c = { list = {}, by_id = {}, by_key = {} }
+    MOD.enemy.choices = c
+    local function key_of(w)
+        if w.key and #w.key == 8 then return w.key end
+        if not (w.hash and #w.hash == 16) then return nil end
+        local out = {}
+        for k = 15, 1, -2 do out[#out + 1] = string.char(tonumber(w.hash:sub(k, k + 1), 16)) end
+        return table.concat(out)
+    end
+    local function add(key, label)
+        if not key or c.by_key[key] then return end
+        local b1, b2, b3, b4 = key:byte(1, 4)
+        local id = b1 + b2 * 256 + b3 * 65536 + b4 * 16777216
+        if id == 0 or c.by_id[id] then return end
+        local g = { id = id, key = key, label = label, n = #c.list + 1 }
+        c.list[#c.list + 1] = g
+        c.by_id[id], c.by_key[key] = g, id
+    end
+    -- only weapons the game loads for SEAF: a player weapon nobody brought shows as a missing model and never fires
+    for _, w in ipairs(weapons) do
+        if not w.enemy and w.name:find('(SEAF)', 1, true) then add(key_of(w), w.name) end
+    end
+    for _, w in ipairs(weapons) do   -- 'SEAF Leader: primary weapon' -> 'SEAF primary weapon'
+        if w.enemy and w.enemy.gun and w.slot == 'SEAF' then add(key_of(w), (w.name:gsub('^SEAF [%a ]-: ', 'SEAF '))) end
+    end
+    return c
+end
+function MOD.enemy.gun_id(bytes)
+    if not bytes or #bytes ~= 8 then return nil end
+    local c = MOD.enemy.gun_choices()
+    if not c.by_key[bytes] then   -- a weapon no page lists: kept as it is, under its hash
+        local h = {}
+        for k = 8, 1, -1 do h[#h + 1] = string.format('%02X', bytes:byte(k)) end
+        local b1, b2, b3, b4 = bytes:byte(1, 4)
+        local id = b1 + b2 * 256 + b3 * 65536 + b4 * 16777216
+        if c.by_id[id] then return nil end
+        local g = { id = id, key = bytes, label = 'weapon ' .. table.concat(h), n = #c.list + 1 }
+        c.list[#c.list + 1] = g
+        c.by_id[id], c.by_key[bytes] = g, id
+    end
+    return c.by_key[bytes]
+end
+
+-- The faction-wide rows: each scales (or, `add`, raises) one stat of every enemy page of the faction and its gun
+-- pages. Only its own value is saved; MOD.enemy.faction_refresh writes the fields, leaving those another page
+-- has a change on. `pick(page, row, part)`: whether a part of a page's row is one it covers.
+function MOD.enemy.damage_part(p)   -- a damage row's damage / durable damage (+4 / +8 of a 76-byte record)
+    local t = p.field and p.field.kind == T_DAMAGE and tables[T_DAMAGE]
+    if not t then return false end
+    t.starts = t.starts or {}
+    if not next(t.starts) then for _, off in pairs(t.index) do t.starts[off] = true end end
+    return t.starts[p.field.offset - 4] or t.starts[p.field.offset - 8] or false
+end
+MOD.enemy.FACTION_STATS = {
+    { 'Toughness', 'all_health', 'Health (x)', 'mult', 20, 'the body and every body part, bleed-out health too',
+      function(page, r) return not page.enemy.gun and (r.id == 'health' or r.id == 'bleed' or r.id:match('^zone%d+_health$')) end },
+    { 'Toughness', 'all_armor', 'Armor (+)', 'add', 10, 'added to every armor value, up to 10; lowered: down to 0',
+      function(page, r) return not page.enemy.gun and (r.id == 'armor' or r.id:match('^zone%d+_armor$')) end },
+    { 'Toughness', 'all_stagger', 'Stagger resistance (x)', 'mult', 20, 'the force a hit needs to stagger them',
+      function(page, r, p) return r.id == 'stagger_resist' and p ~= r.parts[1] end },
+    { 'Toughness', 'all_status', 'Stun and gas resistance (x)', 'mult', 20, nil,
+      function(page, r, p) return (r.id == 'stun_resist' or r.id == 'gas_resist') and p ~= r.parts[1] end },
+    { 'Toughness', 'all_fire', 'Fire damage taken (x)', 'mult', 20, nil,
+      function(page, r, p) return r.id == 'fire_taken' and p ~= r.parts[1] end },
+    { 'Attacks', 'all_damage', 'Damage (x)', 'mult', 20, 'melee, guns and death explosions, shared ones included',
+      function(page, r, p) return MOD.enemy.damage_part(p) end },
+    { 'Movement', 'all_speed', 'Movement speed (x)', 'mult', 10, nil,
+      function(page, r, p) return r.id == 'speed' and p ~= r.parts[1] end },
+    { 'Senses', 'all_sight', 'Sight range (x)', 'mult', 10, nil,
+      function(page, r) return not page.enemy.gun and r.id == 'sight' end },
+}
+
+-- Death explosions (ExplosionType ids of this build, checked against their records: the acid deaths carry acid):
+-- { id, label }
+MOD.enemy.BLASTS = {
+    Terminids = { { 71, 'Scavenger acid burst' }, { 310, 'Warrior acid burst' }, { 275, 'Bile Spewer acid burst' },
+                  { 276, 'Charger acid burst' } },
+    Automatons = { { 10, 'Vehicle death (medium)' }, { 103, 'Vehicle death (medium, ground)' }, { 13, 'Vehicle death (large, ground)' },
+                   { 39, 'Vehicle death (large, air)' }, { 346, 'Vehicle death (huge)' }, { 37, 'Fabricator death' },
+                   { 114, 'Dropship death (air)' }, { 153, 'Dropship death (ground)' } },
+    Illuminate = { { 311, 'Illusionist death' }, { 61, 'Spawner death' }, { 137, 'Dark Fluid burst' } },
+}
+function MOD.enemy.blasts_resolve(entry)
+    for _, b in ipairs(entry.enemy.blasts) do
+        local xrow = tables[T_EXPLOSION] and tables[T_EXPLOSION].index[b[1]]
+        if xrow then
+            local prefix = 'x' .. b[1] .. '_'
+            local did = read_field(field_at(T_EXPLOSION, xrow + 4, 'u32', 100000))
+            local qrow = did and did > 0 and tables[T_DAMAGE] and tables[T_DAMAGE].index[did]
+            if qrow then damage_rows(entry, b[2], prefix, qrow, 'Explosion') end
+            for _, r in ipairs({ { 'inner', 'Inner radius (m)', 16 }, { 'outer', 'Outer radius (m)', 20 },
+                                 { 'shockwave', 'Shockwave radius (m)', 24 } }) do
+                add_row(entry, b[2], prefix .. r[1], r[2], 'f32', { part(prefix .. r[1], T_EXPLOSION, xrow + r[3], 'f32', 100000) }, 0, 200, 0.1, 1)
+            end
+        end
+    end
+end
+
+function MOD.enemy.faction_resolve(entry)
+    for _, s in ipairs(MOD.enemy.FACTION_STATS) do
+        local lead = { id = s[2], field = field_at(0, 'enemy:' .. entry.hash .. ':' .. s[2], 'virtual', 1000) }
+        local add = s[4] == 'add'
+        lead.field.default = add and 0 or 1
+        local r = add_row(entry, s[1], s[2], s[3], add and 'u32' or 'f32', { lead }, add and -10 or 0, s[5],
+                          add and 1 or 0.05, add and 1 or 0.25)
+        r.faction, r.add, r.note = s, add or nil, s[6]
+        lead.field.signed = add or nil
+        if s == MOD.enemy.FACTION_STATS[#MOD.enemy.FACTION_STATS] then   -- under the last row: the blue marks
+            r.after = { 'Enemies and values this page changes are marked in blue in the list and on their pages.',
+                        "A value changed on an enemy's own page stays red: this page leaves it as it is." }
+            r.after_h = #r.after * 16 + 6
+        end
+    end
+end
+
+-- A multiplier row: a value of its own (1: the game's) and the fields it multiplies (row.mult: each written as
+-- its game value x the multiplier, or / it for `inverse`).
+function MOD.enemy.mult_row(entry, section, id, label, fields, max, inverse, note)
+    local lead = { id = id, field = field_at(0, 'enemy:' .. entry.hash .. ':' .. id, 'virtual', 1000) }
+    lead.field.default = 1
+    local p = { lead }
+    for n, f in ipairs(fields) do p[#p + 1] = part(id .. '_' .. n, f[1], f[2], f[3] or 'f32', 1000000) end
+    local r = add_row(entry, section, id, label, 'f32', p, inverse and 0.05 or 0, max or 10, 0.05, 0.25)
+    r.lead, r.mult, r.inverse, r.note = true, true, inverse or nil, note
+    return r
+end
+
+-- The example difficulties (Enemy Editor presets, added once): { name, { { faction id or 'all', 'page' (faction-wide)
+-- / 'spawn' (its Spawning page) / 'floors' (All factions), row id, value }, ... } }
+MOD.enemy.EXAMPLES = {
+    { 'Default', {} },   -- no changes: loading it puts every enemy and spawning value back to the game's
+    { 'Horde', { { 'all', 'spawn', 'reinf_budget', 2 }, { 'all', 'spawn', 'reinf_rate', 2 }, { 'all', 'spawn', 'patrol_rate', 2 },
+                 { 'all', 'spawn', 'patrol_max', 2 }, { 'all', 'spawn', 'cap', 1.5 }, { 'all', 'page', 'all_health', 0.8 } } },
+    { 'Glass Cannon', { { 'all', 'page', 'all_health', 0.5 }, { 'all', 'page', 'all_damage', 2 } } },
+    { 'Elite', { { 'all', 'page', 'all_health', 1.5 }, { 'all', 'page', 'all_armor', 1 }, { 'all', 'page', 'all_damage', 1.25 },
+                 { 'all', 'page', 'all_speed', 1.15 }, { 'all', 'page', 'all_sight', 1.5 } } },
+}
+
+function MOD.enemy.spawning_resolve(entry)
+    if entry.enemy.floors then
+        local ft = tables[TYPES.spawn_floor]
+        local at = ft and next(ft.index) and ft.index[next(ft.index)]
+        if not at then return end
+        MOD.enemy.mult_row(entry, 'Lowest rates', 'floor_patrol', 'Lowest patrol frequency (x)',
+                           { { TYPES.spawn_floor, at + 80 }, { TYPES.spawn_floor, at + 84 } }, 10, nil,
+                           'the faction multipliers cannot slow patrols below this: lower it with them')
+        MOD.enemy.mult_row(entry, 'Lowest rates', 'floor_reinf', 'Lowest reinforcement frequency (x)',
+                           { { TYPES.spawn_floor, at + 88 }, { TYPES.spawn_floor, at + 92 } }, 10)
+        MOD.enemy.mult_row(entry, 'SEAF', 'seaf_reinf', 'SEAF reinforcement cooldown (x)',
+                           { { TYPES.spawn_floor, at + 48 }, { TYPES.spawn_floor, at + 52 }, { TYPES.spawn_floor, at + 56 },
+                             { TYPES.spawn_floor, at + 60 } }, 10)
+        MOD.enemy.mult_row(entry, 'SEAF', 'seaf_wave', 'SEAF wave cooldown (x)',
+                           { { TYPES.spawn_floor, at + 64 }, { TYPES.spawn_floor, at + 68 }, { TYPES.spawn_floor, at + 72 },
+                             { TYPES.spawn_floor, at + 76 } }, 10)
+        return
+    end
+    local t = tables[TYPES.hivemind]
+    if not t then return end
+    local top = t.copies[1] + HEADER_BYTES
+    local records = {}
+    for _, off in pairs(t.index) do
+        if peek4(top + off) == entry.enemy.spawning then records[#records + 1] = off end
+    end
+    table.sort(records)
+    if #records == 0 then return end
+    for _, s in ipairs(MOD.enemy.SPAWN) do
+        if s[5] == 'flag' then
+            local p = {}
+            for n, off in ipairs(records) do p[n] = part(s[2] .. (n > 1 and ('_' .. n) or ''), TYPES.hivemind, off + s[4], 'flag', 1) end
+            local r = add_row(entry, s[1], s[2], s[3], 'flag', p, 0, 1, 1, 1)
+            r.lead = true
+        else
+            local fields = {}
+            for _, off in ipairs(records) do
+                for k = 0, s[5] == 'one' and 0 or 3 do fields[#fields + 1] = { TYPES.hivemind, off + s[4] + k * 4 } end
+            end
+            MOD.enemy.mult_row(entry, s[1], s[2], s[3], fields, s[5] == 'one' and 10 or 20, s[5] == 'inverse', s[6])
+        end
+    end
+end
+
 local function resolve(weapon)
     weapon.rows, weapon.by_id, weapon.aliases, weapon.backpack, weapon.mines, weapon.legacy = {}, {}, nil, nil, nil, nil
     weapon.swaps = nil
@@ -11746,11 +15402,47 @@ local function resolve(weapon)
         resolve_throwable(weapon, true)
         return
     end
+    if weapon.booster then MOD.boosters.resolve(weapon); return end
+    if weapon.enemy then
+        if weapon.slot == 'Spawning' then MOD.enemy.spawning_resolve(weapon)
+        elseif weapon.enemy.faction then MOD.enemy.faction_resolve(weapon)
+        elseif weapon.enemy.blasts then MOD.enemy.blasts_resolve(weapon)
+        elseif weapon.enemy.gun then resolve_gun(weapon, weapon.key); MOD.enemy.gun_tidy(weapon)
+        else MOD.enemy.resolve(weapon) end
+        return
+    end
     if weapon.passive then KINDS[TYPES.passive].resolve(weapon); return end
+    if weapon.kits then MOD.kits.resolve(weapon); return end
     if weapon.player then KINDS[TYPES.avatar].resolve(weapon); return end
     if weapon.stratagem then resolve_stratagem(weapon); return end
     if weapon.attachment then
         KINDS[TYPES.items].mod_rows(weapon, 'Attachment', '', weapon.attachment.mods)
+        local scope = weapon.attachment.scope   -- zoom: 1 = normal view, 2 = half the field of view; zeroing in m
+        for k = 1, 3 do
+            local z = scope and scope['236:' .. (112 + k * 4)]
+            if z then
+                add_row(weapon, 'Scope', 'zoom' .. k, 'Zoom level ' .. k .. ' (x)', 'f32', { { id = 'zoom' .. k, field = field_at(TYPES.deltas, z, 'f32', 1000) } }, 0.1, 100, 0.1, 1).tip =
+                    { 'How close this zoom step looks: 1 is the normal view, 2 twice as close, 4 four times.' }
+            end
+        end
+        for k = 1, 3 do
+            local z = scope and scope['236:' .. (336 + k * 4)]
+            if z then
+                add_row(weapon, 'Scope', 'zero' .. k, 'Zeroing distance ' .. k .. ' (m)', 'f32', { { id = 'zero' .. k, field = field_at(TYPES.deltas, z, 'f32', 100000) } }, 0, 5000, 5, 50).tip =
+                    { 'The range the sights are set for at this step (you switch steps in game). At that range the shot lands',
+                      'on the crosshair; closer or farther it lands a bit high or low. Does not change the zoom.' }
+            end
+        end
+        -- per zoom level: how quickly the view follows your aim (+316; 0.6 on most optics, the 10x sniper scopes'
+        -- 0.8 / 1 / 1.25; high zoom with a high follow speed spins the view, issue #89)
+        for k = 1, 3 do
+            local z = scope and scope['236:' .. (312 + k * 4)]
+            if z then
+                local r = add_row(weapon, 'Scope', 'follow' .. k, 'Zoom level ' .. k .. ' follow speed', 'f32', { { id = 'follow' .. k, field = field_at(TYPES.deltas, z, 'f32', 1000) } }, 0.01, 10, 0.05, 0.25)
+                r.tip = { 'How quickly the scoped view catches up when you move your aim at this zoom (0.6 on most optics).',
+                          'Lower it if a high zoom spins the view.' }
+            end
+        end
         return
     end
     -- sentries and emplacements (listed as weapons on the Stratagems tab): their body, then their gun
@@ -11760,9 +15452,18 @@ local function resolve(weapon)
             parts[k] = part(k == 1 and 'cooldown' or 'cooldown' .. k, def.kind, def.off + 104, 'f32', 100000)
         end
         if parts[1] then add_row(weapon, 'Stratagem', 'cooldown', 'Cooldown (s)', 'f32', parts, 0, 10000, 1, 10) end
+        if weapon.sentry_defs[1] then MOD.code.row(weapon, weapon.sentry_defs[1]) end
         if weapon.sentry_defs[1] then MOD.callin_rows(weapon, weapon.sentry_defs) end
         if weapon.sentry_defs[1] then MOD.extra.row(weapon, weapon.sentry_defs[1]) end
         unit_rows(weapon, KINDS[TYPES.health].body(weapon.key) or weapon.key, weapon.name:find('^E/') and 'Emplacement' or 'Sentry', 'unit_')
+        -- how long it stays once deployed (HellpodPayloadComponentData +4; SHODAN Offline Integration)
+        local pt = tables[TYPES.payload]
+        local pat = pt and pt.index[weapon.key]
+        local life = pat and default_of(field_at(TYPES.payload, pat + 4, 'f32', 100000))
+        if life and life > 0 and life <= 7200 then
+            add_row(weapon, weapon.name:find('^E/') and 'Emplacement' or 'Sentry', 'unit_lifetime', 'Time deployed (s)', 'f32',
+                    { part('unit_lifetime', TYPES.payload, pat + 4, 'f32', 100000) }, 1, 7200, 5, 30)
+        end
     end
     -- Separate EXO mounted-arm durability and the Breakthrough physical shield.
     local exo, arm_name = weapon.name:match('^(EXO%-%d%d .+): (.+)$')
@@ -11803,6 +15504,9 @@ local function resolve(weapon)
         end
     end
     resolve_gun(weapon, weapon.key)
+    if not weapon.mounted and (weapon.slot == 'Primary' or weapon.slot == 'Secondary') then
+        MOD.slot.row(weapon)
+    end
 end
 
 -- The shots a weapon fires besides its projectile, read as the game had them: a second ammo type
@@ -11946,8 +15650,15 @@ MOD.records = { pages = {}, list = nil, cache = nil, KINDS = { T_PROJECTILE, T_E
 -- smaller than one step of the round is stepped over
 MOD.records.NOTES = {
     angle = '360 fires from any side; with a blast proximity above 0 the round becomes a proximity fuse (measured: 360 and 6 m on the crossbow).',
-    proximity = 'only works with the blast angle at 360, and the radius has to be larger than one step of the round: keep it above about speed / frame rate.',
     weapon_angle = '360 with a proximity above 0: a proximity fuse, off from any side.' }
+-- the (?) tips of the fuse rows: what they do (RL-77 Flak 2 m and 0.2 s, the P-34 Breacher's sticky round 1 s)
+MOD.records.TIPS = {
+    impact = { 'The explosion the round sets off when it hits something. 0: no explosion.' },
+    proximity = { 'The round goes off when it passes this close to an enemy, without hitting it. 0: off (the RL-77 uses 2 m).',
+                  'Only works with the blast angle at 360, and the distance has to be larger than one step of the round:',
+                  'keep it above about speed / frame rate.' },
+    delay = { 'How long the round waits after the hit (or after the blast proximity trips) before it goes off.',
+              '0: at once. The RL-77 waits 0.2 s, the P-34 Breacher (it sticks and burns first) 1 s.' } }
 function MOD.records.ids(kind)
     local ids = {}
     for id in pairs(tables[kind] and tables[kind].index or {}) do
@@ -12083,8 +15794,9 @@ function MOD.records.rows(page)
         impact.note = function()
             return 'sets off: ' .. MOD.records.label(T_EXPLOSION, read_field(impact.parts[1].field))
         end
-        num('Explosion id', 'fuse_proximity', 'Blast proximity (m)', 148, 'f32', 200, 0.1, 1).note = MOD.records.NOTES.proximity
-        num('Explosion id', 'fuse_delay', 'Blast delay (s)', 152, 'f32', 30, 0.05, 0.5)
+        impact.tip = MOD.records.TIPS.impact
+        num('Explosion id', 'fuse_proximity', 'Blast proximity (m)', 148, 'f32', 200, 0.1, 1).tip = MOD.records.TIPS.proximity
+        num('Explosion id', 'fuse_delay', 'Blast delay (s)', 152, 'f32', 30, 0.05, 0.5).tip = MOD.records.TIPS.delay
         local expiry = add_row(page, 'Explosion id', 'expiry_explosion', 'Expiry explosion (id)', 'u32',
                                { part('expiry_explosion', kind, at + 156, 'u32', 100000) }, 0, 100000, 1, 10)
         expiry.choice = 'explosion'
@@ -12296,12 +16008,13 @@ local config_dirty_at = nil
 -- The Settings page's choices, saved in config.txt with the changes. changes: apply the changes
 -- (off: every value is the game's, the changes are kept); block_input: the game gets no keyboard /
 -- mouse input while the panel is open; size: panel height, % of the screen's; side: 'left' / 'right';
--- opacity: background, %; remember: reopen on the last tab / weapon; lang: the panel's language, 'en'
+-- opacity: background, %; last: the tab and page each editor was left on (reopened there; 'stat' / 'enemy'),
+-- enemy_last: the editor left in; lang: the panel's language, 'en'
 -- or the id of a translation: fixed by the build (a language's release, MOD.lang), not a choice; offline (every
 -- language built in) a choice, saved as 'lang'.
 local settings = { changes = true, block_input = true, size = 80, side = 'right', opacity = 90,
-                   remember = true, arc_mp = true, updates = 'ask', update_channel = 'releases', stacks = {}, own_off = {}, hidden = {}, lang = MOD.lang or MOD.offline and rawget(_G, 'SHODAN_OFFLINE_LANG') or 'en',
-                   last_tab = nil, last_weapon = nil,
+                   arc_mp = true, updates = 'ask', update_channel = 'releases', stacks = {}, own_off = {}, hidden = {}, lang = MOD.lang or MOD.offline and rawget(_G, 'SHODAN_OFFLINE_LANG') or 'en',
+                   last = { stat = {}, enemy = {} }, enemy_last = false,
                    GITHUB = 'https://github.com/SHODAN-HORAI/SHODAN-Stat-Editor',
                    RANGE = { size = { 50, 100 }, opacity = { 10, 100 } } }
 
@@ -12356,6 +16069,17 @@ do
         state.update_channel = function() return settings.update_channel end   -- 'releases' or 'commits'
         state.stacks = function() return settings.stacks end   -- passive id -> { passive ids stacked on it }
         state.own_off = function() return settings.own_off end -- passive id -> true: its own effects left out
+        -- stratagem type -> { arrow, ... }: every call-in code set here (hostdata.lua M.codes writes them)
+        state.codes = function()
+            local out = {}
+            for _, f in pairs(fields) do
+                if f.def and f.storage == 'virtual' and f.value ~= nil and f.value ~= f.default then
+                    local arrows, t = MOD.code.arrows(f.value), peek4(f.def.at)
+                    if arrows and t then out[t] = arrows end
+                end
+            end
+            return out
+        end
     end
     function settings.tr(v)
         if settings.lang == 'en' or not LANG[settings.lang] then return v end
@@ -12422,7 +16146,6 @@ local function save_config()
     for _, line in ipairs({ 'changes ' .. onoff(settings.changes), 'block_input ' .. onoff(settings.block_input),
                             'panel_size ' .. settings.size, 'panel_side ' .. settings.side,
                             'panel_opacity ' .. settings.opacity,
-                            'remember ' .. onoff(settings.remember),
                             'arc_chains_multiplayer ' .. onoff(settings.arc_mp) }) do
         lines[#lines + 1] = line
     end
@@ -12452,13 +16175,19 @@ local function save_config()
     lines[#lines + 1] = 'several_vehicles ' .. onoff(MOD.vehicles.on)
     lines[#lines + 1] = 'stratagem_bounce ' .. onoff(MOD.tweaks.bounce.on)
     lines[#lines + 1] = 'foliage_pass_through ' .. onoff(MOD.tweaks.foliage.on)
+    lines[#lines + 1] = 'sniper_crosshair ' .. onoff(MOD.tweaks.reticle.on)
     -- hide_tabs <tab>,<tab>...: the tabs Settings > Tabs shown turned off
     local hidden = {}
     for tab in pairs(settings.hidden) do hidden[#hidden + 1] = tab end
     table.sort(hidden)
     if #hidden > 0 then lines[#lines + 1] = 'hide_tabs ' .. table.concat(hidden, ',') end
-    if settings.remember and settings.last_tab then lines[#lines + 1] = 'last_tab ' .. settings.last_tab end
-    if settings.remember and settings.last_weapon then lines[#lines + 1] = 'last_weapon ' .. settings.last_weapon end
+    -- the tab and page each editor was left on, and the editor (reopened there)
+    local last = settings.last
+    if last.stat.tab then lines[#lines + 1] = 'last_tab ' .. last.stat.tab end
+    if last.stat.weapon then lines[#lines + 1] = 'last_weapon ' .. last.stat.weapon end
+    if last.enemy.tab then lines[#lines + 1] = 'enemy_tab ' .. last.enemy.tab end
+    if last.enemy.weapon then lines[#lines + 1] = 'enemy_page ' .. last.enemy.weapon end
+    lines[#lines + 1] = 'editor ' .. (settings.enemy_last and 'enemy' or 'stat')
     for _, o in ipairs(overrides) do
         local weapon = by_hash[o.hash]
         lines[#lines + 1] = o.hash .. ' ' .. o.id .. ' ' .. number_text(o.value) ..
@@ -12493,8 +16222,10 @@ local function load_config()
         end
         local own = line:match('^%s*passive_own%s+(%d+)%s+off%s*$')
         if own and MOD.offline then settings.own_off[tonumber(own)], known = true, true end
-        if name == 'changes' or name == 'block_input' or name == 'remember' then
+        if name == 'changes' or name == 'block_input' then
             settings[name] = value ~= 'off'
+            known = true
+        elseif name == 'remember' then   -- the old Settings choice: always on now
             known = true
         elseif name == 'check_updates' or name == 'updates' and value == 'off' then   -- test builds' (no Off now)
             known = true
@@ -12518,20 +16249,24 @@ local function load_config()
             known = true
         elseif name == 'panel_lang' then   -- the language choice of PR #52's build and of test builds: gone
             known = true                     -- (each language has its own release)
-        elseif name == 'last_tab' then
-            settings.last_tab = value
+        elseif name == 'last_tab' or name == 'enemy_tab' then
+            settings.last[name == 'enemy_tab' and 'enemy' or 'stat'].tab = value
+            known = true
+        elseif name == 'editor' and (value == 'enemy' or value == 'stat') then
+            settings.enemy_last = value == 'enemy'
             known = true
         elseif name == 'hide_tabs' then
             for tab in value:gmatch('[^,%s]+') do settings.hidden[tab] = true end
             known = true
-        elseif name == 'last_weapon' and value:find('^%x+$') and #value == 16 then
-            settings.last_weapon = value:upper()
+        elseif (name == 'last_weapon' or name == 'enemy_page') and value:find('^%x+$') and #value == 16 then
+            settings.last[name == 'enemy_page' and 'enemy' or 'stat'].weapon = value:upper()
             known = true
         elseif name == 'several_vehicles' then
-            MOD.vehicles.on = value ~= 'off'; MOD.vehicles.apply()
+            MOD.vehicles.on = value == 'on'; MOD.vehicles.apply()
             known = true
-        elseif name == 'stratagem_bounce' or name == 'foliage_pass_through' then
-            MOD.tweaks[name == 'stratagem_bounce' and 'bounce' or 'foliage'].on = value == 'on'; MOD.tweaks.apply()
+        elseif name == 'stratagem_bounce' or name == 'foliage_pass_through' or name == 'sniper_crosshair' then
+            MOD.tweaks[name == 'stratagem_bounce' and 'bounce' or name == 'sniper_crosshair' and 'reticle' or 'foliage'].on = value == 'on'
+            MOD.tweaks.apply()
             known = true
         elseif name == 'unlock_unused' then
             settings.unlock_all(value == 'on')
@@ -12559,7 +16294,7 @@ local function load_config()
         ' (' .. path .. ')')
 end
 
-local function mark_config_dirty() config_dirty_at = api.now() + 0.75 end
+local function mark_config_dirty() config_dirty_at = api.now() + 0.75; MOD.enemy.refresh_due = true end
 
 -- Drops every override that writes the same memory as (hash, id), then optionally adds one.
 local function set_override(weapon, p, value)
@@ -12577,10 +16312,135 @@ local function set_override(weapon, p, value)
     mark_config_dirty()
 end
 
+-- Writes the faction-wide rows' fields (MOD.enemy.FACTION_STATS): each covered field as its game value x the row
+-- (armor: + the row), but for the fields another page has a change on (that page's value stands). Run once the
+-- saved values are applied and after every change (MOD.enemy.refresh_due).
+function MOD.enemy.faction_refresh()
+    MOD.enemy.refresh_due = nil
+    local owned, by_all, covered = {}, {}, {}
+    for _, o in ipairs(overrides) do
+        local page = by_hash[o.hash]
+        local p = page and not (page.enemy and page.enemy.faction) and page.by_id[o.id]
+        if p and p.field then owned[p.field.key] = true end
+    end
+    for _, page in ipairs(weapons) do
+        if page.enemy and page.enemy.faction then
+            -- its fields, gathered once: per stat, every covered part of the faction's pages
+            if not page.enemy.targets then
+                local targets = {}
+                for _, r in ipairs(page.rows) do targets[r.id] = { list = {}, seen = {} } end
+                for _, other in ipairs(weapons) do
+                    if other.enemy and other.slot == page.slot and not other.enemy.faction then
+                        for _, r in ipairs(other.rows) do
+                            for _, p in ipairs(r.parts) do
+                                for _, s in ipairs(MOD.enemy.FACTION_STATS) do
+                                    local t = targets[s[2]]
+                                    if t and p.field and p.field.storage ~= 'virtual' and not t.seen[p.field.key] and s[7](other, r, p) then
+                                        t.seen[p.field.key] = true
+                                        t.list[#t.list + 1] = p.field
+                                    end
+                                end
+                            end
+                        end
+                    end
+                end
+                page.enemy.targets = targets
+            end
+            for _, r in ipairs(page.rows) do
+                local v = read_field(r.parts[1].field) or (r.add and 0 or 1)
+                for _, f in ipairs(page.enemy.targets[r.id].list) do
+                    local d = default_of(f)
+                    local new = d and d * v
+                    if d and r.add then new = math.max(0, math.min(10, d + v)) end
+                    if new and f.storage == 'u32' then new = math.floor(new + 0.5) end
+                    if new and f.limit then new = math.min(new, f.limit) end
+                    local moved = new and math.abs(new - d) > 1e-4 * math.max(1, math.abs(d))
+                    if moved then covered[f.key] = true end
+                    if new and not owned[f.key] then
+                        local now = read_field(f)
+                        if now == nil or math.abs(now - new) > 1e-4 * math.max(1, math.abs(new)) then write_field(f, new) end
+                        if moved then by_all[f.key] = true end
+                    end
+                end
+            end
+        end
+    end
+    -- the pages with a value only a faction-wide row changed (their name in the list: MOD.enemy.ALL_INK)
+    local pages = {}
+    for _, page in ipairs(weapons) do
+        if page.enemy and not page.enemy.faction then
+            for _, r in ipairs(page.rows) do
+                if MOD.enemy.by_all_value(r, by_all, owned) then pages[page.hash] = true; break end
+            end
+        end
+    end
+    MOD.enemy.by_all, MOD.enemy.owned, MOD.enemy.by_all_pages, MOD.enemy.covered = by_all, owned, pages, covered
+    -- a page's value kept at the game's own (MOD.enemy.keep_own) once no faction-wide row moves it: dropped
+    local kept = {}
+    for _, o in ipairs(overrides) do
+        local page = by_hash[o.hash]
+        local p = page and page.enemy and not page.enemy.faction and page.by_id[o.id]
+        local d = p and p.field and default_of(p.field)
+        if not (d and not covered[p.field.key] and math.abs(o.value - d) < 1e-4) then kept[#kept + 1] = o end
+    end
+    if #kept < #overrides then overrides = kept; mark_config_dirty() end
+end
+
+-- A row's value when only a faction-wide row changed it (none of its fields has a change of a page's own), else
+-- nil. A multiplier row: the factor its fields got (its own value stays the game's 1).
+function MOD.enemy.by_all_value(row, by_all, owned)
+    by_all, owned = by_all or MOD.enemy.by_all, owned or MOD.enemy.owned
+    if not by_all then return nil end
+    local hit = nil
+    for _, p in ipairs(row.parts) do
+        if p.field and owned[p.field.key] then return nil end
+        if p.field and by_all[p.field.key] then hit = hit or p end
+    end
+    if not hit then return nil end
+    if row.lead then
+        if row.parts[1] == hit then return row_value(row) end
+        local d, v = default_of(hit.field), read_field(hit.field)
+        if not (d and v) or d == 0 or v == 0 then return nil end
+        return row.inverse and d / v or v / d
+    end
+    return row_value(row)
+end
+
 -- The value to keep as a change: nil when it is the game's own.
 local function unless_default(value, default)
     if default ~= nil and math.abs(value - default) < 1e-4 then return nil end
     return value
+end
+
+-- The value to keep as a page's own change: its game value too where an 'All <faction>' row moves the field
+-- (set back to the game's value on purpose: kept, so the faction-wide row leaves it), else unless_default's.
+function MOD.enemy.keep_own(weapon, p, value, default)
+    if weapon.enemy and not weapon.enemy.faction and p.field and MOD.enemy.covered and MOD.enemy.covered[p.field.key] then
+        return value
+    end
+    return unless_default(value, default)
+end
+
+-- Whether a row holds a page's own change at the game's value where a faction-wide row moves it (shown as changed)
+function MOD.enemy.pinned(row)
+    local covered, owned = MOD.enemy.covered, MOD.enemy.owned
+    if not (covered and owned) then return false end
+    for _, p in ipairs(row.parts) do
+        if p.field and covered[p.field.key] and owned[p.field.key] then return true end
+    end
+    return false
+end
+
+-- A multiplier row's fields written from its own value (a preset holding only that: the examples).
+function MOD.enemy.mult_fields(weapon, row, value)
+    for k = 2, #row.parts do
+        local p = row.parts[k]
+        local d = default_of(p.field)
+        if d ~= nil then
+            local new = row.inverse and d / value or d * value
+            if write_field(p.field, new) then set_override(weapon, p, unless_default(new, d)) end
+        end
+    end
 end
 
 -- A row whose value is the span of time rows (row.keeps: the Hover Pack's recharge time, its fuel):
@@ -12723,6 +16583,110 @@ local function apply_config(deadline)
     return true
 end
 
+-- ---------------------------------------------------------------- loadout slot (issue #82)
+-- The loadout list (LoadoutEntryComponentData): keyed by entity, records of 32 bytes (+0 id, +4 type:
+-- 1 primary, 2 support, 3 secondary, 4 throwable, 5 gear, 6 backpack), more records than buckets, so its
+-- bucket count is the one whose keys all sit near their home bucket (key % count). The type is the armory
+-- slot the weapon is listed in: the Slot row moves it (primary, secondary or support).
+TYPES.loadout = 0x4F2CF417
+-- the Enemy Editor's spawning: HiveMindComponentData (a faction's spawn pressure, one per mission type) and the
+-- lowest-rate record (0xD74E6E1A, one 96-byte record: +80/+84 patrols, +88/+92 reinforcements)
+TYPES.hivemind, TYPES.spawn_floor = 0xD0207221, 0xD74E6E1A
+KINDS[TYPES.hivemind] = { name = 'hive mind', stride = 1084, keyed = true }
+KINDS[TYPES.spawn_floor] = { name = 'spawn floor', stride = 96, keyed = true }
+-- the enemy pages' other tables (filediver's typelib layouts; strides checked on the current build):
+-- AiCharacter (+0 preferred / +4 maximum speed), AiEnemy (each AI state's speed; 736 bytes in this build),
+-- Unit (+8 / +12 scale), Inventory (+0 / +8 weapons carried), SensorEar (+4 hearing),
+-- SquadTransportFormation (2 formations of 24: +4 rows, +8 columns)
+TYPES.ai_character, TYPES.ai_enemy = 0x5FEF63C4, 0x9D0EEFB5
+TYPES.unit, TYPES.inventory, TYPES.ear, TYPES.transport = 0x4437574D, 0x8ADAB43B, 0xC8033E7F, 0x498CE7C7
+KINDS[TYPES.ai_character] = { name = 'AI character', stride = 80, keyed = true }
+KINDS[TYPES.ai_enemy] = { name = 'enemy AI', stride = 736, keyed = true }
+KINDS[TYPES.unit] = { name = 'unit', stride = 136, keyed = true }
+KINDS[TYPES.inventory] = { name = 'inventory', stride = 144, keyed = true }
+KINDS[TYPES.ear] = { name = 'hearing', stride = 16, keyed = true }
+KINDS[TYPES.transport] = { name = 'transport', stride = 48, keyed = true }
+-- stratagem jammers (StratagemBlockerComponentData): +0 the stratagem kind blocked (7: every kind), +12 the
+-- radius, +16 active from the start; 4 bytes after the records
+TYPES.jammer = 0x8C5F8AB7
+KINDS[TYPES.jammer] = { name = 'jammer', stride = 20, keyed = true, slack = 4 }
+-- stratagem scramblers (StratagemScramblerComponentData, 28-byte records): +0 the stratagem kind scrambled, +12 the
+-- radius, +16 its strength, +24 the status effect it puts on Helldivers in range
+TYPES.scrambler = 0x595A2910
+KINDS[TYPES.scrambler] = { name = 'scrambler', stride = 28, keyed = true }
+-- target retention (0xFF67A367, 24-byte records; Gameplay Reforged's tank tracking): +16 how fast a lost target is
+-- forgotten (1: the game's; 0.5 keeps tracking twice as long); the enemy Leviathan's flight path
+-- (CurveNavigationComponentData, one 752-byte record): +20 the height above its route (40)
+TYPES.retention, TYPES.curve = 0xFF67A367, 0x333C9A62
+KINDS[TYPES.retention] = { name = 'target retention', stride = 24, keyed = true }
+KINDS[TYPES.curve] = { name = 'flight path', stride = 752, keyed = true }
+-- hit reactions (HitReactComponentData, 4836 bytes): +4 six reactions of 36 bytes (+0 the hit size: 1 light .. 4
+-- massive, +4 the force a hit needs to stagger, +8 whether it staggers, +12 cooldown, +16 duration)
+TYPES.hitreact = 0xD57D0101
+KINDS[TYPES.hitreact] = { name = 'hit reaction', stride = 4836, keyed = true }
+-- status effects taken (StatusEffectReceiverComponentData, 46600 bytes): 8 body parts of 5816 bytes from +0 (+0 the
+-- part's name), each with 33 susceptibilities of 176 bytes from +8 (+140 the kind: 6 fire, 10 acid, 12 fire (bots),
+-- 20 electric, 27 / 28 gas; +144 / +148 thresholds, +168 the damage it takes from it (x))
+TYPES.status_rx = 0x6062C233
+KINDS[TYPES.status_rx] = { name = 'status effects taken', stride = 46600, keyed = true }
+KINDS[TYPES.loadout] = { name = 'loadout', stride = 32 }
+
+KINDS[TYPES.loadout].parse = function(blob, stride)
+    local total, count, live, keys, found = #blob, 0, 0, {}, nil
+    while count * 16 + 16 <= total do
+        local at = count * 16
+        local slot, pad = u32(blob, at + 8), u32(blob, at + 12)
+        if pad ~= 0 or slot > 100000 then break end
+        local lo, hi = u32(blob, at), u32(blob, at + 4)
+        count = count + 1
+        if lo ~= 0 or hi ~= 0 then live = live + 1; keys[live] = { count - 1, lo, hi, slot } end
+        local records = math.floor((total - count * 16) / stride)
+        if count == 2 * live and count >= 64 and records > 0 then   -- (a few buckets always sit near home)
+            local fits = true
+            for k = 1, live do
+                local b = keys[k]
+                local home = ((b[3] % count) * (4294967296 % count) + b[2]) % count
+                if (b[1] - home) % count >= 16 or b[4] >= records then fits = false; break end
+            end
+            if fits then
+                if found then return nil, 'two layouts fit' end
+                found = count
+            end
+        end
+    end
+    if not found then return nil, 'no layout fits' end
+    local index, entries = {}, 0
+    for k = 0, found - 1 do
+        local key = blob:sub(k * 16 + 1, k * 16 + 8)
+        if key ~= string.rep('\0', 8) and not index[key] then
+            index[key] = found * 16 + u32(blob, k * 16 + 8) * stride
+            entries = entries + 1
+        end
+    end
+    return index, entries
+end
+
+-- Primary and secondary weapons only: a support weapon put in another slot is not listed there (the armory
+-- lists the weapons your account owns, and support weapons come with their stratagem; tested 2026-10-24).
+MOD.slot = { NAMES = { [1] = 'Primary', [3] = 'Secondary' } }
+function MOD.slot.row(weapon)
+    local t = tables[TYPES.loadout]
+    local off = t and t.index[weapon.key]
+    if not off then return end
+    local f = field_at(TYPES.loadout, off + 4, 'u32', 100000)
+    if not MOD.slot.NAMES[default_of(f) or 0] then return end
+    f.allowed = { [1] = true, [3] = true, why = 'a slot is 1 (primary) or 3 (secondary)' }
+    local row = add_row(weapon, 'Loadout', 'slot', 'Slot (choice)', 'u32', { part('slot', TYPES.loadout, off + 4, 'u32', 100000) }, 1, 3, 2, 2)
+    row.choice = 'slot'
+    row.label_of = function() return 'Slot: ' .. (MOD.slot.NAMES[read_field(f) or 0] or '?') end
+    row.note = 'the armory list it is in: 1 primary, 3 secondary'
+    -- at the bottom, above the projectile swap
+    table.remove(weapon.rows)
+    local at = #weapon.rows + 1
+    for k, r in ipairs(weapon.rows) do if r.section == 'Projectile swap' then at = k; break end end
+    table.insert(weapon.rows, at, row)
+end
+
 -- ---------------------------------------------------------------- scan client
 -- Once the tables are in: resolve every weapon, then apply the saved values, a slice per frame.
 local progress = nil
@@ -12734,6 +16698,9 @@ local function become_ready(final)
         { 'stratagems', build_stratagems, 'stratagems: not listed: ' },
         { 'attachments', KINDS[TYPES.items].build, 'attachments: not listed: ' },
         { 'passives', KINDS[TYPES.passive].build, 'armor passives: not listed: ' },
+        { 'armor weight', MOD.kits.build, 'armor weight: not listed: ' },
+        { 'boosters', MOD.boosters.build, 'boosters: not listed: ' },
+        { 'enemies', MOD.enemy.build, 'enemies: not listed: ' },
     }
     set_status('building', 'listing stratagems, attachments and armor passives')
 end
@@ -12781,6 +16748,7 @@ local function prepare(deadline)
     if not MOD.snapshot_defaults(progress, deadline) then return end
     if api.now() >= deadline or not apply_config(deadline) then return end
     progress = nil
+    MOD.enemy.faction_refresh()
     local missing = {}
     for _, kind in ipairs(KIND_ORDER) do
         if not tables[kind] then missing[#missing + 1] = KINDS[kind].name end
@@ -12885,6 +16853,7 @@ local function rescan()
     tables, parsed_blocks, stratagem_groups = {}, {}, {}
     KINDS[TYPES.items].list = {}
     KINDS[TYPES.passive].list = {}
+    KINDS[TYPES.kit].list = {}
     KINDS[TYPES.destruction].found, KINDS[TYPES.destruction].told = {}, nil
     state.tables = 0
     set_status('searching', 'a table moved; scanning again')
@@ -13033,9 +17002,10 @@ local ui = { open = false, measured = {}, measures = 0, tab = 'Primary', page = 
 
 -- the status line, for code above the panel's
 function MOD.notify(text, seconds) ui.message = { text = text, till = api.now() + (seconds or 4) } end
-local TABS = { 'Primary', 'Secondary', 'Support', 'Throwables', 'Stratagems', 'Mechas', 'Attachments', 'Armors', 'Records' }
+local TABS = { 'Primary', 'Secondary', 'Support', 'Throwables', 'Stratagems', 'Mechas', 'Boosters', 'Attachments', 'Armors', 'Records' }
 -- the tabs Settings > Tabs shown leaves on
 function settings.shown_tabs()
+    if MOD.enemy.on then return MOD.enemy.TABS end
     local list = {}
     for _, tab in ipairs(TABS) do if not settings.hidden[tab] then list[#list + 1] = tab end end
     return list
@@ -13189,6 +17159,10 @@ end
 
 local function fmt(v, storage)
     if v == nil then return '?' end
+    if storage == 'gun' then   -- its place in the list of weapons
+        local g = MOD.enemy.gun_choices().by_id[v]
+        return g and ('#' .. g.n) or '?'
+    end
     if storage == 'flag' then return v >= 0.5 and 'On' or 'Off' end
     if storage == 'u32' then return tostring(math.floor(v + 0.5)) end
     if math.abs(v - math.floor(v + 0.5)) < 1e-4 then return tostring(math.floor(v + 0.5)) end
@@ -13207,9 +17181,10 @@ end
 
 local function select_weapon(weapon)
     ui.weapon = weapon
-    ui.row, ui.scroll, ui.settings, ui.binding, ui.stack_pick = 1, 1, false, nil, nil
-    if weapon and settings.remember and state.phase == 'ready' and settings.last_weapon ~= weapon.hash then
-        settings.last_tab, settings.last_weapon = weapon.slot, weapon.hash
+    ui.row, ui.scroll, ui.settings, ui.binding, ui.stack_pick, ui.code = 1, 1, false, nil, nil, nil
+    local last = settings.last[MOD.enemy.on and 'enemy' or 'stat']
+    if weapon and state.phase == 'ready' and (last.weapon ~= weapon.hash or last.tab ~= weapon.slot) then
+        last.tab, last.weapon = weapon.slot, weapon.hash
         mark_config_dirty()
     end
     if weapon then
@@ -13222,12 +17197,32 @@ local function select_weapon(weapon)
     end
 end
 
+-- Suppressed on / off: the flag, and the noise template the game's suppressed guns use (10; a silent one, 0, stays 0);
+-- off on a gun the game suppresses: a loud template (7). Off on any other: its own again.
+function MOD.suppress(weapon, row, target)
+    local flag, noise = row.parts[1], row.parts[2]
+    local f0, n0 = default_of(flag.field), default_of(noise.field)
+    if f0 == nil or n0 == nil then return end
+    local n = target == 1 and (n0 == 0 and 0 or 10) or (f0 == 1 and 7 or n0)
+    if write_field(noise.field, n) and write_field(flag.field, target) then
+        set_override(weapon, flag, unless_default(target, f0))
+        set_override(weapon, noise, unless_default(n, n0))
+    end
+    ui.version = ui.version + 1
+end
+
 local function change(row, delta_sign, big, exact)
     local weapon = ui.weapon
     local current = row_value(row)
     if not weapon or current == nil then return end
+    if row.code then return end   -- (recorded with the arrows: MOD.code.start)
     if not settings.changes then
         ui.message = { text = 'Your changes are off: turn them on in Settings to edit.', till = api.now() + 4 }
+        return
+    end
+    if row.suppression then   -- the flag and the noise template together (MOD.suppress)
+        local target = math.max(0, math.min(1, math.floor((exact or current + delta_sign) + 0.5)))
+        if target ~= current then MOD.suppress(weapon, row, target) end
         return
     end
     if row.choice then
@@ -13253,6 +17248,52 @@ local function change(row, delta_sign, big, exact)
                 set_override(weapon, p, unless_default(target, default_of(p.field)))
             end
             if not ok then ui.message = { text = why, till = api.now() + 4 } end
+            ui.version = ui.version + 1
+            return
+        end
+        if row.choice == 'gun' then   -- an enemy's weapon: the next / previous in the list (typed: its number there)
+            local c = MOD.enemy.gun_choices()
+            local g = c.by_id[current]
+            local at = exact and math.floor(exact + 0.5) or ((g and g.n or 0) + delta_sign * (big and 10 or 1))
+            local pick = c.list[math.max(1, math.min(#c.list, at))]
+            if not pick or pick.id == current then return end
+            local p = row.parts[1]
+            local ok, err = true, nil
+            for _, q in ipairs(row.parts) do
+                local done, why = write_field(q.field, pick.id)
+                if done then set_override(weapon, q, unless_default(pick.id, default_of(q.field)))
+                else ok, err = false, why end
+            end
+            if not ok then ui.message = { text = err, till = api.now() + 4 } end
+            ui.version = ui.version + 1
+            return
+        end
+        if row.choice == 'weight' then
+            -- 0 light, 1 medium, 2 heavy, on every piece of the armor (back to the default: each piece's own)
+            local target = math.max(0, math.min(2, exact and math.floor(exact + 0.5) or current + delta_sign))
+            if target == nil or target == current then return end
+            local back = target == default_of(row.parts[1].field)
+            for _, p in ipairs(row.parts) do
+                local d = default_of(p.field)
+                local new = back and d or target
+                local ok, why = write_field(p.field, new)
+                if ok then set_override(weapon, p, unless_default(new, d))
+                else log('write refused: ' .. weapon.name .. ' ' .. p.id .. ': ' .. why) end
+            end
+            ui.version = ui.version + 1
+            return
+        end
+        if row.choice == 'slot' then   -- primary (1) or secondary (3)
+            local target = exact and math.floor(exact + 0.5) or (current == 1 and 3 or 1)
+            if not MOD.slot.NAMES[target] then
+                ui.message = { text = 'Slot: 1 primary or 3 secondary.', till = api.now() + 4 }
+                return
+            end
+            if target == current then return end
+            local p = row.parts[1]
+            local ok, err = write_field(p.field, target)
+            if ok then set_override(weapon, p, unless_default(target, default_of(p.field)))
+            else ui.message = { text = err, till = api.now() + 4 } end
             ui.version = ui.version + 1
             return
         end
@@ -13340,14 +17381,20 @@ local function change(row, delta_sign, big, exact)
         local v = read_field(p.field)
         default_of(p.field)
         local new = target
-        if row.span then new = row.span() / target - (row.rate_plus or 0)
+        if row.mult then
+            local d = defaults[p.field.key]
+            if p == row.parts[1] then new = target
+            elseif d == nil then new = nil
+            else new = row.inverse and d / target or d * target end
+        elseif row.span then new = row.span() / target - (row.rate_plus or 0)
         elseif #row.parts > 1 then new = (current > 0) and v * target / current or target
         elseif row.zero and math.abs(target - row.zero) < 1e-4 and defaults[p.field.key] == 0 then new = 0
         elseif row.scale then new = target / row.scale end
-        local ok, why = write_field(p.field, new)
+        local ok, why = false, 'its game value unread'
+        if new ~= nil then ok, why = write_field(p.field, new) end
         local d = defaults[p.field.key]
         if ok then
-            set_override(weapon, p, unless_default(new, d))
+            set_override(weapon, p, MOD.enemy.keep_own(weapon, p, new, d))
         else
             log('write refused: ' .. weapon.name .. ' ' .. p.id .. ': ' .. why)
         end
@@ -13386,6 +17433,32 @@ local function finish_value(keep)
     end
 end
 
+-- A call-in code row: recording starts (the arrow keys or WASD add arrows), or ends with keep = true / false.
+function MOD.code.start(n)
+    local weapon = ui.weapon
+    if not settings.changes then
+        ui.message = { text = 'Your changes are off: turn them on in Settings to edit.', till = api.now() + 4 }
+        return
+    end
+    ui.value, ui.code = nil, { n = n, weapon = weapon, arrows = {} }
+end
+function MOD.code.finish(keep)
+    local rec = ui.code
+    ui.code = nil
+    ui.version = ui.version + 1
+    local weapon = rec and keep and rec.weapon
+    local row = weapon and weapon == ui.weapon and weapon.rows[rec.n]
+    if not (row and row.code) or #rec.arrows == 0 then return end
+    local p = row.parts[1]
+    local ok, warning = MOD.code.check(p.field.def, rec.arrows)
+    if not ok then ui.message = { text = warning, till = api.now() + 6 }; return end
+    local value = MOD.code.number(rec.arrows)
+    local done, why = write_field(p.field, value)
+    if not done then ui.message = { text = why, till = api.now() + 4 }; return end
+    set_override(weapon, p, unless_default(value, default_of(p.field)))
+    if warning then ui.message = { text = 'Set. ' .. warning, till = api.now() + 8 } end
+end
+
 local function reset_row(weapon, row)
     local keep = MOD.times_of(row)
     for _, p in ipairs(row.parts) do
@@ -13405,6 +17478,30 @@ local function reset_weapon(weapon)
         state.writes = state.writes + 1
         mark_config_dirty()
     end
+end
+
+-- The Enemy Editor's values (enemy and spawning pages) or the Stat Editor's: presets of one leave the other's alone.
+function MOD.is_enemy_value(hash)
+    local w = by_hash[hash]
+    return w and w.enemy and true or false
+end
+
+-- Every change of one side back to the game's (enemy: the Enemy Editor's, else the Stat Editor's).
+function MOD.reset_side(enemy)
+    local keep = {}
+    for _, o in ipairs(overrides) do
+        if MOD.is_enemy_value(o.hash) == enemy then
+            local weapon = by_hash[o.hash]
+            local p = weapon and weapon.by_id[o.id]
+            local d = p and default_of(p.field)
+            if d ~= nil then write_field(p.field, d) end
+        else
+            keep[#keep + 1] = o
+        end
+    end
+    overrides = keep
+    mark_config_dirty()
+    ui.version = ui.version + 1
 end
 
 local function reset_all()
@@ -13457,12 +17554,17 @@ end
 -- <preset> -" is a preset saved with no changes). Full presets: up to 50, each a name and the
 -- whole set of changes, in StatEditor/preset_NN.txt ("name <name>", then the config.txt lines,
 -- so they can be shared).
-local presets = { weapon_count = 5, full_count = 50, full = {} }   -- see below
+local presets = { weapon_count = 5, full_count = 50, full = {}, enemy = {} }   -- see below
+-- the Enemy Editor's presets (custom difficulties: enemy and spawning values only) are in enemy_preset_NN.txt;
+-- the list in use follows the editor shown
+function presets.list() return MOD.enemy.on and presets.enemy or presets.full end
 do
     local WEAPON_PRESETS, FULL_PRESETS = presets.weapon_count, presets.full_count
     local HEX16 = string.rep('%x', 16)
     local weapon_presets = {}   -- weapon hash -> preset -> list of { id, value }
-    local full_presets = presets.full   -- number -> { name, values = list of { hash, id, value } }
+    -- number -> { name, values = list of { hash, id, value } }: the shown editor's (presets.list())
+    local full_presets = setmetatable({}, { __index = function(_, n) return presets.list()[n] end,
+                                            __newindex = function(_, n, v) presets.list()[n] = v end })
     local NAME_BYTES = 40
 
     local function say(text)
@@ -13475,7 +17577,12 @@ do
         return dir and dir .. '/' .. name
     end
 
-    local function full_preset_file(n) return preset_file(string.format('preset_%02d.txt', n)) end
+    -- (no new locals here: the main chunk is at Lua's 200)
+    function presets.file_name(n, enemy)
+        if enemy == nil then enemy = MOD.enemy.on end
+        return string.format(enemy and 'enemy_preset_%02d.txt' or 'preset_%02d.txt', n)
+    end
+    local function full_preset_file(n, enemy) return preset_file(presets.file_name(n, enemy)) end
 
     local function write_lines(path, lines)
         local ok, why = MOD.write_text(path, table.concat(lines, '\r\n') .. '\r\n')
@@ -13534,7 +17641,8 @@ do
             return
         end
         local lines = {
-            '# SHODAN Stat Editor preset. Load it from the Presets tab of the panel.',
+            MOD.enemy.on and '# SHODAN Enemy Editor preset (a custom difficulty). Load it from the Enemy Editor\'s Presets.'
+                         or '# SHODAN Stat Editor preset. Load it from the Presets tab of the panel.',
             '# Lines: name <name>, then <weapon hash> <stat> <value> as in config.txt.',
             'name ' .. full_presets[n].name,
         }
@@ -13567,8 +17675,10 @@ do
             end
         end
         local full = 0
+        for _, enemy in ipairs({ false, true }) do
+        local into = enemy and presets.enemy or presets.full
         for n = 1, FULL_PRESETS do
-            local lines, numbers = read_lines(full_preset_file(n))
+            local lines, numbers = read_lines(full_preset_file(n, enemy))
             local preset = lines and { name = 'Preset ' .. n, values = {} }
             for i, line in ipairs(lines or {}) do
                 if line:match('^%s*cleared') then preset = nil; break end
@@ -13580,13 +17690,56 @@ do
                 elseif parsed then
                     preset.values[#preset.values + 1] = { hash = hash:upper(), id = id, value = parsed }
                 else
-                    MOD.skipped(string.format('preset_%02d.txt', n), numbers[i], line)
+                    MOD.skipped(presets.file_name(n, enemy), numbers[i], line)
                 end
             end
-            full_presets[n] = preset
+            into[n] = preset
             if preset then full = full + 1 end
         end
+        end
         log('presets: ' .. count .. ' weapon preset(s), ' .. full .. ' full preset(s)')
+        -- the example difficulties, added once (deleted ones stay deleted)
+        local marker = preset_file('enemy_examples.txt')
+        local had = marker and io.open(marker, 'rb')
+        if had then had:close() elseif marker then
+            local was = MOD.enemy.on
+            MOD.enemy.on = true
+            for _, ex in ipairs(MOD.enemy.EXAMPLES) do
+                local n = nil
+                for k = 1, FULL_PRESETS do if not presets.enemy[k] then n = k; break end end
+                if not n then break end
+                local values = {}
+                for _, v in ipairs(ex[2]) do
+                    for _, faction in ipairs(v[1] == 'all' and { 2, 8, 4 } or { v[1] }) do
+                        local hash = v[2] == 'page' and string.format('FFFFFFFB%08X', faction)
+                                     or v[2] == 'spawn' and string.format('FFFFFFFC%08X', faction) or 'FFFFFFFC000000FF'
+                        values[#values + 1] = { hash = hash, id = v[3], value = v[4] }
+                    end
+                end
+                presets.enemy[n] = { name = ex[1], values = values }
+                save_full_preset(n)
+            end
+            MOD.enemy.on = was
+            write_lines(marker, { '# The example difficulties were added to the Enemy Editor presets once.' })
+        end
+        -- the Default difficulty (no changes), first in the list: added once to lists made before it existed,
+        -- the others moved down a place
+        local marker2 = preset_file('enemy_default.txt')
+        local had2 = marker2 and io.open(marker2, 'rb')
+        if had2 then had2:close() elseif marker2 then
+            local free = nil
+            for k = 1, FULL_PRESETS do if not presets.enemy[k] then free = k; break end end
+            local first = presets.enemy[1]
+            if free and not (first and first.name == 'Default' and #first.values == 0) then
+                local was = MOD.enemy.on
+                MOD.enemy.on = true
+                for k = free, 2, -1 do presets.enemy[k] = presets.enemy[k - 1]; save_full_preset(k) end
+                presets.enemy[1] = { name = 'Default', values = {} }
+                save_full_preset(1)
+                MOD.enemy.on = was
+            end
+            write_lines(marker2, { '# The Default difficulty was added to the Enemy Editor presets once.' })
+        end
     end
 
     -- Every value of the weapon that differs from the game's, part by part: this mod's own value
@@ -13603,7 +17756,8 @@ do
             for _, p in ipairs(row.parts) do
                 local v, d = p.field.pending_value or read_field(p.field), default_of(p.field)   -- a grenade still loading counts
                 local own = mine[p.field.key]
-                if own and v and d and math.abs(v - d) > 1e-4 then out[#out + 1] = { id = p.id, value = own } end
+                local pin = weapon.enemy and MOD.enemy.covered and MOD.enemy.covered[p.field.key]   -- (a faction-wide row's exception)
+                if own and v and d and (pin or math.abs(v - d) > 1e-4) then out[#out + 1] = { id = p.id, value = own } end
             end
         end
         return out
@@ -13675,11 +17829,15 @@ do
         ui.version = ui.version + 1
     end
 
+    -- the shown editor's changes only
     local function current_values()
         local values = {}
-        for _, o in ipairs(overrides) do values[#values + 1] = { hash = o.hash, id = o.id, value = o.value } end
+        for _, o in ipairs(overrides) do
+            if MOD.is_enemy_value(o.hash) == MOD.enemy.on then values[#values + 1] = { hash = o.hash, id = o.id, value = o.value } end
+        end
         return values
     end
+    presets.current_count = function() return #current_values() end
 
     -- Preset numbers in use, in order.
     local function full_order()
@@ -13759,7 +17917,7 @@ do
         local preset = full_presets[n]
         if not preset then return end
         if not settings.changes then say('Your changes are off: turn them on in Settings to load a preset'); return end
-        reset_all()
+        MOD.reset_side(MOD.enemy.on)
         local refused = 0
         for _, o in ipairs(preset.values) do
             local weapon = by_hash[o.hash]
@@ -13769,7 +17927,9 @@ do
                 local d = default_of(p.field)
                 ok, why = write_field(p.field, o.value)
                 if p.field.storage == 'grenade' and why == 'grenade assets loading' then ok = true end   -- applied once loaded
-                if ok then set_override(weapon, p, unless_default(o.value, d)) end
+                -- (an enemy page's value at the game's own: kept, as a faction-wide row's exception)
+                if ok then set_override(weapon, p, (weapon.enemy and not weapon.enemy.faction) and o.value or unless_default(o.value, d)) end
+                if ok and #parts == 1 and p.row and p.row.mult and p.row.parts[1] == p then MOD.enemy.mult_fields(weapon, p.row, o.value) end
             end
             if not ok then refused = refused + 1; log('preset "' .. preset.name .. '": ' .. (weapon and weapon.name or o.hash) .. ' ' .. o.id .. ': ' .. tostring(why)) end
         end
@@ -13831,7 +17991,8 @@ local function draw(width, height)
         end
         return nil
     end
-    local GOLD, WHITE, MUTED, DIM = color(255, 213, 0), color(238, 242, 246), color(153, 171, 184), color(95, 108, 120)
+    local GOLD, WHITE, MUTED, DIM = MOD.enemy.on and color(255, 72, 60) or color(255, 213, 0), color(238, 242, 246), color(153, 171, 184), color(95, 108, 120)
+    MOD.enemy.ALL_INK = MOD.enemy.ALL_INK or color(120, 200, 255)   -- a value only an 'All <faction>' row changed
     local WARN, GOOD = color(255, 150, 60), color(120, 220, 140)
 
     local function rect(x, y, w, h, c, z)
@@ -13885,7 +18046,7 @@ local function draw(width, height)
     -- z: over an overlay (its buttons at z, z + 1, z + 2)
     local function button(key, label, x, y, w, h, enabled, active, ink, z)
         local hovered = ui.hover == key and enabled ~= false
-        local fill = active and color(90, 74, 8) or hovered and color(52, 66, 80) or color(28, 34, 42)
+        local fill = active and (MOD.enemy.on and color(96, 20, 16) or color(90, 74, 8)) or hovered and color(52, 66, 80) or color(28, 34, 42)
         rect(x, y, w, h, fill, z or 951)
         outline(x, y, w, h, enabled == false and DIM or (active or hovered) and GOLD or color(70, 82, 94), z and z + 1)
         text(label, x + 8, y + (h - 16) / 2, 16, enabled == false and DIM or ink or WHITE, w - 12, false, z and z + 2)
@@ -13896,7 +18057,7 @@ local function draw(width, height)
     rect(0, 0, W, H, color(8, 11, 15, math.floor(255 * settings.opacity / 100 + 0.5)), 950)
     outline(0, 0, W, H, GOLD)
     region('panel', 0, 0, W, H, false)
-    text('SHODAN STAT EDITOR', 18, 12, 24, GOLD)
+    text(MOD.enemy.on and 'SHODAN ENEMY EDITOR' or 'SHODAN STAT EDITOR', 18, 12, 24, GOLD)
     if not MOD.offline then   -- (offline the panel is the window)
         text(hotkey_name .. ' to open/close', W - 56, 16, 15, MUTED, nil, true)
         button('close', 'X', W - 16 - 30, 10, 30, 30, true)
@@ -13912,14 +18073,15 @@ local function draw(width, height)
         return regions
     end
 
-    -- the tabs, each as wide as its (translated) name, the row shrunk to end before the reset button
+    -- the tabs, each as wide as its (translated) name, the row shrunk to end before the reset button (offline the
+    -- reset button sits up on the title's line: the tabs get the whole row)
     do
         local tabs, widths, total = settings.shown_tabs(), {}, 0
         for i, tab in ipairs(tabs) do
             widths[i] = math.max(#tab * 7 + 8, width(tab, 16) + 18)
             total = total + widths[i]
         end
-        local room = W - 16 - 124 - 16 - 4 * (#tabs - 1)
+        local room = W - 16 - (MOD.offline and 0 or 124 + 16) - 4 * (#tabs - 1)
         local fit, tab_x = math.min(1, room / total), 16
         for i, tab in ipairs(tabs) do
             local w = math.floor(widths[i] * fit + 0.5)
@@ -13927,7 +18089,7 @@ local function draw(width, height)
             tab_x = tab_x + w + 4
         end
     end
-    button('reset_weapon', ui.weapon and (ui.weapon.passive and 'Reset passive' or ui.weapon.player and 'Reset helldiver' or ui.weapon.record and 'Reset record') or 'Reset weapon', W - 16 - 124, 52, 124, 32, ui.weapon ~= nil and modified(ui.weapon))
+    button('reset_weapon', ui.weapon and (ui.weapon.passive and 'Reset passive' or ui.weapon.booster and 'Reset booster' or ui.weapon.enemy and (ui.weapon.slot == 'Spawning' and 'Reset spawning' or 'Reset enemy') or ui.weapon.player and 'Reset helldiver' or ui.weapon.record and 'Reset record') or (MOD.enemy.on and 'Reset enemy' or 'Reset weapon'), W - 16 - 124, MOD.offline and 10 or 52, 124, MOD.offline and 30 or 32, ui.weapon ~= nil and modified(ui.weapon))
 
     -- a list's scroll bar (the weapon list, or the full presets): a thin track between the list and the
     -- line that parts the panel's halves, shown when the list is longer than LIST_ROWS
@@ -13955,8 +18117,8 @@ local function draw(width, height)
         for k = 1, LIST_ROWS do
             local n = order[ui.fpage + k - 1]
             if not n then break end
-            local y, key, preset = 96 + (k - 1) * 26, 'fslot:' .. n, presets.full[n]
-            if n == chosen then rect(16, y, 318, 25, color(90, 74, 8), 951)
+            local y, key, preset = 96 + (k - 1) * 26, 'fslot:' .. n, presets.list()[n]
+            if n == chosen then rect(16, y, 318, 25, (MOD.enemy.on and color(96, 20, 16) or color(90, 74, 8)), 951)
             elseif ui.hover == key then rect(16, y, 318, 25, color(40, 52, 64), 951) end
             text(preset.name, 24, y + 4, 16, n == chosen and GOLD or WHITE, 214)
             text(#preset.values .. ' value(s)', 326, y + 5, 14, MUTED, 86, true)
@@ -13972,12 +18134,13 @@ local function draw(width, height)
         button('fpreset:new', '+ New preset from current changes', 16, py + 40, 318, 30, #order < presets.full_count)
         rect(343, 96, 2, H - 96 - 70, color(70, 82, 94), 951)
 
-        local x0, preset = 356, chosen and presets.full[chosen]
+        local x0, preset = 356, chosen and presets.list()[chosen]
         if ui.settings then
             -- the Settings page, drawn below
         elseif not preset then
-            text('Presets', x0, 94, 22, GOLD)
-            text('A preset keeps every change you have made as one set, under a name you choose.', x0, 136, 16, WHITE, W - x0 - 20)
+            text(MOD.enemy.on and 'Custom difficulties' or 'Presets', x0, 94, 22, GOLD)
+            text(MOD.enemy.on and 'A preset keeps every enemy and spawning change as one custom difficulty, under a name you choose. Your weapon changes are kept apart.'
+                 or 'A preset keeps every change you have made as one set, under a name you choose.', x0, 136, 16, WHITE, W - x0 - 20)
             text('"+ New preset" (or Insert) saves your current changes as one; you name it next.', x0, 162, 16, MUTED, W - x0 - 20)
         else
             local e = ui.editing
@@ -13996,7 +18159,8 @@ local function draw(width, height)
                    x0 + 110, 136, 250, 32, true, sure == 'save')
             button('fpreset:rename', 'Rename', x0 + 370, 136, 110, 32, true)
             button('fpreset:delete', sure == 'delete' and 'Sure?' or 'Delete', x0 + 490, 136, 110, 32, true, sure == 'delete')
-            text('Now changed: ' .. #overrides .. ' value(s). Loading a preset replaces every current change with it.',
+            text('Now changed: ' .. presets.current_count() .. ' value(s). Loading a preset replaces every current change' ..
+                 (MOD.enemy.on and ' to enemies and spawning with it.' or ' with it.'),
                  x0, 182, 15, MUTED, W - x0 - 20)
             -- what it holds: weapon (or stratagem) and how many of its values
             local y, names, counts = 212, {}, {}
@@ -14007,7 +18171,7 @@ local function draw(width, height)
             if #preset.values == 0 then
                 text('No changes: loading it puts every value back to the game\'s.', x0, y, 16, MUTED, W - x0 - 20)
             else
-                text(#preset.values .. ' value(s) for ' .. #names .. ' weapon(s) / stratagem(s):', x0, y, 16, WHITE)
+                text(#preset.values .. ' value(s) for ' .. #names .. (MOD.enemy.on and ' page(s):' or ' weapon(s) / stratagem(s):'), x0, y, 16, WHITE)
             end
             y = y + 28
             local room = math.floor((H - 110 - y) / 22)
@@ -14021,7 +18185,7 @@ local function draw(width, height)
                 text(counts[hash] .. ' value(s)', W - 24, y, 15, MUTED, 120, true)
                 y = y + 22
             end
-            text('Saved as StatEditor\\preset_' .. string.format('%02d', chosen) .. '.txt (copy it to share the set).',
+            text('Saved as StatEditor\\' .. presets.file_name(chosen) .. ' (copy it to share the set).',
                  x0, H - 100, 14, DIM, W - x0 - 20)
         end
     end
@@ -14038,14 +18202,47 @@ local function draw(width, height)
         local key = 'weapon:' .. weapon.hash
         if searching then text(weapon.slot, 326, y + 5, 13, DIM, 80, true) end
         local selected = weapon == ui.weapon
-        if selected then rect(16, y, 318, 25, color(90, 74, 8), 951)
+        if selected then rect(16, y, 318, 25, (MOD.enemy.on and color(96, 20, 16) or color(90, 74, 8)), 951)
         elseif ui.hover == key then rect(16, y, 318, 25, color(40, 52, 64), 951) end
         local changed = modified(weapon)
+        local ink = changed and GOLD or WHITE
+        if not changed and MOD.enemy.by_all_pages and MOD.enemy.by_all_pages[weapon.hash] then changed, ink = true, MOD.enemy.ALL_INK end
         -- a stratagem: its number as an extra stratagem after its name
         if (weapon.stratagem or weapon.sentry_defs) and not MOD.extra.list then MOD.extra.choices() end
         local id = weapon.extra_id and ' (' .. weapon.extra_id .. ')' or ''
-        text((changed and '* ' or '') .. settings.tr(weapon.name) .. id, 24, y + 4, 16, changed and GOLD or WHITE, searching and 226 or 302)
+        -- a part of the page above it ("Annihilator Tank: mounted weapon 1" under Annihilator Tank): indented,
+        -- smaller, without the name it shares
+        local owner = not searching and weapon.name:match('^(.+): [^:]+$')
+        if owner then
+            local j = ui.page + k - 2
+            while list[j] and list[j].name:sub(1, #owner + 2) == owner .. ': ' do j = j - 1 end
+            if not (list[j] and list[j].name == owner) then owner = nil end
+        end
+        if owner then
+            local full, top = settings.tr(weapon.name), settings.tr(owner)
+            local rest = full:sub(1, #top) == top and full:sub(#top + 1):gsub('^%s*:%s*', ''):gsub('^\239\188\154%s*', '') or full
+            rest = rest:gsub('^%l', string.upper)
+                       :gsub('^\208([\176-\191])', function(c) return '\208' .. string.char(c:byte() - 32) end)   -- а-п
+                       :gsub('^\209([\128-\143])', function(c) return '\208' .. string.char(c:byte() + 32) end)   -- р-я
+            text((changed and '* ' or '') .. rest .. id, 44, y + 5, 14, ink, searching and 206 or 282)
+        else
+            text((changed and '* ' or '') .. settings.tr(weapon.name) .. id, 24, y + 4, 16, ink, searching and 226 or 302)
+        end
         region(key, 16, y, 318, 25)
+    end
+    -- the Boosters tab: why only some boosters are there, under the list
+    if ui.tab == 'Boosters' and not searching and not presets_tab and #list > 0 and #list <= LIST_ROWS - 5 then
+        local line, y, words = '', 96 + #list * 26 + 12, settings.tr(MOD.boosters.WHY)
+        local spaced = words:find(' ')
+        for word in words:gmatch(spaced and '%S+' or '[^\128-\191][\128-\191]*') do
+            local next_line = line == '' and word or (line .. (spaced and ' ' or '') .. word)
+            if line ~= '' and width(next_line, 14) > 306 then
+                text(line, 24, y, 14, MUTED); y, line = y + 19, word
+            else
+                line = next_line
+            end
+        end
+        text(line, 24, y, 14, MUTED)
     end
     local py = 96 + LIST_ROWS * 26 + 8
     if not presets_tab then
@@ -14061,7 +18258,7 @@ local function draw(width, height)
         rect(16, sy, 274, 30, active and color(20, 26, 34) or color(28, 34, 42), 951)
         outline(16, sy, 274, 30, active and GOLD or (ui.hover == 'search' and GOLD or color(70, 82, 94)))
         if ui.search.text == '' and not active then
-            text('Search weapons and stratagems', 24, sy + 7, 15, DIM, 258)
+            text(MOD.enemy.on and 'Search enemies' or 'Search weapons and stratagems', 24, sy + 7, 15, DIM, 258)
         else
             text(ui.search.text .. (active and '_' or ''), 24, sy + 6, 16, WHITE, 258)
         end
@@ -14123,7 +18320,6 @@ local function draw(width, height)
             choice('Panel side', 'side', { { 'left', 'Left' }, { 'right', 'Right' } }, settings.side)
             percent('Background opacity', 'opacity')
         end
-        choice('Remember last tab and weapon', 'remember', ONOFF, onoff(settings.remember))
         if MOD.offline then   -- wider buttons than choice()'s: 'Automatic', 'Every commit' in every language
             text('Updates', x0, y + 6, 16, WHITE, 270)
             for k, o in ipairs({ { 'ask', 'Ask' }, { 'auto', 'Automatic' } }) do
@@ -14160,6 +18356,9 @@ local function draw(width, height)
         choice('Foliage pass-through', 'foliage', ONOFF, onoff(MOD.tweaks.foliage.on))
         text('On: your rockets, launcher rounds and stratagem ordnance fly through tree canopies and bushes.',
              x0 + 16, y - 6, 14, MUTED, W - x0 - 40)
+        y = y + 14
+        choice('Sniper crosshair in third person', 'reticle', ONOFF, onoff(MOD.tweaks.reticle.on))
+        text('On: sniper rifles show a crosshair when you aim in third person.', x0 + 16, y - 6, 14, MUTED, W - x0 - 40)
         y = y + 14
         if not MOD.offline then   -- (the game's item list exists only while it runs)
         choice('Unlock unused items', 'unlock_all', ONOFF, onoff(settings.unlock_any()))
@@ -14288,6 +18487,14 @@ local function draw(width, height)
                 end
                 local value, default = row_value(row), row_value(row, true)
                 local changed = value ~= nil and default ~= nil and math.abs(value - default) > 1e-4
+                -- changed only by an 'All <faction>' row: its value in that colour, no Reset (nothing of its own)
+                local by_all = weapon.enemy and not weapon.enemy.faction and MOD.enemy.by_all_value(row)
+                local ink = changed and GOLD or WHITE
+                if by_all and default ~= nil and math.abs(by_all - default) > 1e-4 then
+                    value, ink, changed = by_all, MOD.enemy.ALL_INK, false
+                end
+                local was = value ~= nil and default ~= nil and math.abs(value - default) > 1e-4
+                if not changed and weapon.enemy and MOD.enemy.pinned(row) then changed, ink = true, GOLD end
                 local focus = n == ui.row
                 local bh = pitch - 3
                 if focus then rect(x0 - 6, y - 1, W - x0 - 10, pitch - 1, color(30, 38, 48), 951) end
@@ -14298,25 +18505,44 @@ local function draw(width, height)
                     text('(?)', x0 + math.min(width(label, 16), 236) + 6, y + bh / 2 - 7, 14, DIM)
                     if ui.hover == 'row:' .. n then tip_overlay = { lines = row.tip, x = x0, y = y + bh + 2 } end
                 end
-                text(changed and ('was ' .. fmt(default, row.storage)) or '', 690, y + bh / 2 - 7, 14, DIM, 90, true)
-                local typing = ui.value and ui.value.n == n and ui.value.weapon == weapon
-                if typing or (ui.hover == 'value:' .. n and value ~= nil) then
-                    rect(696, y, 88, bh, typing and color(20, 26, 34) or color(40, 52, 64), 951)
-                    outline(696, y, 88, bh, GOLD)
-                end
-                if typing then
-                    text(ui.value.text .. '_', 780, y + bh / 2 - 8, 17, WHITE, 84, true)
+                if row.code then   -- a call-in code: its arrows, and Record
+                    local rec = ui.code and ui.code.n == n and ui.code.weapon == weapon and ui.code
+                    if rec or ui.hover == 'value:' .. n then
+                        rect(572, y, 212, bh, rec and color(20, 26, 34) or color(40, 52, 64), 951)
+                        outline(572, y, 212, bh, GOLD)
+                    end
+                    if rec then
+                        text(#rec.arrows > 0 and (MOD.code.text(nil, rec.arrows) .. '  _') or 'Enter the code...', 780,
+                             y + bh / 2 - 9, 18, #rec.arrows > 0 and WHITE or MUTED, 204, true)
+                    else
+                        text(MOD.code.text(value), 780, y + bh / 2 - 9, 18, changed and GOLD or WHITE, 204, true)
+                    end
+                    text(changed and ('was ' .. MOD.code.text(default, nil, '')) or '', 566, y + bh / 2 - 7, 14, DIM, 94, true)
+                    button('code:' .. n, rec and 'Done' or 'Record', 790, y, 164, bh, value ~= nil, rec ~= false and rec ~= nil)
+                    button('reset:' .. n, 'R', 958, y, 26, bh, changed)
+                    region('row:' .. n, x0 - 6, y - 1, 430, pitch - 1)
+                    region('value:' .. n, 572, y, 212, bh, value ~= nil)
                 else
-                    text(fmt(value, row.storage), 780, y + bh / 2 - 8, 17, changed and GOLD or WHITE, 84, true)
+                    text(was and ('was ' .. fmt(default, row.storage)) or '', 690, y + bh / 2 - 7, 14, DIM, 90, true)
+                    local typing = ui.value and ui.value.n == n and ui.value.weapon == weapon
+                    if typing or (ui.hover == 'value:' .. n and value ~= nil) then
+                        rect(696, y, 88, bh, typing and color(20, 26, 34) or color(40, 52, 64), 951)
+                        outline(696, y, 88, bh, GOLD)
+                    end
+                    if typing then
+                        text(ui.value.text .. '_', 780, y + bh / 2 - 8, 17, WHITE, 84, true)
+                    else
+                        text(fmt(value, row.storage), 780, y + bh / 2 - 8, 17, ink, 84, true)
+                    end
+                    local ok = value ~= nil
+                    button('dec_big:' .. n, '--', 790, y, 40, bh, ok)
+                    button('dec:' .. n, '-', 834, y, 36, bh, ok)
+                    button('inc:' .. n, '+', 874, y, 36, bh, ok)
+                    button('inc_big:' .. n, '++', 914, y, 40, bh, ok)
+                    button('reset:' .. n, 'R', 958, y, 26, bh, changed)
+                    region('row:' .. n, x0 - 6, y - 1, 430, pitch - 1)
+                    region('value:' .. n, 696, y, 88, bh, ok)
                 end
-                local ok = value ~= nil
-                button('dec_big:' .. n, '--', 790, y, 40, bh, ok)
-                button('dec:' .. n, '-', 834, y, 36, bh, ok)
-                button('inc:' .. n, '+', 874, y, 36, bh, ok)
-                button('inc_big:' .. n, '++', 914, y, 40, bh, ok)
-                button('reset:' .. n, 'R', 958, y, 26, bh, changed)
-                region('row:' .. n, x0 - 6, y - 1, 430, pitch - 1)
-                region('value:' .. n, 696, y, 88, bh, ok)
                 y = y + pitch
                 for k, line in ipairs(row.after or {}) do text(line, x0, y + 2 + (k - 1) * 16, 14, MUTED, W - x0 - 20) end
                 y = y + (row.after_h or 0)
@@ -14380,10 +18606,15 @@ local function draw(width, height)
     -- footer, and the Settings button at the bottom right
     rect(16, H - 64, W - 32, 1, color(70, 82, 94), 951)
     button('presets', 'Presets', W - 16 - 104 - 8 - 104, H - 54, 104, 34, true, ui.tab == 'Presets' and not ui.settings)
-    button('settings', ui.settings and 'Back' or 'Settings', W - 16 - 104, H - 54, 104, 34, true, ui.settings)
+    -- ('Back' alone is also a body part's name: the button's own text, 'Back (button)', in the translations)
+    local back = settings.tr('Back (button)')
+    button('settings', ui.settings and (back == 'Back (button)' and 'Back' or back) or 'Settings', W - 16 - 104, H - 54, 104, 34, true, ui.settings)
     if ui.binding then
         text('Press the key that should open and close the panel: F1-F12, Insert, Home, End, Pause or Scroll Lock. Esc cancels.',
              18, H - 56, 14, MUTED, W - 260)
+    elseif ui.code then
+        text('Enter the new code with the arrow keys or WASD, 9 arrows at most. Enter or Done keeps it, Backspace takes ' ..
+             'one back, Esc cancels.', 18, H - 56, 14, MUTED, W - 260)
     elseif ui.settings then
         text('Settings are saved at once, in config.txt with your changes.', 18, H - 56, 14, MUTED, W - 260)
     elseif ui.editing then
@@ -14493,6 +18724,20 @@ local function hit(x, y, enabled_only)
     return nil
 end
 
+-- The shown editor's tab and page as it was left (settings.last), else its first tab and that tab's first page.
+function MOD.restore_last()
+    local last = settings.last[MOD.enemy.on and 'enemy' or 'stat']
+    local tabs = settings.shown_tabs()
+    ui.tab, ui.page, ui.search, ui.settings, ui.weapon = tabs[1], 1, { text = '', active = false }, false, nil
+    for _, t in ipairs(tabs) do if t == last.tab then ui.tab = t end end
+    local page = last.weapon and by_hash[last.weapon]
+    if page and page.slot == ui.tab and #page.rows > 0 and (page.enemy ~= nil) == MOD.enemy.on then
+        select_weapon(page)
+    else
+        select_weapon(weapons_in(ui.tab)[1])
+    end
+end
+
 local function click(key)
     if not key then return end
     local weapon = ui.weapon
@@ -14501,13 +18746,20 @@ local function click(key)
     if ui.editing and kind ~= 'name' then presets.finish_rename(true) end
     if ui.search.active and kind ~= 'search' then ui.search.active = false end
     if ui.value and key ~= 'value:' .. ui.value.n then finish_value(true) end
+    if ui.code and key ~= 'code:' .. ui.code.n then MOD.code.finish(false) end
     if kind ~= 'set' then ui.binding = nil end
     if kind == 'tab' then
         ui.tab, ui.page, ui.search, ui.settings = arg, 1, { text = '', active = false }, false
-        if settings.remember and state.phase == 'ready' and settings.last_tab ~= arg then
-            settings.last_tab = arg
+        local last = settings.last[MOD.enemy.on and 'enemy' or 'stat']
+        if state.phase == 'ready' and last.tab ~= arg then
+            last.tab = arg
             mark_config_dirty()
         end
+    elseif kind == 'enemy_mode' then   -- the other editor, on the tab and page it was left on
+        MOD.enemy.on = not MOD.enemy.on
+        settings.enemy_last = MOD.enemy.on
+        MOD.restore_last()
+        mark_config_dirty()
     elseif kind == 'close' then ui.close_request = true   -- closed by tick, once this frame is done
     elseif kind == 'settings' then ui.settings = not ui.settings
     elseif kind == 'presets' then   -- Presets, or back to the tab before them
@@ -14520,13 +18772,13 @@ local function click(key)
         local name, value = arg:match('^([%w_]+):?(.*)$')
         if name == 'bind' then ui.binding = not ui.binding or nil
         elseif name == 'changes' then settings.set_changes(value == 'on')
-        elseif name == 'block_input' or name == 'remember' then settings[name] = value == 'on'
+        elseif name == 'block_input' then settings[name] = value == 'on'
         elseif name == 'updates' and (value == 'ask' or value == 'auto') then settings.updates = value
         elseif name == 'update_channel' and (value == 'releases' or value == 'commits') then settings.update_channel = value
         elseif name == 'arc_mp' then settings.arc_mp, settings.arc.next_check = value == 'on', 0
         elseif name == 'vehicles' then
             MOD.vehicles.on = value == 'on'; MOD.vehicles.apply()
-        elseif name == 'bounce' or name == 'foliage' then
+        elseif name == 'bounce' or name == 'foliage' or name == 'reticle' then
             MOD.tweaks[name].on = value == 'on'; MOD.tweaks.apply()
         elseif name == 'unlock_all' then
             settings.unlock_all(value == 'on'); settings.unlock.next_check = 0
@@ -14624,10 +18876,19 @@ local function click(key)
         elseif kind == 'inc' then change(row, 1, false)
         elseif kind == 'inc_big' then change(row, 1, true)
         elseif kind == 'reset' then reset_row(weapon, row)
+        elseif kind == 'code' and row.code then
+            if ui.code then MOD.code.finish(true) else MOD.code.start(tonumber(arg)) end
+        elseif kind == 'value' and row.code then MOD.code.start(tonumber(arg))
         elseif kind == 'value' and not ui.value and row_value(row) ~= nil then
             ui.value = { n = tonumber(arg), weapon = weapon, text = fmt(row_value(row), row.storage), fresh = true }
         end
     end
+end
+
+-- the window's titles (offline/host.lua): which editor is shown, and a click on the other one's title
+state.enemy_on = function() return MOD.enemy.on end
+state.switch_editor = function(enemy)
+    if enemy ~= MOD.enemy.on then click('enemy_mode'); ui.version = ui.version + 1 end
 end
 
 -- Keyboard: presses, and repeats while held (after 0.4 s, every 0.08 s).
@@ -14696,6 +18957,23 @@ local function keyboard(now)
         end
         for _, c in ipairs(typed or {}) do
             if c ~= '#' then presets.type_char(c) end   -- '#' starts a comment in the preset files
+        end
+        return
+    end
+    if ui.code then   -- recording a call-in code: an arrow per press (held keys don't repeat)
+        local rec = ui.code
+        local function hit(name) local fresh = held[name] == nil; return pressed(name, now) and fresh end
+        if hit('Escape') then MOD.code.finish(false); return end
+        if hit('Enter') then MOD.code.finish(true); return end
+        if hit('Backspace') and #rec.arrows > 0 then rec.arrows[#rec.arrows] = nil; ui.version = ui.version + 1 end
+        for a, keys in ipairs({ { 'Up', 'T87' }, { 'Right', 'T68' }, { 'Down', 'T83' }, { 'Left', 'T65' } }) do
+            for _, name in ipairs(keys) do
+                if hit(name) then
+                    if #rec.arrows < MOD.code.MAX then rec.arrows[#rec.arrows + 1] = a
+                    else ui.message = { text = 'A code is 9 arrows at most.', till = now + 3 } end
+                    ui.version = ui.version + 1
+                end
+            end
         end
         return
     end
@@ -14798,7 +19076,9 @@ local function keyboard(now)
             end
         end
     end
-    if pressed('Enter', now) and weapon.rows[ui.row] and row_value(weapon.rows[ui.row]) ~= nil then
+    local enter = pressed('Enter', now)
+    if enter and weapon.rows[ui.row] and weapon.rows[ui.row].code then MOD.code.start(ui.row); return end
+    if enter and weapon.rows[ui.row] and row_value(weapon.rows[ui.row]) ~= nil then
         ui.value = { n = ui.row, weapon = weapon, text = fmt(row_value(weapon.rows[ui.row]), weapon.rows[ui.row].storage), fresh = true }
         return
     end
@@ -15284,13 +19564,14 @@ local function open_panel(open)
         if state.phase == 'ready' and not tables_intact() then rescan() end
         if not ui.restored and state.phase == 'ready' then
             ui.restored = true
-            local last = settings.remember and settings.last_weapon and by_hash[settings.last_weapon]
-            if last and #last.rows > 0 and not settings.hidden[last.slot] then
-                select_weapon(last)
-            elseif settings.remember and settings.last_tab then
-                for _, t in ipairs(settings.shown_tabs()) do if t == settings.last_tab then ui.tab = t end end
+            -- (configs before the 'editor' line: one last page for both editors)
+            local old = settings.last.stat.weapon and by_hash[settings.last.stat.weapon]
+            if old and old.enemy then
+                settings.last.enemy.tab, settings.last.enemy.weapon = old.slot, old.hash
+                settings.last.stat.tab, settings.last.stat.weapon, settings.enemy_last = nil, nil, true
             end
-            if settings.hidden[ui.tab] then ui.tab = settings.shown_tabs()[1] end
+            MOD.enemy.on = settings.enemy_last   -- back in the editor it was left in
+            MOD.restore_last()
         end
         if not ui.weapon then
             local list = weapons_in(ui.tab)
@@ -16343,6 +20624,7 @@ local function tick()
                 if #pending == 0 then log('all saved values applied (' .. state.applied .. ')') end
             end
         end
+        if MOD.enemy.refresh_due and #pending == 0 then MOD.enemy.faction_refresh() end
         if config_dirty_at and now >= config_dirty_at then save_config() end
         if now >= settings.unlock.next_check then
             settings.unlock.next_check = now + 2

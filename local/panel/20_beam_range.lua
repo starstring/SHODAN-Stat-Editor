@@ -2,7 +2,7 @@
 --
 -- A beam weapon's damage comes from its beam record: the beam component (+0 beam type) -> the beam
 -- row (+12 damage row). resolve_gun uses that only to find the damage row, so the beam's own
--- values — its range (+8: the 15 m the Meltagun reaches) — were not editable anywhere. This wraps
+-- values — its range (+8, the 15 m the Meltagun reaches) — were not editable anywhere. This wraps
 -- resolve_gun and adds the row right after the shot's damage / status rows, in a "Beam" section:
 --
 --   Damage | Status effects | Beam range (m) | Charge | ...
@@ -10,8 +10,7 @@
 -- Only when the beam really is this weapon's damage source (the same test resolve_gun makes), so a
 -- weapon that has a beam component but fires a projectile does not get the row.
 --
--- No local of its own (upstream's chunk is at LuaJIT's 200-local limit): the wrapped function lives
--- in `state`, and the translations are added from inside a function called right away.
+-- No `local` at this level: upstream's chunk sits at LuaJIT's 200-local limit (see local/README.md).
 state.sse_resolve_gun = resolve_gun
 
 resolve_gun = function(weapon, key)

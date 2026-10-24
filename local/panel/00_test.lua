@@ -17,6 +17,8 @@ if rawget(_G, 'SHODAN_LOCAL_TEST') then
                     TYPES = TYPES, defaults = defaults, read_field = read_field, field_at = field_at,
                     default_of = default_of, MOD = MOD, state = state, HEADER_BYTES = HEADER_BYTES,
                     bytes = function(address, size) return api.read(address, size) end }
+    -- the panel's own display value for a row (it may be wrapped by a later overlay: call it late)
+    state._test.value_of = function(row, default) return row_value(row, default) end
     -- ok, old, new, why = state._test.set('A8A91EB54892B6B2', 'calibre', 20)
     state._test.set = function(hash, id, value)
         local weapon = by_hash[tostring(hash):upper()]

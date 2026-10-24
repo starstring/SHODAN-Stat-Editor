@@ -12,8 +12,8 @@
 -- first shot), so saved values and presets that name them survive. Shrapnel count (+80) is already
 -- on the weapon pages: `MOD.records.shrapnel_rows` adds it with the shrapnel projectile (+84).
 --
--- No local of its own (upstream's chunk is at LuaJIT's 200-local limit): the wrapped function and
--- the helper live in `state`.
+-- No `local` at this level: upstream's chunk sits at LuaJIT's 200-local limit, so scratch values
+-- live in `state` (the panel's own table).
 state.sse_add_row = add_row
 
 -- rows are appended by add_row; take the last `count` rows and splice them in after `at`

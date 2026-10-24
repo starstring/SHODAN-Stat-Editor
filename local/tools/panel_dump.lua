@@ -75,7 +75,8 @@ local test = type(state._test) == 'table' and state._test or nil
 if not test then log('the panel did not expose _test (overlay missing?)'); os.exit(7) end
 
 -- ---------------------------------------------------------------- tick until every weapon is resolved
-local deadline = os.time() + 300
+-- a healthy run is ready in well under a second; a hang is a bug in an overlay, so fail fast
+local deadline = os.time() + 60
 local frames, last_phase = 0, nil
 while os.time() < deadline do
     pcall(update, 1 / 60)
@@ -86,7 +87,10 @@ while os.time() < deadline do
     end
     if state.phase == 'ready' and state.weapons ~= nil then break end
 end
-if state.phase ~= 'ready' then log('gave up waiting: phase ' .. tostring(state.phase)); os.exit(8) end
+if state.phase ~= 'ready' then
+    log('gave up after 60 s: the panel is stuck in phase ' .. tostring(state.phase) .. ' (an overlay probably errors inside resolve: run local/cache/dbg.lua)')
+    os.exit(8)
+end
 for _ = 1, 30 do pcall(update, 1 / 60) end   -- the last rows and saved values
 local field_count = 0
 for _ in pairs(test.fields) do field_count = field_count + 1 end

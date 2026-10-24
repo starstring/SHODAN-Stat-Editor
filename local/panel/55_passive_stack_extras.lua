@@ -52,70 +52,14 @@ save_config = function()
     handle:close()
 end
 
--- the stacks the host installs: the panel's own, plus 'every armor', with the policy handed over
+-- The stacks the host installs, with the conflict policy handed over first. "Every armor" is its
+-- own page (local/panel/60_armor_pages.lua), which adds to this result.
 state.sse_stacks = state.stacks
 state.stacks = function()
     local base = state.sse_stacks()
-    local cfg = state.sse_cfg
     local ok, host = pcall(require, 'hostdata')
-    if ok and type(host) == 'table' and host.set_conflicts then host.set_conflicts(cfg.conflicts) end
-    if not cfg.every or #cfg.every == 0 then return base end
-    local out = {}
-    for target, list in pairs(base) do out[target] = list end
-    for _, entry in ipairs(weapons) do
-        local index = entry.passive and tables[entry.passive] and tables[entry.passive].index
-        local id = index and index.id
-        if id then
-            local list, seen = {}, { [id] = true }
-            for _, other in ipairs(base[id] or {}) do
-                if not seen[other] then seen[other], list[#list + 1] = true, other end
-            end
-            for _, other in ipairs(cfg.every) do
-                if not seen[other] then seen[other], list[#list + 1] = true, other end
-            end
-            if #list > 0 then out[id] = list end
-        end
-    end
-    return out
-end
-
--- The two buttons are drawn by the generated panel (local/patch_panel_ui.py): draw() builds its
--- own nested rect/text/button helpers, so an appended overlay can add clickable regions but cannot
--- draw. Their clicks are handled below.
-
-state.sse_click = click
-click = function(key)
-    local kind = key and key:match('^([%w_]+)')
-    if kind == 'pconf' then
-        state.sse_cfg.conflicts = state.sse_cfg.conflicts == 'strongest' and 'stack' or 'strongest'
-        mark_config_dirty()
-        ui.message = { text = 'Modifiers both passives have: ' .. state.sse_cfg.conflicts ..
-                             (state.sse_cfg.conflicts == 'strongest' and ' (the stronger value wins)' or
-                              ' (the first one is kept)'), till = api.now() + 5 }
-        return
-    elseif kind == 'pevery' then
-        local entry = ui.stack_pick
-        local index = entry and entry.passive and tables[entry.passive] and tables[entry.passive].index
-        local target = index and index.id
-        if state.sse_cfg.every then
-            state.sse_cfg.every = nil
-        else
-            local list = {}
-            for _, other in ipairs((target and settings.stacks[target]) or {}) do list[#list + 1] = other end
-            if #list == 0 then
-                ui.message = { text = 'Add a passive to this armor first: Every armor copies this page\'s stack.',
-                               till = api.now() + 5 }
-                return
-            end
-            state.sse_cfg.every = list
-        end
-        mark_config_dirty()
-        ui.message = { text = state.sse_cfg.every and
-            ('Every armor: ' .. #state.sse_cfg.every .. ' passive(s) added to all ' .. #weapons ..
-             ' passive pages at install') or 'Every armor: off', till = api.now() + 5 }
-        return
-    end
-    return state.sse_click(key)
+    if ok and type(host) == 'table' and host.set_conflicts then host.set_conflicts(state.sse_cfg.conflicts) end
+    return base
 end
 
 ;(function()

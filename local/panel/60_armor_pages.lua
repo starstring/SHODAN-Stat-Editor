@@ -14,6 +14,7 @@
 -- `change` handles the clicks, and no memory is written for them.
 --
 -- No `local` at this level (upstream's chunk sits at LuaJIT's 200-local limit).
+state.sse_own_off = settings.own_off          -- (the panel's own switch, for the preview)
 state.sse_every_id = 0x7E000001                  -- a sentinel: real passive ids are 1..42
 state.sse_every_key = 'armor passive every'
 
@@ -167,8 +168,11 @@ state.sse_merge = function(target)
     if every and t.index.id ~= state.sse_every_id then
         for _, other in ipairs(every) do sources[#sources + 1] = other end
     end
-    add(read_list(target.passive, 'mods'), t.index.id, false)
-    add(read_list(target.passive, 'stats'), t.index.id, true)
+    -- "Own effects: Off" leaves the passive's own rows out of the install, so they are left out here too
+    if not settings.own_off[t.index.id] then
+        add(read_list(target.passive, 'mods'), t.index.id, false)
+        add(read_list(target.passive, 'stats'), t.index.id, true)
+    end
     for _, id in ipairs(sources) do
         local other = by_hash[string.format('FFFFFFFE%08X', id)]
         local table_key = other and other.passive

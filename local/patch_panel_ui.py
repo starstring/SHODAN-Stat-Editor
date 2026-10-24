@@ -32,6 +32,9 @@ ANCHOR_OPEN = """                else
 PATCHED_OPEN = """                else
                     -- local patch (local/patch_panel_ui.py): a row with options draws buttons instead
                     if row.sse_options then
+                        -- the row's own region first: hit() takes the *last* region under the cursor,
+                        -- so a region registered after the buttons would swallow their clicks
+                        region('row:' .. n, x0 - 6, y - 1, 430, pitch - 1)
                         local current = row.sse_current and row.sse_current() or value
                         local count = #row.sse_options
                         local bw = math.min(150, math.floor((W - x0 - 190) / count))
@@ -39,7 +42,6 @@ PATCHED_OPEN = """                else
                             button('sse_opt:' .. n .. ':' .. tostring(option[1]), settings.tr(option[2]),
                                    x0 + 150 + (k - 1) * (bw + 6), y, bw, bh, true, current == option[1])
                         end
-                        region('row:' .. n, x0 - 6, y - 1, 430, pitch - 1)
                     end
                     if not row.sse_options then
                     text(was and ('was ' .. fmt(default, row.storage)) or '', 690, y + bh / 2 - 7, 14, DIM, 90, true)"""

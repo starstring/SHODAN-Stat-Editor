@@ -23,6 +23,18 @@ if rawget(_G, 'SHODAN_LOCAL_TEST') then
                     save_config = function() save_config() end,
                     -- the UI state and the click dispatcher, to drive a real action
                     ui = ui, click = function(key) return click(key) end,
+                    -- draw() fills ui.regions: the harness' update() is a stub, so prepare the
+                    -- two things the real path sets up first, then call it
+                    draw = function(w, h)
+                        local sr = rawget(_G, 'stingray')
+                        if not ui.gui and sr and sr.World then
+                            ui.gui = sr.World.create_screen_gui(nil, 'scale', 1, 1)
+                        end
+                        if not font then font = { font = 'harness', material = 'harness', text = 'harness' } end
+                        local regions = draw(w, h)
+                        ui.regions = regions          -- (the real path does this too)
+                        return regions
+                    end,
                     change = function(row, d, big, exact) return change(row, d, big, exact) end }
     -- the panel's own display value for a row (it may be wrapped by a later overlay: call it late)
     state._test.value_of = function(row, default) return row_value(row, default) end

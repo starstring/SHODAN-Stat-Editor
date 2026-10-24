@@ -40,8 +40,17 @@ def build(skip_test: bool = False) -> Path:
     header = (f"-- built from src/stat_editor_offline.lua + {len(parts)} local part(s) "
               f"({', '.join(p.name for p in parts) or 'none'}) -- do not edit\n")
     out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(header + base + "\n" + "\n".join(pieces), encoding="utf-8")
+    out.write_text(apply_ui_patch(header + base + "\n" + "\n".join(pieces)), encoding="utf-8")
     return out
+
+
+def apply_ui_patch(text: str) -> str:
+    """The one thing an overlay cannot do: draw. See local/patch_panel_ui.py."""
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("patch_panel_ui", str(HERE / "patch_panel_ui.py"))
+    module = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(module)
+    return module.patch(text)
 
 
 def main() -> int:

@@ -79,18 +79,9 @@ state.stacks = function()
     return out
 end
 
--- the two buttons, drawn with the stack dialog's Cancel
-state.sse_button = button
-button = function(id, label, x, y, w, h, ...)
-    local r = state.sse_button(id, label, x, y, w, h, ...)
-    if id == 'stack_cancel' and ui.stack_pick then
-        local cfg = state.sse_cfg
-        state.sse_button('pconf', 'Conflicts: ' .. cfg.conflicts, x - 8 - 160, y, 160, h, true, false, nil, 961)
-        state.sse_button('pevery', cfg.every and ('Every armor: ' .. #cfg.every) or 'Every armor: off',
-                         x - 8 - 160 - 8 - 160, y, 160, h, true, false, nil, 961)
-    end
-    return r
-end
+-- The two buttons are drawn by the generated panel (local/patch_panel_ui.py): draw() builds its
+-- own nested rect/text/button helpers, so an appended overlay can add clickable regions but cannot
+-- draw. Their clicks are handled below.
 
 state.sse_click = click
 click = function(key)

@@ -77,11 +77,9 @@ resolve = function(weapon)
             local row = add_row(weapon, 'Stacks', 'stack_conflicts', 'A modifier both passives have', 'u32',
                                 { part('stack_conflicts', state.sse_handle(), 0, 'u32', 4294967295) }, 0, 1, 1, 1)
             row.sse_setting = 'conflicts'
-            row.note = function()
-                return state.sse_cfg.conflicts == 'strongest' and
-                    '1 strongest: the value further from "no effect" wins' or
-                    '0 stack: the passive you add it to keeps its own value'
-            end
+            row.sse_options = { { 'stack', 'Keep' }, { 'strongest', 'Strongest' } }
+            row.sse_current = function() return state.sse_cfg.conflicts end
+            row.note = 'When both passives have the same modifier' 
         end
         return
     end
@@ -117,6 +115,32 @@ change = function(row, delta_sign, big, exact)
         return
     end
     return state.sse_change(row, delta_sign, big, exact)
+end
+
+-- clicks on an option row (drawn by the generated panel: local/patch_panel_ui.py)
+state.sse_click2 = click
+click = function(key)
+    -- (not `key and key:match(...)`: `and` keeps only the first result)
+    local row_at, value = key and key:match('^sse_opt:(%d+):(.+)$') or nil, nil
+    if key then row_at, value = key:match('^sse_opt:(%d+):(.+)$') end
+    if row_at then
+        local row = ui.weapon and ui.weapon.rows and ui.weapon.rows[tonumber(row_at)]
+        if row then
+            if row.sse_setting == 'conflicts' then
+                state.sse_cfg.conflicts = (value == 'strongest') and 'strongest' or 'stack'
+                mark_config_dirty()
+                ui.message = { text = 'A modifier both passives have: ' .. state.sse_cfg.conflicts ..
+                                     (state.sse_cfg.conflicts == 'strongest' and ' (the stronger value wins)' or
+                                      ' (the passive you add it to keeps its own)'), till = api.now() + 5 }
+                return
+            elseif row.sse_effect_type then
+                change(row, 0, false, tonumber(value))   -- (0: the value is exact, no stepping)
+                return
+            end
+        end
+        return
+    end
+    return state.sse_click2(key)
 end
 
 -- the install side: the "Every armor" list is added to every passive's stack
@@ -161,6 +185,14 @@ end
             lang.exact['Passives added below apply to every armor, whatever you wear.'] = words[5]
             lang.exact['Added with "+ Add passive" below; every armor gets them at install.'] = words[5]
             lang.exact['How the armor passives are applied.'] = words[4]
+            local opts = ({ ['zh-Hans'] = { '保留原值', '最强值胜出' }, ['zh-Hant'] = { '保留原值', '最強值勝出' },
+                            ['ru'] = { 'как есть', 'сильнейшее' } })[lang.id]
+            if opts then
+                lang.exact['Keep'], lang.exact['Strongest'] = opts[1], opts[2]
+                lang.exact['When both passives have the same modifier'] = words[4]
+                if lang.lower then lang.lower['keep'], lang.lower['strongest'] = opts[1], opts[2] end
+                if lang.upper then lang.upper['KEEP'], lang.upper['STRONGEST'] = opts[1], opts[2] end
+            end
             if lang.lower then
                 lang.lower['passives applied'] = words[3]
                 lang.lower['a modifier both passives have'] = words[4]

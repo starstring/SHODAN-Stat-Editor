@@ -34,10 +34,10 @@ add_row = function(weapon, section, id, label, storage, parts, min, max, small, 
     if weapon.by_id[type_id] then return row end
     local made = state.sse_add_row_ptype(weapon, section, type_id, 'Effect type', 'u32',
                                    { part(type_id, first.field.kind, type_at, 'u32', 100000) }, 0, 3, 1, 1)
-    made.note = function()
-        local name = state.sse_modifier_types[read_field(made.parts[1].field) or 0]
-        return '0 set, 1 add, 2 multiply, 3 time' .. (name and (' — this one: ' .. name) or '')
-    end
+    -- a choice row, drawn like the panel's own Settings options
+    made.sse_options = { { 0, 'Set' }, { 1, 'Add' }, { 2, 'Multiply' }, { 3, 'Time' } }
+    made.sse_current = function() return read_field(made.parts[1].field) end
+    made.sse_effect_type = true
     -- keep it directly under its modifier
     table.remove(weapon.rows)
     local at = #weapon.rows
@@ -51,6 +51,21 @@ end
 ;(function()
     for _, lang in ipairs(MOD.langs or {}) do
         local words = ({ ['zh-Hans'] = '效果类型', ['zh-Hant'] = '效果類型', ['ru'] = 'Тип эффекта' })[lang.id]
+        local opts = ({ ['zh-Hans'] = { '设值', '相加', '相乘', '计时' },
+                        ['zh-Hant'] = { '設值', '相加', '相乘', '計時' },
+                        ['ru'] = { 'задать', 'прибавить', 'умножить', 'время' } })[lang.id]
+        if opts then
+            lang.exact['Set'], lang.exact['Add'] = opts[1], opts[2]
+            lang.exact['Multiply'], lang.exact['Time'] = opts[3], opts[4]
+            if lang.lower then
+                lang.lower['set'], lang.lower['add'] = opts[1], opts[2]
+                lang.lower['multiply'], lang.lower['time'] = opts[3], opts[4]
+            end
+            if lang.upper then
+                lang.upper['SET'], lang.upper['ADD'] = opts[1], opts[2]
+                lang.upper['MULTIPLY'], lang.upper['TIME'] = opts[3], opts[4]
+            end
+        end
         if words then
             lang.exact['Effect type'] = words
             if lang.lower then lang.lower['effect type'] = words end

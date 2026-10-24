@@ -42,6 +42,8 @@ def bump_patch(text: str) -> tuple[str, str]:
 def main() -> int:
     # the packaged panel has no test hook (it only exists for the headless harness)
     subprocess.run([sys.executable, str(HERE / "build_panel.py"), "--skip-test"], check=True)
+    # the host file this fork patches (passive-stack conflict policy): generated, never edited upstream
+    subprocess.run([sys.executable, str(HERE / "patch_hostdata.py")], check=True)
     text, version = bump_patch(PANEL.read_text(encoding="utf-8"))
     PANEL.write_text(text, encoding="utf-8")
 
@@ -92,6 +94,11 @@ def main() -> int:
             out_path = folder / name.split("/", 1)[1]
             out_path.parent.mkdir(parents=True, exist_ok=True)
             out_path.write_bytes(archive.read(name))
+
+    # the patched host file goes over the one the packer copied
+    patched = HERE / "build" / "hostdata.lua"
+    if patched.exists() and (folder / "app" / "hostdata.lua").exists():
+        shutil.copy2(patched, folder / "app" / "hostdata.lua")
 
     # ...then refresh the canonical folder file by file, leaving whatever is in use alone
     canonical = OUT / "SHODAN Stat Editor Offline"

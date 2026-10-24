@@ -19,7 +19,9 @@ if not (game and panel_path and out_path) then
     os.exit(2)
 end
 local here = (debug.getinfo(1, 'S').source:match('^@(.*[/\\])') or './')
-package.path = here .. '../../offline/?.lua;' .. here .. '../../offline/?/init.lua;' .. package.path
+-- local/build first: the host file this fork patches (local/patch_hostdata.py) lives there
+package.path = here .. '../build/?.lua;' .. here .. '../../offline/?.lua;' ..
+                here .. '../../offline/?/init.lua;' .. package.path
 
 local ffi = require('ffi')
 local shim = require('engine_shim')

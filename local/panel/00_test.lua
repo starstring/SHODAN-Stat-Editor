@@ -16,7 +16,12 @@ if rawget(_G, 'SHODAN_LOCAL_TEST') then
     state._test = { weapons = weapons, by_hash = by_hash, fields = fields, tables = tables, KINDS = KINDS,
                     TYPES = TYPES, defaults = defaults, read_field = read_field, field_at = field_at,
                     default_of = default_of, MOD = MOD, state = state, HEADER_BYTES = HEADER_BYTES,
-                    bytes = function(address, size) return api.read(address, size) end }
+                    bytes = function(address, size) return api.read(address, size) end,
+                    resolve = resolve, select_weapon = select_weapon,
+                    -- call whatever save_config is at call time (later overlays wrap it)
+                    save_config = function() save_config() end,
+                    -- the UI state and the click dispatcher, to drive a real action
+                    ui = ui, click = function(key) return click(key) end }
     -- the panel's own display value for a row (it may be wrapped by a later overlay: call it late)
     state._test.value_of = function(row, default) return row_value(row, default) end
     -- ok, old, new, why = state._test.set('A8A91EB54892B6B2', 'calibre', 20)

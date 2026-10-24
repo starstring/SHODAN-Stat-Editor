@@ -14,7 +14,7 @@
 --
 -- No `local` at this level: upstream's chunk sits at LuaJIT's 200-local limit, so scratch values
 -- live in `state` (the panel's own table).
-state.sse_add_row = add_row
+state.sse_add_row_calibre = add_row
 
 -- rows are appended by add_row; take the last `count` rows and splice them in after `at`
 state.sse_splice = function(weapon, at, count)
@@ -27,7 +27,7 @@ end
 
 add_row = function(weapon, section, id, label, storage, parts, min, max, small, big)
     local before = #weapon.rows
-    local row = state.sse_add_row(weapon, section, id, label, storage, parts, min, max, small, big)
+    local row = state.sse_add_row_calibre(weapon, section, id, label, storage, parts, min, max, small, big)
     if weapon.record or type(id) ~= 'string' or id:sub(-7) ~= 'pellets' then return row end
     local field = parts and parts[1] and parts[1].field
     if not field or field.kind ~= T_PROJECTILE then return row end
@@ -38,7 +38,7 @@ add_row = function(weapon, section, id, label, storage, parts, min, max, small, 
                             { 'mass', 'Mass (kg)', 36, 10000, 0.1, 1 } }) do
         local new_id = prefix .. spec[1]
         if not weapon.by_id[new_id] then
-            state.sse_add_row(weapon, section, new_id, spec[2], 'f32',
+            state.sse_add_row_calibre(weapon, section, new_id, spec[2], 'f32',
                               { part(new_id, T_PROJECTILE, p + spec[3], 'f32', 100000) },
                               0, spec[4], spec[5], spec[6])
             made = made + 1

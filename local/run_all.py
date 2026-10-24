@@ -87,6 +87,7 @@ def main(argv=None) -> int:
     if args.skip_panel:
         return 0
     run(PYTHON, str(HERE / "build_panel.py"))
+    run(PYTHON, str(HERE / "patch_hostdata.py"))      # the host file this fork patches
     if not LUAJIT.exists():
         raise SystemExit(f"LuaJIT not built: run local/build_luajit.bat ({LUAJIT})")
     run(str(LUAJIT), "panel_dump.lua", game, str(HERE / "build" / "panel.lua"),

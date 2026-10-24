@@ -154,8 +154,9 @@ for _, weapon in ipairs(test.weapons) do
     for _, row in ipairs(weapon.rows or {}) do
         local parts = {}
         for _, p in ipairs(row.parts or {}) do
-            parts[#parts + 1] = string.format('%s=%s:%d:%s', clean(p.id), hex(p.field.kind), p.field.offset,
-                                             clean(p.field.storage))
+            -- a part's offset may be a selector rather than a number since v4.0.0: keep it as text
+            parts[#parts + 1] = string.format('%s=%s:%s:%s', clean(p.id), hex(p.field.kind),
+                                             clean(tostring(p.field.offset)), clean(tostring(p.field.storage)))
         end
         out:write('ROW\t', clean(weapon.hash), '\t', clean(row.id), '\t', clean(row.section), '\t',
                   clean(row.label), '\t', table.concat(parts, ','), '\n')

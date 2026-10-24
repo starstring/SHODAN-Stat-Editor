@@ -19,9 +19,11 @@ resolve = function(weapon)
                 if first and other and math.abs(other - first) > 1e-4 then
                     row.show_first = true
                     row.note = function()
+                        -- part 1 is the row in the stratagem list; the others belong to variants that
+                        -- are not (the Rocket Sentry's is the President's reward one: 45 s, 5 s, 1 use)
                         local held = {}
-                        for i = 1, #row.parts do held[i] = number_text(read_field(row.parts[i].field) or 0) end
-                        return 'two stratagem rows share this name: ' .. table.concat(held, ' / ')
+                        for i = 2, #row.parts do held[#held + 1] = number_text(read_field(row.parts[i].field) or 0) end
+                        return 'not in the stratagem list: ' .. table.concat(held, ' / ')
                     end
                     break
                 end
@@ -41,10 +43,10 @@ end
 
 ;(function()
     for _, lang in ipairs(MOD.langs or {}) do
-        local text = ({ ['zh-Hans'] = '两条同名战略配备共用这一页：', ['zh-Hant'] = '兩條同名戰略配備共用這一頁：',
-                        ['ru'] = 'одну страницу делят две строки стратегемы: ' })[lang.id]
+        local text = ({ ['zh-Hans'] = '不在战备列表里的同名行：', ['zh-Hant'] = '不在戰備列表裡的同名行：',
+                        ['ru'] = 'не в списке стратегем, строка с тем же именем: ' })[lang.id]
         if text then
-            table.insert(lang.prefix, { 'two stratagem rows share this name: ', text })
+            table.insert(lang.prefix, { 'not in the stratagem list: ', text })
         end
     end
 end)()

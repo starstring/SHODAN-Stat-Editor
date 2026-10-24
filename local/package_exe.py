@@ -81,16 +81,38 @@ def main() -> int:
         target = OUT / (made.stem + f"-{stamp}" + made.suffix)
         shutil.copy2(made, target)
         print(f"note: {made.name} was locked; wrote {target.name} instead")
-    folder = OUT / "SHODAN Stat Editor Offline"
-    if folder.exists():
-        try:
-            shutil.rmtree(folder)
-        except PermissionError as why:
-            raise SystemExit(f"close the running {folder.name} (or its Explorer window) and try again: {why}")
+    # Unpack into a folder of its own first. The previous build may be running from the canonical
+    # folder (its .exe and DLLs are locked), and deleting files there before knowing that would leave
+    # a half-deleted build behind.
+    stamp = datetime.datetime.now().strftime("%H%M%S")
+    folder = OUT / f"SHODAN Stat Editor Offline ({stamp})"
     with zipfile.ZipFile(target) as archive:
-        archive.extractall(OUT)
+        names = [n for n in archive.namelist() if not n.endswith("/") and "/" in n]
+        for name in names:
+            out_path = folder / name.split("/", 1)[1]
+            out_path.parent.mkdir(parents=True, exist_ok=True)
+            out_path.write_bytes(archive.read(name))
+
+    # ...then refresh the canonical folder file by file, leaving whatever is in use alone
+    canonical = OUT / "SHODAN Stat Editor Offline"
+    skipped = 0
+    if canonical.exists():
+        for source in sorted(folder.rglob("*")):
+            if source.is_dir():
+                continue
+            target_file = canonical / source.relative_to(folder)
+            target_file.parent.mkdir(parents=True, exist_ok=True)
+            try:
+                shutil.copy2(source, target_file)
+            except PermissionError:
+                skipped += 1
+    if not canonical.exists():
+        canonical = folder                      # first pack: the timestamped folder is the build
+    elif skipped:
+        print(f"note: {skipped} file(s) are in use by the running build; the full new build is {folder.name}")
+        print(f"      ({canonical} got everything else; close the editor and pack again to refresh it)")
     print(f"\n{target}")
-    print(f"{folder}  (run it from here)")
+    print(f"{canonical}  (run it from here)")
     return 0
 
 

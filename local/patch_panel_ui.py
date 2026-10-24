@@ -1,16 +1,20 @@
-"""Draw option buttons for a row, the way the panel's own Settings page draws its choices.
+"""Two things an overlay cannot do itself: draw option buttons for a row, and draw an overlay.
 
-Rows are drawn by one loop inside `draw`, so a row cannot look like a choice row from an overlay
-(there are no drawing primitives at chunk level). This patch adds that: a row that carries
-`row.sse_options` (a list of `{ value, label }`) and `row.sse_current` (a function returning the
-current value) gets its value/±/R block replaced by a row of buttons, and the click on
-`sse_opt:<row>:<value>` is left to the overlay that owns the row.
+`draw(width, height)` builds its own nested `rect` / `text` / `button` helpers, so a row cannot look
+like a choice row and no overlay can be shown from an appended overlay. This patch adds both, in the
+*generated* panel only:
 
     python local/patch_panel_ui.py            # local/build/panel.lua, in place
 
-`local/build_panel.py` applies it after splicing. `src/stat_editor_offline.lua` stays untouched; if
-upstream rewrites the row loop, the anchors are gone and this fails loudly instead of drawing
-nothing.
+1. **option rows** — a row carrying `row.sse_options` (`{ {value, label}, ... }`) and
+   `row.sse_current` (a function returning the current value) has its value/±/R block replaced by a
+   row of buttons, click id `sse_opt:<row>:<value>`.
+2. **a preview** — a passive page's stack block gets a button (`sse_preview`), and a table in
+   `state.sse_preview` (`{ title, lines = {...} }`) is drawn as an overlay above the rows, like the
+   panel's own tooltips.
+
+`src/stat_editor_offline.lua` stays untouched; if upstream rewrites either anchor, this fails loudly
+instead of drawing nothing.
 """
 from __future__ import annotations
 
@@ -19,8 +23,9 @@ import sys
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
+MARK = "local patch (local/patch_panel_ui.py)"
 
-# the plain value block of a row (its opening line, unique in the file)
+# ---------------------------------------------------------------- 1. option rows
 ANCHOR_OPEN = """                else
                     text(was and ('was ' .. fmt(default, row.storage)) or '', 690, y + bh / 2 - 7, 14, DIM, 90, true)"""
 
@@ -39,7 +44,6 @@ PATCHED_OPEN = """                else
                     if not row.sse_options then
                     text(was and ('was ' .. fmt(default, row.storage)) or '', 690, y + bh / 2 - 7, 14, DIM, 90, true)"""
 
-# its closing lines (the value region and the end of the value block)
 ANCHOR_CLOSE = """                    region('value:' .. n, 696, y, 88, bh, ok)
                 end"""
 
@@ -47,18 +51,55 @@ PATCHED_CLOSE = """                    region('value:' .. n, 696, y, 88, bh, ok)
                     end
                 end"""
 
+# ---------------------------------------------------------------- 2. the preview button
+ANCHOR_BUTTON = """    button('reset_weapon', ui.weapon and (ui.weapon.passive and 'Reset passive'"""
+
+PATCHED_BUTTON = """    -- local patch (local/patch_panel_ui.py): what a passive's stack ends up doing, next to Reset
+    if ui.weapon and ui.weapon.passive then
+        button('sse_preview', 'Preview the result', W - 16 - 124 - 8 - 208, MOD.offline and 10 or 52, 208,
+               MOD.offline and 30 or 32, true, state.sse_preview ~= nil)
+    end
+    button('reset_weapon', ui.weapon and (ui.weapon.passive and 'Reset passive'"""
+
+# ---------------------------------------------------------------- 2. the preview overlay
+ANCHOR_OVERLAY = """    if tip_overlay then
+        local w, h = 0, #tip_overlay.lines * 18 + 16"""
+
+PATCHED_OVERLAY = """    -- local patch (local/patch_panel_ui.py): the final stacked effects, over the rows
+    if state.sse_preview then
+        local preview = state.sse_preview
+        local w, h = 0, #preview.lines * 19 + 52
+        for _, line in ipairs(preview.lines) do w = math.max(w, width(line, 15)) end
+        w = math.max(360, math.min(w + 28, W - 64))
+        local x = math.max(16, math.min(96, W - 16 - w))
+        local y = math.max(56, math.min(132, H - 70 - h))
+        rect(x, y, w, h, color(8, 11, 15), 964)
+        rect(x, y, w, 2, GOLD, 965); rect(x, y + h - 2, w, 2, GOLD, 965)
+        rect(x, y, 2, h, GOLD, 965); rect(x + w - 2, y, 2, h, GOLD, 965)
+        text(preview.title, x + 14, y + 10, 18, GOLD, w - 28, false, 966)
+        for k, line in ipairs(preview.lines) do
+            text(line, x + 14, y + 38 + (k - 1) * 19, 15, WHITE, w - 28, false, 966)
+        end
+        region('sse_preview_close', x, y, w, h, true)
+    end
+    if tip_overlay then
+        local w, h = 0, #tip_overlay.lines * 18 + 16"""
+
 
 def patch(text: str) -> str:
-    if "local patch (local/patch_panel_ui.py)" in text:
+    if MARK in text:
         return text
-    if ANCHOR_OPEN not in text:
-        raise SystemExit("the row drawing loop is not where this patch expects it (ANCHOR_OPEN); "
-                         "re-check local/patch_panel_ui.py")
+    for name, anchor in (("ANCHOR_OPEN", ANCHOR_OPEN), ("ANCHOR_BUTTON", ANCHOR_BUTTON),
+                         ("ANCHOR_OVERLAY", ANCHOR_OVERLAY)):
+        if text.count(anchor) != 1:
+            raise SystemExit(f"the row/stack drawing code is not where this patch expects it ({name}, "
+                             f"{text.count(anchor)} match(es)); re-check local/patch_panel_ui.py")
     if text.count(ANCHOR_CLOSE) != 1:
-        raise SystemExit("the row drawing loop's end is not unique any more (ANCHOR_CLOSE); "
-                         "re-check local/patch_panel_ui.py")
+        raise SystemExit("the row drawing loop's end is not unique any more (ANCHOR_CLOSE)")
     text = text.replace(ANCHOR_OPEN, PATCHED_OPEN, 1)
-    return text.replace(ANCHOR_CLOSE, PATCHED_CLOSE, 1)
+    text = text.replace(ANCHOR_CLOSE, PATCHED_CLOSE, 1)
+    text = text.replace(ANCHOR_BUTTON, PATCHED_BUTTON, 1)
+    return text.replace(ANCHOR_OVERLAY, PATCHED_OVERLAY, 1)
 
 
 def main(argv=None) -> int:
@@ -71,7 +112,8 @@ def main(argv=None) -> int:
     original = path.read_text(encoding="utf-8")
     patched = patch(original)
     path.write_text(patched, encoding="utf-8")
-    print(f"{path}: +{len(patched.splitlines()) - len(original.splitlines())} line(s) (option rows)")
+    print(f"{path}: +{len(patched.splitlines()) - len(original.splitlines())} line(s) "
+          f"(option rows, preview button, preview overlay)")
     return 0
 
 

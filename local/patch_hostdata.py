@@ -27,9 +27,9 @@ REPO = HERE.parent
 ANCHOR_POLICY = "local PASSIVE = 0x63CE0FEB\n"
 
 POLICY_CODE = """local PASSIVE = 0x63CE0FEB
--- local patch: what a modifier id that both sides have does. 'stack' (the panel's own behaviour)
--- keeps the first row and drops the later one; 'strongest' keeps whichever value is further from
--- "no effect" (Armory Forge's conflicts = strongest, with its own strength rule).
+-- local patch: what a modifier id that both sides have does. 'stack' keeps every row (the game
+-- applies an id once, so the first wins); 'strongest' keeps only the value further from "no effect"
+-- (Armory Forge's conflicts = strongest, with its own strength rule).
 local CONFLICT = 'stack'
 function M.set_conflicts(policy)
     CONFLICT = (policy == 'strongest') and 'strongest' or 'stack'
@@ -80,12 +80,14 @@ REPLACEMENT_APPEND = """local function append_mods(mods, add, dropped)
             rows[#rows + 1] = m
             at[key] = #rows
         elseif CONFLICT == 'strongest' then
+            -- one row per modifier id: the value further from "no effect" wins (Armory Forge's rule)
             if strength(row_type(m), row_value(m)) > strength(row_type(rows[k]), row_value(rows[k])) then
                 rows[k] = m
             end
         else
-            local b1, b2, b3, b4 = key:byte(1, 4)
-            dropped[#dropped + 1] = string.format('%08X', ((b4 * 256 + b3) * 256 + b2) * 256 + b1)
+            -- keep: every row is kept, duplicates included (the game applies an id once, so the first
+            -- one is what counts; Armory Forge's 'stack' lists them all the same way)
+            rows[#rows + 1] = m
         end
     end
     return table.concat(rows)

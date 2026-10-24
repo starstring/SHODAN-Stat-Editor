@@ -77,7 +77,7 @@ resolve = function(weapon)
             local row = add_row(weapon, 'Stacks', 'stack_conflicts', 'A modifier both passives have', 'u32',
                                 { part('stack_conflicts', state.sse_handle(), 0, 'u32', 4294967295) }, 0, 1, 1, 1)
             row.sse_setting = 'conflicts'
-            row.sse_options = { { 'stack', 'Keep' }, { 'strongest', 'Strongest' } }
+            row.sse_options = { { 'stack', 'Stack all' }, { 'strongest', 'Strongest only' } }
             row.sse_current = function() return state.sse_cfg.conflicts end
             row.note = 'When both passives have the same modifier' 
         end
@@ -117,12 +117,101 @@ change = function(row, delta_sign, big, exact)
     return state.sse_change(row, delta_sign, big, exact)
 end
 
+-- The final effects of a passive's stack: its own rows plus every stacked passive's, merged the way
+-- the install merges them ('keep' = all of them, 'strongest' = one per modifier id, the strongest by
+-- the Armory Forge rule: |log v| for a multiply, |v| otherwise).
+state.sse_merge = function(target)
+    local t = tables[target.passive]
+    if not t then return {} end
+    local policy = state.sse_cfg.conflicts
+    local function strength(typ, v)
+        if typ == 2 then return (v <= 0) and math.huge or math.abs(math.log(v)) end
+        return math.abs(v)
+    end
+    -- one passive's modifier rows (16 B: id, type, value) or weapon-stat rows (12 B: stat, a, b)
+    local function read_list(table_key, field)
+        local entry = table_key and tables[table_key]
+        local out = {}
+        if not entry then return out end
+        for _, m in ipairs(entry.index[field] or {}) do
+            local v = read_field(field_at(table_key, m.offset, 'f32', 100000))
+            if v then out[#out + 1] = { id = m.id or m.stat, type = m.type or 0, value = v } end
+        end
+        return out
+    end
+    local rows, order, by_id = {}, {}, {}
+    local function add(list, from, is_stat)
+        for _, m in ipairs(list) do
+            local key = (is_stat and 'stat ' or 'mod ') .. tostring(m.id)
+            if not by_id[key] then
+                by_id[key] = #rows + 1
+                order[#order + 1] = key
+                rows[#rows + 1] = { id = m.id, type = m.type, value = m.value, from = from, stat = is_stat }
+            elseif policy == 'strongest' then
+                local at = by_id[key]
+                if strength(m.type, m.value) > strength(rows[at].type, rows[at].value) then
+                    rows[at] = { id = m.id, type = m.type, value = m.value, from = from, stat = is_stat }
+                end
+            end
+        end
+    end
+    -- the passive's own effects first, then what is stacked on it (and, for "Every armor", those too)
+    local sources = {}
+    local function push(id)
+        for _, other in ipairs(settings.stacks[id] or {}) do
+            if other ~= id then sources[#sources + 1] = other end
+        end
+    end
+    push(t.index.id)
+    local every = settings.stacks[state.sse_every_id]
+    if every and t.index.id ~= state.sse_every_id then
+        for _, other in ipairs(every) do sources[#sources + 1] = other end
+    end
+    add(read_list(target.passive, 'mods'), t.index.id, false)
+    add(read_list(target.passive, 'stats'), t.index.id, true)
+    for _, id in ipairs(sources) do
+        local other = by_hash[string.format('FFFFFFFE%08X', id)]
+        local table_key = other and other.passive
+        if table_key and tables[table_key] then
+            add(read_list(table_key, 'mods'), id, false)
+            add(read_list(table_key, 'stats'), id, true)
+        end
+    end
+    return rows, order, by_id
+end
+
+state.sse_preview_of = function(target)
+    local rows = state.sse_merge(target)
+    local spec = KINDS[TYPES.passive]
+    local lines = {}
+    for _, m in ipairs(rows) do
+        local name = (m.stat and spec.STATS[m.id]) or spec.MODS[m.id] or
+                     (m.stat and ('Stat ' .. tostring(m.id)) or string.format('Modifier %08X', m.id))
+        local sign = ({ [0] = '=', [1] = '+', [2] = '×', [3] = 's ' })[m.type] or '?'
+        local from = by_hash[string.format('FFFFFFFE%08X', m.from)]
+        lines[#lines + 1] = string.format('%s  %s%s  — %s', name, sign, number_text(m.value),
+                                          from and from.name or ('Passive ' .. tostring(m.from)))
+    end
+    if #lines == 0 then lines[1] = 'Nothing yet: add a passive below.' end
+    return { title = settings.tr('Final effects') .. ': ' .. #lines, lines = lines }
+end
+
 -- clicks on an option row (drawn by the generated panel: local/patch_panel_ui.py)
 state.sse_click2 = click
 click = function(key)
     -- (not `key and key:match(...)`: `and` keeps only the first result)
-    local row_at, value = key and key:match('^sse_opt:(%d+):(.+)$') or nil, nil
+    local row_at, value
     if key then row_at, value = key:match('^sse_opt:(%d+):(.+)$') end
+    if key and key:match('^sse_preview') then
+        local target = ui.weapon
+        if target and target.passive and state.sse_preview then
+            state.sse_preview = nil
+        elseif target and target.passive then
+            state.sse_preview = state.sse_preview_of(target)
+        end
+        return
+    end
+    if state.sse_preview and key ~= 'sse_preview' then state.sse_preview = nil end
     if row_at then
         local row = ui.weapon and ui.weapon.rows and ui.weapon.rows[tonumber(row_at)]
         if row then
@@ -185,13 +274,23 @@ end
             lang.exact['Passives added below apply to every armor, whatever you wear.'] = words[5]
             lang.exact['Added with "+ Add passive" below; every armor gets them at install.'] = words[5]
             lang.exact['How the armor passives are applied.'] = words[4]
-            local opts = ({ ['zh-Hans'] = { '保留原值', '最强值胜出' }, ['zh-Hant'] = { '保留原值', '最強值勝出' },
-                            ['ru'] = { 'как есть', 'сильнейшее' } })[lang.id]
+            lang.exact['Preview the result'] = ({ ['zh-Hans'] = '预览最终效果', ['zh-Hant'] = '預覽最終效果',
+                                                  ['ru'] = 'Предпросмотр итога' })[lang.id]
+            lang.exact['Final effects'] = ({ ['zh-Hans'] = '最终效果', ['zh-Hant'] = '最終效果',
+                                             ['ru'] = 'Итоговые эффекты' })[lang.id]
+            if lang.lower then lang.lower['preview the result'] = lang.exact['Preview the result'] end
+            if lang.upper then lang.upper['PREVIEW THE RESULT'] = lang.exact['Preview the result'] end
+            local opts = ({ ['zh-Hans'] = { '全部堆叠', '只取最强' }, ['zh-Hant'] = { '全部堆疊', '只取最強' },
+                            ['ru'] = { 'все подряд', 'только сильнейшее' } })[lang.id]
             if opts then
-                lang.exact['Keep'], lang.exact['Strongest'] = opts[1], opts[2]
+                lang.exact['Stack all'], lang.exact['Strongest only'] = opts[1], opts[2]
                 lang.exact['When both passives have the same modifier'] = words[4]
-                if lang.lower then lang.lower['keep'], lang.lower['strongest'] = opts[1], opts[2] end
-                if lang.upper then lang.upper['KEEP'], lang.upper['STRONGEST'] = opts[1], opts[2] end
+                if lang.lower then
+                    lang.lower['stack all'], lang.lower['strongest only'] = opts[1], opts[2]
+                end
+                if lang.upper then
+                    lang.upper['STACK ALL'], lang.upper['STRONGEST ONLY'] = opts[1], opts[2]
+                end
             end
             if lang.lower then
                 lang.lower['passives applied'] = words[3]

@@ -117,24 +117,27 @@ local function run(policy)
             local P = header.at + 24
             if u32(out, P) == pair.target.passive then
                 local count = u32(out, P + 24)
-                local found, total = nil, count
+                local first, rows_with, total = nil, 0, count
                 for k = 0, count - 1 do
                     local at = P + 56 + k * 16
                     if u32(out, at) == pair.id then
-                        found = f32_at(out, at + 8)
+                        rows_with = rows_with + 1
+                        first = first or f32_at(out, at + 8)
                     end
                 end
-                return found, total
+                return first, total, rows_with
             end
         end
     end
     return nil, 'target passive not in the output'
 end
 
-local stacked, count_stack = run('stack')
-local strongest, count_strong = run('strongest')
-print(string.format('stack      -> %s   (%s modifiers on the target)', tostring(stacked), tostring(count_stack)))
-print(string.format('strongest  -> %s   (%s modifiers on the target)', tostring(strongest), tostring(count_strong)))
+local stacked, count_stack, rows_stack = run('stack')
+local strongest, count_strong, rows_strong = run('strongest')
+print(string.format('keep      -> first %s, %s row(s) with this id, %s modifiers on the target',
+                    tostring(stacked), tostring(rows_stack), tostring(count_stack)))
+print(string.format('strongest -> %s, %s row(s) with this id, %s modifiers on the target',
+                    tostring(strongest), tostring(rows_strong), tostring(count_strong)))
 
 local ok = true
 if stacked ~= pair.target.value then ok = false; print('FAIL: stack did not keep the target\'s own value') end

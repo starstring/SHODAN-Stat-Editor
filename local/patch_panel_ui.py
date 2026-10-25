@@ -58,12 +58,22 @@ ANCHOR_BUTTON = """    button('reset_weapon', ui.weapon and (ui.weapon.passive a
 
 PATCHED_BUTTON = """    -- local patch (local/patch_panel_ui.py): what a passive's stack ends up doing, next to Reset
     if ui.weapon and ui.weapon.passive then
-        button('sse_preview', 'Preview the result', W - 16 - 124 - 8 - 208, MOD.offline and 10 or 52, 208,
-               MOD.offline and 30 or 32, true, state.sse_preview ~= nil)
+        local hy, hh = MOD.offline and 10 or 52, MOD.offline and 30 or 32
+        button('sse_preview', 'Preview the result', W - 16 - 124 - 8 - 208, hy, 208, hh, true,
+               state.sse_preview ~= nil)
+        if not ui.weapon.sse_page then
+            button('sse_add_all', 'Add to every armor', W - 16 - 124 - 8 - 208 - 8 - 216, hy, 216, hh, true)
+        end
     end
     button('reset_weapon', ui.weapon and (ui.weapon.passive and 'Reset passive'"""
 
 # ---------------------------------------------------------------- 2. the preview overlay
+# ---------------------------------------------------------------- 3. the picker's list
+ANCHOR_PICKER = """            local t = w.passive and tables[w.passive]"""
+
+PATCHED_PICKER = """            -- local patch (local/patch_panel_ui.py): this fork's own pages are not passives to stack
+            local t = w.passive and not w.sse_page and tables[w.passive]"""
+
 ANCHOR_OVERLAY = """    if tip_overlay then
         local w, h = 0, #tip_overlay.lines * 18 + 16"""
 
@@ -92,7 +102,7 @@ def patch(text: str) -> str:
     if MARK in text:
         return text
     for name, anchor in (("ANCHOR_OPEN", ANCHOR_OPEN), ("ANCHOR_BUTTON", ANCHOR_BUTTON),
-                         ("ANCHOR_OVERLAY", ANCHOR_OVERLAY)):
+                         ("ANCHOR_PICKER", ANCHOR_PICKER), ("ANCHOR_OVERLAY", ANCHOR_OVERLAY)):
         if text.count(anchor) != 1:
             raise SystemExit(f"the row/stack drawing code is not where this patch expects it ({name}, "
                              f"{text.count(anchor)} match(es)); re-check local/patch_panel_ui.py")
@@ -101,6 +111,7 @@ def patch(text: str) -> str:
     text = text.replace(ANCHOR_OPEN, PATCHED_OPEN, 1)
     text = text.replace(ANCHOR_CLOSE, PATCHED_CLOSE, 1)
     text = text.replace(ANCHOR_BUTTON, PATCHED_BUTTON, 1)
+    text = text.replace(ANCHOR_PICKER, PATCHED_PICKER, 1)
     return text.replace(ANCHOR_OVERLAY, PATCHED_OVERLAY, 1)
 
 

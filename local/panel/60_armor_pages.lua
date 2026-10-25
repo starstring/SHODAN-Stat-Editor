@@ -206,6 +206,26 @@ click = function(key)
     -- (not `key and key:match(...)`: `and` keeps only the first result)
     local row_at, value
     if key then row_at, value = key:match('^sse_opt:(%d+):(.+)$') end
+    if key == 'sse_add_all' then
+        -- this page's passive, added to the "Every armor" list (the same thing "+ Add passive" does there)
+        local target = ui.weapon
+        local index = target and target.passive and tables[target.passive] and tables[target.passive].index
+        local id = index and index.id
+        if not id or id == state.sse_every_id then return end
+        local list = settings.stacks[state.sse_every_id] or {}
+        for _, other in ipairs(list) do
+            if other == id then
+                ui.message = { text = 'Already in Every armor: ' .. tostring(target.name), till = api.now() + 4 }
+                return
+            end
+        end
+        list[#list + 1] = id
+        settings.stacks[state.sse_every_id] = list
+        mark_config_dirty()
+        ui.message = { text = target.name .. ' is now added to every armor (' .. #list .. ' passive(s)).',
+                       till = api.now() + 5 }
+        return
+    end
     if key and key:match('^sse_preview') then
         local target = ui.weapon
         if target and target.passive and state.sse_preview then
@@ -282,6 +302,10 @@ end
                                                   ['ru'] = 'Предпросмотр итога' })[lang.id]
             lang.exact['Final effects'] = ({ ['zh-Hans'] = '最终效果', ['zh-Hant'] = '最終效果',
                                              ['ru'] = 'Итоговые эффекты' })[lang.id]
+            lang.exact['Add to every armor'] = ({ ['zh-Hans'] = '添加到所有护甲', ['zh-Hant'] = '新增到所有護甲',
+                                                  ['ru'] = 'Добавить всей броне' })[lang.id]
+            if lang.lower then lang.lower['add to every armor'] = lang.exact['Add to every armor'] end
+            if lang.upper then lang.upper['ADD TO EVERY ARMOR'] = lang.exact['Add to every armor'] end
             if lang.lower then lang.lower['preview the result'] = lang.exact['Preview the result'] end
             if lang.upper then lang.upper['PREVIEW THE RESULT'] = lang.exact['Preview the result'] end
             local opts = ({ ['zh-Hans'] = { '全部堆叠', '只取最强' }, ['zh-Hant'] = { '全部堆疊', '只取最強' },

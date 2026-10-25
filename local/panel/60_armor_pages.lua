@@ -119,85 +119,139 @@ change = function(row, delta_sign, big, exact)
 end
 
 -- The final effects of a passive's stack: its own rows plus every stacked passive's, merged the way
--- the install merges them ('keep' = all of them, 'strongest' = one per modifier id, the strongest by
--- the Armory Forge rule: |log v| for a multiply, |v| otherwise).
+-- the install merges them, and then added up per effect so the list reads as a result, not as a pile
+-- of rows:
+--   * 'strongest': one row per effect, the value further from "no effect" (|log v| for a multiply,
+--     |v| otherwise - Armory Forge's rule, so a bigger number is not always the stronger one);
+--   * 'stack all': every row applies, so the values are combined (multiplies by multiplying, adds by
+--     adding) and identical rows are counted once.
+state.sse_strength = function(typ, v)
+    if typ == 2 then return (v <= 0) and math.huge or math.abs(math.log(v)) end
+    return math.abs(v)
+end
+
 state.sse_merge = function(target)
-    local t = tables[target.passive]
-    if not t then return {} end
     local policy = state.sse_cfg.conflicts
-    local function strength(typ, v)
-        if typ == 2 then return (v <= 0) and math.huge or math.abs(math.log(v)) end
-        return math.abs(v)
-    end
-    -- one passive's modifier rows (16 B: id, type, value) or weapon-stat rows (12 B: stat, a, b)
-    local function read_list(table_key, field)
+    local spec = KINDS[TYPES.passive]
+    local seen, order, groups = {}, {}, {}
+    local function read_list(table_key, field, is_stat)
         local entry = table_key and tables[table_key]
-        local out = {}
-        if not entry then return out end
+        if not entry then return end
         for _, m in ipairs(entry.index[field] or {}) do
             local v = read_field(field_at(table_key, m.offset, 'f32', 100000))
-            if v then out[#out + 1] = { id = m.id or m.stat, type = m.type or 0, value = v } end
-        end
-        return out
-    end
-    local rows, order, by_id = {}, {}, {}
-    local function add(list, from, is_stat)
-        for _, m in ipairs(list) do
-            local key = (is_stat and 'stat ' or 'mod ') .. tostring(m.id)
-            if not by_id[key] then
-                by_id[key] = #rows + 1
-                order[#order + 1] = key
-                rows[#rows + 1] = { id = m.id, type = m.type, value = m.value, from = from, stat = is_stat }
-            elseif policy == 'strongest' then
-                local at = by_id[key]
-                if strength(m.type, m.value) > strength(rows[at].type, rows[at].value) then
-                    rows[at] = { id = m.id, type = m.type, value = m.value, from = from, stat = is_stat }
+            if v then
+                local id = m.id or m.stat
+                local typ = is_stat and 2 or (m.type or 0)
+                local known = (is_stat and spec.STATS[id]) or spec.MODS[id]
+                local name = known and settings.tr(known) or
+                             (settings.tr('Unnamed effect') .. ' ' .. string.format('%08X', id))
+                local key = name                     -- one line per effect, whatever field it lives in
+                if not seen[key] then
+                    seen[key] = true
+                    order[#order + 1] = key
+                    groups[key] = { name = name, rows = {}, known = known }
                 end
+                groups[key].rows[#groups[key].rows + 1] = { type = typ, value = v }
             end
         end
     end
-    -- the passive's own effects first, then what is stacked on it (and, for "Every armor", those too)
+    if not settings.own_off[tables[target.passive] and tables[target.passive].index.id or -1] then
+        read_list(target.passive, 'mods', false)
+        read_list(target.passive, 'stats', true)
+    end
     local sources = {}
     local function push(id)
         for _, other in ipairs(settings.stacks[id] or {}) do
             if other ~= id then sources[#sources + 1] = other end
         end
     end
-    push(t.index.id)
+    local own = tables[target.passive] and tables[target.passive].index.id
+    if own then push(own) end
     local every = settings.stacks[state.sse_every_id]
-    if every and t.index.id ~= state.sse_every_id then
+    if every and own ~= state.sse_every_id then
         for _, other in ipairs(every) do sources[#sources + 1] = other end
-    end
-    -- "Own effects: Off" leaves the passive's own rows out of the install, so they are left out here too
-    if not settings.own_off[t.index.id] then
-        add(read_list(target.passive, 'mods'), t.index.id, false)
-        add(read_list(target.passive, 'stats'), t.index.id, true)
     end
     for _, id in ipairs(sources) do
         local other = by_hash[string.format('FFFFFFFE%08X', id)]
-        local table_key = other and other.passive
-        if table_key and tables[table_key] then
-            add(read_list(table_key, 'mods'), id, false)
-            add(read_list(table_key, 'stats'), id, true)
+        if other and other.passive then
+            read_list(other.passive, 'mods', false)
+            read_list(other.passive, 'stats', true)
         end
     end
-    return rows, order, by_id
+    -- resolve each effect
+    local out = {}
+    for _, key in ipairs(order) do
+        local group = groups[key]
+        local rows, uniq = group.rows, {}
+        for _, r in ipairs(rows) do                    -- an identical row applies once
+            local dup = false
+            for _, u in ipairs(uniq) do
+                if u.type == r.type and math.abs(u.value - r.value) < 1e-6 then dup = true end
+            end
+            if not dup then uniq[#uniq + 1] = r end
+        end
+        if #uniq > 0 then
+            if policy == 'strongest' and #uniq > 1 then
+                local best = uniq[1]
+                for _, u in ipairs(uniq) do
+                    if state.sse_strength(u.type, u.value) > state.sse_strength(best.type, best.value) then
+                        best = u
+                    end
+                end
+                uniq = { best }
+            end
+            -- add up what can be added up, keep the rest as their own entries
+            local added, other = {}, {}
+            for _, u in ipairs(uniq) do
+                if u.type == 1 or u.type == 2 then
+                    local at = nil
+                    for k, a in ipairs(added) do if a.type == u.type then at = k end end
+                    if at then
+                        added[at].value = u.type == 1 and (added[at].value + u.value) or (added[at].value * u.value)
+                    else
+                        added[#added + 1] = { type = u.type, value = u.value }
+                    end
+                else
+                    other[#other + 1] = u
+                end
+            end
+            for _, a in ipairs(added) do other[#other + 1] = a end
+            out[#out + 1] = { name = group.name, rows = other, known = group.known }
+        end
+    end
+    table.sort(out, function(a, b)
+        if (a.known ~= nil) ~= (b.known ~= nil) then return a.known ~= nil end
+        return a.name:lower() < b.name:lower()
+    end)
+    return out
+end
+
+-- one line per effect: plain wording, no mention of which passive it came from
+state.sse_effect_text = function(r)
+    if r.type == 2 then
+        local pct = (r.value - 1) * 100
+        if math.abs(pct) >= 0.5 then
+            return string.format('×%s（%+d%%）', string.format('%g', r.value), math.floor(pct + 0.5))
+        end
+        return string.format('×%s', string.format('%g', r.value))
+    elseif r.type == 1 then
+        return string.format('+%s', string.format('%g', r.value))
+    elseif r.type == 3 then
+        return string.format('%g', r.value)
+    end
+    return string.format('=%s', string.format('%g', r.value))
 end
 
 state.sse_preview_of = function(target)
-    local rows = state.sse_merge(target)
-    local spec = KINDS[TYPES.passive]
+    local effects = state.sse_merge(target)
     local lines = {}
-    for _, m in ipairs(rows) do
-        local name = (m.stat and spec.STATS[m.id]) or spec.MODS[m.id] or
-                     (m.stat and ('Stat ' .. tostring(m.id)) or string.format('Modifier %08X', m.id))
-        local sign = ({ [0] = '=', [1] = '+', [2] = '×', [3] = 's ' })[m.type] or '?'
-        local from = by_hash[string.format('FFFFFFFE%08X', m.from)]
-        lines[#lines + 1] = string.format('%s  %s%s  — %s', name, sign, number_text(m.value),
-                                          from and from.name or ('Passive ' .. tostring(m.from)))
+    for _, e in ipairs(effects) do
+        local parts = {}
+        for _, r in ipairs(e.rows) do parts[#parts + 1] = state.sse_effect_text(r) end
+        lines[#lines + 1] = e.name .. '   ' .. table.concat(parts, '，')
     end
-    if #lines == 0 then lines[1] = 'Nothing yet: add a passive below.' end
-    return { title = settings.tr('Final effects') .. ': ' .. #lines, lines = lines }
+    if #lines == 0 then lines[1] = settings.tr('Nothing yet: add a passive below.') end
+    return { title = settings.tr('Final effects') .. '（' .. #lines .. '）', lines = lines }
 end
 
 -- clicks on an option row (drawn by the generated panel: local/patch_panel_ui.py)
@@ -304,6 +358,10 @@ end
                                              ['ru'] = 'Итоговые эффекты' })[lang.id]
             lang.exact['Add to every armor'] = ({ ['zh-Hans'] = '添加到所有护甲', ['zh-Hant'] = '新增到所有護甲',
                                                   ['ru'] = 'Добавить всей броне' })[lang.id]
+            lang.exact['Unnamed effect'] = ({ ['zh-Hans'] = '未命名效果', ['zh-Hant'] = '未命名效果',
+                                              ['ru'] = 'Без имени' })[lang.id]
+            if lang.lower then lang.lower['unnamed effect'] = lang.exact['Unnamed effect'] end
+            if lang.upper then lang.upper['UNNAMED EFFECT'] = lang.exact['Unnamed effect'] end
             lang.exact['Add to all'] = ({ ['zh-Hans'] = '全部护甲', ['zh-Hant'] = '全部護甲',
                                          ['ru'] = 'всей броне' })[lang.id]
             lang.exact['Preview'] = ({ ['zh-Hans'] = '预览', ['zh-Hant'] = '預覽', ['ru'] = 'Обзор' })[lang.id]

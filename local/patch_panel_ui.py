@@ -53,19 +53,28 @@ PATCHED_CLOSE = """                    region('value:' .. n, 696, y, 88, bh, ok)
                     end
                 end"""
 
-# ---------------------------------------------------------------- 2. the preview button
-ANCHOR_BUTTON = """    button('reset_weapon', ui.weapon and (ui.weapon.passive and 'Reset passive'"""
+# ---------------------------------------------------------------- 2. the page's two buttons
+ANCHOR_BUTTON = """        text(weapon.name, x0, 94, 22, GOLD, W - x0 - 20)"""
 
-PATCHED_BUTTON = """    -- local patch (local/patch_panel_ui.py): what a passive's stack ends up doing, next to Reset
-    if ui.weapon and ui.weapon.passive then
-        local hy, hh = MOD.offline and 10 or 52, MOD.offline and 30 or 32
-        button('sse_preview', 'Preview the result', W - 16 - 124 - 8 - 208, hy, 208, hh, true,
-               state.sse_preview ~= nil)
-        if not ui.weapon.sse_page then
-            button('sse_add_all', 'Add to every armor', W - 16 - 124 - 8 - 208 - 8 - 216, hy, 216, hh, true)
-        end
-    end
-    button('reset_weapon', ui.weapon and (ui.weapon.passive and 'Reset passive'"""
+PATCHED_BUTTON = """        text(weapon.name, x0, 94, 22, GOLD, W - x0 - 20)
+        -- local patch (local/patch_panel_ui.py): a passive page's two actions, on the name's line and
+        -- only as wide as the room the name leaves (the window's title bar belongs to the host)
+        if weapon.passive then
+            local room = W - 20 - x0 - width(weapon.name, 22) - 24
+            local count = weapon.sse_page and 1 or 2
+            local bw = math.min(208, math.floor((room - 8 * (count - 1)) / count))
+            if bw >= 80 then
+                -- short labels when the name is long: the text is clipped to the button's width
+                local short = bw < 150
+                local bx = W - 20 - (bw * count + 8 * (count - 1))
+                if not weapon.sse_page then
+                    button('sse_add_all', short and 'Add to all' or 'Add to every armor', bx, 90, bw, 28, true)
+                    bx = bx + bw + 8
+                end
+                button('sse_preview', short and 'Preview' or 'Preview the result', bx, 90, bw, 28, true,
+                       state.sse_preview ~= nil)
+            end
+        end"""
 
 # ---------------------------------------------------------------- 2. the preview overlay
 # ---------------------------------------------------------------- 3. the picker's list

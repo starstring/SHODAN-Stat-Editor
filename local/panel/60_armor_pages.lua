@@ -304,8 +304,17 @@ end
                                              ['ru'] = 'Итоговые эффекты' })[lang.id]
             lang.exact['Add to every armor'] = ({ ['zh-Hans'] = '添加到所有护甲', ['zh-Hant'] = '新增到所有護甲',
                                                   ['ru'] = 'Добавить всей броне' })[lang.id]
-            if lang.lower then lang.lower['add to every armor'] = lang.exact['Add to every armor'] end
-            if lang.upper then lang.upper['ADD TO EVERY ARMOR'] = lang.exact['Add to every armor'] end
+            lang.exact['Add to all'] = ({ ['zh-Hans'] = '全部护甲', ['zh-Hant'] = '全部護甲',
+                                         ['ru'] = 'всей броне' })[lang.id]
+            lang.exact['Preview'] = ({ ['zh-Hans'] = '预览', ['zh-Hant'] = '預覽', ['ru'] = 'Обзор' })[lang.id]
+            if lang.lower then
+                lang.lower['add to every armor'] = lang.exact['Add to every armor']
+                lang.lower['add to all'], lang.lower['preview'] = lang.exact['Add to all'], lang.exact['Preview']
+            end
+            if lang.upper then
+                lang.upper['ADD TO EVERY ARMOR'] = lang.exact['Add to every armor']
+                lang.upper['ADD TO ALL'], lang.upper['PREVIEW'] = lang.exact['Add to all'], lang.exact['Preview']
+            end
             if lang.lower then lang.lower['preview the result'] = lang.exact['Preview the result'] end
             if lang.upper then lang.upper['PREVIEW THE RESULT'] = lang.exact['Preview the result'] end
             local opts = ({ ['zh-Hans'] = { '全部堆叠', '只取最强' }, ['zh-Hant'] = { '全部堆疊', '只取最強' },

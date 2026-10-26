@@ -6,7 +6,9 @@ file with the panel's own rules (same keys, same value shapes) and reports:
 
   * unknown setting names and unknown line shapes (with a "did you mean" for near misses)
   * values the panel would clamp or reject
-  * overrides whose weapon hash or stat id is not in the panel's current build (the dump says which)
+  * overrides whose weapon hash or stat id is not in the panel's current build (the dump says which);
+    a row can have several *parts* and the panel writes one override per part, so part ids count as
+    stat ids too (`cooldown2` for a two-part stratagem row, each joined modifier id for a passive)
   * passive_stack / passive_every references to passives that are not in this build
   * lines the panel writes itself that a hand edit could have broken
 
@@ -54,7 +56,15 @@ def panel_ids(tsv: Path) -> tuple[set[str], dict[str, set[str]], set[int]]:
             weapons.add(parts[1].upper())
             stats.setdefault(parts[1].upper(), set())
         elif parts[0] == "ROW" and len(parts) > 2:
-            stats.setdefault(parts[1].upper(), set()).add(parts[2])
+            ids = stats.setdefault(parts[1].upper(), set())
+            ids.add(parts[2])
+            # a row can be several parts, and the panel writes one override per part: a multi-part
+            # cooldown row has 'cooldown' and 'cooldown2', a joined passive row has each modifier id
+            if len(parts) > 5:
+                for chunk in parts[5].split(","):
+                    part_id = chunk.split("=", 1)[0].strip()
+                    if part_id:
+                        ids.add(part_id)
         if parts[0] == "WEAPON" and len(parts) > 1 and parts[1].startswith("FFFFFFFE"):
             # a passive page's hash is FFFFFFFE<passive id>: that is where the passive ids come from
             passives.add(int(parts[1][8:], 16))

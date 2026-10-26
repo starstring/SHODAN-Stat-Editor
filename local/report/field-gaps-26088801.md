@@ -140,8 +140,8 @@ tables: weapon
 | ✗ | +388 | 4 | u32/f32 | StartFiringMinigunAnimationEvent |  | 0 |
 | ✗ | +392 | 4 | u32/f32 | StopFiringMinigunAnimationEvent |  | 0 |
 | ✗ | +396 | 4 | u32/f32 |  |  | 0 |
-| ✗ | +400 | 1 | u8 | crosshair_type |  | 0 |
-| ✗ | +404 | 4 | u32/f32 |  |  | 0 |
+| ✗ | +400 | 1 | u8 |  |  | 0 |
+| ✗ | +404 | 4 | u32/f32 | crosshair_type |  | 0 |
 | ✗ | +408 | 48 | struct 0x4C18DE6F |  |  |  |
 | ✗ | +456 | 4 | u32/f32 | first_person_sight_node |  | 1383898227 |
 | ✗ | +460 | 4 | u32/f32 | first_person_optic_attach_node |  | 1294297178 |
@@ -150,12 +150,12 @@ tables: weapon
 | ✗ | +472 | 4 | u32/f32 | enter_first_person_aim_audio_event |  | 0 |
 | ✗ | +476 | 4 | u32/f32 | exit_first_person_aim_audio_event |  | 0 |
 | ✗ | +480 | 4 | u32/f32 | first_person_aim_audio_event_node_id |  | 0 |
-| ✗ | +484 | 4 | u32/f32 | enter_third_person_aim_audio_event |  | 0 |
-| ✗ | +488 | 4 | u32/f32 | exit_third_person_aim_audio_event |  | 0 |
-| ✗ | +492 | 4 | u32/f32 | third_person_aim_audio_event_node_id |  | 0 |
-| ✗ | +496 | 4 | u32/f32 | fire_mode_changed_audio_event |  | 0 |
-| ✗ | +500 | 4 | u32/f32 | on_fire_rounds_remaining_animation_variable |  | 0 |
-| ✗ | +504 | 4 | u32/f32 |  |  | 0 |
+| ✗ | +484 | 4 | u32/f32 | ExitThirdPersonAimAudioEvent |  | 0 |
+| ✗ | +488 | 4 | u32/f32 | enter_third_person_aim_audio_event |  | 0 |
+| ✗ | +492 | 4 | u32/f32 | exit_third_person_aim_audio_event |  | 0 |
+| ✗ | +496 | 4 | u32/f32 | third_person_aim_audio_event_node_id |  | 0 |
+| ✗ | +500 | 4 | u32/f32 | fire_mode_changed_audio_event |  | 0 |
+| ✗ | +504 | 4 | u32/f32 | on_fire_rounds_remaining_animation_variable |  | 0 |
 | ✗ | +512 | 384 | struct 0x10CEE58B |  |  |  |
 | ✗ | +896 | 32 | struct 0x49D0074E |  |  |  |
 | ✗ | +928 | 4 | u32/f32 | on_fire_round_anim_event |  | 0, 4125806552  [0..4125806552] |
@@ -280,30 +280,30 @@ tables: projectile
 |  | +152 | 4 | u32/f32 | explosion_delay | fuse_delay, m2_fuse_delay, c1_fuse_delay | 0, 0.5, 0.8  [0..0.8] |
 |  | +156 | 4 | u32/f32 | explosion_type_expire | expiry_explosion, m2_expiry_explosion, t_expiry_explosion | 0, 277, 419  [0..419] |
 | ✗ | +160 | 4 | u32/f32 | arming_distance |  | 0 |
-| ✗ | +164 | 4 | u32/f32 | decal_size |  | 3212836864  (f32: -1) |
-| ✗ | +168 | 4 | u32/f32 | surface_impact_type |  | 0.1 |
-| ✗ | +172 | 4 | u32/f32 | ricochet_impact_type |  | 0, 3  [0..3] |
-| ✗ | +176 | 4 | u32/f32 | max_ricochets |  | 0, 3  [0..3] |
-| ✗ | +180 | 4 | u32/f32 | ricochet_threshold_angle |  | 1, 5  [1..5] |
-| ✗ | +184 | 4 | u32/f32 | ricochet_threshold_speed |  | 1118175232, 1119092736  (f32: 83, 90)  [1118175232..1119092736] |
-| ✗ | +188 | 4 | u32/f32 | ricochet_angle_loss |  | 1092616192, 1114636288  (f32: 10, 60)  [1092616192..1114636288] |
-| ✗ | +192 | 4 | u32/f32 | ricochet_spread_vertical |  | 0.75 |
-| ✗ | +196 | 4 | u32/f32 | ricochet_spread_horizontal |  | 0, 1084227584  (f32: 0, 5)  [0..1084227584] |
-| ✗ | +200 | 4 | u32/f32 | audio_crack_event |  | 0, 1101004800  (f32: 0, 20)  [0..1101004800] |
-| ✗ | +204 | 4 | u32/f32 | audio_ricochet_event |  | 0 |
-| ✗ | +208 | 4 | u32/f32 | audio_trail_event_start |  | 0 |
-| ✗ | +212 | 4 | u32/f32 | audio_trail_event_stop |  | 0, 223688661, 657364492 …  [0..3742797545] |
+| ✗ | +164 | 4 | u32/f32 | ArmingDistance? |  | 3212836864  (f32: -1) |
+| ✗ | +168 | 4 | u32/f32 | decal_size |  | 0.1 |
+| ✗ | +172 | 4 | u32/f32 | surface_impact_type |  | 0, 3  [0..3] |
+| ✗ | +176 | 4 | u32/f32 | ricochet_impact_type |  | 0, 3  [0..3] |
+| ✗ | +180 | 4 | u32/f32 | max_ricochets |  | 1, 5  [1..5] |
+| ✗ | +184 | 4 | u32/f32 | ricochet_threshold_angle |  | 1118175232, 1119092736  (f32: 83, 90)  [1118175232..1119092736] |
+| ✗ | +188 | 4 | u32/f32 | ricochet_threshold_speed |  | 1092616192, 1114636288  (f32: 10, 60)  [1092616192..1114636288] |
+| ✗ | +192 | 4 | u32/f32 | ricochet_angle_loss |  | 0.75 |
+| ✗ | +196 | 4 | u32/f32 | ricochet_spread_vertical |  | 0, 1084227584  (f32: 0, 5)  [0..1084227584] |
+| ✗ | +200 | 4 | u32/f32 | ricochet_spread_horizontal |  | 0, 1101004800  (f32: 0, 20)  [0..1101004800] |
+| ✗ | +204 | 4 | u32/f32 | audio_crack_event |  | 0 |
+| ✗ | +208 | 4 | u32/f32 | audio_ricochet_event |  | 0 |
+| ✗ | +212 | 4 | u32/f32 | audio_trail_event_start |  | 0, 223688661, 657364492 …  [0..3742797545] |
 | ✗ | +216 | 4 | u32/f32 | audio_trail_event_stop |  | 0, 1041721433, 1880483028 …  [0..4071212405] |
 | ✗ | +220 | 4 | u32/f32 | UnkFloat2? |  | 3212836864  (f32: -1) |
 | ✗ | +224 | 4 | u32/f32 | UnkAudioEvent? |  | 0 |
-| ✗ | +228 | 1 | u8 | status_effect_volume_template |  | 0 |
-| ✗ | +232 | 4 | u32/f32 | effect_damage_type |  | 0 |
-| ✗ | +236 | 4 | u32/f32 | fire_template |  | 1, 2, 3  [1..3] |
-| ✗ | +240 | 4 | u32/f32 | projectile_flags_1 |  | 0 |
-| ✗ | +244 | 2 | u16 | raycast_template |  | 125, 188, 6168  [125..6168] |
-| ✗ | +248 | 4 | u32/f32 | proximity_explosion_collision_filter |  | 0 |
-| ✗ | +252 | 4 | u32/f32 | projectile_flags_2 |  | 0.0001808 |
-| ✗ | +256 | 1 | u8 |  |  | 0 |
+| ✗ | +228 | 1 | u8 | UnkBool2? |  | 0 |
+| ✗ | +232 | 4 | u32/f32 | status_effect_volume_template |  | 0 |
+| ✗ | +236 | 4 | u32/f32 | effect_damage_type |  | 1, 2, 3  [1..3] |
+| ✗ | +240 | 4 | u32/f32 | fire_template |  | 0 |
+| ✗ | +244 | 2 | u16 | projectile_flags_1 |  | 125, 188, 6168  [125..6168] |
+| ✗ | +248 | 4 | u32/f32 | raycast_template |  | 0 |
+| ✗ | +252 | 4 | u32/f32 | proximity_explosion_collision_filter |  | 0.0001808 |
+| ✗ | +256 | 1 | u8 | projectile_flags_2 |  | 0 |
 | ✗ | +260 | 12 | struct 0x85B82A43 | projectile_attachment_local_offset |  |  |
 
 ### WeaponHeatComponentData → WeaponHeatComponent (54 members, 11 editable, 30 rows)
@@ -555,38 +555,38 @@ tables: eagle
 | ✗ | +20 | 4 | u32/f32 | airstrike_pattern |  | 0, 3, 4 …  [0..7] |
 | ✗ | +24 | 4 | u32/f32 | projectile_type |  | 0, 84, 117 …  [0..291] |
 | ✗ | +32 | 8 | u64 |  |  | 0x0000000000000000, 0x0000000000000000 |
-| ✗ | +40 | 4 | u32/f32 | search_radius |  | 1119092736, 1127481344  (f32: 90, 180)  [1119092736..1127481344] |
-| ✗ | +44 | 1 | u8 | fire_duration |  | 0, 1  [0..1] |
-| ✗ | +48 | 4 | u32/f32 | bomb_interval |  | 1101004800, 1114636288, 1133903872  (f32: 20, 60)  [1101004800..1133903872] |
-|  | +52 | 4 | u32/f32 | bomb_prediction_interval | eagle_fire_time | 1.5, 2  [1.5..2] |
-|  | +56 | 4 | u32/f32 | approach_min_distance | eagle_bomb_gap | 0.05, 0.1, 0.2 …  [0.05..1e+04] |
-| ✗ | +60 | 4 | u32/f32 | approach_max_distance |  | 0.05 |
-|  | +64 | 4 | u32/f32 | approach_max_height | eagle_approach | 1145569280, 1148846080  (f32: 800, 1000)  [1145569280..1148846080] |
-|  | +68 | 4 | u32/f32 |  | eagle_approach_2 | 1145569280, 1148846080  (f32: 800, 1000)  [1145569280..1148846080] |
-| ✗ | +72 | 4 | u32/f32 | num_heights_to_try |  | 1145569280, 1147207680, 1148846080  (f32: 800, 900)  [1145569280..1148846080] |
-| ✗ | +76 | 4 | u32/f32 | attack_movespeed |  | 1073741824, 1086324736, 1098907648  (f32: 2, 6)  [1073741824..1098907648] |
-| ✗ | +80 | 4 | u32/f32 | evade_movespeed |  | 1120403456  (f32: 100) |
-| ✗ | +84 | 4 | u32/f32 | damaged_movespeed |  | 1094713344  (f32: 12) |
-| ✗ | +88 | 4 | u32/f32 | acceleration |  | 1135869952  (f32: 360) |
-|  | +92 | 4 | u32/f32 | deceleration | eagle_speed | 1133903872  (f32: 300) |
-| ✗ | +96 | 4 | u32/f32 | damage_cooldown |  | 1133903872  (f32: 300) |
-| ✗ | +100 | 4 | u32/f32 | master_target_position_adjustment |  | 1120403456  (f32: 100) |
-| ✗ | +104 | 4 | u32/f32 | master_target_enemy_count |  | 1106247680  (f32: 30) |
-| ✗ | +108 | 4 | u32/f32 | strafing_run_length |  | 1106247680  (f32: 30) |
-| ✗ | +112 | 4 | u32/f32 | strafing_run_target_adjustment |  | 1133903872  (f32: 300) |
-| ✗ | +116 | 4 | u32/f32 | strafing_run_target_bias_time |  | 1103626240  (f32: 25) |
-| ✗ | +120 | 4 | u32/f32 | strafing_run_fire_distance |  | 1082130432  (f32: 4) |
-|  | +124 | 4 | u32/f32 |  | eagle_run_length | 0, 1092616192, 1112014848 …  (f32: 0, 10)  [0..1114636288] |
-| ✗ | +128 | 4 | u32/f32 |  |  | 1088421888  (f32: 7) |
-| ✗ | +132 | 4 | u32/f32 |  |  | 0.4 |
-| ✗ | +136 | 4 | u32/f32 | engine_start_audio |  | 1133903872, 1135542272, 1142292480  (f32: 300, 350)  [1133903872..1142292480] |
+| ✗ | +40 | 4 | u32/f32 | target_angle |  | 1119092736, 1127481344  (f32: 90, 180)  [1119092736..1127481344] |
+| ✗ | +44 | 1 | u8 |  |  | 0, 1  [0..1] |
+| ✗ | +48 | 4 | u32/f32 | search_radius |  | 1101004800, 1114636288, 1133903872  (f32: 20, 60)  [1101004800..1133903872] |
+|  | +52 | 4 | u32/f32 | fire_duration | eagle_fire_time | 1.5, 2  [1.5..2] |
+|  | +56 | 4 | u32/f32 | bomb_interval | eagle_bomb_gap | 0.05, 0.1, 0.2 …  [0.05..1e+04] |
+| ✗ | +60 | 4 | u32/f32 | bomb_prediction_interval |  | 0.05 |
+|  | +64 | 4 | u32/f32 | approach_min_distance | eagle_approach | 1145569280, 1148846080  (f32: 800, 1000)  [1145569280..1148846080] |
+|  | +68 | 4 | u32/f32 | approach_max_distance | eagle_approach_2 | 1145569280, 1148846080  (f32: 800, 1000)  [1145569280..1148846080] |
+| ✗ | +72 | 4 | u32/f32 | approach_max_height |  | 1145569280, 1147207680, 1148846080  (f32: 800, 900)  [1145569280..1148846080] |
+| ✗ | +76 | 4 | u32/f32 | num_angles_to_try |  | 1073741824, 1086324736, 1098907648  (f32: 2, 6)  [1073741824..1098907648] |
+| ✗ | +80 | 4 | u32/f32 |  |  | 1120403456  (f32: 100) |
+| ✗ | +84 | 4 | u32/f32 | num_heights_to_try |  | 1094713344  (f32: 12) |
+| ✗ | +88 | 4 | u32/f32 |  |  | 1135869952  (f32: 360) |
+|  | +92 | 4 | u32/f32 | attack_movespeed | eagle_speed | 1133903872  (f32: 300) |
+| ✗ | +96 | 4 | u32/f32 | evade_movespeed |  | 1133903872  (f32: 300) |
+| ✗ | +100 | 4 | u32/f32 | damaged_movespeed |  | 1120403456  (f32: 100) |
+| ✗ | +104 | 4 | u32/f32 | acceleration |  | 1106247680  (f32: 30) |
+| ✗ | +108 | 4 | u32/f32 | deceleration |  | 1106247680  (f32: 30) |
+| ✗ | +112 | 4 | u32/f32 | damage_cooldown |  | 1133903872  (f32: 300) |
+| ✗ | +116 | 4 | u32/f32 | master_target_position_adjustment |  | 1103626240  (f32: 25) |
+| ✗ | +120 | 4 | u32/f32 | master_target_enemy_count |  | 1082130432  (f32: 4) |
+|  | +124 | 4 | u32/f32 | strafing_run_length | eagle_run_length | 0, 1092616192, 1112014848 …  (f32: 0, 10)  [0..1114636288] |
+| ✗ | +128 | 4 | u32/f32 | strafing_run_target_adjustment |  | 1088421888  (f32: 7) |
+| ✗ | +132 | 4 | u32/f32 | strafing_run_target_bias_time |  | 0.4 |
+| ✗ | +136 | 4 | u32/f32 | strafing_run_fire_distance |  | 1133903872, 1135542272, 1142292480  (f32: 300, 350)  [1133903872..1142292480] |
 | ✗ | +140 | 28 | struct 0x19CCA20E |  |  |  |
 | ✗ | +168 | 84 | struct 0x2308DBEC |  |  |  |
 | ✗ | +252 | 40 | struct 0x2C2D1CF9 |  |  |  |
-| ✗ | +292 | 4 | u32/f32 | engine_stop_audio |  | 1094713344  (f32: 12) |
+| ✗ | +292 | 4 | u32/f32 |  |  | 1094713344  (f32: 12) |
 | ✗ | +296 | 4 | u32/f32 |  |  | 1090519040  (f32: 8) |
-| ✗ | +300 | 4 | u32/f32 |  |  | 822447567, 1501143151, 2158166289 …  [822447567..3636994674] |
-| ✗ | +304 | 4 | u32/f32 |  |  | 989231445, 1910392746, 2209072266 …  [989231445..4087131915] |
+| ✗ | +300 | 4 | u32/f32 | engine_start_audio |  | 822447567, 1501143151, 2158166289 …  [822447567..3636994674] |
+| ✗ | +304 | 4 | u32/f32 | engine_stop_audio |  | 989231445, 1910392746, 2209072266 …  [989231445..4087131915] |
 | ✗ | +312 | 8 | u64 | sonic_boom_effect |  | 0xC4652C812D9C2873, 0xC4652C812D9C2873 |
 | ✗ | +320 | 4 | u32/f32 |  |  | 3212836864  (f32: -1) |
 | ✗ | +324 | 4 | u32/f32 |  |  | 3212836864  (f32: -1) |
@@ -908,20 +908,20 @@ tables: status effect
 | ✗ | +44 | 4 | u32/f32 | damage_info_type |  | 0, 531, 532 …  [0..552] |
 | ✗ | +48 | 1 | u8 | damage_ignore_avatar_armor |  | 0 |
 | ✗ | +56 | 8 | u64 |  |  | 0x0000000000000000, 0x0000000000000000 |
-| ✗ | +64 | 4 | u32/f32 | script_event_start |  | 0, 1897902647  [0..1897902647] |
-| ✗ | +68 | 4 | u32/f32 | script_event_stop |  | 0, 1034147453, 1912561169  [0..1912561169] |
-| ✗ | +72 | 4 | u32/f32 | audio_event_start |  | 0, 1033575834, 3734442065  [0..3734442065] |
-| ✗ | +76 | 4 | u32/f32 | audio_event_stop |  | -0.6377, 0, 1.895e-06  [-0.6377..1.895e-06] |
-| ✗ | +80 | 4 | u32/f32 | audio_event_enter |  | 0, 1404037441, 3198568334  [0..3198568334] |
-| ✗ | +84 | 4 | u32/f32 | audio_event_exit |  | 0 |
-| ✗ | +88 | 4 | u32/f32 | animation_event_start |  | 0 |
-| ✗ | +92 | 4 | u32/f32 | animation_event_stop |  | 0 |
-| ✗ | +96 | 4 | u32/f32 | difficult_terrain_amount |  | 0 |
-| ✗ | +100 | 4 | u32/f32 | status_effect_flags |  | 0, 1065353216  (f32: 0, 1)  [0..1065353216] |
-| ✗ | +104 | 1 | u8 | notify_event_on_added |  | 0, 2, 3 …  [0..8] |
+| ✗ | +64 | 4 | u32/f32 |  |  | 0, 1897902647  [0..1897902647] |
+| ✗ | +68 | 4 | u32/f32 | script_event_start |  | 0, 1034147453, 1912561169  [0..1912561169] |
+| ✗ | +72 | 4 | u32/f32 | script_event_stop |  | 0, 1033575834, 3734442065  [0..3734442065] |
+| ✗ | +76 | 4 | u32/f32 | audio_event_start |  | -0.6377, 0, 1.895e-06  [-0.6377..1.895e-06] |
+| ✗ | +80 | 4 | u32/f32 | audio_event_stop |  | 0, 1404037441, 3198568334  [0..3198568334] |
+| ✗ | +84 | 4 | u32/f32 | audio_event_enter |  | 0 |
+| ✗ | +88 | 4 | u32/f32 | audio_event_exit |  | 0 |
+| ✗ | +92 | 4 | u32/f32 | animation_event_start |  | 0 |
+| ✗ | +96 | 4 | u32/f32 | animation_event_stop |  | 0 |
+| ✗ | +100 | 4 | u32/f32 | difficult_terrain_amount |  | 0, 1065353216  (f32: 0, 1)  [0..1065353216] |
+| ✗ | +104 | 1 | u8 | status_effect_flags |  | 0, 2, 3 …  [0..8] |
 | ✗ | +112 | 16 | struct 0x17B9083A |  |  |  |
-| ✗ | +128 | 4 | u32/f32 |  |  | 0, 2343002388, 4224911188  [0..4224911188] |
-| ✗ | +132 | 4 | u32/f32 |  |  | 0, 47623951, 1086274594  [0..1086274594] |
+| ✗ | +128 | 4 | u32/f32 | notify_event_on_added |  | 0, 2343002388, 4224911188  [0..4224911188] |
+| ✗ | +132 | 4 | u32/f32 | notify_event_on_removed |  | 0, 47623951, 1086274594  [0..1086274594] |
 | ✗ | +136 | 1 | u8 |  |  | 0 |
 | ✗ | +140 | 4 | u32/f32 |  |  | 1 |
 | ✗ | +144 | 16 | struct 0x9DDD1BE2 |  |  |  |
@@ -1040,7 +1040,7 @@ tables: orbital beam
 | ✗ | +536 | 4 | u32/f32 | projectile_spawn_height |  | 1161527296  (f32: 3000) |
 | ✗ | +540 | 4 | u32/f32 | projectile_spawn_delay |  | 0, 1.7  [0..1.7] |
 | ✗ | +544 | 4 | u32/f32 | target_list_update_time |  | 0, 1065353216  (f32: 0, 1)  [0..1065353216] |
-| ✗ | +548 | 16 | 16B |  |  |  |
+| ✗ | +548 | 16 | 16B | factions |  |  |
 
 ### TurretComponentData → TurretComponent (19 members, 2 editable, 74 rows)
 

@@ -145,11 +145,14 @@ unzipped folder into `local/build/`:
 
 ```
 local/build/SHODAN Stat Editor Offline/SHODAN Stat Editor Offline.exe   <- run this
-local/build/SHODAN-Stat-Editor-Offline-local-<version>.zip
+local/build/SHODAN-Stat-Editor-Offline-<upstream version>-r<NN>.zip   (only the newest is kept)
 ```
 
-Two deliberate differences from a release build: the panel's version is bumped one patch level (so the
-updater does not offer to replace this build with the official release of the same version), and
+The version is upstream's plus a local revision: `4.5.1-r01`, `4.5.1-r02`, then `4.5.2-r01` after the
+next merge (the counter lives in `local/build/.release.json`). The updater compares versions by their
+numbers, so `4.5.1-r02` counts as {4, 5, 1, 2}: newer than the official `4.5.1` (no update offered over
+this build) and older than a future `4.5.2` (that update is offered, and merging it gives `4.5.2-r01`).
+Two deliberate differences from a release build: that revision suffix, and
 `app/build.txt` names the commit with `+local` when the working tree is dirty. The packaged panel leaves
 out `panel/*_test.lua` — that hook is only for the headless harness. Presets, saved values and the game's
 originals are shared with any other install, since they live in `%LOCALAPPDATA%\SHODAN\StatEditor`.

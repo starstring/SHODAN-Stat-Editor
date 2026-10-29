@@ -1,20 +1,23 @@
 """Packs a runnable build of this fork: upstream's launcher + the generated panel.
 
-    python local/package_exe.py                # -> local/build/SHODAN-Stat-Editor-Offline-local-<ver>.zip
-                                               #    and the same, unzipped, next to it
+    python local/package_exe.py          # -> local/build/SHODAN-Stat-Editor-Offline-<version>-r<NN>.zip
+                                         #    and the runnable folder next to it
 
 Upstream's `offline/package.py` does the packing (its file list, README, third-party notices); this
-script only swaps in the panel that `local/build_panel.py` generates and puts the zip where this
-fork keeps its build output instead of upstream's release folder. Nothing upstream is edited.
+script only swaps in the panel that `local/build_panel.py` generates, tags the build with its local
+revision, and puts the output where this fork keeps it. Nothing upstream is edited.
 
-The version is bumped by one patch level in the *generated* panel only (not in src/): the packaged
-build then counts as newer than the release it is based on, so the updater does not offer to replace
-it with the same-named official release. Settings > Updates still works, so turn it off while a
-local build is installed if you do not want to lose these stats.
+Versioning: the build keeps upstream's version and adds a local revision - `4.5.1-r01`, `4.5.1-r02`,
+then `4.5.2-r01` after the next merge. The counter lives in `local/build/.release.json`, so packing
+twice without merging upstream gives r01, r02, ...
+
+The updater compares versions by their numbers (`offline/update.lua`: `gmatch('%d+')`), so
+`4.5.1-r02` counts as {4, 5, 1, 2}: newer than the official `4.5.1` (no update offered over this
+build) and older than a future `4.5.2` (that update is offered, and merging it gives 4.5.2-r01).
 """
 from __future__ import annotations
 
-import datetime
+import json
 import os
 import re
 import shutil
@@ -25,18 +28,46 @@ from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
 REPO = HERE.parent
-PANEL = HERE / "build" / "panel-for-package.lua"
-OUT = HERE / "build"
+BUILD = HERE / "build"
+PANEL = BUILD / "panel-for-package.lua"
+OUT = BUILD
+STATE = OUT / ".release.json"
+FOLDER = OUT / "SHODAN Stat Editor Offline"
+STAGING = OUT / ".staging"
 
 
-def bump_patch(text: str) -> tuple[str, str]:
-    """3.2.0 -> 3.2.1, in the generated panel only."""
-    found = re.search(r"version = '(\d+)\.(\d+)\.(\d+)'", text)
+def next_version() -> str:
+    """Upstream's version plus this fork's revision: 4.5.1 -> 4.5.1-r01 (and r02, r03, ...)."""
+    text = PANEL.read_text(encoding="utf-8")
+    found = re.search(r"version = '([\d.]+)'", text)
     if not found:
-        raise SystemExit("no version in the panel")
-    major, minor, patch = (int(part) for part in found.groups())
-    local = f"{major}.{minor}.{patch + 1}"
-    return text[:found.start()] + f"version = '{local}'" + text[found.end():], local
+        raise SystemExit("no version in the generated panel")
+    upstream = found.group(1)
+    state = {}
+    if STATE.exists():
+        try:
+            state = json.loads(STATE.read_text(encoding="utf-8"))
+        except ValueError:
+            state = {}
+    revision = int(state.get("revision", 0)) + 1 if state.get("version") == upstream else 1
+    version = f"{upstream}-r{revision:02d}"
+    PANEL.write_text(text[:found.start()] + f"version = '{version}'" + text[found.end():], encoding="utf-8")
+    STATE.write_text(json.dumps({"version": upstream, "revision": revision}, indent=1), encoding="utf-8")
+    return version
+
+
+def unpack(archive: Path, into: Path) -> None:
+    """The zip's payload (its top folder is dropped) into `into`."""
+    if into.exists():
+        shutil.rmtree(into, ignore_errors=True)
+    into.mkdir(parents=True, exist_ok=True)
+    with zipfile.ZipFile(archive) as zf:
+        for name in zf.namelist():
+            if name.endswith("/") or "/" not in name:
+                continue
+            target = into / name.split("/", 1)[1]
+            target.parent.mkdir(parents=True, exist_ok=True)
+            target.write_bytes(zf.read(name))
 
 
 def main() -> int:
@@ -44,10 +75,9 @@ def main() -> int:
     subprocess.run([sys.executable, str(HERE / "build_panel.py"), "--skip-test"], check=True)
     # the host file this fork patches (passive-stack conflict policy): generated, never edited upstream
     subprocess.run([sys.executable, str(HERE / "patch_hostdata.py")], check=True)
-    text, version = bump_patch(PANEL.read_text(encoding="utf-8"))
-    PANEL.write_text(text, encoding="utf-8")
+    version = next_version()
 
-    name = f"SHODAN-Stat-Editor-Offline-local-{version}"
+    name = f"SHODAN-Stat-Editor-Offline-{version}"
     os.environ["SSEO_CHANNEL"] = "local"
     if not os.environ.get("SSEO_COMMIT"):
         commit = subprocess.run(["git", "-C", str(REPO), "rev-parse", "--short", "HEAD"],
@@ -56,13 +86,16 @@ def main() -> int:
                                capture_output=True, text=True).stdout.strip()
         os.environ["SSEO_COMMIT"] = commit + ("+local" if dirty else "")
 
-    # upstream's packer, with its panel swapped for the generated one
+    # upstream's packer, with its panel swapped for the generated one and its version taken as-is
     source = (REPO / "offline" / "package.py").read_text(encoding="utf-8")
     patched = source.replace(
         "PANEL = os.path.join(ADDON, 'stat_editor_offline.lua')   # build.py --offline",
         f"PANEL = {str(PANEL)!r}   # local build")
     if patched == source:
         raise SystemExit("offline/package.py changed: it no longer sets PANEL where this expects")
+    patched, count = re.subn(r"^VERSION = .*$", f"VERSION = {version!r}", patched, count=1, flags=re.M)
+    if count != 1:
+        raise SystemExit("offline/package.py changed: no VERSION line to replace")
     argv = sys.argv
     sys.argv = ["package.py", name]
     try:
@@ -76,50 +109,34 @@ def main() -> int:
         raise SystemExit(f"expected {made}")
     OUT.mkdir(parents=True, exist_ok=True)
     target = OUT / made.name
-    try:
-        shutil.copy2(made, target)
-    except PermissionError:      # the previous zip is open somewhere (Explorer's preview, an archiver)
-        stamp = datetime.datetime.now().strftime("%H%M%S")
-        target = OUT / (made.stem + f"-{stamp}" + made.suffix)
-        shutil.copy2(made, target)
-        print(f"note: {made.name} was locked; wrote {target.name} instead")
-    # Unpack into a folder of its own first. The previous build may be running from the canonical
-    # folder (its .exe and DLLs are locked), and deleting files there before knowing that would leave
-    # a half-deleted build behind.
-    stamp = datetime.datetime.now().strftime("%H%M%S")
-    folder = OUT / f"SHODAN Stat Editor Offline ({stamp})"
-    with zipfile.ZipFile(target) as archive:
-        names = [n for n in archive.namelist() if not n.endswith("/") and "/" in n]
-        for name in names:
-            out_path = folder / name.split("/", 1)[1]
-            out_path.parent.mkdir(parents=True, exist_ok=True)
-            out_path.write_bytes(archive.read(name))
+    shutil.copy2(made, target)
 
-    # the patched host file goes over the one the packer copied
-    patched = HERE / "build" / "hostdata.lua"
-    if patched.exists() and (folder / "app" / "hostdata.lua").exists():
-        shutil.copy2(patched, folder / "app" / "hostdata.lua")
-
-    # ...then refresh the canonical folder file by file, leaving whatever is in use alone
-    canonical = OUT / "SHODAN Stat Editor Offline"
+    # unpack beside the runnable folder, then refresh that folder file by file: the running build's
+    # .exe and DLLs are locked, and deleting files there before knowing that would leave it broken
+    unpack(target, STAGING)
+    patched_host = BUILD / "hostdata.lua"
+    if patched_host.exists() and (STAGING / "app" / "hostdata.lua").exists():
+        shutil.copy2(patched_host, STAGING / "app" / "hostdata.lua")
     skipped = 0
-    if canonical.exists():
-        for source in sorted(folder.rglob("*")):
-            if source.is_dir():
-                continue
-            target_file = canonical / source.relative_to(folder)
-            target_file.parent.mkdir(parents=True, exist_ok=True)
-            try:
-                shutil.copy2(source, target_file)
-            except PermissionError:
-                skipped += 1
-    if not canonical.exists():
-        canonical = folder                      # first pack: the timestamped folder is the build
-    elif skipped:
-        print(f"note: {skipped} file(s) are in use by the running build; the full new build is {folder.name}")
-        print(f"      ({canonical} got everything else; close the editor and pack again to refresh it)")
+    for source_file in sorted(STAGING.rglob("*")):
+        if source_file.is_dir():
+            continue
+        destination = FOLDER / source_file.relative_to(STAGING)
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            shutil.copy2(source_file, destination)
+        except PermissionError:
+            skipped += 1
+    shutil.rmtree(STAGING, ignore_errors=True)
+    if skipped:
+        print(f"note: {skipped} file(s) are in use by the running build; close the editor and pack again")
+
+    # one zip at a time: the previous ones are superseded
+    for old in OUT.glob("SHODAN-Stat-Editor-Offline-*.zip"):
+        if old.name != target.name:
+            old.unlink(missing_ok=True)
     print(f"\n{target}")
-    print(f"{canonical}  (run it from here)")
+    print(f"{FOLDER}  (run it from here)")
     return 0
 
 

@@ -110,6 +110,10 @@ def main() -> int:
     OUT.mkdir(parents=True, exist_ok=True)
     target = OUT / made.name
     shutil.copy2(made, target)
+    # upstream's release folder is the packer's output: it only keeps the build just made too
+    for old in made.parent.glob("SHODAN-Stat-Editor-Offline-*.zip"):
+        if old.name != made.name:
+            old.unlink(missing_ok=True)
 
     # unpack beside the runnable folder, then refresh that folder file by file: the running build's
     # .exe and DLLs are locked, and deleting files there before knowing that would leave it broken

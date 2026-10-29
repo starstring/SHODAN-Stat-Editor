@@ -27,7 +27,7 @@ MARK = "local patch (local/patch_panel_ui.py)"
 
 # ---------------------------------------------------------------- 1. option rows
 ANCHOR_OPEN = """                else
-                    text(was and ('was ' .. fmt(default, row.storage)) or '', 690, y + bh / 2 - 7, 14, DIM, 90, true)"""
+                    local shown = function(v) return row.never and v == 0 and 'Never' or fmt(v, row.storage) end"""
 
 PATCHED_OPEN = """                else
                     -- local patch (local/patch_panel_ui.py): a row with options draws buttons instead
@@ -44,23 +44,25 @@ PATCHED_OPEN = """                else
                         end
                     end
                     if not row.sse_options then
-                    text(was and ('was ' .. fmt(default, row.storage)) or '', 690, y + bh / 2 - 7, 14, DIM, 90, true)"""
+                    local shown = function(v) return row.never and v == 0 and 'Never' or fmt(v, row.storage) end"""
 
-ANCHOR_CLOSE = """                    region('value:' .. n, 696, y, 88, bh, ok)
+ANCHOR_CLOSE = """                    region('row:' .. n, x0 - 6, y - 1, 430, pitch - 1)
+                    region('value:' .. n, 696, y, 88, bh, ok)
                 end"""
 
-PATCHED_CLOSE = """                    region('value:' .. n, 696, y, 88, bh, ok)
+PATCHED_CLOSE = """                    region('row:' .. n, x0 - 6, y - 1, 430, pitch - 1)
+                    region('value:' .. n, 696, y, 88, bh, ok)
                     end
                 end"""
 
 # ---------------------------------------------------------------- 2. the page's two buttons
-ANCHOR_BUTTON = """        text(weapon.name, x0, 94, 22, GOLD, W - x0 - 20)"""
+ANCHOR_BUTTON = """        text(weapon.name, x0, 94, 22, GOLD, room)"""
 
-PATCHED_BUTTON = """        text(weapon.name, x0, 94, 22, GOLD, W - x0 - 20)
+PATCHED_BUTTON = """        text(weapon.name, x0, 94, 22, GOLD, room)
         -- local patch (local/patch_panel_ui.py): a passive page's two actions, on the name's line and
         -- only as wide as the room the name leaves (the window's title bar belongs to the host)
         if weapon.passive then
-            local room = W - 20 - x0 - width(weapon.name, 22) - 24
+            local room = W - 20 - x0 - width(weapon.name, 22) - 24   -- (the name's own room, less a gap)
             local count = weapon.sse_page and 1 or 2
             local bw = math.min(208, math.floor((room - 8 * (count - 1)) / count))
             if bw >= 80 then

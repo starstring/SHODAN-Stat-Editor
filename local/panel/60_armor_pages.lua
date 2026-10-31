@@ -246,30 +246,32 @@ state.sse_preview_of = function(page)
     return { title = settings.tr('Final effects') .. '（' .. #lines .. '）', lines = lines }
 end
 
--- the two buttons, on an armor page's own title line (drawn by the generated panel)
+-- "Add to every armor", on a passive page: that passive joins the Every armor list. It is a virtual
+-- list: every armor gets it at install, and it is only shown on the Every armor page, not on the
+-- armors' own pages.
 state.sse_add_to_all = function(page)
-    local mine = MOD.kits.list_of(page) or {}
-    if #mine == 0 then
-        ui.message = { text = 'This armor has no passives of its own to copy.', till = api.now() + 5 }
+    local index = page and page.passive and tables[page.passive] and tables[page.passive].index
+    local pid = index and index.id
+    if not pid then
+        ui.message = { text = 'This page has no passive to add.', till = api.now() + 5 }
         return
     end
-    local count = 0
-    for _, other in ipairs(weapons) do
-        if other.armor and other ~= page and other.armor ~= state.sse_every_armor and other.armor ~= 0x7E000002 then
-            local list, seen = {}, {}
-            for _, pid in ipairs(MOD.kits.list_of(other) or {}) do seen[pid] = true; list[#list + 1] = pid end
-            for _, pid in ipairs(mine) do
-                if not seen[pid] then seen[pid] = true; list[#list + 1] = pid end
-            end
-            if #list > MOD.kits.MAX_PASSIVES then
-                while #list > MOD.kits.MAX_PASSIVES do table.remove(list) end
-            end
-            MOD.kits.set(other, list)
-            count = count + 1
+    local list = {}
+    for _, id in ipairs(settings.armor_passives[state.sse_every_armor] or {}) do list[#list + 1] = id end
+    for _, id in ipairs(list) do
+        if id == pid then
+            ui.message = { text = 'Already in Every armor: ' .. tostring(page.name), till = api.now() + 5 }
+            return
         end
     end
-    mark_config_dirty()
-    ui.message = { text = 'Added ' .. #mine .. ' passive(s) to ' .. count .. ' armor(s).', till = api.now() + 5 }
+    if #list >= MOD.kits.MAX_PASSIVES then
+        ui.message = { text = 'Every armor is full: 14 passives at most.', till = api.now() + 5 }
+        return
+    end
+    list[#list + 1] = pid
+    local every = by_hash[string.format(state.sse_page_armor, state.sse_every_armor)]
+    MOD.kits.set(every, list)                       -- (writes settings.armor_passives and marks it dirty)
+    ui.message = { text = tostring(page.name) .. ' is now on every armor.', till = api.now() + 5 }
 end
 
 ;(function()
@@ -278,17 +280,23 @@ end
                                         '预览最终效果', '预览', '最终效果', '未命名效果', '未命名效果',
                                         '全部堆叠', '只取最强', '两个被动都有的修正',
                                         '此处的被动会加到每一件护甲上，不论你穿哪一件。',
-                                        '设置如何叠加护甲被动。', '添加被动', '该护甲没有自己的被动可复制。' },
+                                        '设置如何叠加护甲被动。', '添加被动', '该护甲没有自己的被动可复制。',
+                                        '这一页没有可添加的被动。', '所有护甲已满：最多 14 个被动。',
+                                        '已在所有护甲中：', ' 已加到所有护甲。' },
                          ['zh-Hant'] = { '所有護甲', '護甲設定', '把該護甲效果加到所有護甲', '全部護甲',
                                         '預覽最終效果', '預覽', '最終效果', '未命名效果', '未命名效果',
                                         '全部堆疊', '只取最強', '兩個被動都有的修正',
                                         '此處的被動會加到每一件護甲上，不論你穿哪一件。',
-                                        '設定如何疊加護甲被動。', '新增被動', '該護甲沒有自己的被動可複製。' },
+                                        '設定如何疊加護甲被動。', '新增被動', '該護甲沒有自己的被動可複製。',
+                                        '這一頁沒有可新增的被動。', '所有護甲已滿：最多 14 個被動。',
+                                        '已在所有護甲中：', ' 已加到所有護甲。' },
                          ['ru'] = { 'Вся броня', 'Настройки брони', 'Добавить всей броне', 'всей броне',
                                     'Предпросмотр итога', 'Обзор', 'Итоговые эффекты', 'Без имени', 'Без имени',
                                     'Все подряд', 'Только сильнейшее', 'Модификатор у обоих пассивов',
                                     'Пассивы здесь добавляются ко всей броне.',
-                                    'Как применяются пассивы брони.', 'Добавить пассив', 'У этой брони нет своих пассивов.' } })[lang.id]
+                                    'Как применяются пассивы брони.', 'Добавить пассив', 'У этой брони нет своих пассивов.',
+                                    'На этой странице нет пассива.', 'Вся броня заполнена: не более 14.',
+                                    'Уже во всей броне: ', ' теперь на всей броне.' } })[lang.id]
         if words then
             lang.exact['Every armor'] = words[1]
             lang.exact['Armor settings'] = words[2]
@@ -305,6 +313,10 @@ end
             lang.exact['How the armor passives are applied.'] = words[14]
             lang.exact['Nothing yet: add a passive below.'] = words[15]
             lang.exact['This armor has no passives of its own to copy.'] = words[16]
+            lang.exact['This page has no passive to add.'] = words[17]
+            lang.exact['Every armor is full: 14 passives at most.'] = words[18]
+            table.insert(lang.prefix, { 'Already in Every armor: ', words[19] })
+            table.insert(lang.prefix, { ' is now on every armor.', words[20] })
             if lang.lower then
                 lang.lower['add to every armor'] = words[3]
                 lang.lower['add to all'] = words[4]

@@ -61,20 +61,20 @@ ANCHOR_BUTTON = """        text(weapon.name, x0, 94, 22, GOLD, room)"""
 PATCHED_BUTTON = """        text(weapon.name, x0, 94, 22, GOLD, room)
         -- local patch (local/patch_panel_ui.py): a passive page's two actions, on the name's line and
         -- only as wide as the room the name leaves (the window's title bar belongs to the host)
-        if weapon.armor then
+        -- local patch (local/patch_panel_ui.py): a passive page offers "add this passive to every
+        -- armor", the Every armor page offers the preview; other pages get neither
+        if weapon.passive or weapon.armor == 0x7E000001 then
             local room = W - 20 - x0 - width(weapon.name, 22) - 24   -- (the name's own room, less a gap)
-            local count = (weapon.armor == 0x7E000002) and 0 or (weapon.armor == 0x7E000001 and 1 or 2)
-            local bw = math.min(208, math.floor((room - 8 * (count - 1)) / count))
+            local bw = math.min(208, room)
             if bw >= 80 then
-                -- short labels when the name is long: the text is clipped to the button's width
                 local short = bw < 150
-                local bx = W - 20 - (bw * count + 8 * (count - 1))
-                if count == 2 then
-                    button('sse_add_all', short and 'Add to all' or 'Add to every armor', bx, 90, bw, 28, true)
-                    bx = bx + bw + 8
+                if weapon.passive then
+                    button('sse_add_all', short and 'Add to all' or 'Add to every armor',
+                           W - 20 - bw, 90, bw, 28, true)
+                else
+                    button('sse_preview', short and 'Preview' or 'Preview the result',
+                           W - 20 - bw, 90, bw, 28, true, state.sse_preview ~= nil)
                 end
-                button('sse_preview', short and 'Preview' or 'Preview the result', bx, 90, bw, 28, true,
-                       state.sse_preview ~= nil)
             end
         end"""
 

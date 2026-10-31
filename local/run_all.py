@@ -88,6 +88,8 @@ def main(argv=None) -> int:
         return 0
     run(PYTHON, str(HERE / "build_panel.py"))
     run(PYTHON, str(HERE / "patch_hostdata.py"))      # the host file this fork patches
+    # every page must also *draw*: resolving a page and drawing it are different paths
+    run(LUAJIT, str(HERE / "tools" / "draw_all.lua"), str(game), str(HERE / "build" / "panel.lua"))
     if not LUAJIT.exists():
         raise SystemExit(f"LuaJIT not built: run local/build_luajit.bat ({LUAJIT})")
     run(str(LUAJIT), "panel_dump.lua", game, str(HERE / "build" / "panel.lua"),

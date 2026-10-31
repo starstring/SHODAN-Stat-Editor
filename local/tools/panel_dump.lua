@@ -62,6 +62,9 @@ if loaded == 0 then os.exit(3) end
 
 -- ---------------------------------------------------------------- the panel
 rawset(_G, 'SHODAN_OFFLINE', true)
+-- (SHODAN_PHYSICS stays absent: the panel's physics rows need a real `base` address from that host, so a
+-- fake one only makes every structure page fail to draw. The rename code paths that need it are covered
+-- by the shape check in draw_all.lua instead.)
 rawset(_G, 'SHODAN_OFFLINE_LANG', 'en')
 rawset(_G, 'SHODAN_LOCAL_TEST', true)
 function update(dt) end

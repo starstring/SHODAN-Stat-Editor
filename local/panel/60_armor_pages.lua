@@ -24,8 +24,11 @@ state.sse_page_armor = 'FFFFFFF8%08X'               -- the panel's own armor pag
 
 -- the two pages, (re)listed after the panel builds the armor pages (its build drops pages with .kits)
 state.sse_list_pages = function()
-    tables[state.sse_custom_key] = { index = { id = state.sse_custom_id, mods = {}, stats = {}, name = 0, type = 0,
-                                              pieces = {} }, entries = 0, copies = {} }
+    -- a complete shape: the panel walks a passive's `lines` (its description text ids) whenever it
+    -- builds the rename boxes, so an index without them breaks drawing the page
+    tables[state.sse_custom_key] = { index = { id = state.sse_custom_id, mods = {}, stats = {}, lines = {},
+                                              pieces = {}, name = 0, type = 0, text = nil },
+                                     entries = 0, copies = {} }
     for _, spec in ipairs({ { id = state.sse_custom_id, name = 'Custom passive', passive = state.sse_custom_key,
                               note = 'A bundle: the passives here reach an armor as one entry. Add it to an armor below.' },
                             { id = state.sse_every_armor, name = 'Every armor',

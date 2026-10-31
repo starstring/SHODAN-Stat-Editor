@@ -76,6 +76,41 @@ end
 -- the Armor settings page's one row: which value wins when both passives have the same modifier
 state.sse_resolve_armor = resolve
 resolve = function(weapon)
+    -- an armor's page says how many passives it gets from Every armor (they are not listed there)
+    if weapon and weapon.armor and weapon.armor ~= state.sse_every_armor and weapon.armor ~= 0x7E000002 then
+        weapon.sse_base_note = weapon.sse_base_note or weapon.note
+        local extra = #(settings.armor_passives[state.sse_every_armor] or {})
+        -- (not settings.tr: it translates 'armor' inside the sentence on its own)
+        local hint = ({ en = 'Plus %d from Every armor', ['zh-Hans'] = '另有 %d 个来自所有护甲',
+                        ['zh-Hant'] = '另有 %d 個來自所有護甲', ru = 'Ещё %d из «всей брони»' })[settings.lang] or
+                     'Plus %d from Every armor'
+        weapon.note = weapon.sse_base_note .. (extra > 0 and ('  ·  ' .. hint:format(extra)) or '')
+    end
+    -- the Every armor page says when an armor would go past the game's 14, because then Install stops
+    if weapon and weapon.armor == state.sse_every_armor then
+        weapon.sse_base_note = weapon.sse_base_note or weapon.note
+        local over, first = 0, nil
+        for _, other in ipairs(weapons) do
+            local armor = other.armor
+            if armor and armor ~= state.sse_every_armor and armor ~= 0x7E000002 then
+                local seen, count = {}, 0
+                for _, id in ipairs(MOD.kits.list_of(other) or {}) do seen[id] = true; count = count + 1 end
+                for _, id in ipairs(settings.armor_passives[state.sse_every_armor] or {}) do
+                    if not seen[id] then seen[id] = true; count = count + 1 end
+                end
+                if count > MOD.kits.MAX_PASSIVES then
+                    over = over + 1
+                    first = first or other.name
+                end
+            end
+        end
+        local warn = ({ en = 'Install will stop: %d armor(s) would get more than 14 passives (first: %s).',
+                        ['zh-Hans'] = '安装会停止：有 %d 件护甲会超过 14 个被动（例如 %s）。',
+                        ['zh-Hant'] = '安裝會停止：有 %d 件護甲會超過 14 個被動（例如 %s）。',
+                        ru = 'Установка остановится: у %d брони больше 14 пассивов (напр. %s).' })[settings.lang] or
+                     'Install will stop: %d armor(s) would get more than 14 passives (first: %s).'
+        weapon.note = weapon.sse_base_note .. (over > 0 and ('  ·  ' .. warn:format(over, first or '?')) or '')
+    end
     if weapon and weapon.armor == 0x7E000002 then
         if not weapon.by_id['stack_conflicts'] then
             local row = add_row(weapon, 'Stacks', 'stack_conflicts', 'When both passives have the same modifier',
@@ -271,7 +306,23 @@ state.sse_add_to_all = function(page)
     list[#list + 1] = pid
     local every = by_hash[string.format(state.sse_page_armor, state.sse_every_armor)]
     MOD.kits.set(every, list)                       -- (writes settings.armor_passives and marks it dirty)
-    ui.message = { text = tostring(page.name) .. ' is now on every armor.', till = api.now() + 5 }
+    local over = 0
+    for _, other in ipairs(weapons) do
+        local armor = other.armor
+        if armor and armor ~= state.sse_every_armor and armor ~= 0x7E000002 then
+            local own, seen = {}, {}
+            for _, id in ipairs(MOD.kits.list_of(other) or {}) do seen[id] = true; own[#own + 1] = id end
+            for _, id in ipairs(list) do if not seen[id] then seen[id] = true; own[#own + 1] = id end end
+            if #own > MOD.kits.MAX_PASSIVES then over = over + 1 end
+        end
+    end
+    ui.message = { text = tostring(page.name) .. ' is now on every armor.' ..
+                         (over > 0 and (' ' .. (({ en = '%d armor(s) would go past 14: install will stop.',
+                                                  ['zh-Hans'] = '有 %d 件护甲会超过 14 个：安装会停止。',
+                                                  ['zh-Hant'] = '有 %d 件護甲會超過 14 個：安裝會停止。',
+                                                  ru = 'У %d брони будет больше 14: установка остановится.' })[settings.lang] or
+                                                '%d armor(s) would go past 14: install will stop.'):format(over)) or ''),
+                   till = api.now() + 5 }
 end
 
 ;(function()
@@ -282,7 +333,8 @@ end
                                         '此处的被动会加到每一件护甲上，不论你穿哪一件。',
                                         '设置如何叠加护甲被动。', '添加被动', '该护甲没有自己的被动可复制。',
                                         '这一页没有可添加的被动。', '所有护甲已满：最多 14 个被动。',
-                                        '已在所有护甲中：', ' 已加到所有护甲。' },
+                                        '已在所有护甲中：', ' 已加到所有护甲。',
+                                        '另有 %d 个来自所有护甲', '有 %d 件护甲会超过 14 个：安装会停止。' },
                          ['zh-Hant'] = { '所有護甲', '護甲設定', '把該護甲效果加到所有護甲', '全部護甲',
                                         '預覽最終效果', '預覽', '最終效果', '未命名效果', '未命名效果',
                                         '全部堆疊', '只取最強', '兩個被動都有的修正',
@@ -296,7 +348,8 @@ end
                                     'Пассивы здесь добавляются ко всей броне.',
                                     'Как применяются пассивы брони.', 'Добавить пассив', 'У этой брони нет своих пассивов.',
                                     'На этой странице нет пассива.', 'Вся броня заполнена: не более 14.',
-                                    'Уже во всей броне: ', ' теперь на всей броне.' } })[lang.id]
+                                    'Уже во всей броне: ', ' теперь на всей броне.',
+                                    'Ещё %d из «всей брони»', 'У %d брони будет больше 14: установка остановится.' } })[lang.id]
         if words then
             lang.exact['Every armor'] = words[1]
             lang.exact['Armor settings'] = words[2]
@@ -316,6 +369,8 @@ end
             lang.exact['This page has no passive to add.'] = words[17]
             lang.exact['Every armor is full: 14 passives at most.'] = words[18]
             table.insert(lang.prefix, { 'Already in Every armor: ', words[19] })
+            table.insert(lang.prefix, { 'Plus %d from Every armor', words[21] })
+            table.insert(lang.prefix, { '%d armor(s) would go past 14: install will stop.', words[22] })
             table.insert(lang.prefix, { ' is now on every armor.', words[20] })
             if lang.lower then
                 lang.lower['add to every armor'] = words[3]

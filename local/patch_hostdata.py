@@ -49,6 +49,16 @@ local function row_value(m)
 end
 """
 
+ANCHOR_LIMIT = """    log, lists, one_line = log or function() end, lists or {}, one_line or {}"""
+LIMIT_CODE = """    log, lists, one_line = log or function() end, lists or {}, one_line or {}
+    -- local patch: an armor takes 14 passives at most, so an install that would go past that stops
+    -- here instead of writing a list the game cannot use
+    for armor, list in pairs(lists) do
+        if #list > 14 then
+            return nil, string.format('armor %08X would get %d passives (14 at most)', armor, #list)
+        end
+    end"""
+
 ANCHOR_APPEND = """local function append_mods(mods, add, dropped)
     local have, out = {}, { mods }
     for o = 1, #mods, 16 do have[mods:sub(o, o + 3)] = true end
@@ -100,6 +110,9 @@ def patch(text: str) -> str:
     if ANCHOR_POLICY not in text:
         raise SystemExit("offline/hostdata.lua: the passive-stacking anchor is gone; re-check the patch")
     text = text.replace(ANCHOR_POLICY, POLICY_CODE, 1)
+    if ANCHOR_LIMIT not in text:
+        raise SystemExit("offline/hostdata.lua: armor_passives' first line is not where this expects it")
+    text = text.replace(ANCHOR_LIMIT, LIMIT_CODE, 1)
     if ANCHOR_APPEND not in text:
         raise SystemExit("offline/hostdata.lua: append_mods is not the version this patch expects")
     return text.replace(ANCHOR_APPEND, REPLACEMENT_APPEND, 1)

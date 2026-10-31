@@ -27,6 +27,7 @@ import zipfile
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
+LUAJIT = HERE / "third_party" / "LuaJIT" / "src" / "luajit.exe"
 REPO = HERE.parent
 BUILD = HERE / "build"
 PANEL = BUILD / "panel-for-package.lua"

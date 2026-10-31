@@ -139,6 +139,21 @@ end
 
 state.sse_click_armor = click
 click = function(key)
+    if key == 'sse_add_all' then                       -- a passive page: that passive joins Every armor
+        state.sse_add_to_all(ui.weapon)
+        return
+    elseif key == 'sse_preview' then                   -- the Every armor page: its final effects
+        -- (not `a and nil or b`: that always takes b, so the preview could never close)
+        if state.sse_preview then
+            state.sse_preview = nil
+        else
+            state.sse_preview = state.sse_preview_of(ui.weapon)
+        end
+        return
+    elseif key == 'sse_preview_close' then
+        state.sse_preview = nil
+        return
+    end
     local row_at, value = nil, nil
     if key then row_at, value = key:match('^sse_opt:(%d+):(.+)$') end
     if row_at then
@@ -327,7 +342,7 @@ end
 
 ;(function()
     for _, lang in ipairs(MOD.langs or {}) do
-        local words = ({ ['zh-Hans'] = { '所有护甲', '护甲设置', '添加该护甲效果到所有护甲', '全部护甲',
+        local words = ({ ['zh-Hans'] = { '所有护甲', '护甲设置', '添加该被动效果到所有护甲', '全部护甲',
                                         '预览最终效果', '预览', '最终效果', '未命名效果', '未命名效果',
                                         '全部堆叠', '只取最强', '两个被动都有的修正',
                                         '此处的被动会加到每一件护甲上，不论你穿哪一件。',
@@ -335,21 +350,41 @@ end
                                         '这一页没有可添加的被动。', '所有护甲已满：最多 14 个被动。',
                                         '已在所有护甲中：', ' 已加到所有护甲。',
                                         '另有 %d 个来自所有护甲', '有 %d 件护甲会超过 14 个：安装会停止。' },
-                         ['zh-Hant'] = { '所有護甲', '護甲設定', '把該護甲效果加到所有護甲', '全部護甲',
+                         ['zh-Hant'] = { '所有護甲', '護甲設定', '把該被動效果加到所有護甲', '全部護甲',
                                         '預覽最終效果', '預覽', '最終效果', '未命名效果', '未命名效果',
                                         '全部堆疊', '只取最強', '兩個被動都有的修正',
                                         '此處的被動會加到每一件護甲上，不論你穿哪一件。',
                                         '設定如何疊加護甲被動。', '新增被動', '該護甲沒有自己的被動可複製。',
                                         '這一頁沒有可新增的被動。', '所有護甲已滿：最多 14 個被動。',
                                         '已在所有護甲中：', ' 已加到所有護甲。' },
-                         ['ru'] = { 'Вся броня', 'Настройки брони', 'Добавить всей броне', 'всей броне',
+                         ['ru'] = { 'Вся броня', 'Настройки брони', 'Добавить пассив всей броне', 'всей броне',
                                     'Предпросмотр итога', 'Обзор', 'Итоговые эффекты', 'Без имени', 'Без имени',
                                     'Все подряд', 'Только сильнейшее', 'Модификатор у обоих пассивов',
                                     'Пассивы здесь добавляются ко всей броне.',
                                     'Как применяются пассивы брони.', 'Добавить пассив', 'У этой брони нет своих пассивов.',
                                     'На этой странице нет пассива.', 'Вся броня заполнена: не более 14.',
                                     'Уже во всей броне: ', ' теперь на всей броне.',
-                                    'Ещё %d из «всей брони»', 'У %d брони будет больше 14: установка остановится.' } })[lang.id]
+                                    'Ещё %d из «всей брони»', 'У %d брони будет больше 14: установка остановится.' },
+                         ['es-419'] = { 'Toda la armadura', 'Ajustes de armadura', 'Añadir pasiva a toda la armadura',
+                                        'A toda', 'Previsualizar el resultado', 'Previsualizar',
+                                        'Efectos finales', 'Efecto sin nombre', 'Efecto sin nombre',
+                                        'Acumular todo', 'Solo lo más fuerte', 'Modificador en ambas pasivas',
+                                        'Las pasivas de aquí se añaden a toda la armadura.',
+                                        'Cómo se aplican las pasivas.', 'Añadir pasiva',
+                                        'Esta armadura no tiene pasivas propias.', 'Esta página no tiene pasiva.',
+                                        'Toda la armadura está llena: 14 como máximo.',
+                                        'Ya en toda la armadura: ', ' ahora está en toda la armadura.',
+                                        'Además %d de toda la armadura', '%d armadura(s) pasarían de 14: se detendrá.' },
+                         ['pt-BR'] = { 'Toda a armadura', 'Ajustes da armadura', 'Adicionar passiva a toda a armadura',
+                                       'A todas', 'Pré-visualizar o resultado', 'Pré-visualizar',
+                                       'Efeitos finais', 'Efeito sem nome', 'Efeito sem nome',
+                                       'Acumular tudo', 'Só o mais forte', 'Modificador nas duas passivas',
+                                       'As passivas aqui são adicionadas a toda a armadura.',
+                                       'Como as passivas são aplicadas.', 'Adicionar passiva',
+                                       'Esta armadura não tem passivas próprias.', 'Esta página não tem passiva.',
+                                       'Toda a armadura está cheia: 14 no máximo.',
+                                       'Já em toda a armadura: ', ' agora está em toda a armadura.',
+                                       'Mais %d de toda a armadura', '%d armadura(s) passariam de 14: vai parar.' } })[lang.id]
         if words then
             lang.exact['Every armor'] = words[1]
             lang.exact['Armor settings'] = words[2]

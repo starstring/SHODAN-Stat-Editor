@@ -1,5 +1,9 @@
 # local/ — this fork's own layer
 
+What this layer has cost in practice - and the fifteen things that bit hardest - is written up in
+`../../hd2data/docs/13-overlay-lessons.md` (200-local limit, no drawing from an overlay, resolve vs
+draw, synthetic records need the full shape, region order, do not wrap `update`, log truncation).
+
 Everything here is **added** to the project; nothing upstream is edited. `git pull` from the
 project's `main` therefore never conflicts: the only files it can touch are ones this folder does
 not contain.

@@ -51,11 +51,11 @@ end
 
 ANCHOR_LIMIT = """    log, lists, one_line = log or function() end, lists or {}, one_line or {}"""
 LIMIT_CODE = """    log, lists, one_line = log or function() end, lists or {}, one_line or {}
-    -- local patch: an armor takes 14 passives at most, so an install that would go past that stops
-    -- here instead of writing a list the game cannot use
+    -- local patch: a runaway guard only. The panel's 14 was its own list cap; this install merges an
+    -- armor's whole list into one record, so a long list is fine - 64 stops a mistake, not the game.
     for armor, list in pairs(lists) do
-        if #list > 14 then
-            return nil, string.format('armor %08X would get %d passives (14 at most)', armor, #list)
+        if #list > 64 then
+            return nil, string.format('armor %08X would get %d passives (64 at most)', armor, #list)
         end
     end"""
 

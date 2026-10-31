@@ -13,12 +13,22 @@
 -- and "Preview the result" (the final effects of that armor's list, merged and added up).
 --
 -- No `local` at this level (upstream's chunk sits at LuaJIT's 200-local limit).
-state.sse_every_armor = 0x7E000001                  -- a sentinel: real armor ids are elsewhere
+state.sse_every_armor = 0x7E000001
+-- a custom passive: a bundle of passives that an armor can carry as one entry. The install merges an
+-- armor's whole list into one record anyway (upstream does that), so this is the way past the 14-entry
+-- UI cap: any number of passives here, added to an armor as a single choice.
+state.sse_custom_id = 999
+state.sse_custom_key = 'sse custom passive'
+MOD.kits.MAX_PASSIVES = 64                  -- a sentinel: real armor ids are elsewhere
 state.sse_page_armor = 'FFFFFFF8%08X'               -- the panel's own armor page hash pattern
 
 -- the two pages, (re)listed after the panel builds the armor pages (its build drops pages with .kits)
 state.sse_list_pages = function()
-    for _, spec in ipairs({ { id = state.sse_every_armor, name = 'Every armor',
+    tables[state.sse_custom_key] = { index = { id = state.sse_custom_id, mods = {}, stats = {}, name = 0, type = 0,
+                                              pieces = {} }, entries = 0, copies = {} }
+    for _, spec in ipairs({ { id = state.sse_custom_id, name = 'Custom passive', passive = state.sse_custom_key,
+                              note = 'A bundle: the passives here reach an armor as one entry. Add it to an armor below.' },
+                            { id = state.sse_every_armor, name = 'Every armor',
                               note = 'The passives here are added to every armor, whatever you wear.' },
                             { id = 0x7E000002, name = 'Armor settings',
                               note = 'How the armor passives are applied.' } }) do
@@ -26,7 +36,8 @@ state.sse_list_pages = function()
         local page = by_hash[hash]
         if not page then
             page = { name = spec.name, slot = 'Armors', hash = hash, key = hash_key(hash), rows = {}, by_id = {},
-                     kits = 'passive', armor = spec.id, default = {}, note = spec.note, sse_page = true }
+                     kits = 'passive', armor = spec.id, default = {}, note = spec.note, sse_page = true,
+                     passive = spec.passive }
             by_hash[hash] = page
         end
         page.rows, page.by_id = {}, {}              -- (a rebuild: its rows are made again)
@@ -56,17 +67,25 @@ state.armor_passives = function()
     for armor, list in pairs(base) do
         if armor ~= state.sse_every_armor and armor ~= 0x7E000002 then out[armor] = list end
     end
-    if not every or #every == 0 then return out end
+    local custom = base[state.sse_custom_id] or {}
     for _, page in ipairs(weapons) do
         local armor = page.armor
-        if armor and armor ~= state.sse_every_armor and armor ~= 0x7E000002 then
+        if armor and armor ~= state.sse_every_armor and armor ~= state.sse_custom_id and armor ~= 0x7E000002 then
             local list, seen = {}, {}
-            for _, pid in ipairs(out[armor] or page.default or {}) do
-                if not seen[pid] then seen[pid] = true; list[#list + 1] = pid end
+            local function add(one)
+                if one == state.sse_custom_id then
+                    -- the bundle, spread out (once: a bundle inside a bundle would loop)
+                    if not seen[state.sse_custom_id] then
+                        seen[state.sse_custom_id] = true
+                        for _, pid in ipairs(custom) do add(pid) end
+                    end
+                elseif one and not seen[one] then
+                    seen[one] = true
+                    list[#list + 1] = one
+                end
             end
-            for _, pid in ipairs(every) do
-                if not seen[pid] then seen[pid] = true; list[#list + 1] = pid end
-            end
+            for _, pid in ipairs(out[armor] or page.default or {}) do add(pid) end
+            if every then for _, pid in ipairs(every) do add(pid) end end
             out[armor] = list
         end
     end
@@ -77,7 +96,8 @@ end
 state.sse_resolve_armor = resolve
 resolve = function(weapon)
     -- an armor's page says how many passives it gets from Every armor (they are not listed there)
-    if weapon and weapon.armor and weapon.armor ~= state.sse_every_armor and weapon.armor ~= 0x7E000002 then
+    if weapon and weapon.armor and weapon.armor ~= state.sse_every_armor and weapon.armor ~= state.sse_custom_id
+            and weapon.armor ~= 0x7E000002 then
         weapon.sse_base_note = weapon.sse_base_note or weapon.note
         local extra = #(settings.armor_passives[state.sse_every_armor] or {})
         -- (not settings.tr: it translates 'armor' inside the sentence on its own)
@@ -139,7 +159,10 @@ end
 
 state.sse_click_armor = click
 click = function(key)
-    if key == 'sse_add_all' then                       -- a passive page: that passive joins Every armor
+    if key == 'sse_add_custom' then
+        state.sse_add_to_custom(ui.weapon)
+        return
+    elseif key == 'sse_add_all' then                       -- a passive page: that passive joins Every armor
         state.sse_add_to_all(ui.weapon)
         return
     elseif key == 'sse_preview' then                   -- the Every armor page: its final effects
@@ -296,6 +319,29 @@ state.sse_preview_of = function(page)
     return { title = settings.tr('Final effects') .. '（' .. #lines .. '）', lines = lines }
 end
 
+-- "Add to the custom passive", on a passive page: that passive joins the bundle (no limit of its own)
+state.sse_add_to_custom = function(page)
+    local index = page and page.passive and tables[page.passive] and tables[page.passive].index
+    local pid = index and index.id
+    if not pid or pid == state.sse_custom_id then
+        ui.message = { text = 'This page has no passive to add.', till = api.now() + 5 }
+        return
+    end
+    local list = {}
+    for _, id in ipairs(settings.armor_passives[state.sse_custom_id] or {}) do list[#list + 1] = id end
+    for _, id in ipairs(list) do
+        if id == pid then
+            ui.message = { text = 'Already in the custom passive: ' .. tostring(page.name), till = api.now() + 5 }
+            return
+        end
+    end
+    list[#list + 1] = pid
+    local custom = by_hash[string.format(state.sse_page_armor, state.sse_custom_id)]
+    MOD.kits.set(custom, list)
+    ui.message = { text = tostring(page.name) .. ' is now in the custom passive (' .. #list .. ' in all).',
+                   till = api.now() + 5 }
+end
+
 -- "Add to every armor", on a passive page: that passive joins the Every armor list. It is a virtual
 -- list: every armor gets it at install, and it is only shown on the Every armor page, not on the
 -- armors' own pages.
@@ -339,6 +385,17 @@ state.sse_add_to_all = function(page)
                                                 '%d armor(s) would go past 14: install will stop.'):format(over)) or ''),
                    till = api.now() + 5 }
 end
+
+; (function()
+    -- the headless harness must not write the player's config: probes set state._test.no_save
+    if rawget(_G, 'SHODAN_LOCAL_TEST') then
+        state.sse_save_guard = save_config
+        save_config = function()
+            if state._test and state._test.no_save then return end
+            return state.sse_save_guard()
+        end
+    end
+end)()
 
 ;(function()
     for _, lang in ipairs(MOD.langs or {}) do
@@ -386,6 +443,33 @@ end
                                        'Já em toda a armadura: ', ' agora está em toda a armadura.',
                                        'Mais %d de toda a armadura', '%d armadura(s) passariam de 14: vai parar.' } })[lang.id]
         if words then
+            lang.exact['Custom passive'] = ({ ['zh-Hans'] = '自定义被动', ['zh-Hant'] = '自訂被動',
+                                              ['ru'] = 'Свой пассив', ['es-419'] = 'Pasiva propia',
+                                              ['pt-BR'] = 'Passiva própria' })[lang.id]
+            lang.exact['Add to the custom passive'] = ({ ['zh-Hans'] = '添加该被动效果到自定义被动',
+                                                         ['zh-Hant'] = '把該被動效果加到自訂被動',
+                                                         ['ru'] = 'В свой пассив',
+                                                         ['es-419'] = 'A la pasiva propia',
+                                                         ['pt-BR'] = 'À passiva própria' })[lang.id]
+            lang.exact['To custom'] = ({ ['zh-Hans'] = '加到自定义', ['zh-Hant'] = '加到自訂',
+                                         ['ru'] = 'в свой', ['es-419'] = 'A propia', ['pt-BR'] = 'À própria' })[lang.id]
+            lang.exact['To every armor'] = ({ ['zh-Hans'] = '加到所有护甲', ['zh-Hant'] = '加到所有護甲',
+                                              ['ru'] = 'всей броне', ['es-419'] = 'A todas',
+                                              ['pt-BR'] = 'A todas' })[lang.id]
+            lang.exact['A bundle: the passives here reach an armor as one entry. Add it to an armor below.'] =
+                ({ ['zh-Hans'] = '一个打包：这里的被动会作为一条记录加到护甲上。在下面把它加到护甲。',
+                    ['zh-Hant'] = '一個打包：這裡的被動會作為一條記錄加到護甲上。在下面把它加到護甲。',
+                    ['ru'] = 'Набор: пассивы отсюда попадают в броню одной записью.',
+                    ['es-419'] = 'Un paquete: las pasivas de aquí llegan a la armadura como una entrada.',
+                    ['pt-BR'] = 'Um pacote: as passivas daqui chegam à armadura como uma entrada.' })[lang.id]
+            table.insert(lang.prefix, { 'Already in the custom passive: ',
+                                        ({ ['zh-Hans'] = '已在自定义被动中：', ['zh-Hant'] = '已在自訂被動中：',
+                                           ['ru'] = 'Уже в своём пассиве: ', ['es-419'] = 'Ya en la pasiva propia: ',
+                                           ['pt-BR'] = 'Já na passiva própria: ' })[lang.id] })
+            table.insert(lang.prefix, { ' is now in the custom passive (', 
+                                        ({ ['zh-Hans'] = ' 已加入自定义被动（共 ', ['zh-Hant'] = ' 已加入自訂被動（共 ',
+                                           ['ru'] = ' теперь в своём пассиве (всего ', ['es-419'] = ' ya está en la pasiva propia (',
+                                           ['pt-BR'] = ' agora está na passiva própria (' })[lang.id] })
             lang.exact['Every armor'] = words[1]
             lang.exact['Armor settings'] = words[2]
             lang.exact['Add to every armor'] = words[3]

@@ -65,12 +65,19 @@ PATCHED_BUTTON = """        text(weapon.name, x0, 94, 22, GOLD, room)
         -- armor", the Every armor page offers the preview; other pages get neither
         if weapon.passive or weapon.armor == 0x7E000001 then
             local room = W - 20 - x0 - width(weapon.name, 22) - 24   -- (the name's own room, less a gap)
-            local bw = math.min(208, room)
+            local bw = math.min(460, room)
             if bw >= 80 then
                 local short = bw < 150
                 if weapon.passive then
-                    button('sse_add_all', short and 'Add to all' or 'Add to every armor',
-                           W - 20 - bw, 90, bw, 28, true)
+                    -- two actions on a passive page: into the custom bundle, or onto every armor
+                    local half = math.max(60, math.floor((bw - 8) / 2))
+                    local two = half >= 80
+                    button('sse_add_custom', two and (short and 'To custom' or 'Add to the custom passive') or 'Custom',
+                           W - 20 - bw, 90, two and half or bw, 28, true)
+                    if two then
+                        button('sse_add_all', short and 'To every armor' or 'Add to every armor',
+                               W - 20 - half, 90, half, 28, true)
+                    end
                 else
                     button('sse_preview', short and 'Preview' or 'Preview the result',
                            W - 20 - bw, 90, bw, 28, true, state.sse_preview ~= nil)

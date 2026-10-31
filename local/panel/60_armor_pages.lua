@@ -41,6 +41,7 @@ state.sse_list_pages = function()
             by_hash[hash] = page
         end
         page.rows, page.by_id = {}, {}              -- (a rebuild: its rows are made again)
+        by_hash[string.format('FFFFFFFE%08X', spec.id)] = page   -- (as a passive an armor's list names)
         local here = false
         for _, other in ipairs(weapons) do if other == page then here = true end end
         if not here then
@@ -93,6 +94,18 @@ state.armor_passives = function()
 end
 
 -- the Armor settings page's one row: which value wins when both passives have the same modifier
+-- A page that throws while resolving used to stall the panel at "resolving weapons" for ever (the
+-- loop retries the same page). Log which one and skip it, so the editor still starts.
+state.sse_resolve_some = resolve_some
+resolve_some = function(progress, deadline)
+    local ok, res = pcall(state.sse_resolve_some, progress, deadline)
+    if ok then return res end
+    local page = weapons[progress.next]
+    log('local: resolving ' .. tostring(page and page.name) .. ' failed: ' .. tostring(res))
+    progress.next = progress.next + 1
+    return false
+end
+
 state.sse_resolve_armor = resolve
 resolve = function(weapon)
     -- an armor's page says how many passives it gets from Every armor (they are not listed there)

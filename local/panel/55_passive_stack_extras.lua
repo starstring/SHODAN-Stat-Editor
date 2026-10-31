@@ -20,7 +20,7 @@ state.sse_cfg = { conflicts = 'stack' }
     handle:close()
     for line in text:gmatch('[^\r\n]+') do
         line = line:gsub('#.*$', '')
-        local policy = line:match('^%s*passive_conflicts%s+(%a+)')
+        local policy = line:match('^#?%s*passive_conflicts%s+(%a+)')
         if policy then state.sse_cfg.conflicts = (policy == 'strongest') and 'strongest' or 'stack' end
     end
 end)()

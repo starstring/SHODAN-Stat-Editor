@@ -77,7 +77,6 @@ local function main()
               .. I.home:gsub('/', '\\') .. '\\game folder.txt\nand start again.')
     end
     log('game: ' .. game)
-    log('hash search: ' .. (G.native and 'native, every core' or 'Lua (shodan_hash.dll not found)'))
     screen({ 'SHODAN Stat Editor Offline', 'Reading the game\'s data files...' })
     shim.pump()
     local originals, ours, problems, count = I.originals(game)
@@ -130,17 +129,20 @@ local function main()
     if type(state.lang) == 'function' then shim.lang = state.lang end
 
     -- ------------------------------------------------------------ the host's bar (below the panel)
-    local bar = { hover = nil, message = nil, tone = MUTED, busy = nil, base = nil, buttons = {} }
+    local bar = { hover = nil, message = nil, tone = MUTED, busy = nil, base = nil, buttons = {}, dropped = 0, banner = nil }
+    local DROPPED = "Installed, but not everything fits. Some projectiles may show no trail, and some Always bring it stratagems stay out of missions."
     local function layout()
         local s = shim.h / 1080
         local y0, y1 = 1038 * s, 1072 * s
         bar.buttons = {
-            { key = 'install', label = 'Install into the game', x0 = 30 * s, x1 = 290 * s, y0 = y0, y1 = y1 },
-            { key = 'restore', label = 'Restore the game\'s files', x0 = 302 * s, x1 = 562 * s, y0 = y0, y1 = y1 },
+            { key = 'install', label = 'Install into the game', x0 = 30 * s, x1 = 210 * s, y0 = y0, y1 = y1 },
+            { key = 'restore', label = 'Restore the game\'s files', x0 = 218 * s, x1 = 398 * s, y0 = y0, y1 = y1 },
+            { key = 'start_game', label = 'Start game', x0 = 406 * s, x1 = 506 * s, y0 = y0, y1 = y1, tint = { 26, 54, 36 } },
+            { key = 'close_game', label = 'Close game', x0 = 514 * s, x1 = 614 * s, y0 = y0, y1 = y1, tint = { 58, 30, 32 } },
         }
         if bar.release then
             local x1 = shim.w - 30 * s
-            bar.buttons[3] = { key = 'update', label = 'Update to ' .. bar.release.label, x0 = x1 - 170 * s, x1 = x1,
+            bar.buttons[#bar.buttons + 1] = { key = 'update', label = 'Update to ' .. bar.release.label, x0 = x1 - 170 * s, x1 = x1,
                                y0 = 9 * s, y1 = 41 * s, gold = true }   -- top right, in the tagline's place
         end
         -- the titles (paint_bar): Stat Editor, then Enemy Editor once the editor offers the switch
@@ -153,7 +155,9 @@ local function main()
                 x = x + w + 12 * s
             end
         end
-        bar.s, bar.h = s, shim.h
+        local last = bar.titles[#bar.titles]
+        bar.sign = { x0 = last.x1 + 12 * s, x1 = last.x1 + 44 * s, y0 = 9 * s, y1 = 39 * s }   -- the free space after the titles
+        bar.s, bar.h, bar.lang = s, shim.h, shim.lang()
     end
     layout()
 
@@ -203,30 +207,87 @@ local function main()
         if not bar.release then
             -- smaller where it would run into the titles (a longer translation)
             local last = bar.titles[#bar.titles]
-            local room, size = shim.w - 30 * s - (last and last.x1 + 16 * s or 0), 15 * s
+            local room, size = shim.w - 30 * s - (bar.dropped > 0 and bar.sign.x1 + 12 * s or last and last.x1 + 16 * s or 0), 15 * s
             while size > 10 * s and shim.text_width(t, size) > room do size = size - 0.5 * s end
             shim.text(t, shim.w - 30 * s - shim.text_width(t, size), 31 * s, size, MUTED)
         end
         for _, b in ipairs(bar.buttons) do
             local hovered = bar.hover == b.key and not bar.busy
-            shim.fill(b.x0, b.y0, b.x1, b.y1, hovered and { 255, 52, 66, 80 } or { 255, 28, 34, 42 })
+            local c = b.tint or { 28, 34, 42 }
+            shim.fill(b.x0, b.y0, b.x1, b.y1, hovered and { 255, c[1] * 1.6, c[2] * 1.6, c[3] * 1.6 } or { 255, c[1], c[2], c[3] })
             local edge = hovered and GOLD or { 255, 70, 82, 94 }
             local e = math.max(1, math.floor(2 * s + 0.5))
             shim.fill(b.x0, b.y0, b.x1, b.y0 + e, edge); shim.fill(b.x0, b.y1 - e, b.x1, b.y1, edge)
             shim.fill(b.x0, b.y0, b.x0 + e, b.y1, edge); shim.fill(b.x1 - e, b.y0, b.x1, b.y1, edge)
             shim.flush()
-            local size, label = 16 * s, tr(b.label)
+            local size, label = 16 * s, tr(b.key == 'close_game' and bar.close_until and 'Click again' or b.label)
             while size > 10 * s and shim.text_width(label, size) > b.x1 - b.x0 - 12 * s do size = size - 0.5 end
             shim.text(label, (b.x0 + b.x1 - shim.text_width(label, size)) / 2, (b.y0 + b.y1) / 2 + size * 0.35, size,
                       b.gold and GOLD or WHITE)
         end
         local text, tone = status()
         text = tr(text)
-        local x = 576 * s
+        local x = 626 * s
         local size = 14 * s
         local limit = shim.w - 30 * s - x
-        while size > 9 * s and shim.text_width(text, size) > limit do size = size - 0.5 end
-        shim.text(text, x, 1055 * s + size * 0.35, size, tone)
+        local first, second = text:match('^(.-%.) (.+)$')
+        if first and shim.text_width(text, size) > limit then   -- two sentences: a line each, at full size
+            while size > 9 * s and math.max(shim.text_width(first, size), shim.text_width(second, size)) > limit do size = size - 0.5 end
+            shim.text(first, x, 1046 * s + size * 0.35, size, tone)
+            shim.text(second, x, 1064 * s + size * 0.35, size, tone)
+        else
+            while size > 9 * s and shim.text_width(text, size) > limit do size = size - 0.5 end
+            shim.text(text, x, 1055 * s + size * 0.35, size, tone)
+        end
+        -- the effects that did not fit: a warning sign for as long as that install stands (hover: the banner, gone when the mouse leaves)
+        if bar.dropped > 0 then
+            local sign = bar.sign
+            local h, c = math.floor(sign.y1 - sign.y0), WARN
+            for row = 0, h - 1 do
+                local half = (row + 1) / h * (sign.x1 - sign.x0) / 2
+                shim.fill((sign.x0 + sign.x1) / 2 - half, sign.y0 + row, (sign.x0 + sign.x1) / 2 + half, sign.y0 + row + 1, c)
+            end
+            shim.flush()
+            local size = 20 * s
+            shim.text('!', (sign.x0 + sign.x1 - shim.text_width('!', size, true)) / 2, sign.y1 - 4 * s, size, BACK, true)
+        end
+        -- over the top strip, so a click here never lands on the panel
+        if bar.banner then
+            -- what did not fit, under the warning: a line per kind, wrapped
+            local lines, room = {}, shim.w - 60 * s
+            local listed = state.dropped or {}
+            for _, g in ipairs({ { 'Projectiles with no trail:', listed.shots }, { 'Stratagems left out of missions:', listed.stratagems } }) do
+                local line = g[2] and g[2][1] and tr(g[1])
+                for k, name in ipairs(g[2] or {}) do
+                    local longer = line .. (k > 1 and ', ' or ' ') .. name
+                    if shim.text_width(longer, 16 * s) > room then
+                        lines[#lines + 1] = line .. ','
+                        line = name
+                    else line = longer end
+                end
+                if line then lines[#lines + 1] = line end
+            end
+            bar.banner_h = (46 + 24 * #lines + (#lines > 0 and 6 or 0)) * s
+            shim.fill(0, 0, shim.w, bar.banner_h, { 255, 122, 60, 14 })
+            shim.fill(0, bar.banner_h - math.max(1, math.floor(2 * s + 0.5)), shim.w, bar.banner_h, WARN)
+            shim.flush()
+            for k, line in ipairs(lines) do shim.text(line, 30 * s, (40 + 24 * k) * s, 16 * s, WHITE) end
+            local warning, size = tr(DROPPED), 19 * s
+            while size > 10 * s and shim.text_width(warning, size) > shim.w - 60 * s do size = size - 0.5 end
+            -- the setting's name a shade darker: the text in three pieces, or whole when a language has no such piece
+            local x, y = 30 * s, 23 * s + size * 0.35
+            local name = tr('Always bring it')
+            local at, stop = warning:find(name, 1, true)
+            if at then
+                local before = warning:sub(1, at - 1)
+                shim.text(before, x, y, size, WHITE)
+                x = x + shim.text_width(before, size)
+                shim.text(name, x, y, size, { 255, 205, 195, 185 })
+                x = x + shim.text_width(name, size)
+                warning = warning:sub(stop + 1)
+            end
+            shim.text(warning, x, y, size, WHITE)
+        end
     end
 
     local function paint()
@@ -242,6 +303,22 @@ local function main()
     end
 
     local function say(text, tone) bar.message, bar.tone = text, tone or MUTED end
+    local function start_game()
+        if I.game_running() then say('Helldivers 2 is already running.', WARN)
+        elseif I.launch_game() then say('Starting Helldivers 2 through Steam...', GOOD)
+        else say('Could not ask Steam to start the game.', WARN) end
+    end
+    -- the second click within 4 seconds ends it (bar.close_until: the button says so)
+    local function close_game()
+        if not I.game_running() then bar.close_until = nil; say('Helldivers 2 is not running.'); return end
+        if not bar.close_until then
+            bar.close_until = clock() + 4
+            say('Click again within 4 seconds to end the game. Unsaved progress is lost.', WARN)
+            return
+        end
+        bar.close_until = nil
+        if I.close_game() then say('Helldivers 2 was closed.', GOOD) else say('Could not close Helldivers 2.', WARN) end
+    end
 
     local function busy(text)
         bar.busy = text
@@ -253,8 +330,9 @@ local function main()
     local function install()
         if I.game_running() then say('Helldivers 2 is running: close it, then Install.', WARN); return end
         busy('Installing: finding what changed...')
+        local dropped = state.load_donors and state.load_donors() or 0
         local changes = D.diff()
-        local stacked, why_not = D.stack(changes, state.stacks and state.stacks(), log, state.own_off and state.own_off())
+        local stacked, why_not = D.armor_passives(changes, state.armor_passives and state.armor_passives(), log, state.one_line and state.one_line())
         if not stacked then
             for _, c in ipairs(changes) do G.free(c.plain) end
             bar.busy = nil
@@ -317,6 +395,8 @@ local function main()
             return
         end
         bar.base = state.writes
+        bar.dropped = dropped
+        if dropped > 0 then state.notify(DROPPED, 8, true) end
         log(string.format('installed: %d changed, %d back to the original', made, back))
         say(string.format('Installed (%d game files changed%s). Start the game to play with your values.', made,
             back > 0 and ', ' .. back .. ' back to the original' or ''), GOOD)
@@ -347,6 +427,7 @@ local function main()
         end
         for _, name in ipairs(why) do log('restore skipped ' .. name .. ': another tool changed it since') end
         bar.base = nil
+        bar.dropped, bar.banner = 0, nil
         log('restored the originals')
         say('The game\'s files are back as they were before this editor. Your values stay saved here (Install puts them in again).'
             .. (modded > 0 and string.format(' %d of them still hold another mod\'s changes: Steam\'s "Verify integrity of game files" puts back the game\'s own.', modded) or ''), GOOD)
@@ -394,15 +475,15 @@ local function main()
         local now = clock()
         update(math.min(0.1, now - last))
         last = now
-        if bar.h ~= shim.h then layout() end   -- moved onto another screen: sized for that one
+        if bar.h ~= shim.h or bar.lang ~= shim.lang() then layout() end   -- moved onto another screen or another language: sized for that one
         if state.phase == 'ready' and not said_ready then
             said_ready = true
+            if installed_count() > 0 and state.load_donors then bar.dropped = state.load_donors() end
             bar.base = installed_count() > 0 and state.writes or nil
             log(string.format('ready: %s weapons, %s values applied, %s refused', tostring(state.weapons),
                 tostring(state.applied), tostring(state.refused)))
-            local stacks = state.stacks and state.stacks() or {}
-            local own_off = state.own_off and state.own_off() or {}
-            if installed_count() == 0 and ((state.applied or 0) > 0 or next(stacks) or next(own_off)) then bar.base = -1 end
+            local armors = state.armor_passives and state.armor_passives() or {}
+            if installed_count() == 0 and ((state.applied or 0) > 0 or next(armors)) then bar.base = -1 end
             if I.game_running() then say('Helldivers 2 is running: you can edit, but close it before you Install.', WARN) end
             local updated = U.cleanup()
             if updated then say('Updated to ' .. updated .. '.', GOOD) end
@@ -441,20 +522,25 @@ local function main()
                 if x and x >= b.x0 and x < b.x1 and y >= b.y0 and y < b.y1 then hover = b.key end
             end
         end
+        bar.banner = bar.dropped > 0 and x ~= nil and (bar.banner and y < (bar.banner_h or 46 * bar.s)
+                     or x >= bar.sign.x0 and x < bar.sign.x1 and y >= bar.sign.y0 and y < bar.sign.y1)
+        if bar.banner then hover = 'banner' end   -- it covers the titles and the Update button
         bar.hover = hover
         local down = shim.focused() and shim.key_down(0x01)
         if down and not was_down then armed = hover end
         if not down and was_down and armed and armed == hover and state.phase == 'ready' then
             bar.message = nil
             if hover == 'install' then install() elseif hover == 'restore' then restore()
+            elseif hover == 'start_game' then start_game() elseif hover == 'close_game' then close_game()
             elseif hover == 'update' and update_program() then break
             elseif hover == 'title_stat' or hover == 'title_enemy' then state.switch_editor(hover == 'title_enemy') end
             armed = nil
         end
         was_down = down
+        if bar.close_until and clock() >= bar.close_until then bar.close_until, bar.message = nil, nil end
         local text = status()
         local signature = table.concat({ shim.version, state.phase, tostring(state.status), tostring(hover), text,
-                                         shim.lang(), bar.release and bar.release.label or '' }, '|')
+                                         shim.lang(), bar.release and bar.release.label or '', bar.dropped, tostring(bar.banner) }, '|')
         if signature ~= painted then
             painted = signature
             paint()

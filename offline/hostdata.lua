@@ -143,7 +143,7 @@ end
 -- nothing changed. Resolved fields keep their stored bytes.
 local function changes(f)
     local orig, n = open_base(f.cipher)
-    local changed, words = 0, {}
+    local changed = 0
     local a, b = ffi.cast('uint64_t *', f.p), ffi.cast('uint64_t *', orig)
     for w = 0, math.floor(n / 8) - 1 do
         if a[w] ~= b[w] then
@@ -151,43 +151,33 @@ local function changes(f)
                 if f.p[k] ~= orig[k] and not f.resolved[k] then
                     orig[k] = f.p[k]
                     changed = changed + 1
-                    words[k - k % 4] = true
                 end
             end
         end
     end
     for k = n - n % 8, n - 1 do
-        if f.p[k] ~= orig[k] and not f.resolved[k] then orig[k] = f.p[k]; changed = changed + 1; words[k - k % 4] = true end
+        if f.p[k] ~= orig[k] and not f.resolved[k] then orig[k] = f.p[k]; changed = changed + 1 end
     end
     if changed == 0 then G.free(orig); return nil end
-    -- floats among the changed words (a salt for one-table files): a value with decimals between 1e-4 and 1e7
-    local floats = {}
-    for o in pairs(words) do
-        -- by the bits (|v| from 1e-4 up to 1e7, NaN out): LuaJIT reads the float FFFFFFFF (a -1 or none) as nil
-        local a = bit.band(u32(orig, o), 0x7FFFFFFF)
-        if a >= 0x38D1B718 and a < 0x4B189680 then floats[#floats + 1] = o end
-    end
-    table.sort(floats)
-    return orig, n, changed, floats
+    return orig, n, changed
 end
 
--- every file whose plain text differs from its original: { name, plain, n, bytes, floats }
+-- every file whose plain text differs from its original: { name, plain, n, bytes }
 function M.diff()
     local out = {}
     for name, f in pairs(M.files) do
-        local plain, n, count, floats = changes(f)
-        if plain then out[#out + 1] = { name = name, plain = plain, n = n, bytes = count, floats = floats, hash = f.hash } end
+        local plain, n, count = changes(f)
+        if plain then out[#out + 1] = { name = name, plain = plain, n = n, bytes = count, hash = f.hash } end
     end
     table.sort(out, function(x, y) return x.name < y.name end)
     return out
 end
 
--- ---------------------------------------------------------------- passive stacking
--- Every armor with passive T also gets passive S's modifiers and weapon stat modifiers (their values as edited):
--- they are appended to T's block (payload: 56 bytes, the modifiers at +56, 16 bytes each, then the weapon stat
--- modifiers, 12 bytes each), so the file grows; the hash correction works at any length.
--- stacks: target passive id -> { source passive id, ... }; own_off: passive id -> true: its own modifiers left out
--- (only the stacked ones; none: the passive does nothing). Adds to / changes `changes` (from M.diff) in place.
+-- ---------------------------------------------------------------- armor passives
+-- An armor holds one passive id (kit +28), so an armor with several passives gets a passive record of its own: their
+-- modifiers and weapon stat modifiers (their values as edited) in one new block after the last, with the first
+-- passive's name and icon. Armors with the same list share it. New blocks: payload 56 bytes, the modifiers at +56,
+-- 16 bytes each, then the weapon stat modifiers, 12 bytes each; the file grows and its first word counts the blocks.
 local PASSIVE = 0x63CE0FEB
 -- `add`'s modifiers appended to `mods`, but for the ids `mods` has already: the game applies an id once (Engineering
 -- Kit + Integrated Explosives: +2 grenades, not +4), and the armory's preview of a passive holding an id twice crashes
@@ -209,15 +199,27 @@ end
 
 -- The armory's preview of a passive lists at most 3 described modifiers (no native passive has more; a 4th crashes
 -- the game, issue #74): past the 3rd, a modifier keeps its effect but loses its description id (+12). The ids
--- that lose it go to `hidden`.
+-- that lose it go to `hidden`. `parts`, each passive's modifiers, take turns, so a long first one does not hide the rest.
 local MAX_DESCRIBED = 3
-local function cap_descriptions(mods, hidden)
-    local out, shown = {}, 0
+local function cap_descriptions(mods, hidden, parts)
+    local keep, left = {}, MAX_DESCRIBED
+    for round = 1, MAX_DESCRIBED do
+        for _, part in ipairs(parts) do
+            local seen = 0
+            for o = 1, #part, 16 do
+                if part:sub(o + 12, o + 15) ~= '\0\0\0\0' then
+                    seen = seen + 1
+                    local id = part:sub(o, o + 3)
+                    if seen == round and left > 0 and not keep[id] then keep[id], left = true, left - 1 end
+                end
+            end
+        end
+    end
+    local out = {}
     for o = 1, #mods, 16 do
         local m = mods:sub(o, o + 15)
         if m:sub(13, 16) ~= '\0\0\0\0' then
-            shown = shown + 1
-            if shown > MAX_DESCRIBED then
+            if not keep[m:sub(1, 4)] then
                 local b1, b2, b3, b4 = m:byte(1, 4)
                 hidden[#hidden + 1] = string.format('%08X', ((b4 * 256 + b3) * 256 + b2) * 256 + b1)
                 m = m:sub(1, 12) .. '\0\0\0\0'
@@ -228,30 +230,48 @@ local function cap_descriptions(mods, hidden)
     return table.concat(out)
 end
 
-function M.stack(changes, stacks, log, own_off)
-    log, stacks, own_off = log or function() end, stacks or {}, own_off or {}
-    local any = next(own_off) ~= nil
-    for _, list in pairs(stacks) do if #list > 0 then any = true end end
-    if not any then return true end
-    local f
-    for _, file in pairs(M.files) do
-        for _, h in ipairs(G.headers(file.p, file.n)) do if h.type == PASSIVE then f = file; break end end
-        if f then break end
-    end
-    if not f then return nil, 'the armor passive file is not loaded' end
-    local c
-    for _, x in ipairs(changes) do if x.name == f.name then c = x end end
-    if not c then
+local KIT = 0xD9A55AA0
+local FIRST_NEW_ID = 60
+-- lists: armor text id -> { passive id, ... }. Adds to / changes `changes` (from M.diff) in place.
+-- one_line: passive id -> the lines of its typed description; its other lines leave the armory.
+function M.armor_passives(changes, lists, log, one_line)
+    log, lists, one_line = log or function() end, lists or {}, one_line or {}
+    if not next(lists) and not next(one_line) then return true end
+    local function change_of(typ)
+        local f
+        for _, file in pairs(M.files) do
+            for _, h in ipairs(G.headers(file.p, file.n)) do if h.type == typ then f = file; break end end
+            if f then break end
+        end
+        if not f then return nil, 'the armor files are not loaded' end
+        for _, x in ipairs(changes) do if x.name == f.name then return x end end
         local plain, n = open_base(f.cipher)
         if not plain then return nil, f.name .. ': ' .. tostring(n) end
-        c = { name = f.name, plain = plain, n = n, bytes = 0, floats = {}, hash = f.hash }
+        local c = { name = f.name, plain = plain, n = n, bytes = 0, hash = f.hash }
         changes[#changes + 1] = c
         table.sort(changes, function(x, y) return x.name < y.name end)
+        return c
     end
-    local p, n = c.plain, c.n
+    local pc, why = change_of(PASSIVE)
+    if not pc then return nil, why end
+    local ac, why2 = change_of(KIT)
+    if not ac then return nil, why2 end
+    -- every passive's modifiers and weapon stat modifiers, as edited
+    local p, n = pc.plain, pc.n
     local hs = G.headers(p, n)
-    -- every passive's modifiers and weapon stat modifiers, as edited (before any grows)
-    local blocks = {}
+    for _, h in ipairs(hs) do
+        local P = h.at + 24
+        if h.type == PASSIVE and h.size >= 56 and one_line[u32(p, P)] then
+            local left = one_line[u32(p, P)]
+            for at = P + 56 + 12, P + 56 + 12 + (u32(p, P + 24) - 1) * 16, 16 do
+                if u32(p, at) ~= 0 then
+                    if left <= 0 then ffi.cast('uint32_t *', p + at)[0] = 0; pc.bytes = pc.bytes + 4 end
+                    left = left - 1
+                end
+            end
+        end
+    end
+    local blocks, next_id = {}, FIRST_NEW_ID
     for _, h in ipairs(hs) do
         if h.type == PASSIVE and h.size >= 56 then
             local P = h.at + 24
@@ -259,66 +279,70 @@ function M.stack(changes, stacks, log, own_off)
             local mo = mc > 0 and tonumber(ffi.cast(u64p, p + P + 16)[0]) or 56
             local so = sc > 0 and tonumber(ffi.cast(u64p, p + P + 32)[0]) or 56 + mc * 16
             if mo == 56 and so == 56 + mc * 16 and h.size == so + sc * 12 then
-                blocks[u32(p, P)] = { mods = ffi.string(p + P + 56, mc * 16), stats = ffi.string(p + P + so, sc * 12) }
+                local id = u32(p, P)
+                blocks[id] = { mods = ffi.string(p + P + 56, mc * 16), stats = ffi.string(p + P + so, sc * 12), head = ffi.string(p + h.at, 80) }
+                next_id = math.max(next_id, id + 1)
             end
         end
     end
-    local out, done = { ffi.string(p, hs[1].at) }, 0
-    for k, h in ipairs(hs) do
-        local P = h.at + 24
-        local id = h.type == PASSIVE and h.size >= 56 and u32(p, P)
-        local own, list = id and blocks[id], id and stacks[id]
-        local mods, stats, names = own and own.mods, own and own.stats, {}
-        if own and own_off[id] then mods, stats = '', '' end
-        for _, s in ipairs(own and list or {}) do
-            if s ~= id and blocks[s] then
-                local dropped = {}
-                mods, stats = append_mods(mods, blocks[s].mods, dropped), stats .. blocks[s].stats
-                names[#names + 1] = tostring(s)
-                if #dropped > 0 then
-                    log('passive ' .. s .. ' (stacked on ' .. id .. '): modifier ' .. table.concat(dropped, ', ') ..
-                        ' left out, passive ' .. id .. ' has it already')
-                end
-            elseif s ~= id then
-                log('passive ' .. s .. ' (stacked on ' .. id .. ') is not in this game\'s file: left out')
-            end
+    if u32(p, 0) ~= #hs or hs[#hs].at + 24 + hs[#hs].size ~= n then return nil, 'the armor passive file has another layout' end
+    -- each armor's id; a new record per different list
+    local armors, wanted, records, added = {}, {}, {}, {}
+    for armor in pairs(lists) do armors[#armors + 1] = armor end
+    table.sort(armors)
+    for _, armor in ipairs(armors) do
+        local list = {}
+        for _, id in ipairs(lists[armor]) do
+            if blocks[id] then list[#list + 1] = id else log('passive ' .. id .. ' is not in this game\'s file: left out') end
         end
-        local block_end = k < #hs and hs[k + 1].at or n
-        if #names > 0 then
-            local hidden = {}
-            mods = cap_descriptions(mods, hidden)
-            if #hidden > 0 then
-                log('passive ' .. id .. ': modifier ' .. table.concat(hidden, ', ') .. ' not described in the armory' ..
-                    ' (it lists ' .. MAX_DESCRIBED .. ' at most), still applied')
+        local key = table.concat(list, ',')
+        if #list < 2 then
+            wanted[armor] = list[1] or 0
+        elseif records[key] then
+            wanted[armor] = records[key]
+        else
+            local mods, stats, dropped, hidden, parts = '', '', {}, {}, {}
+            for _, id in ipairs(list) do
+                mods, stats = append_mods(mods, blocks[id].mods, dropped), stats .. blocks[id].stats
+                parts[#parts + 1] = blocks[id].mods
             end
-        end
-        if #names > 0 or (own and own_off[id]) then
+            mods = cap_descriptions(mods, hidden, parts)
             local head = ffi.new('uint8_t[80]')
-            ffi.copy(head, p + h.at, 80)
+            ffi.copy(head, blocks[list[1]].head, 80)
             local payload = head + 24
             local mc, sc = #mods / 16, #stats / 12
             ffi.cast('uint32_t *', head + 12)[0] = 56 + #mods + #stats                           -- block size
+            ffi.cast('uint32_t *', payload)[0] = next_id
             ffi.cast(u64p, payload + 16)[0] = mc > 0 and 56 or NONE
             ffi.cast('uint32_t *', payload + 24)[0] = mc
             ffi.cast(u64p, payload + 32)[0] = sc > 0 and 56 + #mods or NONE
             ffi.cast('uint32_t *', payload + 40)[0] = sc
-            out[#out + 1] = ffi.string(head, 80) .. mods .. stats
-            out[#out + 1] = ffi.string(p + P + h.size, block_end - P - h.size)                   -- any padding after
-            log(string.format('passive %d: %s, stacked %s (%d modifiers, %d weapon stat modifiers)', id,
-                own_off[id] and 'own effects off' or 'own effects on', #names > 0 and table.concat(names, ', ') or 'none',
-                mc, sc))
-            done = done + 1
-        else
-            out[#out + 1] = ffi.string(p + h.at, block_end - h.at)
+            added[#added + 1] = ffi.string(head, 80) .. mods .. stats
+            records[key], wanted[armor] = next_id, next_id
+            log(string.format('passive %d: %s (%d modifiers, %d weapon stat modifiers)%s%s', next_id, key, mc, sc,
+                #dropped > 0 and ', already had ' .. table.concat(dropped, ' ') or '',
+                #hidden > 0 and ', not described in the armory ' .. table.concat(hidden, ' ') or ''))
+            next_id = next_id + 1
         end
     end
-    if done == 0 then return true end
-    local s = table.concat(out)
+    -- the armors
+    local q, kits = ac.plain, 0
+    for _, h in ipairs(G.headers(q, ac.n)) do
+        local P = h.at + 24
+        if h.type == KIT and u32(q, P + 40) == 0 and wanted[u32(q, P + 16)] then
+            ffi.cast('uint32_t *', q + P + 28)[0] = wanted[u32(q, P + 16)]
+            kits = kits + 1
+        end
+    end
+    ac.bytes = ac.bytes + kits * 4
+    log(string.format('armor passives: %d armor sets, %d new records', kits, #added))
+    if #added == 0 then return true end
+    local s = ffi.string(p, n) .. table.concat(added)
     local grown = G.alloc(#s)
     ffi.copy(grown, s, #s)
-    G.free(c.plain)
-    -- the edited floats moved: the other headers' reserved bytes salt the hash correction
-    c.plain, c.n, c.bytes, c.floats = grown, #s, c.bytes + #s - n, {}
+    ffi.cast('uint32_t *', grown)[0] = #hs + #added
+    G.free(pc.plain)
+    pc.plain, pc.n, pc.bytes = grown, #s, pc.bytes + #s - n
     return true
 end
 
@@ -343,7 +367,7 @@ function M.codes(changes, codes, log)
     if not c then
         local plain, n = open_base(f.cipher)
         if not plain then return nil, f.name .. ': ' .. tostring(n) end
-        c = { name = f.name, plain = plain, n = n, bytes = 0, floats = {}, hash = f.hash }
+        c = { name = f.name, plain = plain, n = n, bytes = 0, hash = f.hash }
         changes[#changes + 1] = c
         table.sort(changes, function(x, y) return x.name < y.name end)
     end
@@ -408,29 +432,27 @@ function M.codes(changes, codes, log)
     local bigger = G.alloc(#s)
     ffi.copy(bigger, s, #s)
     G.free(c.plain)
-    -- the edited floats moved: the other headers' reserved bytes salt the hash correction
-    c.plain, c.n, c.floats = bigger, #s, {}
+    c.plain, c.n = bigger, #s
     return true
 end
 
 -- seal one changed file: { name, sealed } or nil, why
 function M.build(change, log)
     log = log or function() end
-    -- a one-table file whose changes hold no float to vary (whole numbers, zeros): nothing in it may vary for the
-    -- hash correction, so its table grows by 16 zero bytes after everything it holds (the game reads only what
-    -- its offsets name; grown tables load, as stacked passives do), and those vary instead
+    -- the last table grows over any bytes after it plus one word (the game reads only what its offsets name; grown
+    -- tables load, as stacked passives do), solved for the hash: no search, and no edited value nudged
     local hs = G.headers(change.plain, change.n)
-    if #change.floats == 0 and #hs == 1 and hs[1].at + 24 + hs[1].size == change.n then
-        local n = change.n
-        local salt = n + (8 - n % 8) % 8                -- a word of its own (the native search needs the words whole)
-        local grown = G.alloc(salt + 16)               -- (zeroed)
-        ffi.copy(grown, change.plain, n)
-        ffi.cast('uint32_t *', grown + hs[1].at + 12)[0] = salt + 16 - hs[1].at - 24
-        G.free(change.plain)
-        change.plain, change.n, change.floats = grown, salt + 16, { salt }
-        log(string.format('no float among the changes: the table grows by %d bytes for the hash correction', salt + 16 - n))
-    end
-    local ok, why = G.correct(change.plain, change.n, change.hash, change.floats, log)
+    local last = hs[#hs]
+    if not last then G.free(change.plain); return nil, 'no blocks' end
+    local n = change.n
+    local word = n + (8 - n % 8) % 8
+    local grown = G.alloc(word + 8)                    -- (zeroed)
+    ffi.copy(grown, change.plain, n)
+    ffi.cast('uint32_t *', grown + last.at + 12)[0] = word + 8 - last.at - 24
+    G.free(change.plain)
+    change.plain, change.n = grown, word + 8
+    local ok, why = G.correct_tail(change.plain, change.n, change.hash), 'hash correction did not verify'
+    log(string.format('hash corrected: the last table grows by %d bytes', change.n - n))
     if not ok then G.free(change.plain); return nil, why end
     local sealed = G.seal(change.plain, change.n)
     local back, m = G.open_sealed(sealed)

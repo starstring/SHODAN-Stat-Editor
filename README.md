@@ -1,7 +1,7 @@
 # SHODAN Stat Editor
 
 Change the stats of weapons, throwables, stratagems, mechas, boosters, attachments, armor passives and your
-helldiver in **Helldivers 2**, and transmog armor passives: stack any passives into one. The **Enemy Editor**
+helldiver in **Helldivers 2**, and transmog armor. The **Enemy Editor**
 changes every enemy, your SEAF allies and how they spawn, and keeps custom difficulties as presets. **SHODAN Stat Editor
 Offline** (SSEO) is a Windows program: pick a weapon, change its numbers, press **Install into the
 game**, and play. It writes your values into the game's own
@@ -120,18 +120,16 @@ Multipliers show as the game stores them: 1 is no change, 0.5 damage taken is 50
 
 ### Transmog
 
-Give an armor passive the effects of any other passives, as many as you like. On a passive's page
-(Armors tab), **Also includes** lists the passives stacked on it:
+Give any armor up to 14 passives, or none, so you can wear the look you want with
+the passives you want. Every armor has its own page on the Armors tab:
 
 - **+ Add passive** picks one from a list; **Remove** takes it off; **Open** goes to its page.
-- **Own effects**: **On** keeps the passive's own stats; **Off** leaves them out, so only the
-  passives listed below it apply. Off with Engineering Kit listed turns Med-Kit into Engineering
-  Kit on every Med-Kit armor.
-- A stacked passive brings every effect it has (Engineering Kit: its grenades and its recoil
-  reduction), at the values set on its own page.
-- Like every passive value, a transmog applies to every armor with that passive: the game does
-  not let one armor be changed alone.
-- **Reset passive** clears its stack and turns its own effects back on.
+- It changes only that armor, and every armor set with that name.
+- A passive brings every effect it has (Engineering Kit: its grenades and its recoil reduction), at
+  the values set on its own page. The passive pages are below the armors.
+- With several passives the armory shows the first one's name and at most 3 effects. All of them
+  apply. Two passives with the same effect count it once.
+- **Reset armor** puts its passive, name and description back to the game's.
 
 **Armor weight**: on the Armors tab, make any armor light, medium or heavy. Speed and stamina
 follow the weight you pick.
@@ -233,9 +231,12 @@ with your presets. The game gets them when you press **Install into the game** (
 closed: it reads its files when it starts). The bar at the bottom says whether your values are in
 the game.
 
-**Names and descriptions.** Weapon, throwable and stratagem pages have Name and Description boxes at
-the bottom. Click one, type, and press Enter; R puts the game's own text back. Install puts your text
-in the game, in every language.
+**Names and descriptions.** Weapons, throwables, stratagems, armors, helmets, capes, passives,
+attachments and boosters have Name and Description boxes at the bottom of their pages, and each passive
+on an armor's page has a text box of its own. Click one, type, and press Enter; R puts the game's own text back. Press
+Shift+Enter in a description for a new line, twice for a blank line
+between paragraphs. In passive text, `#BONUS` shows the passive's value and each paragraph keeps its
+own. Install puts your text in the game, in every language.
 
 ## Settings
 
@@ -330,9 +331,12 @@ share the whole setup.
 - **SSEO changes the game's data files.** The changed files keep the checksum the game expects,
   and the originals are kept in `%LOCALAPPDATA%\SHODAN\StatEditor\originals` (Restore puts them
   back). Use it at your own risk, and keep to private games with friends if in doubt.
-- **Projectile swap** works offline, but a swapped projectile has its trail only if someone in
-  the mission carries the weapon it comes from. Arc chain length / split edits also apply with
-  other players.
+- **Projectile swap** loads the chosen weapon's trail and effects by itself, with no need to bring
+  that weapon, for up to 6 weapons per install. A support weapon's first swap loads only when that
+  weapon is brought, and takes one of those places. Past the limit, the weapons highest on the list
+  keep their effects and Install warns you; the other shots still work, but have their trail only
+  if someone in the mission brings the weapon they come from.
+  Arc chain length / split edits also apply with other players.
 - **One extra file.** Vehicle handling, exosuit movement, enemy animation speed and your names and
   descriptions go into one extra file in the game's `data` folder (`9ba626afa44a3aa3.patch_N`), which
   the game loads over its own files. Restore removes it.

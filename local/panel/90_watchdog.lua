@@ -10,6 +10,24 @@
 -- Offline only, and it writes nothing else. Remove it once startup is trustworthy again.
 if MOD.offline then
     ;(function()
+        -- the panel truncates its log on every flush, so a crash wipes the lines that explain it: keep
+        -- the log as it stands now as <name>.prev, before this session writes anything
+        local dir = data_dir('Logs')
+        if dir then
+            local path = dir .. '/' .. MOD.log
+            local old = io.open(path, 'rb')
+            if old then
+                local text = old:read('*a')
+                old:close()
+                if text and #text > 0 then
+                    local keep = io.open(path .. '.prev', 'wb')
+                    if keep then
+                        keep:write(text)
+                        keep:close()
+                    end
+                end
+            end
+        end
         local at, last, started = nil, nil, nil
         local check = update
         update = function(dt)

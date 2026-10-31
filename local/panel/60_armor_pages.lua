@@ -29,18 +29,23 @@ state.sse_list_pages = function()
     tables[state.sse_custom_key] = { index = { id = state.sse_custom_id, mods = {}, stats = {}, lines = {},
                                               pieces = {}, name = 0, type = 0, text = nil },
                                      entries = 0, copies = {} }
-    for _, spec in ipairs({ { id = state.sse_custom_id, name = 'Custom passive', passive = state.sse_custom_key,
+    for _, spec in ipairs({ { id = state.sse_custom_id, name = '* Custom passive', passive = state.sse_custom_key,
                               note = 'A bundle: the passives here reach an armor as one entry. Add it to an armor below.' },
                             { id = state.sse_every_armor, name = 'Every armor',
                               note = 'The passives here are added to every armor, whatever you wear.' },
-                            { id = 0x7E000002, name = 'Armor settings',
+                            { id = 0x7E000002, name = 'Armor settings', settings = true,
                               note = 'How the armor passives are applied.' } }) do
         local hash = string.format(state.sse_page_armor, spec.id)
         local page = by_hash[hash]
         if not page then
             page = { name = spec.name, slot = 'Armors', hash = hash, key = hash_key(hash), rows = {}, by_id = {},
-                     kits = 'passive', armor = spec.id, default = {}, note = spec.note, sse_page = true,
-                     passive = spec.passive }
+                     default = {}, note = spec.note, sse_page = true, passive = spec.passive,
+                     -- a settings page is not an armor (no `armor` field): upstream then leaves out the
+                     -- PASSIVES block, which this page has no use for
+                     -- (not `spec.settings and nil or spec.id`: that is always spec.id)
+                     kits = (not spec.settings) and 'passive' or nil,
+                     armor = (not spec.settings) and spec.id or nil,
+                     sse_settings = spec.settings }
             by_hash[hash] = page
         end
         page.rows, page.by_id = {}, {}              -- (a rebuild: its rows are made again)
@@ -163,7 +168,7 @@ resolve = function(weapon)
                      'Install will stop: %d armor(s) would get more than 14 passives (first: %s).'
         weapon.note = weapon.sse_base_note .. (over > 0 and ('  ·  ' .. warn:format(over, first or '?')) or '')
     end
-    if weapon and weapon.armor == 0x7E000002 then
+    if weapon and weapon.sse_settings then
         if not weapon.by_id['stack_conflicts'] then
             local row = add_row(weapon, 'Stacks', 'stack_conflicts', 'When both passives have the same modifier',
                                 'u32', { part('stack_conflicts', KINDS[TYPES.passive].list[1], 0, 'u32', 4294967295) },
@@ -478,7 +483,7 @@ end)()
                                        'Já em toda a armadura: ', ' agora está em toda a armadura.',
                                        'Mais %d de toda a armadura', '%d armadura(s) passariam de 14: vai parar.' } })[lang.id]
         if words then
-            lang.exact['Custom passive'] = ({ ['zh-Hans'] = '自定义被动', ['zh-Hant'] = '自訂被動',
+            lang.exact['* Custom passive'] = ({ ['zh-Hans'] = '* 自定义被动', ['zh-Hant'] = '* 自訂被動',
                                               ['ru'] = 'Свой пассив', ['es-419'] = 'Pasiva propia',
                                               ['pt-BR'] = 'Passiva própria' })[lang.id]
             lang.exact['Add to the custom passive'] = ({ ['zh-Hans'] = '添加该被动效果到自定义被动',

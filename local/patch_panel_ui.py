@@ -89,8 +89,9 @@ PATCHED_BUTTON = """        text(weapon.name, x0, 94, 22, GOLD, room)
 # ---------------------------------------------------------------- 3. the picker's list
 ANCHOR_PICKER = """            local t = w.passive and tables[w.passive]"""
 
-PATCHED_PICKER = """            -- local patch (local/patch_panel_ui.py): this fork's own pages are not passives to stack
-            local t = w.passive and not w.sse_page and tables[w.passive]"""
+PATCHED_PICKER = """            -- local patch (local/patch_panel_ui.py): the Every armor page is not a passive to stack
+            -- ...but the custom passive is: it is exactly what an armor is meant to pick (999)
+            local t = w.passive and w.armor ~= 0x7E000001 and tables[w.passive]"""
 
 ANCHOR_OVERLAY = """    if tip_overlay then
         local w, h = 0, #tip_overlay.lines * 18 + 16"""

@@ -6,6 +6,7 @@ file with the panel's own rules (same keys, same value shapes) and reports:
 
   * unknown setting names and unknown line shapes (with a "did you mean" for near misses)
   * values the panel would clamp or reject
+  * the panel's own `armor_passive <armor hash> <ids>` line (shape only: the ids are passive ids);
   * overrides whose weapon hash or stat id is not in the panel's current build (the dump says which);
     a row can have several *parts* and the panel writes one override per part, so part ids count as
     stat ids too (`cooldown2` for a two-part stratagem row, each joined modifier id for a passive)
@@ -43,6 +44,7 @@ SETTINGS_PASSIVE = {"passive_stack", "passive_own", "passive_conflicts", "passiv
 ALL_SETTINGS = SETTINGS_ONOFF | SETTINGS_TEXT | SETTINGS_NUMBER | SETTINGS_PASSIVE
 # written by this fork's overlays (they read them itself; the panel skips them)
 FORK_KEYS = {"passive_conflicts", "passive_every"}
+PANEL_KEYS = {"armor_passive"}      # the panel's own per-armor passive list
 
 ONOFF = {"on", "off"}
 
@@ -145,11 +147,30 @@ def check(path: Path, weapons: set[str] | None, stats: dict[str, set[str]] | Non
             elif head == "passive_conflicts":
                 if value not in {"stack", "strongest"}:
                     errors.append(f"{where}: passive_conflicts wants stack/strongest, got '{value}'")
+            elif head == "armor_passive":
+                # the panel's line for one armor's passive list: <armor hash> <id,id,...>
+                if len(parts) < 3 or len(parts[1]) != 16:
+                    errors.append(f"{where}: armor_passive wants '<armor hash> <id,id,...>'")
+                else:
+                    for one in parts[2].split(","):
+                        if one and not one.strip().isdigit():
+                            errors.append(f"{where}: armor_passive has a non-numeric id {one!r}")
             elif head == "hide_tabs":
                 if len(parts) < 2:
                     errors.append(f"{where}: hide_tabs wants a list of tabs")
             continue
         if head in FORK_KEYS:
+            continue
+        if head in PANEL_KEYS:
+            # <armor hash> <id,id,...>: ids are passive ids, so the only thing to check is the shape
+            # (an armor's hash is 16 hex digits; this fork's own pages use short sentinels like 7E000001)
+            if len(parts) < 3 or not (len(parts[1]) in (8, 16)
+                                      and all(c in "0123456789ABCDEFabcdef" for c in parts[1])):
+                errors.append(f"{where}: armor_passive wants '<armor hash> <id,id,...>'")
+            else:
+                for one in parts[2].split(","):
+                    if one and not one.strip().isdigit():
+                        errors.append(f"{where}: armor_passive has a non-numeric id {one!r}")
             continue
         # an override: <weapon hash> <stat id> <value>
         if len(parts) == 3 and len(head) == 16 and all(c in "0123456789ABCDEFabcdef" for c in head):

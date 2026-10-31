@@ -26,6 +26,26 @@
             end
         end
     end
+    -- the panel truncates its log on every flush, so a "panel error: ..." line lives only until the next
+    -- one. Keep those (and our own notes) in a second file that is only ever appended to.
+    local write = log
+    log = function(...)
+        local args = { ... }
+        pcall(write, unpack(args))
+        pcall(function()
+            local first = args[1]
+            if type(first) ~= 'string' then return end
+            if not (first:find('panel error', 1, true) or first:find('local:', 1, true)) then return end
+            local logs = data_dir('Logs')
+            local handle = logs and io.open(logs .. '/local-panel-errors.log', 'ab')
+            if not handle then return end
+            local line = { os.date('%H:%M:%S '), first }
+            for k = 2, #args do line[#line + 1] = ' ' .. tostring(args[k]) end
+            handle:write(table.concat(line), string.char(10))
+            handle:close()
+        end)
+    end
+
     local remembered = settings.last and settings.last.stat and settings.last.stat.weapon
     if remembered then
         for _, id in ipairs({ state.sse_custom_id, state.sse_every_armor, 0x7E000002 }) do

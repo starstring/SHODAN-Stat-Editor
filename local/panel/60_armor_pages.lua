@@ -109,8 +109,24 @@ resolve_some = function(progress, deadline)
     return false
 end
 
+-- a page with no rows at all cannot be drawn (the row list's scroll bar reads rows[#rows]): every one of
+-- our pages keeps a count row, which also tells the user how much it holds
+state.sse_count_row = function(weapon)
+    if not weapon or not weapon.armor or weapon.by_id['sse_count'] then return end
+    local row = add_row(weapon, 'Stacks', 'sse_count', 'Passives here', 'u32',
+                        { part('sse_count', KINDS[TYPES.passive].list[1], 0, 'u32', 4294967295) }, 0, 999, 1, 5)
+    row.sse_setting = 'count'
+    row.sse_page = weapon                      -- (row_value needs to know whose count it shows)
+    row.note = 'Add passives with "+ Add passive" below.'
+end
+
 state.sse_resolve_armor = resolve
 resolve = function(weapon)
+    -- upstream builds a page's rows here (and starts from an empty list), so our rows go in *after* it
+    local built = state.sse_resolve_armor(weapon)
+    if weapon and (weapon.armor == state.sse_every_armor or weapon.armor == state.sse_custom_id) then
+        state.sse_count_row(weapon)
+    end
     -- an armor's page says how many passives it gets from Every armor (they are not listed there)
     if weapon and weapon.armor and weapon.armor ~= state.sse_every_armor and weapon.armor ~= state.sse_custom_id
             and weapon.armor ~= 0x7E000002 then
@@ -161,15 +177,18 @@ resolve = function(weapon)
                     'Every row is kept; the game applies each modifier id once, so the first one counts.'
             end
         end
-        return
+        return built
     end
-    return state.sse_resolve_armor(weapon)
+    return built
 end
 
 -- what that row shows, and what clicking its options does
 state.sse_row_value_armor = row_value
 row_value = function(row, default)
     if row and row.sse_setting == 'conflicts' then return state.sse_cfg.conflicts == 'strongest' and 1 or 0 end
+    if row and row.sse_setting == 'count' then
+        return #(MOD.kits.list_of(row.sse_page or ui.weapon) or {})
+    end
     return state.sse_row_value_armor(row, default)
 end
 

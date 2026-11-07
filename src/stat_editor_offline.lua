@@ -1186,15 +1186,20 @@ MOD.langs = {
       ['9x70mm Super Uranium Core'] = '9x70mm超铀芯弹',
       ['A hellpod lands this many seconds plus its 4.75 s fall after the beacon, so 0 is the fastest it gets.'] = '空投舱落地用时为此倒计时加 4.75 秒下落时间，因此设为 0 时最快。',
       ['A hit to the head costs this many times its damage. 1 = the same as the body.'] = '头部命中按伤害的这个倍数扣血。1 = 与身体相同。',
+      ['A limit: enemy reinforcements never come slower than this, even if a faction page asks for slower.'] = '上限提示：即使阵营页面要求更慢，敌方增援也不会比这个更慢。',
+      ['A limit: patrols never come slower than this, even if a faction page asks for slower.'] = '下限：即使阵营页面要求更慢，巡逻也不会比这个更慢。',
       ['A mounted cannon with a seat, dropped by hellpod. Not the one you carry.'] = '带座位的固定火炮，由空投舱投送。不是你携带的那把。',
       ['A mounted copy aimed by AI. Not the one you carry.'] = '由 AI 瞄准的固定版本。不是你携带的那把。',
       ['A mounted copy run by AI (emplacement-style). Not the one you carry.'] = '由 AI 操作的固定版本（炮台式）。不是你携带的那把。',
       ['A mounted copy. Not the one you carry.'] = '固定版本。不是你携带的那把。',
       ['A pathetic creature of meat and bone.'] = '一个由血肉和骨头组成的可怜生物。',
+      ['A preset file in the import folder was not imported. Fix the lines the log names and start SSEO again.'] = '导入文件夹中的一个预设文件未能导入。请修正日志中列出的行，然后重新启动 SSEO。',
       ['A preset keeps every change you have made as one set, under a name you choose.'] = '预设会把你所有的修改作为一组保存，并取一个你指定的名字。',
       ['A preset keeps every enemy and spawning change as one custom difficulty, under a name you choose. Your weapon changes are kept apart.'] = '预设会把所有敌人与生成的改动保存为一个自定义难度，名称由你决定。武器改动单独保存。',
       ['A resupply box gives this many. An ammo box on the map gives half, rounded down (at least 1).'] = '补给箱提供这么多。地图上的弹药箱提供一半，向下取整（至少 1）。',
       ['A resupply box gives this much. An ammo box on the map gives half, rounded down.'] = '补给箱提供这么多。地图上的弹药箱提供一半，向下取整。',
+      ['A second SEAF wait: 80 to 100 seconds at x1. Probably the pause between waves of soldiers; the game only gives the name.'] = 'SEAF 的第二个等待时间：x1 时为 80 到 100 秒。可能是士兵波次之间的间隔；游戏只给出了名称。',
+      ['A second ammo fires as many projectiles per shot as this weapon\'s own.'] = '第二种弹药每次射击的弹丸数与此武器自身弹药相同。',
       ['A value changed on an enemy\'s own page stays red: this page leaves it as it is.'] = '在敌人自己页面上更改的数值保持红色：此页面不会改动它。',
       ['A weapon whose own Sway multiplier you changed keeps it. Sway this row changes shows in blue.'] = '你单独改过晃动系数的武器保留其数值。此行改变的晃动以蓝色显示。',
       ['A/AC-8 Autocannon Sentry'] = 'A/AC-8 自动哨戒炮',
@@ -1238,6 +1243,7 @@ MOD.langs = {
       ['AX/FLAM-75 "Guard Dog" Hot Dog'] = 'AX/FLAM-75 “护卫犬”热狗',
       ['AX/LAS-5 "Guard Dog" Rover'] = 'AX/LAS-5 “护卫犬”漫游者',
       ['AX/TX-13 "Guard Dog" Dog Breath'] = 'AX/TX-13 “护卫犬”腐息',
+      ['Above this speed the wheels turn less and less. Raise it to keep steering at high speed.'] = '超过此速度，车轮转向会越来越小。调高可在高速时保持转向。',
       ['Acceleration (m/s2)'] = '加速度(米/秒^2)',
       ['Accelerator Rifle'] = '加速步枪',
       ['Acclimated'] = '应变自如',
@@ -1261,6 +1267,7 @@ MOD.langs = {
       ['Aim steadies again after (s)'] = '瞄准恢复稳定所需时间（秒）',
       ['Aim zoom (x)'] = '瞄准放大倍率 (x)',
       ['Aiming sway'] = '瞄准晃动',
+      ['Air density'] = '空气密度',
       ['Airborne'] = '空降',
       ['Airburst Rocket Launcher'] = '空爆火箭弹发射器',
       ['All'] = '全部',
@@ -1322,6 +1329,7 @@ MOD.langs = {
       ['Armor penetration'] = '穿甲',
       ['Armor weight'] = '护甲重量',
       ['Armors'] = '护甲',
+      ['Arms'] = '机臂',
       ['Ask'] = '询问',
       ['Assassinate'] = '刺杀',
       ['Assault'] = '突击',
@@ -1387,6 +1395,7 @@ MOD.langs = {
       ['Beams per barrel'] = '每管光束数',
       ['Belt-Fed Grenade Launcher'] = '弹链式榴弹发射器',
       ['Berserker'] = '狂暴者',
+      ['Best engine speed (rpm)'] = '最佳转速 (rpm)',
       ['Better stratagem bounce'] = '改进战略配备弹跳',
       ['Big walker cannon'] = '步行机巨炮',
       ['Bigger wheels: a higher top speed and more room under the body, but a weaker pull.'] = '轮子越大：最高速度更高、底盘离地更高，但拉力更弱。',
@@ -1519,6 +1528,7 @@ MOD.langs = {
       ['Charges'] = '使用次数',
       ['Charges from resupply'] = '补给箱补充的使用次数',
       ['Charging speed (m/s)'] = '冲锋速度 (米/秒)',
+      ['Chassis'] = '车身',
       ['Chemical Backpack'] = '装有化学武器的背包',
       ['Chest'] = '胸部',
       ['Chest bleeding damage'] = '胸部流血伤害',
@@ -1532,6 +1542,11 @@ MOD.langs = {
       ['Click again'] = '再点一次确认',
       ['Click again to overwrite'] = '再次点击以覆盖',
       ['Click again within 4 seconds to end the game. Unsaved progress is lost.'] = '4 秒内再点一次即结束游戏，未保存的进度会丢失。',
+      ['Client-sided only: in a lobby it counts for your own shots, not other players\'.'] = '仅客户端生效：在大厅中只对你自己的射击生效，对其他玩家无效。',
+      ['Client-sided only: other players may keep the game\'s normal radius.'] = '仅客户端生效：其他玩家可能仍是游戏原本的半径。',
+      ['Client-sided only: other players may see the game\'s normal shots.'] = '仅客户端生效：其他玩家可能看到游戏原本的射击。',
+      ['Client-sided only: other players see the normal animation; attack timing may follow the host.'] = '仅客户端生效：其他玩家看到的是正常动画；攻击时机可能以房主为准。',
+      ['Client-sided only: other players see the normal size; reach may follow the host.'] = '仅客户端生效：其他玩家看到的是正常大小；攻击距离可能以房主为准。',
       ['Climb acceleration'] = '爬升加速度',
       ['Climb multiplier (horizontal)'] = '枪口上扬倍率（水平）',
       ['Climb multiplier (vertical)'] = '枪口上扬倍率（垂直）',
@@ -1541,6 +1556,7 @@ MOD.langs = {
       ['Close all'] = '全部收起',
       ['Close game'] = '关闭游戏',
       ['Cluster Bomb'] = '集束炸弹',
+      ['Clutch slip (rpm)'] = '离合器打滑 (rpm)',
       ['Cognitive Disruptor'] = '感知干扰器',
       ['Collision'] = '碰撞体',
       ['Combat Hatchet'] = '战斗短柄斧',
@@ -1604,6 +1620,8 @@ MOD.langs = {
       ['Damage ticks per minute'] = '每分钟伤害次数',
       ['Damage to you'] = '对你造成的伤害',
       ['Damping'] = '悬挂阻尼',
+      ['Damping (compression)'] = '悬挂阻尼 (压缩)',
+      ['Damping (rebound)'] = '悬挂阻尼 (回弹)',
       ['Dark Fluid Backpack'] = '暗液背包',
       ['Dark Fluid burst'] = '暗流体爆裂',
       ['Data Jack'] = '数据接口',
@@ -1639,7 +1657,9 @@ MOD.langs = {
       ['Done'] = '完成',
       ['Double Freedom'] = '双重自由',
       ['Double-Edge Sickle'] = '双刃镰刀',
+      ['Double-Edge Sickle heat ramp'] = '双刃镰刀热量递增',
       ['Down'] = '下移',
+      ['Drag coefficient'] = '阻力系数',
       ['Drag factor'] = '阻力系数',
       ['Dragonroach'] = '蟑龙',
       ['Drift from the last shell, least (m)'] = '相对上一发的偏移，最小（米）',
@@ -1716,6 +1736,10 @@ MOD.langs = {
       ['Enemy detection range'] = '敌人侦测范围',
       ['Enemy shots count within (m)'] = '敌方射击生效范围（米）',
       ['Enemy.'] = '敌人。',
+      ['Engine'] = '引擎',
+      ['Engine drag at the best speed'] = '最佳转速时的引擎阻力',
+      ['Engine drag at the lowest speed'] = '最低转速时的引擎阻力',
+      ['Engine drag at the top speed'] = '最高转速时的引擎阻力',
       ['Engine front'] = '前引擎',
       ['Engine rear'] = '后引擎',
       ['Engine rear weakspot'] = '引擎后部弱点',
@@ -1790,6 +1814,7 @@ MOD.langs = {
       ['Field width (m)'] = '雷区宽度（米）',
       ['Fighting speed (m/s)'] = '战斗速度 (米/秒)',
       ['Fin front'] = '前鳍',
+      ['Final drive ratio'] = '主减速比',
       ['Finding the stats...'] = '正在查找数值...',
       ['Fire'] = '开火',
       ['Fire damage taken'] = '受到火焰伤害',
@@ -1800,6 +1825,8 @@ MOD.langs = {
       ['Fire rate (x)'] = '射速 (x)',
       ['Fire/gas/acid/arc damage taken'] = '受到火焰 / 毒气 / 酸液 / 电弧伤害',
       ['Firebomb Hellpods'] = '火焰炸弹绝地喷射舱',
+      ['Fires the Double-Edge Sickle\'s stronger shots as it heats up, and hurts you near overheat.'] = '随着热量升高发射双刃镰刀的强化射击，接近过热时会伤害你。',
+      ['Firing it standing no longer knocks you down or hurts you.'] = '站立射击不再将你击倒或伤害你。',
       ['First shell (id)'] = '第一发炮弹（ID）',
       ['Flame Sentry'] = '火焰喷射哨戒炮',
       ['Flames'] = '喷射火焰',
@@ -1818,16 +1845,21 @@ MOD.langs = {
       ['Folder'] = '文件夹',
       ['Folder path copied.'] = '已复制文件夹路径。',
       ['Foliage pass-through'] = '穿透植被',
+      ['For very few patrols, lower this as well as Patrol frequency on the faction page.'] = '想让巡逻很少，请同时调低此项和阵营页面上的巡逻频率。',
+      ['For very few reinforcements, lower this as well as Reinforcement frequency on the faction page.'] = '想让增援很少，请同时调低此项和阵营页面上的增援频率。',
       ['Fortified'] = '强化',
       ['Forward share of the launch (0-1)'] = '起跳前冲占比(0-1)',
       ['Found in the game data (not in the built-in list).'] = '在游戏数据中找到（不在内置列表中）。',
       ['Frag'] = '破片弹',
       ['From supply'] = '来自补给',
       ['Front'] = '前部',
+      ['Front area (m2)'] = '迎风面积 (m2)',
       ['Front armor'] = '前装甲',
       ['Front body'] = '前身体',
       ['Front brake strength'] = '前轮制动力',
       ['Front damping'] = '前悬挂阻尼',
+      ['Front damping (compression)'] = '前悬挂阻尼 (压缩)',
+      ['Front damping (rebound)'] = '前悬挂阻尼 (回弹)',
       ['Front face'] = '前面',
       ['Front grip lower than the rear: it turns wide. Rear lower than the front: the back slides out.'] = '前轮抓地比后轮低：转弯会冲外侧。后轮比前轮低：车尾会甩出去。',
       ['Front hull'] = '前车体',
@@ -1837,11 +1869,13 @@ MOD.langs = {
       ['Front right wheel hub'] = '右前轮毂',
       ['Front spring stiffness'] = '前悬挂刚度',
       ['Front suspension travel'] = '前悬挂行程',
+      ['Front suspension travel (m)'] = '前悬挂行程 (米)',
       ['Front wheel grip'] = '前轮抓地力',
       ['Front wheel radius (m)'] = '前轮半径（米）',
       ['Full charge'] = '充满',
       ['Full charge explosion'] = '满蓄力爆炸',
       ['Full charge shot'] = '满蓄力射击',
+      ['Full steering up to (m/s)'] = '全转向的最高速度 (m/s)',
       ['Fuse time (s)'] = '引信时间(秒)',
       ['Fusion Autocannon'] = '聚变机炮',
       ['Fusion Repeater'] = '聚变连发炮',
@@ -1977,7 +2011,10 @@ MOD.langs = {
       ['High Dissipation Heatsink'] = '高功率散热器',
       ['High Explosive'] = '高爆弹',
       ['High-Velocity Shrapnel'] = '高速破片',
+      ['Higher means a longer wait, so they come slower. x2 is 160 to 200 seconds.'] = '数值越高等待越久，来得越慢。x2 为 160 到 200 秒。',
+      ['Higher means a longer wait, so they come slower. x2 is 310 to 330 seconds.'] = '数值越高等待越久，来得越慢。x2 为 310 到 330 秒。',
       ['Higher: a stiffer ride, less lean in turns, bumps kick harder.'] = '越高：行驶更硬，转弯侧倾更少，颠簸冲击更大。',
+      ['Higher: easier starts from a stop and on hills. Lower: a more direct pull.'] = '越高起步和爬坡越轻松；越低动力传递越直接。',
       ['Higher: leans more and tips over in sharp turns.'] = '越高：倾斜更多，急转弯时容易翻车。',
       ['Higher: stops in a shorter distance. Too high locks the wheels, and it skids instead of stopping.'] = '越高：刹车距离越短。太高会抱死车轮，车会打滑而不是停下。',
       ['Highest ledge it climbs (m)'] = '可攀爬的最高边缘（米）',
@@ -2004,19 +2041,39 @@ MOD.langs = {
       ['Hover time, full-speed climb (s)'] = '悬停时间：全速爬升(秒)',
       ['Hover time, holding height (s)'] = '悬停时间：保持高度(秒)',
       ['Hoverpack Backpack'] = '悬浮背包',
+      ['How badly its shape cuts through the air. Higher: more air drag, a lower top speed.'] = '外形穿过空气的阻力系数。越高空气阻力越大，极速越低。',
+      ['How big the vehicle is to the air. Higher: more air drag, a lower top speed.'] = '载具迎风的面积。越大空气阻力越大，极速越低。',
       ['How close the view gets when you aim: 1 is the normal view, 2 twice as close, 4 four times.'] = '瞄准时视野拉近多少：1 为正常视野，2 拉近两倍，4 拉近四倍。',
       ['How close this zoom step looks: 1 is the normal view, 2 twice as close, 4 four times.'] = '这一档的放大程度：1 为正常视野，2 拉近两倍，4 拉近四倍。',
       ['How far away the jet starts its run. With its speed, it sets how long the Eagle takes to arrive.'] = '飞鹰开始攻击航线时距目标的距离，与飞行速度共同决定抵达时间。',
+      ['How far the engine speed can run ahead of the wheels before the clutch grips.'] = '离合器咬合前，引擎转速能比车轮超出多少。',
+      ['How far the front wheels turn. Higher: tighter turns at low speed.'] = '前轮最大转向角。越高低速时转弯越急。',
+      ['How fast a spin dies down on its own. Higher: stops spinning out sooner.'] = '打转自行减弱的速度。越高越快停止打转。',
       ['How fast the engine may spin before it stops pulling. Higher: a higher top speed in every gear,'] = '引擎停止发力前能转多快。越高：每个挡位的最高速度都更高，',
+      ['How fast the springs push back out after a bump. Higher: they come back slowly, a calmer ride.'] = '颠簸后弹簧回弹的速度。越高回弹越慢，行驶越平稳。',
       ['How fast the springs settle after a bump. Higher: settles at once, a firmer ride.'] = '弹簧在颠簸后稳定下来的速度。越高：立刻稳定，行驶更硬。',
       ['How fast their animations play. Most attacks follow the animation, so they come sooner or later too.'] = '它们的动画播放速度。大多数攻击跟随动画，所以攻击也会更早或更晚发生。',
+      ['How hard it is to roll it onto its side. Higher: harder to tip over in turns and blasts.'] = '让载具侧翻的难度。越高转弯和爆炸时越难翻车。',
+      ['How hard it is to start or stop turning. Too low on a heavy vehicle makes turns stutter.'] = '开始或停止转向的难度。重型载具设得太低会使转弯卡顿。',
+      ['How hard it is to tip it nose up or down. Higher: steadier over bumps and jumps.'] = '让载具前后俯仰的难度。越高过颠簸和飞跃时越稳。',
       ['How hard the engine pushes. Higher: faster acceleration and steeper hills, but more wheelspin.'] = '引擎的推力。越高：加速更快、能爬更陡的坡，但更容易打滑。',
       ['How high the balance point sits. Lower (even below 0): stays flat in hard turns and over rocks.'] = '重心的高度。越低（甚至低于 0）：急转弯和过石头时更平稳。',
+      ['How long SEAF waits before sending more soldiers: 155 to 165 seconds at x1.'] = 'SEAF 派出更多士兵前的等待时间：x1 时为 155 到 165 秒。',
       ['How long the round waits after the hit (or after the blast proximity trips) before it goes off.'] = '射弹命中后（或近炸距离触发后）等待多久才爆炸。',
       ['How many bombs one run drops and how they land. The bombs stay this Eagle\'s own.'] = '一次飞越投下多少枚炸弹以及落点分布。炸弹仍是该飞鹰自己的。',
       ['How many times the round can bounce off a surface. 0: it never bounces back at you.'] = '射弹能从表面弹开多少次。0：它永远不会弹回到你身上。',
+      ['How much of the engine torque it has at its lowest speed. Higher: stronger off the line and on hills.'] = '最低转速时拥有的引擎扭矩比例。越高起步和爬坡越强。',
+      ['How much of the engine torque it keeps at its top speed. Higher: keeps speeding up near the top.'] = '最高转速时保留的引擎扭矩比例。越高接近极速时仍能加速。',
+      ['How much speeding up and braking tip the nose. Lower: stays level when it brakes or speeds up.'] = '加速和刹车让车头俯仰的程度。越低加速刹车时越平稳。',
+      ['How much the air lifts it at speed. Above 0: lighter and floatier when fast. Below 0: pressed down, more grip.'] = '高速时空气产生的升力。高于 0 高速时变轻发飘；低于 0 被压向地面，抓地更好。',
+      ['How much the engine holds itself back at its best speed. Higher: weaker acceleration overall.'] = '引擎在最佳转速时的自身阻力。越高整体加速越弱。',
+      ['How much the engine holds itself back at its lowest speed. Higher: slower to get going.'] = '引擎在最低转速时的自身阻力。越高起步越慢。',
+      ['How much the engine holds itself back near its top speed. Higher: it struggles to reach it.'] = '引擎接近最高转速时的自身阻力。越高越难达到。',
+      ['How much the wheels’ forces lean the body in turns. Lower: stays flatter and harder to roll.'] = '车轮的力在转弯时让车身倾斜的程度。越低车身越平、越难翻车。',
+      ['How much the wheels’ forces swing it round. Lower: steadier, less likely to spin out.'] = '车轮的力让载具打转的程度。越低越稳，越不容易甩尾。',
       ['How much this gear multiplies the engine. Higher: stronger pull, but it tops out sooner.'] = '这个挡位把引擎放大多少倍。越高：拉力更强，但更早到顶。',
       ['How quickly the scoped view catches up when you move your aim at this zoom (0.6 on most optics).'] = '此倍率下移动瞄准时，瞄准镜视野跟上的速度（大多数瞄具为 0.6）。',
+      ['How thick the air is for this vehicle. Higher: more air drag, a lower top speed.'] = '此载具所受空气的密度。越高空气阻力越大，极速越低。',
       ['How well the tyres hold the ground. Higher: sharper turns, less sliding and wheelspin.'] = '轮胎抓地的程度。越高：转弯更急，更少侧滑和打滑。',
       ['Hulk'] = '巨型者',
       ['Hulk Bruiser'] = '巨型碾压者',
@@ -2057,6 +2114,7 @@ MOD.langs = {
       ['Inner torso'] = '内躯干',
       ['Insides'] = '内部',
       ['Install into the game'] = '写入游戏',
+      ['Install loads the chosen arm\'s exosuit into every mission, so its model shows.'] = '安装会把所选机臂的外骨骼载入每场任务，使其模型显示。',
       ['Install loads up to 6 such weapons into every mission, so nobody has to bring them. A support weapon brings its own.'] = '安装后每个任务最多加载 6 把此类武器，无需携带。支援武器会自带其效果。',
       ['Installed, but not everything fits. Some projectiles may show no trail, and some Always bring it stratagems stay out of missions.'] = '已安装,但无法全部载入。部分弹药可能没有轨迹,部分“始终携带”的战略配备不会进入任务。',
       ['Installing: finding what changed...'] = '写入中：正在查找改动…',
@@ -2137,6 +2195,11 @@ MOD.langs = {
       ['Left'] = '左',
       ['Left arm'] = '左手臂',
       ['Left arm armor'] = '左手臂装甲',
+      ['Left arm from (1-4)'] = '左臂来自 (1-4)',
+      ['Left arm from: Breakthrough'] = '左臂来自：Breakthrough',
+      ['Left arm from: Emancipator'] = '左臂来自：Emancipator',
+      ['Left arm from: Lumberer'] = '左臂来自：Lumberer',
+      ['Left arm from: Patriot'] = '左臂来自：Patriot',
       ['Left arm health'] = '左臂生命值',
       ['Left arm weakspot'] = '左手臂弱点',
       ['Left armor'] = '左装甲',
@@ -2214,6 +2277,7 @@ MOD.langs = {
       ['Left wrist blade'] = '左腕刀刃',
       ['Leg injury immunity (1 on)'] = '免疫腿部受伤（1 为开启）',
       ['Less: bumps go straight into the body and it wobbles.'] = '越少：颠簸直接传到车身，车身会晃动。',
+      ['Less: bumps go straight into the body.'] = '越少：颠簸直接传到车身。',
       ['Leveller'] = '荡平者',
       ['Leviathan'] = '利维坦',
       ['Leviathan bomb'] = '利维坦炸弹',
@@ -2225,6 +2289,7 @@ MOD.langs = {
       ['Liberator Legacy'] = '“解放者”传承',
       ['Liberator Penetrator'] = '穿甲“解放者”',
       ['Lifetime (s)'] = '存续时间(秒)',
+      ['Lift coefficient'] = '升力系数',
       ['Light armor'] = '轻型护甲',
       ['Light, medium or heavy, per armor (every armor set with that name).'] = '每件护甲的轻型、中型或重型（同名的所有护甲套装）。',
       ['Lighter: quicker off the line, but bounces over bumps and gets thrown around by explosions.'] = '越轻：起步更快，但过坑洼会弹跳，容易被爆炸掀飞。',
@@ -2242,9 +2307,12 @@ MOD.langs = {
       ['Lower back'] = '下背部',
       ['Lower it if a high zoom spins the view.'] = '如果高倍率时视野旋转，请调低。',
       ['Lower spine'] = '下脊椎',
+      ['Lower: a higher top speed, if the engine can pull it.'] = '越低极速越高（前提是引擎拉得动）。',
       ['Lower: a softer ride, the body leans in turns and sags.'] = '越低：行驶更软，转弯时车身侧倾并下沉。',
       ['Lower: faster in this gear, weaker on hills and from a stop.'] = '越低：这个挡位更快，上坡和起步更弱。',
       ['Lower: keeps bouncing after every bump.'] = '越低：每次颠簸后都会一直弹跳。',
+      ['Lower: the wheels spring back fast and the body bounces.'] = '越低：车轮回弹很快，车身弹跳。',
+      ['Lowest engine speed (rpm)'] = '最低转速 (rpm)',
       ['Lowest patrol frequency (x)'] = '最低巡逻频率 (x)',
       ['Lowest rates'] = '最低频率',
       ['Lowest reinforcement frequency (x)'] = '最低增援频率 (x)',
@@ -2342,6 +2410,7 @@ MOD.langs = {
       ['Movement'] = '移动',
       ['Movement speed (multiplier)'] = '移动速度（倍率）',
       ['Movement speed (x)'] = '移动速度 (x)',
+      ['Multiplies every gear. Higher: stronger pull and steeper hills, a lower top speed.'] = '作用于所有挡位。越高牵引力越强、能爬更陡的坡，极速越低。',
       ['Muzzle'] = '枪口',
       ['Muzzle brake'] = '枪口制退器',
       ['Name'] = '名称',
@@ -2358,6 +2427,7 @@ MOD.langs = {
       ['No changes: loading it puts every value back to the game\'s.'] = '没有修改：读取它会把所有数值恢复为游戏原值。',
       ['No description'] = '无描述',
       ['No free preset place: delete one first.'] = '没有空位：请先删除一个预设。',
+      ['No knockdown when standing'] = '站姿射击不倒地',
       ['No other vehicle has this section.'] = '没有其他载具有此部分。',
       ['No page in this editor uses this id.'] = '此编辑器中没有页面使用此 id。',
       ['No passive.'] = '无被动。',
@@ -2396,6 +2466,7 @@ MOD.langs = {
       ['On: your '] = '开启：你的',
       ['On: your arc chain length / split apply with other players too (arcs can stay on screen).'] = '开启：你的电弧连锁长度 / 分裂对其他玩家同样生效（电弧可留在屏幕上）。',
       ['On: your rockets, launcher rounds and stratagem ordnance fly through tree canopies and bushes.'] = '开启：你的火箭弹、发射器弹药和战略配备弹药可穿过树冠和灌木。',
+      ['Once your reinforcements run out, one comes back after this long: 120 seconds by default.'] = '增援用完后，每隔这么久恢复一次：默认 120 秒。',
       ['One True Flag'] = '唯一真旗',
       ['One-Two'] = '幺二',
       ['One-handed'] = '单手持握',
@@ -2501,6 +2572,8 @@ MOD.langs = {
       ['Pilot light goes out after (s)'] = '引火熄灭时间（秒）',
       ['Pilot seat'] = '驾驶座',
       ['Pineapple'] = '菠萝',
+      ['Pitch from wheel forces (x)'] = '车轮力导致的俯仰 (x)',
+      ['Pitch inertia'] = '俯仰惯性',
       ['Plasma Pistol. Canister Extended'] = '等离子手枪：扩容弹药罐',
       ['Plasma Pistol. Canister Pistol'] = '等离子手枪：标准弹药罐',
       ['Point of interest range'] = '兴趣点探测范围',
@@ -2528,6 +2601,8 @@ MOD.langs = {
       ['Projectiles with no trail:'] = '没有轨迹的弹药:',
       ['Prone speed (m/s)'] = '匍匐速度(米/秒)',
       ['Prospecting Drill'] = '勘探钻机',
+      ['Pull at the lowest engine speed (x)'] = '最低转速时的牵引力 (x)',
+      ['Pull at the top engine speed (x)'] = '最高转速时的牵引力 (x)',
       ['Punisher'] = '制裁者',
       ['Punisher Plasma'] = '等离子“制裁者”',
       ['Purifier'] = '净化者',
@@ -2582,9 +2657,12 @@ MOD.langs = {
       ['Rear brake strength'] = '后轮制动力',
       ['Rear cockpit'] = '后驾驶舱',
       ['Rear damping'] = '后悬挂阻尼',
+      ['Rear damping (compression)'] = '后悬挂阻尼 (压缩)',
+      ['Rear damping (rebound)'] = '后悬挂阻尼 (回弹)',
       ['Rear sight range (m)'] = '后方视野距离（米）',
       ['Rear spring stiffness'] = '后悬挂刚度',
       ['Rear suspension travel'] = '后悬挂行程',
+      ['Rear suspension travel (m)'] = '后悬挂行程 (米)',
       ['Rear wheel grip'] = '后轮抓地力',
       ['Rear wheel radius (m)'] = '后轮半径（米）',
       ['Recharge delay (s)'] = '重新充能延迟(秒)',
@@ -2611,6 +2689,7 @@ MOD.langs = {
       ['Reinforced Scout Strider'] = '强化侦察纵步者',
       ['Reinforcement Beacon'] = '增援信标',
       ['Reinforcement frequency (x)'] = '增援频率 (x)',
+      ['Reinforcement regen time (s)'] = '增援恢复时间（秒）',
       ['Reinforcement size (x)'] = '增援规模 (x)',
       ['Reinforcements'] = '增援',
       ['Reinforcements (flares, breaches, drops)'] = '增援 (信号弹、虫潮、空投)',
@@ -2644,6 +2723,11 @@ MOD.langs = {
       ['Right'] = '右',
       ['Right arm'] = '右手臂',
       ['Right arm armor'] = '右手臂装甲',
+      ['Right arm from (1-4)'] = '右臂来自 (1-4)',
+      ['Right arm from: Breakthrough'] = '右臂来自：Breakthrough',
+      ['Right arm from: Emancipator'] = '右臂来自：Emancipator',
+      ['Right arm from: Lumberer'] = '右臂来自：Lumberer',
+      ['Right arm from: Patriot'] = '右臂来自：Patriot',
       ['Right arm health'] = '右臂生命值',
       ['Right arm weakspot'] = '右手臂弱点',
       ['Right armor'] = '右装甲',
@@ -2724,6 +2808,8 @@ MOD.langs = {
       ['Rocket Sentry'] = '火箭哨戒炮',
       ['Rocket fired (id)'] = '发射的火箭（ID）',
       ['Rocket pods'] = '火箭舱',
+      ['Roll from wheel forces (x)'] = '车轮力导致的侧倾 (x)',
+      ['Roll inertia'] = '侧倾惯性',
       ['Rooted (experimental)'] = '定身（实验性）',
       ['Rotator'] = '转子',
       ['Round 1 blast'] = '第 1 发爆炸',
@@ -2861,12 +2947,14 @@ MOD.langs = {
       ['Sentry: its cooldown, its body, then its weapon.'] = '哨戒炮：依次为冷却时间、本体、武器。',
       ['Separate from the normal ground patrols. Does nothing on a mission without such a modifier.'] = '与普通地面巡逻分开。任务没有此类修正条件时不起作用。',
       ['Servo-Assisted'] = '伺服辅助',
+      ['Set it low for nearly endless reinforcements.'] = '调低可获得几乎无限的增援。',
       ['Sets off mines'] = '会引爆地雷',
       ['Settings'] = '设置',
       ['Settings are saved at once, in config.txt with your changes.'] = '设置会与你的修改一并即时保存到 config.txt。',
       ['Several vehicles of a kind'] = '同类载具数量',
       ['Shape'] = '形状',
       ['Shared by every armor with this passive. Multipliers: 1 = no change.'] = '所有带此被动的护甲共用。倍率：1 = 不变。',
+      ['Shares its levels: change their damage on the Double-Edge Sickle\'s page. Applies on Install.'] = '与其共用等级：在双刃镰刀页面修改其伤害。安装时生效。',
       ['Shares its name and description with the armor of this name: a change here changes both.'] = '与同名护甲共用名称和描述：在此处修改会同时改变两者。',
       ['Shear'] = '切变',
       ['Shell fired (id)'] = '发射的炮弹（ID）',
@@ -2883,6 +2971,8 @@ MOD.langs = {
       ['Shield plate armor'] = '护盾板护甲',
       ['Shield plate health'] = '护盾板生命值',
       ['Shield zone'] = '护盾',
+      ['Shift down at (rpm)'] = '降挡转速 (rpm)',
+      ['Shift up at (rpm)'] = '升挡转速 (rpm)',
       ['Ship upgrades that make support weapons and sentries launch at once skip it (tested).'] = '让支援武器和哨戒炮立即发射的舰船升级会跳过此倒计时（已由作者测试）。',
       ['Shockwave radius (m)'] = '冲击波半径(米)',
       ['Short Magazine'] = '短弹匣',
@@ -2947,6 +3037,8 @@ MOD.langs = {
       ['Speargun'] = '矛枪',
       ['Speed until it has fired (m/s)'] = '开火前飞行速度（米/秒）',
       ['Speed while aiming (m/s)'] = '瞄准时速度(米/秒)',
+      ['Spin damping'] = '旋转阻尼',
+      ['Spin damping in collisions'] = '碰撞时的旋转阻尼',
       ['Spine lower'] = '下脊椎',
       ['Spine plate'] = '脊椎甲板',
       ['Spine roll back'] = '脊椎后部',
@@ -3003,6 +3095,8 @@ MOD.langs = {
       ['Status'] = '状态',
       ['Status effects'] = '状态效果',
       ['Statuses'] = '状态效果',
+      ['Steering'] = '转向',
+      ['Steering angle (deg)'] = '转向角度 (度)',
       ['Stim Pistol'] = '治疗剂手枪',
       ['Stingray'] = '刺魟',
       ['Stoker'] = '司炉者',
@@ -3047,6 +3141,7 @@ MOD.langs = {
       ['Surplus EAT Allocation'] = '盈余EAT配给',
       ['Surviving lethal damage'] = '致命伤害存活几率',
       ['Suspension travel'] = '悬挂行程',
+      ['Suspension travel (m)'] = '悬挂行程 (米)',
       ['Swapping makes the shot the chosen weapon\'s, your edits to it included: damage,'] = '替换后使用所选武器的弹丸，包含你对其伤害、',
       ['Sway multiplier'] = '晃动系数',
       ['Sweeper'] = '扫荡者',
@@ -3080,10 +3175,12 @@ MOD.langs = {
       ['Tested releases only.'] = '仅限经过测试的正式版。',
       ['That did not work; see the log.'] = '操作失败，请查看日志。',
       ['That is not a valid preset code.'] = '这不是有效的预设代码。',
+      ['That takes one of the 6 spots the Projectile swap rows also use.'] = '这会占用弹丸替换行也使用的 6 个位置之一。',
       ['That would make a loop of extra stratagems.'] = '此选择会使额外战略配备形成循环。',
       ['The Arbitrator\'s underbarrel shotgun, not the rifle itself.'] = '“仲裁者”的下挂霰弹枪，不是步枪本身。',
       ['The Defender SEAF soldiers carry. Not yours.'] = 'SEAF 士兵携带的“防卫者”。不是你的那把。',
       ['The EAT-17 SEAF soldiers carry. Not yours.'] = 'SEAF 士兵携带的 EAT-17。不是你的那把。',
+      ['The GATER\'s 600 (FRVs 5, tanks 15) is what holds it near 55 km/h.'] = 'GATER 的 600（FRV 为 5，坦克为 15）正是它只能跑约 55 km/h 的原因。',
       ['The MG-43 SEAF soldiers carry. Not yours.'] = 'SEAF 士兵携带的 MG-43。不是你的那把。',
       ['The One-Two\'s underbarrel launcher, not the rifle. Fires the GP-31\'s grenade.'] = '“幺二”的下挂发射器，不是步枪本身。发射 GP-31 的榴弹。',
       ['The SMG you carry. Its underbarrel flamer is listed separately.'] = '你携带的冲锋枪。其下挂火焰喷射器单独列出。',
@@ -3097,6 +3194,9 @@ MOD.langs = {
       ['The beacon\'s timer still counts down the usual time (tested).'] = '信标仍显示原本的倒计时（已由作者测试）。',
       ['The charge backpack, the charge and its blast. Cooldown: Stratagems tab.'] = '炸药背包、炸药包及其爆炸。冷却时间见“战略配备”页。',
       ['The clipboard has no valid preset code.'] = '剪贴板中没有有效的预设代码。',
+      ['The engine speed where it changes to the next gear. Higher: holds each gear longer.'] = '升入下一挡的转速。越高每个挡位保持越久。',
+      ['The engine speed where it drops a gear. Higher: drops sooner, so it keeps more pull on hills.'] = '降挡的转速。越高越早降挡，爬坡时保留更多牵引力。',
+      ['The engine speed where it pulls hardest. Its pull falls off below and above it.'] = '牵引力最强的转速，低于或高于此转速牵引力都会下降。',
       ['The explosion the round sets off when it hits something. 0: no explosion.'] = '射弹命中物体时引发的爆炸。0：不爆炸。',
       ['The explosion the round sets off when its life time runs out before it hits anything. 0: no explosion.'] = '弹药在命中任何目标之前寿命耗尽时触发的爆炸。0:无爆炸。',
       ['The flamethrower you carry.'] = '你携带的火焰喷射器。',
@@ -3119,6 +3219,7 @@ MOD.langs = {
       ['The round goes off when it passes this close to an enemy, without hitting it. 0: off (the RL-77 uses 2 m).'] = '射弹从敌人这么近的距离经过时即使没有命中也会爆炸。0：关闭（RL-77 为 2 米）。',
       ['The round only bounces when it hits faster than this. Grenade launcher rounds use 20 m/s, most rounds 60 m/s.'] = '射弹只有在命中速度高于此值时才会弹开。榴弹发射器的射弹为 20 米/秒，大多数射弹为 60 米/秒。',
       ['The round only bounces when it hits further than this from head on (0 = head on, 90 = grazing).'] = '射弹只有在命中角度偏离正面超过此值时才会弹开（0 = 正面，90 = 擦过）。',
+      ['The same, right after it hits something. Higher: a crash spins it round less.'] = '同上，但作用于撞击之后。越高撞击后打转越少。',
       ['The shot\'s trail and other effects belong to the chosen weapon.'] = '弹道尾迹和其他特效属于所选武器。',
       ['The support hammer delivered by hellpod. The game data files it next to the Machete.'] = '由空投舱投送的支援锤。游戏数据将它列在砍刀旁边。',
       ['The support weapon. The CQC-73 is listed under Secondary.'] = '支援武器。CQC-73 列在“副武器”下。',
@@ -3169,6 +3270,7 @@ MOD.langs = {
       ['True Grit'] = '坚韧不拔',
       ['Tube Reddot 2x'] = '2倍红点瞄准镜',
       ['Tube Reddot 2x Legacy'] = '旧式2倍管状红点瞄准镜',
+      ['Turn inertia'] = '转向惯性',
       ['Turn speed (x)'] = '转向速度 (x)',
       ['Turn speed at cruise'] = '巡航转向速率',
       ['Turn speed at slowest'] = '最慢转向速率',
@@ -3266,13 +3368,17 @@ MOD.langs = {
       ['Wheel grip'] = '车轮抓地力',
       ['Wheel radius (m)'] = '车轮半径（米）',
       ['Wheels'] = '车轮',
+      ['Where the engine\'s speed range starts. Higher: more pull from a stop, but it wastes the low end.'] = '引擎转速范围的起点。越高起步牵引力越大，但浪费了低转速段。',
+      ['Which exosuit this arm comes from: 1 Patriot, 2 Emancipator, 3 Breakthrough, 4 Lumberer.'] = '此机臂来自哪台外骨骼：1 Patriot，2 Emancipator，3 Breakthrough，4 Lumberer。',
       ['Wind-down time (s)'] = '转管减速时间（秒）',
       ['Wind-down time, released (s)'] = '松开扳机后减速时间（秒）',
       ['Wind-up'] = '转管加速',
       ['Wind-up time (s)'] = '转管加速时间（秒）',
       ['Wings'] = '翼',
+      ['With the air density, it caps the GATER\'s top speed.'] = '它与空气密度一起限制了 GATER 的极速。',
       ['Wretch'] = '悲怜体',
       ['Xenobite Ardent'] = '炽热异噬者',
+      ['Yaw from wheel forces (x)'] = '车轮力导致的偏航 (x)',
       ['You are an insect, Helldiver.'] = '你只是一只虫子，绝地潜兵。',
       ['Your changes are off: turn them on in Settings to edit.'] = '你的改动当前处于关闭状态：请在设置里开启后再编辑。',
       ['Your changes are off: turn them on in Settings to load a preset'] = '你的修改已关闭：请在设置中开启后再读取预设',
@@ -3298,6 +3404,7 @@ MOD.langs = {
       ['attachment items'] = '配件物品',
       ['backpack charges'] = '背包使用次数',
       ['beam weapon'] = '光束武器',
+      ['below 0: pressed down at speed'] = '低于 0：高速时被压向地面',
       ['body parts without their own armor use this'] = '没有自身护甲的身体部位使用此值',
       ['bull'] = '公牛',
       ['clip'] = '弹夹',
@@ -3313,6 +3420,7 @@ MOD.langs = {
       ['every enemy with this attack shares it'] = '所有拥有此攻击的敌人共用',
       ['extra health for this part, it does not run out by itself'] = '该部位的额外生命值，不会自行流失',
       ['fake'] = '伪装',
+      ['faster than this, it steers less'] = '超过此速度转向变小',
       ['fire mode'] = '射击模式',
       ['gloom'] = '幽暗',
       ['goes off on impact, but not before this'] = '撞击时引爆，但不能早于此时间',
@@ -3323,7 +3431,11 @@ MOD.langs = {
       ['heavycannon'] = '重炮',
       ['hellpod rack'] = '空投舱挂架',
       ['hexagon'] = '六边形',
+      ['higher: harder to reach top speed'] = '越高越难达到极速',
+      ['higher: harder to tip over'] = '越高越难翻车',
       ['higher: less bounce'] = '越高：弹跳越少',
+      ['higher: more air drag, a lower top speed'] = '越高空气阻力越大，极速越低',
+      ['higher: stops spinning out sooner'] = '越高越快停止打转',
       ['hit reactions, staggers and stuns'] = '受击反应、踉跄和眩晕',
       ['how close enemy fire must pass to shake your aim; 0: never'] = '敌方火力需掠过多近才会干扰你的瞄准；0：从不',
       ['how close your shots must land to rattle it'] = '你的射击需落在多近才能干扰它',
@@ -3349,6 +3461,7 @@ MOD.langs = {
       ['how quickly the view follows your aim at this zoom; lower it if a high zoom spins the view'] = '此倍率下视野跟随瞄准的速度；如果高倍率时视野旋转，请调低',
       ['its height above its flight route; lower flies closer to the ground (terrain still holds it up)'] = '高于飞行路线的高度；越低越贴近地面（地形仍会托住它）',
       ['its own. - / + : fire another weapon\'s'] = '自身弹丸。- / +：改为发射其他武器的弹丸',
+      ['its own. 1 Patriot, 2 Emancipator, 3 Breakthrough, 4 Lumberer'] = '自身的。1 Patriot，2 Emancipator，3 Breakthrough，4 Lumberer',
       ['ivory legion assault'] = '象牙军团突击',
       ['ivory legion tier 2'] = '象牙军团2级',
       ['jammer'] = '干扰器',
@@ -3360,7 +3473,10 @@ MOD.langs = {
       ['loadout package'] = '配装包',
       ['lower (more negative): you go deeper before drowning starts'] = '越低（越负）：开始溺水前可以潜得越深',
       ['lower: a higher top speed in that gear, a weaker pull'] = '越低：该挡位最高速度越高，牵引越弱',
+      ['lower: bounces back faster'] = '越低回弹越快',
+      ['lower: dips less when braking'] = '越低刹车时点头越少',
       ['lower: harder to roll over'] = '越低：越难翻车',
+      ['lower: leans less in turns'] = '越低转弯时倾斜越少',
       ['lower: softer, the body sags (at 1 it barely moves)'] = '越低越软，车身下沉（为 1 时几乎无法行驶）',
       ['lower: their shots land closer to where they aim (0: dead on)'] = '越低：射击越接近瞄准点 (0：百发百中)',
       ['melee weapon'] = '近战武器',
@@ -3368,6 +3484,7 @@ MOD.langs = {
       ['min charge'] = '最少充能',
       ['mine spawner'] = '地雷生成器',
       ['mine thrower'] = '布雷器',
+      ['multiplies every gear; lower: faster, weaker pull'] = '作用于每个挡位；越低越快，牵引力越弱',
       ['negative: below level, -90 straight down'] = '负数：低于水平，-90 为正下方',
       ['no demolition tier there'] = '没有对应的破坏等级',
       ['no shrapnel'] = '无破片',
@@ -3439,6 +3556,7 @@ MOD.langs = {
       ['what each hit applies; the slots go in order'] = '每次命中施加的状态；状态槽需按顺序填写',
       ['what it has left once its health is gone, lost over time'] = '生命值耗尽后剩余的部分，随时间流失',
       ['where it hangs when put away: 0 on the back, 1 on the hip'] = '收起时挂在哪里：0 背部，1 腰部',
+      ['where it pulls hardest'] = '此转速下牵引力最强',
       ['who it fights for: units of other sides attack it, and it attacks them'] = '它为谁而战：其他阵营的单位会攻击它，它也会攻击它们',
       ['with the gears, sets the top speed'] = '与各挡位一起决定最高速度',
     },
@@ -3603,6 +3721,7 @@ MOD.langs = {
       ['a mounted copy run by ai (emplacement-style). not the one you carry.'] = '由 AI 操作的固定版本（炮台式）。不是你携带的那把。',
       ['a mounted copy. not the one you carry.'] = '固定版本。不是你携带的那把。',
       ['a preset keeps every change you have made as one set, under a name you choose.'] = '预设会把你所有的修改作为一组保存，并取一个你指定的名字。',
+      ['a second ammo fires as many projectiles per shot as this weapon\'s own.'] = '第二种弹药每次射击的弹丸数与此武器自身弹药相同。',
       ['a settings table moved; scanning again'] = '设置数据表已移动，正在重新扫描',
       ['a table moved; scanning again'] = '数据表已移动，正在重新扫描',
       ['a/ac-8 autocannon sentry'] = 'A/AC-8 自动哨戒炮',
@@ -5189,15 +5308,20 @@ MOD.langs = {
       ['9x70mm Super Uranium Core'] = '9x70mm超鈾核心彈',
       ['A hellpod lands this many seconds plus its 4.75 s fall after the beacon, so 0 is the fastest it gets.'] = '空投艙落地用時為此倒計時加 4.75 秒下落時間，因此設為 0 時最快。',
       ['A hit to the head costs this many times its damage. 1 = the same as the body.'] = '頭部命中按傷害的這個倍數扣血。1 = 與身體相同。',
+      ['A limit: enemy reinforcements never come slower than this, even if a faction page asks for slower.'] = '上限提示：即使陣營頁面要求更慢，敵方增援也不會比這個更慢。',
+      ['A limit: patrols never come slower than this, even if a faction page asks for slower.'] = '下限：即使陣營頁面要求更慢，巡邏也不會比這個更慢。',
       ['A mounted cannon with a seat, dropped by hellpod. Not the one you carry.'] = '帶座位的固定火炮，由空投艙投送。不是你攜帶的那把。',
       ['A mounted copy aimed by AI. Not the one you carry.'] = '由 AI 瞄準的固定版本。不是你攜帶的那把。',
       ['A mounted copy run by AI (emplacement-style). Not the one you carry.'] = '由 AI 操作的固定版本（炮台式）。不是你攜帶的那把。',
       ['A mounted copy. Not the one you carry.'] = '固定版本。不是你攜帶的那把。',
       ['A pathetic creature of meat and bone.'] = '一個由血肉和骨頭組成的可憐生物。',
+      ['A preset file in the import folder was not imported. Fix the lines the log names and start SSEO again.'] = '匯入資料夾中的一個預設檔案未能匯入。請修正日誌中列出的行，然後重新啟動 SSEO。',
       ['A preset keeps every change you have made as one set, under a name you choose.'] = '預設會把你所有的修改作為一組儲存，並取一個你指定的名字。',
       ['A preset keeps every enemy and spawning change as one custom difficulty, under a name you choose. Your weapon changes are kept apart.'] = '預設會把所有敵人與生成的改動儲存為一個自定義難度，名稱由你決定。武器改動單獨儲存。',
       ['A resupply box gives this many. An ammo box on the map gives half, rounded down (at least 1).'] = '補給箱提供這麼多。地圖上的彈藥箱提供一半，向下取整（至少 1）。',
       ['A resupply box gives this much. An ammo box on the map gives half, rounded down.'] = '補給箱提供這麼多。地圖上的彈藥箱提供一半，向下取整。',
+      ['A second SEAF wait: 80 to 100 seconds at x1. Probably the pause between waves of soldiers; the game only gives the name.'] = 'SEAF 的第二個等待時間：x1 時為 80 到 100 秒。可能是士兵波次之間的間隔；遊戲只給出了名稱。',
+      ['A second ammo fires as many projectiles per shot as this weapon\'s own.'] = '第二種彈藥每次射擊的射彈數與此武器自身彈藥相同。',
       ['A value changed on an enemy\'s own page stays red: this page leaves it as it is.'] = '在敵人自己頁面上更改的數值保持紅色：此頁面不會改動它。',
       ['A weapon whose own Sway multiplier you changed keeps it. Sway this row changes shows in blue.'] = '你單獨改過晃動係數的武器保留其數值。此行改變的晃動以藍色顯示。',
       ['A/AC-8 Autocannon Sentry'] = 'A/AC-8 哨戒機炮',
@@ -5241,6 +5365,7 @@ MOD.langs = {
       ['AX/FLAM-75 "Guard Dog" Hot Dog'] = 'AX/FLAM-75 護衛犬熱狗',
       ['AX/LAS-5 "Guard Dog" Rover'] = 'AX/LAS-5 護衛犬漫遊者',
       ['AX/TX-13 "Guard Dog" Dog Breath'] = 'AX/TX-13 護衛犬腐氣',
+      ['Above this speed the wheels turn less and less. Raise it to keep steering at high speed.'] = '超過此速度，車輪轉向會越來越小。調高可在高速時保持轉向。',
       ['Acceleration (m/s2)'] = '加速度(米/秒^2)',
       ['Accelerator Rifle'] = '加速步槍',
       ['Acclimated'] = '適應自如',
@@ -5264,6 +5389,7 @@ MOD.langs = {
       ['Aim steadies again after (s)'] = '瞄準恢復穩定所需時間（秒）',
       ['Aim zoom (x)'] = '瞄準放大倍率 (x)',
       ['Aiming sway'] = '瞄準晃動',
+      ['Air density'] = '空氣密度',
       ['Airborne'] = '空降',
       ['Airburst Rocket Launcher'] = '空爆火箭發射器',
       ['All'] = '全部',
@@ -5325,6 +5451,7 @@ MOD.langs = {
       ['Armor penetration'] = '穿甲',
       ['Armor weight'] = '護甲重量',
       ['Armors'] = '護甲',
+      ['Arms'] = '機臂',
       ['Ask'] = '詢問',
       ['Assassinate'] = '刺殺',
       ['Assault'] = '突擊',
@@ -5390,6 +5517,7 @@ MOD.langs = {
       ['Beams per barrel'] = '每管光束數',
       ['Belt-Fed Grenade Launcher'] = '彈鏈式榴彈發射器',
       ['Berserker'] = '狂暴者',
+      ['Best engine speed (rpm)'] = '最佳轉速 (rpm)',
       ['Better stratagem bounce'] = '改進戰略配備彈跳',
       ['Big walker cannon'] = '步行機巨炮',
       ['Bigger wheels: a higher top speed and more room under the body, but a weaker pull.'] = '輪子越大：最高速度更高、底盤離地更高，但拉力更弱。',
@@ -5522,6 +5650,7 @@ MOD.langs = {
       ['Charges'] = '使用次數',
       ['Charges from resupply'] = '補給箱補充的使用次數',
       ['Charging speed (m/s)'] = '衝鋒速度 (米/秒)',
+      ['Chassis'] = '車身',
       ['Chemical Backpack'] = '化學背包',
       ['Chest'] = '胸部',
       ['Chest bleeding damage'] = '胸部流血傷害',
@@ -5535,6 +5664,11 @@ MOD.langs = {
       ['Click again'] = '再點一次確認',
       ['Click again to overwrite'] = '再次點選以覆蓋',
       ['Click again within 4 seconds to end the game. Unsaved progress is lost.'] = '4 秒內再點一次即結束遊戲，未儲存的進度會丟失。',
+      ['Client-sided only: in a lobby it counts for your own shots, not other players\'.'] = '僅客戶端生效：在大廳中只對你自己的射擊生效，對其他玩家無效。',
+      ['Client-sided only: other players may keep the game\'s normal radius.'] = '僅客戶端生效：其他玩家可能仍是遊戲原本的半徑。',
+      ['Client-sided only: other players may see the game\'s normal shots.'] = '僅客戶端生效：其他玩家可能看到遊戲原本的射擊。',
+      ['Client-sided only: other players see the normal animation; attack timing may follow the host.'] = '僅客戶端生效：其他玩家看到的是正常動畫；攻擊時機可能以房主為準。',
+      ['Client-sided only: other players see the normal size; reach may follow the host.'] = '僅客戶端生效：其他玩家看到的是正常大小；攻擊距離可能以房主為準。',
       ['Climb acceleration'] = '爬升加速度',
       ['Climb multiplier (horizontal)'] = '槍口上揚倍率（水平）',
       ['Climb multiplier (vertical)'] = '槍口上揚倍率（垂直）',
@@ -5544,6 +5678,7 @@ MOD.langs = {
       ['Close all'] = '全部收起',
       ['Close game'] = '關閉遊戲',
       ['Cluster Bomb'] = '集束炸彈',
+      ['Clutch slip (rpm)'] = '離合器打滑 (rpm)',
       ['Cognitive Disruptor'] = '認知干擾器',
       ['Collision'] = '碰撞體',
       ['Combat Hatchet'] = '戰鬥斧',
@@ -5607,6 +5742,8 @@ MOD.langs = {
       ['Damage ticks per minute'] = '每分鐘傷害次數',
       ['Damage to you'] = '對你造成的傷害',
       ['Damping'] = '懸掛阻尼',
+      ['Damping (compression)'] = '懸掛阻尼 (壓縮)',
+      ['Damping (rebound)'] = '懸掛阻尼 (回彈)',
       ['Dark Fluid Backpack'] = '暗液背包',
       ['Dark Fluid burst'] = '暗流體爆裂',
       ['Data Jack'] = '資料介面',
@@ -5642,7 +5779,9 @@ MOD.langs = {
       ['Done'] = '完成',
       ['Double Freedom'] = '雙重自由',
       ['Double-Edge Sickle'] = '雙刃鐮刀',
+      ['Double-Edge Sickle heat ramp'] = '雙刃鐮刀熱量遞增',
       ['Down'] = '下移',
+      ['Drag coefficient'] = '阻力系數',
       ['Drag factor'] = '阻力系數',
       ['Dragonroach'] = '龍蟑',
       ['Drift from the last shell, least (m)'] = '相對上一發的偏移，最小（米）',
@@ -5719,6 +5858,10 @@ MOD.langs = {
       ['Enemy detection range'] = '敵人偵測範圍',
       ['Enemy shots count within (m)'] = '敵方射擊生效範圍（米）',
       ['Enemy.'] = '敵人。',
+      ['Engine'] = '引擎',
+      ['Engine drag at the best speed'] = '最佳轉速時的引擎阻力',
+      ['Engine drag at the lowest speed'] = '最低轉速時的引擎阻力',
+      ['Engine drag at the top speed'] = '最高轉速時的引擎阻力',
       ['Engine front'] = '前引擎',
       ['Engine rear'] = '後引擎',
       ['Engine rear weakspot'] = '引擎後部弱點',
@@ -5793,6 +5936,7 @@ MOD.langs = {
       ['Field width (m)'] = '雷區寬度（米）',
       ['Fighting speed (m/s)'] = '戰鬥速度 (米/秒)',
       ['Fin front'] = '前鰭',
+      ['Final drive ratio'] = '主減速比',
       ['Finding the stats...'] = '正在查詢數值...',
       ['Fire'] = '開火',
       ['Fire damage taken'] = '受到火焰傷害',
@@ -5803,6 +5947,8 @@ MOD.langs = {
       ['Fire rate (x)'] = '射速 (x)',
       ['Fire/gas/acid/arc damage taken'] = '受到火焰 / 毒氣 / 酸液 / 電弧傷害',
       ['Firebomb Hellpods'] = '燃燒彈絕地噴射艙',
+      ['Fires the Double-Edge Sickle\'s stronger shots as it heats up, and hurts you near overheat.'] = '隨著熱量升高發射雙刃鐮刀的強化射擊，接近過熱時會傷害你。',
+      ['Firing it standing no longer knocks you down or hurts you.'] = '站立射擊不再將你擊倒或傷害你。',
       ['First shell (id)'] = '第一發炮彈（ID）',
       ['Flame Sentry'] = '火焰火箭炮',
       ['Flames'] = '火焰噴射器',
@@ -5821,16 +5967,21 @@ MOD.langs = {
       ['Folder'] = '資料夾',
       ['Folder path copied.'] = '已複製資料夾路徑。',
       ['Foliage pass-through'] = '穿透植被',
+      ['For very few patrols, lower this as well as Patrol frequency on the faction page.'] = '想讓巡邏很少，請同時調低此項和陣營頁面上的巡邏頻率。',
+      ['For very few reinforcements, lower this as well as Reinforcement frequency on the faction page.'] = '想讓增援很少，請同時調低此項和陣營頁面上的增援頻率。',
       ['Fortified'] = '強化',
       ['Forward share of the launch (0-1)'] = '起跳前衝佔比(0-1)',
       ['Found in the game data (not in the built-in list).'] = '在遊戲資料中找到（不在內建列表中）。',
       ['Frag'] = '破片彈',
       ['From supply'] = '來自補給',
       ['Front'] = '前部',
+      ['Front area (m2)'] = '迎風面積 (m2)',
       ['Front armor'] = '前裝甲',
       ['Front body'] = '前身體',
       ['Front brake strength'] = '前輪制動力',
       ['Front damping'] = '前懸掛阻尼',
+      ['Front damping (compression)'] = '前懸掛阻尼 (壓縮)',
+      ['Front damping (rebound)'] = '前懸掛阻尼 (回彈)',
       ['Front face'] = '前面',
       ['Front grip lower than the rear: it turns wide. Rear lower than the front: the back slides out.'] = '前輪抓地比後輪低：轉彎會衝外側。後輪比前輪低：車尾會甩出去。',
       ['Front hull'] = '前車體',
@@ -5840,11 +5991,13 @@ MOD.langs = {
       ['Front right wheel hub'] = '右前輪轂',
       ['Front spring stiffness'] = '前懸掛剛度',
       ['Front suspension travel'] = '前懸掛行程',
+      ['Front suspension travel (m)'] = '前懸掛行程 (米)',
       ['Front wheel grip'] = '前輪抓地力',
       ['Front wheel radius (m)'] = '前輪半徑（米）',
       ['Full charge'] = '充滿',
       ['Full charge explosion'] = '滿蓄力爆炸',
       ['Full charge shot'] = '滿蓄力射擊',
+      ['Full steering up to (m/s)'] = '全轉向的最高速度 (m/s)',
       ['Fuse time (s)'] = '引信時間(秒)',
       ['Fusion Autocannon'] = '聚變機炮',
       ['Fusion Repeater'] = '聚變連發炮',
@@ -5980,7 +6133,10 @@ MOD.langs = {
       ['High Dissipation Heatsink'] = '高效能散熱器',
       ['High Explosive'] = '高爆彈',
       ['High-Velocity Shrapnel'] = '高速破片',
+      ['Higher means a longer wait, so they come slower. x2 is 160 to 200 seconds.'] = '數值越高等待越久，來得越慢。x2 為 160 到 200 秒。',
+      ['Higher means a longer wait, so they come slower. x2 is 310 to 330 seconds.'] = '數值越高等待越久，來得越慢。x2 為 310 到 330 秒。',
       ['Higher: a stiffer ride, less lean in turns, bumps kick harder.'] = '越高：行駛更硬，轉彎側傾更少，顛簸衝擊更大。',
+      ['Higher: easier starts from a stop and on hills. Lower: a more direct pull.'] = '越高起步和爬坡越輕鬆；越低動力傳遞越直接。',
       ['Higher: leans more and tips over in sharp turns.'] = '越高：傾斜更多，急轉彎時容易翻車。',
       ['Higher: stops in a shorter distance. Too high locks the wheels, and it skids instead of stopping.'] = '越高：剎車距離越短。太高會抱死車輪，車會打滑而不是停下。',
       ['Highest ledge it climbs (m)'] = '可攀爬的最高邊緣（米）',
@@ -6007,19 +6163,39 @@ MOD.langs = {
       ['Hover time, full-speed climb (s)'] = '懸停時間：全速爬升(秒)',
       ['Hover time, holding height (s)'] = '懸停時間：保持高度(秒)',
       ['Hoverpack Backpack'] = '懸浮背包',
+      ['How badly its shape cuts through the air. Higher: more air drag, a lower top speed.'] = '外形穿過空氣的阻力系數。越高空氣阻力越大，極速越低。',
+      ['How big the vehicle is to the air. Higher: more air drag, a lower top speed.'] = '載具迎風的面積。越大空氣阻力越大，極速越低。',
       ['How close the view gets when you aim: 1 is the normal view, 2 twice as close, 4 four times.'] = '瞄準時視野拉近多少：1 為正常視野，2 拉近兩倍，4 拉近四倍。',
       ['How close this zoom step looks: 1 is the normal view, 2 twice as close, 4 four times.'] = '這一檔的放大程度：1 為正常視野，2 拉近兩倍，4 拉近四倍。',
       ['How far away the jet starts its run. With its speed, it sets how long the Eagle takes to arrive.'] = '飛鷹開始攻擊航線時距目標的距離，與飛行速度共同決定抵達時間。',
+      ['How far the engine speed can run ahead of the wheels before the clutch grips.'] = '離合器咬合前，引擎轉速能比車輪超出多少。',
+      ['How far the front wheels turn. Higher: tighter turns at low speed.'] = '前輪最大轉向角。越高低速時轉彎越急。',
+      ['How fast a spin dies down on its own. Higher: stops spinning out sooner.'] = '打轉自行減弱的速度。越高越快停止打轉。',
       ['How fast the engine may spin before it stops pulling. Higher: a higher top speed in every gear,'] = '引擎停止發力前能轉多快。越高：每個擋位的最高速度都更高，',
+      ['How fast the springs push back out after a bump. Higher: they come back slowly, a calmer ride.'] = '顛簸後彈簧回彈的速度。越高回彈越慢，行駛越平穩。',
       ['How fast the springs settle after a bump. Higher: settles at once, a firmer ride.'] = '彈簧在顛簸後穩定下來的速度。越高：立刻穩定，行駛更硬。',
       ['How fast their animations play. Most attacks follow the animation, so they come sooner or later too.'] = '它們的動畫播放速度。大多數攻擊跟隨動畫，所以攻擊也會更早或更晚發生。',
+      ['How hard it is to roll it onto its side. Higher: harder to tip over in turns and blasts.'] = '讓載具側翻的難度。越高轉彎和爆炸時越難翻車。',
+      ['How hard it is to start or stop turning. Too low on a heavy vehicle makes turns stutter.'] = '開始或停止轉向的難度。重型載具設得太低會使轉彎卡頓。',
+      ['How hard it is to tip it nose up or down. Higher: steadier over bumps and jumps.'] = '讓載具前後俯仰的難度。越高過顛簸和飛躍時越穩。',
       ['How hard the engine pushes. Higher: faster acceleration and steeper hills, but more wheelspin.'] = '引擎的推力。越高：加速更快、能爬更陡的坡，但更容易打滑。',
       ['How high the balance point sits. Lower (even below 0): stays flat in hard turns and over rocks.'] = '重心的高度。越低（甚至低於 0）：急轉彎和過石頭時更平穩。',
+      ['How long SEAF waits before sending more soldiers: 155 to 165 seconds at x1.'] = 'SEAF 派出更多士兵前的等待時間：x1 時為 155 到 165 秒。',
       ['How long the round waits after the hit (or after the blast proximity trips) before it goes off.'] = '射彈命中後（或近炸距離觸發後）等待多久才爆炸。',
       ['How many bombs one run drops and how they land. The bombs stay this Eagle\'s own.'] = '一次飛越投下多少枚炸彈以及落點分佈。炸彈仍是該飛鷹自己的。',
       ['How many times the round can bounce off a surface. 0: it never bounces back at you.'] = '射彈能從表面彈開多少次。0：它永遠不會彈回到你身上。',
+      ['How much of the engine torque it has at its lowest speed. Higher: stronger off the line and on hills.'] = '最低轉速時擁有的引擎扭矩比例。越高起步和爬坡越強。',
+      ['How much of the engine torque it keeps at its top speed. Higher: keeps speeding up near the top.'] = '最高轉速時保留的引擎扭矩比例。越高接近極速時仍能加速。',
+      ['How much speeding up and braking tip the nose. Lower: stays level when it brakes or speeds up.'] = '加速和剎車讓車頭俯仰的程度。越低加速剎車時越平穩。',
+      ['How much the air lifts it at speed. Above 0: lighter and floatier when fast. Below 0: pressed down, more grip.'] = '高速時空氣產生的升力。高於 0 高速時變輕發飄；低於 0 被壓向地面，抓地更好。',
+      ['How much the engine holds itself back at its best speed. Higher: weaker acceleration overall.'] = '引擎在最佳轉速時的自身阻力。越高整體加速越弱。',
+      ['How much the engine holds itself back at its lowest speed. Higher: slower to get going.'] = '引擎在最低轉速時的自身阻力。越高起步越慢。',
+      ['How much the engine holds itself back near its top speed. Higher: it struggles to reach it.'] = '引擎接近最高轉速時的自身阻力。越高越難達到。',
+      ['How much the wheels’ forces lean the body in turns. Lower: stays flatter and harder to roll.'] = '車輪的力在轉彎時讓車身傾斜的程度。越低車身越平、越難翻車。',
+      ['How much the wheels’ forces swing it round. Lower: steadier, less likely to spin out.'] = '車輪的力讓載具打轉的程度。越低越穩，越不容易甩尾。',
       ['How much this gear multiplies the engine. Higher: stronger pull, but it tops out sooner.'] = '這個擋位把引擎放大多少倍。越高：拉力更強，但更早到頂。',
       ['How quickly the scoped view catches up when you move your aim at this zoom (0.6 on most optics).'] = '此倍率下移動瞄準時，瞄準鏡視野跟上的速度（大多數瞄具為 0.6）。',
+      ['How thick the air is for this vehicle. Higher: more air drag, a lower top speed.'] = '此載具所受空氣的密度。越高空氣阻力越大，極速越低。',
       ['How well the tyres hold the ground. Higher: sharper turns, less sliding and wheelspin.'] = '輪胎抓地的程度。越高：轉彎更急，更少側滑和打滑。',
       ['Hulk'] = '巨型者',
       ['Hulk Bruiser'] = '巨型殲滅者',
@@ -6060,6 +6236,7 @@ MOD.langs = {
       ['Inner torso'] = '內軀幹',
       ['Insides'] = '內部',
       ['Install into the game'] = '寫入遊戲',
+      ['Install loads the chosen arm\'s exosuit into every mission, so its model shows.'] = '安裝會把所選機臂的外骨骼載入每場任務，使其模型顯示。',
       ['Install loads up to 6 such weapons into every mission, so nobody has to bring them. A support weapon brings its own.'] = '安裝後每個任務最多載入 6 把此類武器，無需攜帶。支援武器會自帶其效果。',
       ['Installed, but not everything fits. Some projectiles may show no trail, and some Always bring it stratagems stay out of missions.'] = '已安裝,但無法全部載入。部分彈藥可能沒有軌跡,部分「始終攜帶」的戰略配備不會進入任務。',
       ['Installing: finding what changed...'] = '寫入中：正在查詢改動…',
@@ -6140,6 +6317,11 @@ MOD.langs = {
       ['Left'] = '左',
       ['Left arm'] = '左手臂',
       ['Left arm armor'] = '左手臂裝甲',
+      ['Left arm from (1-4)'] = '左臂來自 (1-4)',
+      ['Left arm from: Breakthrough'] = '左臂來自：Breakthrough',
+      ['Left arm from: Emancipator'] = '左臂來自：Emancipator',
+      ['Left arm from: Lumberer'] = '左臂來自：Lumberer',
+      ['Left arm from: Patriot'] = '左臂來自：Patriot',
       ['Left arm health'] = '左臂生命值',
       ['Left arm weakspot'] = '左手臂弱點',
       ['Left armor'] = '左裝甲',
@@ -6217,6 +6399,7 @@ MOD.langs = {
       ['Left wrist blade'] = '左腕刀刃',
       ['Leg injury immunity (1 on)'] = '免疫腿部受傷（1 為開啟）',
       ['Less: bumps go straight into the body and it wobbles.'] = '越少：顛簸直接傳到車身，車身會晃動。',
+      ['Less: bumps go straight into the body.'] = '越少：顛簸直接傳到車身。',
       ['Leveller'] = '夷平者',
       ['Leviathan'] = '利維坦',
       ['Leviathan bomb'] = '利維坦炸彈',
@@ -6228,6 +6411,7 @@ MOD.langs = {
       ['Liberator Legacy'] = '解放者「榮光」',
       ['Liberator Penetrator'] = '穿甲解放者',
       ['Lifetime (s)'] = '存續時間(秒)',
+      ['Lift coefficient'] = '升力係數',
       ['Light armor'] = '輕型護甲',
       ['Light, medium or heavy, per armor (every armor set with that name).'] = '每件護甲的輕型、中型或重型（同名的所有護甲套裝）。',
       ['Lighter: quicker off the line, but bounces over bumps and gets thrown around by explosions.'] = '越輕：起步更快，但過坑窪會彈跳，容易被爆炸掀飛。',
@@ -6245,9 +6429,12 @@ MOD.langs = {
       ['Lower back'] = '下背部',
       ['Lower it if a high zoom spins the view.'] = '如果高倍率時視野旋轉，請調低。',
       ['Lower spine'] = '下脊椎',
+      ['Lower: a higher top speed, if the engine can pull it.'] = '越低極速越高（前提是引擎拉得動）。',
       ['Lower: a softer ride, the body leans in turns and sags.'] = '越低：行駛更軟，轉彎時車身側傾並下沉。',
       ['Lower: faster in this gear, weaker on hills and from a stop.'] = '越低：這個擋位更快，上坡和起步更弱。',
       ['Lower: keeps bouncing after every bump.'] = '越低：每次顛簸後都會一直彈跳。',
+      ['Lower: the wheels spring back fast and the body bounces.'] = '越低：車輪迴彈很快，車身彈跳。',
+      ['Lowest engine speed (rpm)'] = '最低轉速 (rpm)',
       ['Lowest patrol frequency (x)'] = '最低巡邏頻率 (x)',
       ['Lowest rates'] = '最低頻率',
       ['Lowest reinforcement frequency (x)'] = '最低增援頻率 (x)',
@@ -6345,6 +6532,7 @@ MOD.langs = {
       ['Movement'] = '移動',
       ['Movement speed (multiplier)'] = '移動速度（倍率）',
       ['Movement speed (x)'] = '移動速度 (x)',
+      ['Multiplies every gear. Higher: stronger pull and steeper hills, a lower top speed.'] = '作用於所有擋位。越高牽引力越強、能爬更陡的坡，極速越低。',
       ['Muzzle'] = '槍口',
       ['Muzzle brake'] = '槍口制退器',
       ['Name'] = '名稱',
@@ -6361,6 +6549,7 @@ MOD.langs = {
       ['No changes: loading it puts every value back to the game\'s.'] = '沒有修改：讀取它會把所有數值恢復為遊戲原值。',
       ['No description'] = '無描述',
       ['No free preset place: delete one first.'] = '沒有空位：請先刪除一個預設。',
+      ['No knockdown when standing'] = '站姿射擊不倒地',
       ['No other vehicle has this section.'] = '沒有其他載具有此部分。',
       ['No page in this editor uses this id.'] = '此編輯器中沒有頁面使用此 id。',
       ['No passive.'] = '無被動。',
@@ -6399,6 +6588,7 @@ MOD.langs = {
       ['On: your '] = '開啟：你的',
       ['On: your arc chain length / split apply with other players too (arcs can stay on screen).'] = '開啟：你的電弧連鎖長度 / 分裂對其他玩家同樣生效（電弧可留在螢幕上）。',
       ['On: your rockets, launcher rounds and stratagem ordnance fly through tree canopies and bushes.'] = '開啟：你的火箭彈、發射器彈藥和戰略配備彈藥可穿過樹冠和灌木。',
+      ['Once your reinforcements run out, one comes back after this long: 120 seconds by default.'] = '增援用完後，每隔這麼久恢復一次：預設 120 秒。',
       ['One True Flag'] = '唯一真旗',
       ['One-Two'] = '雙響',
       ['One-handed'] = '單手持握',
@@ -6504,6 +6694,8 @@ MOD.langs = {
       ['Pilot light goes out after (s)'] = '引火熄滅時間（秒）',
       ['Pilot seat'] = '駕駛座',
       ['Pineapple'] = '鳳梨',
+      ['Pitch from wheel forces (x)'] = '車輪力導致的俯仰 (x)',
+      ['Pitch inertia'] = '俯仰慣性',
       ['Plasma Pistol. Canister Extended'] = '等離子手槍：擴容彈藥罐',
       ['Plasma Pistol. Canister Pistol'] = '等離子手槍：標準彈藥罐',
       ['Point of interest range'] = '興趣點探測範圍',
@@ -6531,6 +6723,8 @@ MOD.langs = {
       ['Projectiles with no trail:'] = '沒有軌跡的彈藥:',
       ['Prone speed (m/s)'] = '匍匐速度(米/秒)',
       ['Prospecting Drill'] = '勘探鑽機',
+      ['Pull at the lowest engine speed (x)'] = '最低轉速時的牽引力 (x)',
+      ['Pull at the top engine speed (x)'] = '最高轉速時的牽引力 (x)',
       ['Punisher'] = '制裁者',
       ['Punisher Plasma'] = '電漿制裁者',
       ['Purifier'] = '淨化者',
@@ -6585,9 +6779,12 @@ MOD.langs = {
       ['Rear brake strength'] = '後輪制動力',
       ['Rear cockpit'] = '後駕駛艙',
       ['Rear damping'] = '後懸掛阻尼',
+      ['Rear damping (compression)'] = '後懸掛阻尼 (壓縮)',
+      ['Rear damping (rebound)'] = '後懸掛阻尼 (回彈)',
       ['Rear sight range (m)'] = '後方視野距離（米）',
       ['Rear spring stiffness'] = '後懸掛剛度',
       ['Rear suspension travel'] = '後懸掛行程',
+      ['Rear suspension travel (m)'] = '後懸掛行程 (米)',
       ['Rear wheel grip'] = '後輪抓地力',
       ['Rear wheel radius (m)'] = '後輪半徑（米）',
       ['Recharge delay (s)'] = '重新充能延遲(秒)',
@@ -6614,6 +6811,7 @@ MOD.langs = {
       ['Reinforced Scout Strider'] = '強化偵察闊步者',
       ['Reinforcement Beacon'] = '增援信標',
       ['Reinforcement frequency (x)'] = '增援頻率 (x)',
+      ['Reinforcement regen time (s)'] = '增援恢復時間（秒）',
       ['Reinforcement size (x)'] = '增援規模 (x)',
       ['Reinforcements'] = '增援',
       ['Reinforcements (flares, breaches, drops)'] = '增援 (訊號彈、蟲潮、空投)',
@@ -6647,6 +6845,11 @@ MOD.langs = {
       ['Right'] = '右',
       ['Right arm'] = '右手臂',
       ['Right arm armor'] = '右手臂裝甲',
+      ['Right arm from (1-4)'] = '右臂來自 (1-4)',
+      ['Right arm from: Breakthrough'] = '右臂來自：Breakthrough',
+      ['Right arm from: Emancipator'] = '右臂來自：Emancipator',
+      ['Right arm from: Lumberer'] = '右臂來自：Lumberer',
+      ['Right arm from: Patriot'] = '右臂來自：Patriot',
       ['Right arm health'] = '右臂生命值',
       ['Right arm weakspot'] = '右手臂弱點',
       ['Right armor'] = '右裝甲',
@@ -6727,6 +6930,8 @@ MOD.langs = {
       ['Rocket Sentry'] = '哨戒火箭炮',
       ['Rocket fired (id)'] = '發射的火箭（ID）',
       ['Rocket pods'] = '火箭艙',
+      ['Roll from wheel forces (x)'] = '車輪力導致的側傾 (x)',
+      ['Roll inertia'] = '側傾慣性',
       ['Rooted (experimental)'] = '定身（實驗性）',
       ['Rotator'] = '轉子',
       ['Round 1 blast'] = '第 1 發爆炸',
@@ -6864,12 +7069,14 @@ MOD.langs = {
       ['Sentry: its cooldown, its body, then its weapon.'] = '哨戒炮：依次為冷卻時間、本體、武器。',
       ['Separate from the normal ground patrols. Does nothing on a mission without such a modifier.'] = '與普通地面巡邏分開。任務沒有此類修正條件時不起作用。',
       ['Servo-Assisted'] = '伺服輔助',
+      ['Set it low for nearly endless reinforcements.'] = '調低可獲得幾乎無限的增援。',
       ['Sets off mines'] = '會引爆地雷',
       ['Settings'] = '設定',
       ['Settings are saved at once, in config.txt with your changes.'] = '設定會與你的修改一併即時儲存到 config.txt。',
       ['Several vehicles of a kind'] = '同類載具數量',
       ['Shape'] = '形狀',
       ['Shared by every armor with this passive. Multipliers: 1 = no change.'] = '所有帶此被動的護甲共用。倍率：1 = 不變。',
+      ['Shares its levels: change their damage on the Double-Edge Sickle\'s page. Applies on Install.'] = '與其共用等級：在雙刃鐮刀頁面修改其傷害。安裝時生效。',
       ['Shares its name and description with the armor of this name: a change here changes both.'] = '與同名護甲共用名稱和描述：在此處修改會同時改變兩者。',
       ['Shear'] = '雷射剪',
       ['Shell fired (id)'] = '發射的炮彈（ID）',
@@ -6886,6 +7093,8 @@ MOD.langs = {
       ['Shield plate armor'] = '護盾板護甲',
       ['Shield plate health'] = '護盾板生命值',
       ['Shield zone'] = '護盾',
+      ['Shift down at (rpm)'] = '降擋轉速 (rpm)',
+      ['Shift up at (rpm)'] = '升擋轉速 (rpm)',
       ['Ship upgrades that make support weapons and sentries launch at once skip it (tested).'] = '讓支援武器和哨戒炮立即發射的艦船升級會跳過此倒計時（已由作者測試）。',
       ['Shockwave radius (m)'] = '衝擊波半徑(米)',
       ['Short Magazine'] = '短型彈匣',
@@ -6950,6 +7159,8 @@ MOD.langs = {
       ['Speargun'] = '矛槍',
       ['Speed until it has fired (m/s)'] = '開火前飛行速度（米/秒）',
       ['Speed while aiming (m/s)'] = '瞄準時速度(米/秒)',
+      ['Spin damping'] = '旋轉阻尼',
+      ['Spin damping in collisions'] = '碰撞時的旋轉阻尼',
       ['Spine lower'] = '下脊椎',
       ['Spine plate'] = '脊椎甲板',
       ['Spine roll back'] = '脊椎後部',
@@ -7006,6 +7217,8 @@ MOD.langs = {
       ['Status'] = '狀態',
       ['Status effects'] = '狀態效果',
       ['Statuses'] = '狀態效果',
+      ['Steering'] = '轉向',
+      ['Steering angle (deg)'] = '轉向角度 (度)',
       ['Stim Pistol'] = '治療槍',
       ['Stingray'] = '魟艦',
       ['Stoker'] = '爆燃者',
@@ -7050,6 +7263,7 @@ MOD.langs = {
       ['Surplus EAT Allocation'] = '剩餘EAT配給',
       ['Surviving lethal damage'] = '致命傷害存活機率',
       ['Suspension travel'] = '懸掛行程',
+      ['Suspension travel (m)'] = '懸掛行程 (米)',
       ['Swapping makes the shot the chosen weapon\'s, your edits to it included: damage,'] = '替換後使用所選武器的射彈，包含你對其傷害、',
       ['Sway multiplier'] = '晃動係數',
       ['Sweeper'] = '掃蕩者',
@@ -7083,10 +7297,12 @@ MOD.langs = {
       ['Tested releases only.'] = '僅限經過測試的正式版。',
       ['That did not work; see the log.'] = '操作失敗，請檢視日誌。',
       ['That is not a valid preset code.'] = '這不是有效的預設程式碼。',
+      ['That takes one of the 6 spots the Projectile swap rows also use.'] = '這會佔用射彈替換行也使用的 6 個位置之一。',
       ['That would make a loop of extra stratagems.'] = '此選擇會使額外戰略配備形成迴圈。',
       ['The Arbitrator\'s underbarrel shotgun, not the rifle itself.'] = '「仲裁者」的下掛霰彈槍，不是步槍本身。',
       ['The Defender SEAF soldiers carry. Not yours.'] = 'SEAF 士兵攜帶的「防衛者」。不是你的那把。',
       ['The EAT-17 SEAF soldiers carry. Not yours.'] = 'SEAF 士兵攜帶的 EAT-17。不是你的那把。',
+      ['The GATER\'s 600 (FRVs 5, tanks 15) is what holds it near 55 km/h.'] = 'GATER 的 600（FRV 為 5，坦克為 15）正是它只能跑約 55 km/h 的原因。',
       ['The MG-43 SEAF soldiers carry. Not yours.'] = 'SEAF 士兵攜帶的 MG-43。不是你的那把。',
       ['The One-Two\'s underbarrel launcher, not the rifle. Fires the GP-31\'s grenade.'] = '「么二」的下掛發射器，不是步槍本身。發射 GP-31 的榴彈。',
       ['The SMG you carry. Its underbarrel flamer is listed separately.'] = '你攜帶的衝鋒槍。其下掛火焰噴射器單獨列出。',
@@ -7100,6 +7316,9 @@ MOD.langs = {
       ['The beacon\'s timer still counts down the usual time (tested).'] = '信標仍顯示原本的倒計時（已由作者測試）。',
       ['The charge backpack, the charge and its blast. Cooldown: Stratagems tab.'] = '炸藥背包、炸藥包及其爆炸。冷卻時間見「戰略配備」頁。',
       ['The clipboard has no valid preset code.'] = '剪貼簿中沒有有效的預設程式碼。',
+      ['The engine speed where it changes to the next gear. Higher: holds each gear longer.'] = '升入下一擋的轉速。越高每個擋位保持越久。',
+      ['The engine speed where it drops a gear. Higher: drops sooner, so it keeps more pull on hills.'] = '降擋的轉速。越高越早降擋，爬坡時保留更多牽引力。',
+      ['The engine speed where it pulls hardest. Its pull falls off below and above it.'] = '牽引力最強的轉速，低於或高於此轉速牽引力都會下降。',
       ['The explosion the round sets off when it hits something. 0: no explosion.'] = '射彈命中物體時引發的爆炸。0：不爆炸。',
       ['The explosion the round sets off when its life time runs out before it hits anything. 0: no explosion.'] = '彈藥在命中任何目標之前壽命耗盡時觸發的爆炸。0:無爆炸。',
       ['The flamethrower you carry.'] = '你攜帶的火焰噴射器。',
@@ -7122,6 +7341,7 @@ MOD.langs = {
       ['The round goes off when it passes this close to an enemy, without hitting it. 0: off (the RL-77 uses 2 m).'] = '射彈從敵人這麼近的距離經過時即使沒有命中也會爆炸。0：關閉（RL-77 為 2 米）。',
       ['The round only bounces when it hits faster than this. Grenade launcher rounds use 20 m/s, most rounds 60 m/s.'] = '射彈只有在命中速度高於此值時才會彈開。榴彈發射器的射彈為 20 米/秒，大多數射彈為 60 米/秒。',
       ['The round only bounces when it hits further than this from head on (0 = head on, 90 = grazing).'] = '射彈只有在命中角度偏離正面超過此值時才會彈開（0 = 正面，90 = 擦過）。',
+      ['The same, right after it hits something. Higher: a crash spins it round less.'] = '同上，但作用於撞擊之後。越高撞擊後打轉越少。',
       ['The shot\'s trail and other effects belong to the chosen weapon.'] = '彈道尾跡和其他特效屬於所選武器。',
       ['The support hammer delivered by hellpod. The game data files it next to the Machete.'] = '由空投艙投送的支援錘。遊戲資料將它列在砍刀旁邊。',
       ['The support weapon. The CQC-73 is listed under Secondary.'] = '支援武器。CQC-73 列在「副武器」下。',
@@ -7172,6 +7392,7 @@ MOD.langs = {
       ['True Grit'] = '堅毅不屈',
       ['Tube Reddot 2x'] = '2倍紅點瞄具',
       ['Tube Reddot 2x Legacy'] = '舊式2倍管狀紅點瞄準鏡',
+      ['Turn inertia'] = '轉向慣性',
       ['Turn speed (x)'] = '轉向速度 (x)',
       ['Turn speed at cruise'] = '巡航轉向速率',
       ['Turn speed at slowest'] = '最慢轉向速率',
@@ -7269,13 +7490,17 @@ MOD.langs = {
       ['Wheel grip'] = '車輪抓地力',
       ['Wheel radius (m)'] = '車輪半徑（米）',
       ['Wheels'] = '車輪',
+      ['Where the engine\'s speed range starts. Higher: more pull from a stop, but it wastes the low end.'] = '引擎轉速範圍的起點。越高起步牽引力越大，但浪費了低轉速段。',
+      ['Which exosuit this arm comes from: 1 Patriot, 2 Emancipator, 3 Breakthrough, 4 Lumberer.'] = '此機臂來自哪台外骨骼：1 Patriot，2 Emancipator，3 Breakthrough，4 Lumberer。',
       ['Wind-down time (s)'] = '轉管減速時間（秒）',
       ['Wind-down time, released (s)'] = '鬆開扳機後減速時間（秒）',
       ['Wind-up'] = '轉管加速',
       ['Wind-up time (s)'] = '轉管加速時間（秒）',
       ['Wings'] = '翼',
+      ['With the air density, it caps the GATER\'s top speed.'] = '它與空氣密度一起限制了 GATER 的極速。',
       ['Wretch'] = '哀惡者',
       ['Xenobite Ardent'] = '熾燃地獄使者',
+      ['Yaw from wheel forces (x)'] = '車輪力導致的偏航 (x)',
       ['You are an insect, Helldiver.'] = '你只是一隻蟲子，絕地潛兵。',
       ['Your changes are off: turn them on in Settings to edit.'] = '你的改動當前處於關閉狀態：請在設定裡開啟後再編輯。',
       ['Your changes are off: turn them on in Settings to load a preset'] = '你的修改已關閉：請在設定中開啟後再讀取預設',
@@ -7301,6 +7526,7 @@ MOD.langs = {
       ['attachment items'] = '配件物品',
       ['backpack charges'] = '背包使用次數',
       ['beam weapon'] = '光束武器',
+      ['below 0: pressed down at speed'] = '低於 0：高速時被壓向地面',
       ['body parts without their own armor use this'] = '沒有自身護甲的身體部位使用此值',
       ['bull'] = '公牛',
       ['clip'] = '彈夾',
@@ -7316,6 +7542,7 @@ MOD.langs = {
       ['every enemy with this attack shares it'] = '所有擁有此攻擊的敵人共用',
       ['extra health for this part, it does not run out by itself'] = '該部位的額外生命值，不會自行流失',
       ['fake'] = '偽裝',
+      ['faster than this, it steers less'] = '超過此速度轉向變小',
       ['fire mode'] = '射擊模式',
       ['gloom'] = '幽暗',
       ['goes off on impact, but not before this'] = '撞擊時引爆，但不能早於此時間',
@@ -7326,7 +7553,11 @@ MOD.langs = {
       ['heavycannon'] = '重炮',
       ['hellpod rack'] = '空投艙掛架',
       ['hexagon'] = '六邊形',
+      ['higher: harder to reach top speed'] = '越高越難達到極速',
+      ['higher: harder to tip over'] = '越高越難翻車',
       ['higher: less bounce'] = '越高：彈跳越少',
+      ['higher: more air drag, a lower top speed'] = '越高空氣阻力越大，極速越低',
+      ['higher: stops spinning out sooner'] = '越高越快停止打轉',
       ['hit reactions, staggers and stuns'] = '受擊反應、踉蹌和眩暈',
       ['how close enemy fire must pass to shake your aim; 0: never'] = '敵方火力需掠過多近才會干擾你的瞄準；0：從不',
       ['how close your shots must land to rattle it'] = '你的射擊需落在多近才能干擾它',
@@ -7352,6 +7583,7 @@ MOD.langs = {
       ['how quickly the view follows your aim at this zoom; lower it if a high zoom spins the view'] = '此倍率下視野跟隨瞄準的速度；如果高倍率時視野旋轉，請調低',
       ['its height above its flight route; lower flies closer to the ground (terrain still holds it up)'] = '高於飛行路線的高度；越低越貼近地面（地形仍會托住它）',
       ['its own. - / + : fire another weapon\'s'] = '自身射彈。- / +：改為發射其他武器的射彈',
+      ['its own. 1 Patriot, 2 Emancipator, 3 Breakthrough, 4 Lumberer'] = '自身的。1 Patriot，2 Emancipator，3 Breakthrough，4 Lumberer',
       ['ivory legion assault'] = '象牙軍團突擊',
       ['ivory legion tier 2'] = '象牙軍團2級',
       ['jammer'] = '干擾器',
@@ -7363,7 +7595,10 @@ MOD.langs = {
       ['loadout package'] = '配裝包',
       ['lower (more negative): you go deeper before drowning starts'] = '越低（越負）：開始溺水前可以潛得越深',
       ['lower: a higher top speed in that gear, a weaker pull'] = '越低：該擋位最高速度越高，牽引越弱',
+      ['lower: bounces back faster'] = '越低迴彈越快',
+      ['lower: dips less when braking'] = '越低剎車時點頭越少',
       ['lower: harder to roll over'] = '越低：越難翻車',
+      ['lower: leans less in turns'] = '越低轉彎時傾斜越少',
       ['lower: softer, the body sags (at 1 it barely moves)'] = '越低越軟，車身下沉（為 1 時幾乎無法行駛）',
       ['lower: their shots land closer to where they aim (0: dead on)'] = '越低：射擊越接近瞄準點 (0：百發百中)',
       ['melee weapon'] = '近戰武器',
@@ -7371,6 +7606,7 @@ MOD.langs = {
       ['min charge'] = '最少充能',
       ['mine spawner'] = '地雷生成器',
       ['mine thrower'] = '佈雷器',
+      ['multiplies every gear; lower: faster, weaker pull'] = '作用於每個擋位；越低越快，牽引力越弱',
       ['negative: below level, -90 straight down'] = '負數：低於水平，-90 為正下方',
       ['no demolition tier there'] = '沒有對應的破壞等級',
       ['no shrapnel'] = '無破片',
@@ -7442,6 +7678,7 @@ MOD.langs = {
       ['what each hit applies; the slots go in order'] = '每次命中施加的狀態；狀態槽需按順序填寫',
       ['what it has left once its health is gone, lost over time'] = '生命值耗盡後剩餘的部分，隨時間流失',
       ['where it hangs when put away: 0 on the back, 1 on the hip'] = '收起時掛在哪裡：0 背部，1 腰部',
+      ['where it pulls hardest'] = '此轉速下牽引力最強',
       ['who it fights for: units of other sides attack it, and it attacks them'] = '它為誰而戰：其他陣營的單位會攻擊它，它也會攻擊它們',
       ['with the gears, sets the top speed'] = '與各擋位一起決定最高速度',
     },
@@ -7606,6 +7843,7 @@ MOD.langs = {
       ['a mounted copy run by ai (emplacement-style). not the one you carry.'] = '由 AI 操作的固定版本（炮台式）。不是你攜帶的那把。',
       ['a mounted copy. not the one you carry.'] = '固定版本。不是你攜帶的那把。',
       ['a preset keeps every change you have made as one set, under a name you choose.'] = '預設會把你所有的修改作為一組儲存，並取一個你指定的名字。',
+      ['a second ammo fires as many projectiles per shot as this weapon\'s own.'] = '第二種彈藥每次射擊的射彈數與此武器自身彈藥相同。',
       ['a settings table moved; scanning again'] = '設定資料表已移動，正在重新掃描',
       ['a table moved; scanning again'] = '資料表已移動，正在重新掃描',
       ['a/ac-8 autocannon sentry'] = 'A/AC-8 哨戒機炮',
@@ -9190,15 +9428,20 @@ MOD.langs = {
       ['9x70mm Super Uranium Core'] = 'С суперурановым сердечником 9x70 мм',
       ['A hellpod lands this many seconds plus its 4.75 s fall after the beacon, so 0 is the fastest it gets.'] = 'Капсула приземляется через столько секунд плюс 4,75 с падения после маяка, так что 0 быстрее всего.',
       ['A hit to the head costs this many times its damage. 1 = the same as the body.'] = 'Попадание в голову отнимает урон, умноженный на это число. 1 = как по телу.',
+      ['A limit: enemy reinforcements never come slower than this, even if a faction page asks for slower.'] = 'Предел: вражеские подкрепления не приходят реже этого, даже если на странице фракции задано реже.',
+      ['A limit: patrols never come slower than this, even if a faction page asks for slower.'] = 'Предел: патрули не приходят реже этого, даже если на странице фракции задано реже.',
       ['A mounted cannon with a seat, dropped by hellpod. Not the one you carry.'] = 'Станковое орудие с сиденьем, сбрасывается в Адской капсуле. Не то, что вы носите.',
       ['A mounted copy aimed by AI. Not the one you carry.'] = 'Станковая копия с наводкой ИИ. Не то, что вы носите.',
       ['A mounted copy run by AI (emplacement-style). Not the one you carry.'] = 'Станковая копия под управлением ИИ (как огневая позиция). Не то, что вы носите.',
       ['A mounted copy. Not the one you carry.'] = 'Станковая копия. Не то, что вы носите.',
       ['A pathetic creature of meat and bone.'] = 'Жалкое создание из мяса и костей.',
+      ['A preset file in the import folder was not imported. Fix the lines the log names and start SSEO again.'] = 'Файл пресета в папке import не импортирован. Исправьте строки, указанные в журнале, и снова запустите SSEO.',
       ['A preset keeps every change you have made as one set, under a name you choose.'] = 'Пресет хранит все ваши изменения одним набором под выбранным вами именем.',
       ['A preset keeps every enemy and spawning change as one custom difficulty, under a name you choose. Your weapon changes are kept apart.'] = 'Пресет хранит все изменения врагов и их появления как свой уровень сложности под выбранным вами именем. Изменения оружия хранятся отдельно.',
       ['A resupply box gives this many. An ammo box on the map gives half, rounded down (at least 1).'] = 'Ящик снабжения даёт столько. Ящик с боеприпасами на карте даёт половину с округлением вниз (минимум 1).',
       ['A resupply box gives this much. An ammo box on the map gives half, rounded down.'] = 'Ящик снабжения даёт столько. Ящик с боеприпасами на карте даёт половину с округлением вниз.',
+      ['A second SEAF wait: 80 to 100 seconds at x1. Probably the pause between waves of soldiers; the game only gives the name.'] = 'Второе ожидание СЕАФ: от 80 до 100 секунд при x1. Вероятно, пауза между волнами солдат; игра даёт только название.',
+      ['A second ammo fires as many projectiles per shot as this weapon\'s own.'] = 'Вторые патроны дают столько же снарядов за выстрел, сколько собственные патроны этого оружия.',
       ['A value changed on an enemy\'s own page stays red: this page leaves it as it is.'] = 'Значение, изменённое на странице самого врага, остаётся красным: эта страница его не трогает.',
       ['A weapon whose own Sway multiplier you changed keeps it. Sway this row changes shows in blue.'] = 'Оружие, у которого вы изменили свой Множитель колебания, сохраняет его. Колебание, изменённое этой строкой, показано синим.',
       ['A/AC-8 Autocannon Sentry'] = 'A/AC-8 «Турель с автопушкой»',
@@ -9242,6 +9485,7 @@ MOD.langs = {
       ['AX/FLAM-75 "Guard Dog" Hot Dog'] = 'AX/FLAM-75 «Сторожевой пес» Хот-дог',
       ['AX/LAS-5 "Guard Dog" Rover'] = 'AX/LAS-5 «Сторожевой пес» Аппарат',
       ['AX/TX-13 "Guard Dog" Dog Breath'] = 'AX/TX-13 «Сторожевой пес» Вонючка',
+      ['Above this speed the wheels turn less and less. Raise it to keep steering at high speed.'] = 'Выше этой скорости колёса поворачиваются всё меньше. Поднимите, чтобы рулить на высокой скорости.',
       ['Acceleration (m/s2)'] = 'Ускорение (м/с^2)',
       ['Accelerator Rifle'] = 'Акселераторная винтовка',
       ['Acclimated'] = 'Акклиматизированный',
@@ -9265,6 +9509,7 @@ MOD.langs = {
       ['Aim steadies again after (s)'] = 'Прицел восстанавливается через (с)',
       ['Aim zoom (x)'] = 'Увеличение при прицеливании (x)',
       ['Aiming sway'] = 'Покачивание при прицеливании',
+      ['Air density'] = 'Плотность воздуха',
       ['Airborne'] = 'десант',
       ['Airburst Rocket Launcher'] = '«Ракетница с подрывом в воздухе»',
       ['All'] = 'Всё',
@@ -9322,6 +9567,7 @@ MOD.langs = {
       ['Armor penetration'] = 'Бронепробиваемость',
       ['Armor weight'] = 'Вес брони',
       ['Armors'] = 'Броня',
+      ['Arms'] = 'Руки',
       ['Ask'] = 'Спрашивать',
       ['Assassinate'] = 'убийца',
       ['Assault'] = 'штурм',
@@ -9387,6 +9633,7 @@ MOD.langs = {
       ['Beams per barrel'] = 'Лучей на ствол',
       ['Belt-Fed Grenade Launcher'] = 'Ленточный гранатомет',
       ['Berserker'] = 'Берсерк',
+      ['Best engine speed (rpm)'] = 'Оптимальные обороты (об/мин)',
       ['Better stratagem bounce'] = 'Улучшенный отскок стратагем',
       ['Big walker cannon'] = 'Пушка шатуна',
       ['Bigger wheels: a higher top speed and more room under the body, but a weaker pull.'] = 'Колёса больше: выше максимальная скорость и больше просвет, но слабее тяга.',
@@ -9513,6 +9760,7 @@ MOD.langs = {
       ['Charges'] = 'Заряды',
       ['Charges from resupply'] = 'Заряды из пополнения',
       ['Charging speed (m/s)'] = 'Скорость рывка (м/с)',
+      ['Chassis'] = 'Шасси',
       ['Chemical Backpack'] = 'Рюкзак с химикатами',
       ['Chest'] = 'Грудь',
       ['Chest bleeding damage'] = 'Урон от кровотечения в груди',
@@ -9526,6 +9774,11 @@ MOD.langs = {
       ['Click again'] = 'Нажмите ещё раз',
       ['Click again to overwrite'] = 'Нажмите еще раз, чтобы перезаписать',
       ['Click again within 4 seconds to end the game. Unsaved progress is lost.'] = 'Нажмите ещё раз в течение 4 секунд, чтобы закрыть игру. Несохранённый прогресс будет потерян.',
+      ['Client-sided only: in a lobby it counts for your own shots, not other players\'.'] = 'Только на клиенте: в лобби это действует на ваши выстрелы, но не на выстрелы других игроков.',
+      ['Client-sided only: other players may keep the game\'s normal radius.'] = 'Только на клиенте: у других игроков радиус может остаться обычным.',
+      ['Client-sided only: other players may see the game\'s normal shots.'] = 'Только на клиенте: другие игроки могут видеть обычные выстрелы игры.',
+      ['Client-sided only: other players see the normal animation; attack timing may follow the host.'] = 'Только на клиенте: другие игроки видят обычную анимацию; время атак может зависеть от хоста.',
+      ['Client-sided only: other players see the normal size; reach may follow the host.'] = 'Только на клиенте: другие игроки видят обычный размер; дальность атак может зависеть от хоста.',
       ['Climb acceleration'] = 'Ускорение подъема',
       ['Climb multiplier (horizontal)'] = 'Множитель подъема (по горизонтали)',
       ['Climb multiplier (vertical)'] = 'Множитель подъема (по вертикали)',
@@ -9535,6 +9788,7 @@ MOD.langs = {
       ['Close all'] = 'Закрыть все',
       ['Close game'] = 'Закрыть игру',
       ['Cluster Bomb'] = 'Кластерная бомба',
+      ['Clutch slip (rpm)'] = 'Пробуксовка сцепления (об/мин)',
       ['Cognitive Disruptor'] = 'Искажатель разума',
       ['Collision'] = 'Корпус',
       ['Combat Hatchet'] = 'Боевой топорик',
@@ -9595,6 +9849,8 @@ MOD.langs = {
       ['Damage ticks per minute'] = 'Тиков урона в минуту',
       ['Damage to you'] = 'Урон вам',
       ['Damping'] = 'Демпфирование',
+      ['Damping (compression)'] = 'Демпфирование (сжатие)',
+      ['Damping (rebound)'] = 'Демпфирование (отбой)',
       ['Dark Fluid burst'] = 'Выплеск тёмной жидкости',
       ['De-Escalator'] = 'Деэскалатор',
       ['Dead Sprint'] = 'Смертельный рывок',
@@ -9626,7 +9882,9 @@ MOD.langs = {
       ['Done'] = 'Готово',
       ['Double Freedom'] = 'Двойная свобода',
       ['Double-Edge Sickle'] = 'Обоюдоострый серп',
+      ['Double-Edge Sickle heat ramp'] = 'Нагрев как у Обоюдоострого серпа',
       ['Down'] = 'Вниз',
+      ['Drag coefficient'] = 'Коэффициент сопротивления',
       ['Drag factor'] = 'Коэффициент сопротивления',
       ['Dragonroach'] = 'Дракоракан',
       ['Drift from the last shell, least (m)'] = 'Смещение от прошлого снаряда, мин. (м)',
@@ -9698,6 +9956,10 @@ MOD.langs = {
       ['Enemy detection range'] = 'Дальность обнаружения врагов',
       ['Enemy shots count within (m)'] = 'Вражеские выстрелы считаются в пределах (м)',
       ['Enemy.'] = 'Враг.',
+      ['Engine'] = 'Двигатель',
+      ['Engine drag at the best speed'] = 'Сопротивление двигателя на оптимальных оборотах',
+      ['Engine drag at the lowest speed'] = 'Сопротивление двигателя на минимальных оборотах',
+      ['Engine drag at the top speed'] = 'Сопротивление двигателя на максимальных оборотах',
       ['Engine front'] = 'Передний двигатель',
       ['Engine rear'] = 'Задний двигатель',
       ['Engine rear weakspot'] = 'Задняя слабая точка двигателя',
@@ -9769,6 +10031,7 @@ MOD.langs = {
       ['Field width (m)'] = 'Ширина поля (м)',
       ['Fighting speed (m/s)'] = 'Скорость в бою (м/с)',
       ['Fin front'] = 'Передний плавник',
+      ['Final drive ratio'] = 'Главная передача',
       ['Finding the stats...'] = 'Поиск характеристик...',
       ['Fire'] = 'Огонь',
       ['Fire damage taken'] = 'Получаемый урон от огня',
@@ -9778,6 +10041,8 @@ MOD.langs = {
       ['Fire rate (x)'] = 'Скорострельность (x)',
       ['Fire/gas/acid/arc damage taken'] = 'Получаемый урон от огня/газа/кислоты/дуги',
       ['Firebomb Hellpods'] = 'Зажигательные Адские Капсулы',
+      ['Fires the Double-Edge Sickle\'s stronger shots as it heats up, and hurts you near overheat.'] = 'Стреляет усиленными выстрелами Обоюдоострого серпа по мере нагрева и ранит вас перед перегревом.',
+      ['Firing it standing no longer knocks you down or hurts you.'] = 'Стрельба стоя больше не сбивает с ног и не ранит.',
       ['First shell (id)'] = 'Первый снаряд (id)',
       ['Flame Sentry'] = 'Турель-огнемет',
       ['Flames'] = 'Горючая смесь',
@@ -9795,16 +10060,21 @@ MOD.langs = {
       ['Folder'] = 'Папка',
       ['Folder path copied.'] = 'Путь к папке скопирован.',
       ['Foliage pass-through'] = 'Пролёт сквозь листву',
+      ['For very few patrols, lower this as well as Patrol frequency on the faction page.'] = 'Чтобы патрулей было совсем мало, снизьте и это, и частоту патрулей на странице фракции.',
+      ['For very few reinforcements, lower this as well as Reinforcement frequency on the faction page.'] = 'Чтобы подкреплений было совсем мало, снизьте и это, и частоту подкреплений на странице фракции.',
       ['Fortified'] = 'Укрепление',
       ['Forward share of the launch (0-1)'] = 'Доля толчка вперед (0-1)',
       ['Found in the game data (not in the built-in list).'] = 'Найдено в данных игры (нет во встроенном списке).',
       ['Frag'] = '«Осколочная»',
       ['From supply'] = 'Из снабжения',
       ['Front'] = 'Передняя часть',
+      ['Front area (m2)'] = 'Площадь лобовой части (м2)',
       ['Front armor'] = 'Передняя броня',
       ['Front body'] = 'Переднее тело',
       ['Front brake strength'] = 'Тормоза передних колёс',
       ['Front damping'] = 'Демпфирование спереди',
+      ['Front damping (compression)'] = 'Демпфирование спереди (сжатие)',
+      ['Front damping (rebound)'] = 'Демпфирование спереди (отбой)',
       ['Front face'] = 'Передняя грань',
       ['Front grip lower than the rear: it turns wide. Rear lower than the front: the back slides out.'] = 'Перед держит хуже зада: машина идёт по широкой дуге. Зад хуже переда: заносит заднюю часть.',
       ['Front hull'] = 'Передняя часть корпуса',
@@ -9814,11 +10084,13 @@ MOD.langs = {
       ['Front right wheel hub'] = 'Ступица переднего правого колеса',
       ['Front spring stiffness'] = 'Жёсткость передней подвески',
       ['Front suspension travel'] = 'Ход передней подвески',
+      ['Front suspension travel (m)'] = 'Ход передней подвески (м)',
       ['Front wheel grip'] = 'Сцепление передних колёс',
       ['Front wheel radius (m)'] = 'Радиус передних колёс (м)',
       ['Full charge'] = 'Полный заряд',
       ['Full charge explosion'] = 'Взрыв с полным зарядом',
       ['Full charge shot'] = 'Выстрел с полным зарядом',
+      ['Full steering up to (m/s)'] = 'Полный поворот до (м/с)',
       ['Fuse time (s)'] = 'Время запала (с)',
       ['Fusion Autocannon'] = 'Термоядерная автопушка',
       ['Fusion Repeater'] = 'Термоядерный повторитель',
@@ -9943,7 +10215,10 @@ MOD.langs = {
       ['High Dissipation Heatsink'] = 'Высокоэффективный радиатор',
       ['High Explosive'] = '«Фугасная»',
       ['High-Velocity Shrapnel'] = 'Высокоскоростной снаряд со шрапнелью',
+      ['Higher means a longer wait, so they come slower. x2 is 160 to 200 seconds.'] = 'Больше значит дольше ждать, поэтому они приходят медленнее. x2: от 160 до 200 секунд.',
+      ['Higher means a longer wait, so they come slower. x2 is 310 to 330 seconds.'] = 'Больше значит дольше ждать, поэтому они приходят медленнее. x2: от 310 до 330 секунд.',
       ['Higher: a stiffer ride, less lean in turns, bumps kick harder.'] = 'Больше: жёстче ход, меньше крен в поворотах, кочки бьют сильнее.',
+      ['Higher: easier starts from a stop and on hills. Lower: a more direct pull.'] = 'Выше: легче трогаться с места и в гору. Ниже: тяга прямее.',
       ['Higher: leans more and tips over in sharp turns.'] = 'Выше: сильнее кренится и опрокидывается в крутых поворотах.',
       ['Higher: stops in a shorter distance. Too high locks the wheels, and it skids instead of stopping.'] = 'Больше: короче тормозной путь. Слишком много: колёса блокируются, и машину заносит.',
       ['Highest ledge it climbs (m)'] = 'Макс. высота уступа для подъёма (м)',
@@ -9969,18 +10244,38 @@ MOD.langs = {
       ['Hover speed (m/s)'] = 'Скорость парения (м/с)',
       ['Hover time, full-speed climb (s)'] = 'Парение: быстрый подъем (с)',
       ['Hover time, holding height (s)'] = 'Парение: удержание высоты (с)',
+      ['How badly its shape cuts through the air. Higher: more air drag, a lower top speed.'] = 'Насколько плохо форма режет воздух. Выше: больше сопротивление, ниже максимальная скорость.',
+      ['How big the vehicle is to the air. Higher: more air drag, a lower top speed.'] = 'Насколько машина большая для воздуха. Выше: больше сопротивление, ниже максимальная скорость.',
       ['How close the view gets when you aim: 1 is the normal view, 2 twice as close, 4 four times.'] = 'Насколько приближается вид при прицеливании: 1 — обычный вид, 2 — вдвое ближе, 4 — вчетверо.',
       ['How close this zoom step looks: 1 is the normal view, 2 twice as close, 4 four times.'] = 'Насколько приближает эта ступень: 1 обычный вид, 2 в два раза ближе, 4 в четыре раза.',
+      ['How far the engine speed can run ahead of the wheels before the clutch grips.'] = 'Насколько обороты могут обогнать колёса, прежде чем сцепление схватит.',
+      ['How far the front wheels turn. Higher: tighter turns at low speed.'] = 'Насколько поворачиваются передние колёса. Выше: круче повороты на малой скорости.',
+      ['How fast a spin dies down on its own. Higher: stops spinning out sooner.'] = 'Как быстро само гаснет вращение. Выше: быстрее выходит из заноса.',
       ['How fast the engine may spin before it stops pulling. Higher: a higher top speed in every gear,'] = 'До каких оборотов двигатель продолжает тянуть. Больше: выше максимальная скорость на всех передачах,',
+      ['How fast the springs push back out after a bump. Higher: they come back slowly, a calmer ride.'] = 'Как быстро пружины разжимаются после удара. Выше: медленнее, езда спокойнее.',
       ['How fast the springs settle after a bump. Higher: settles at once, a firmer ride.'] = 'Как быстро подвеска успокаивается после кочки. Больше: сразу, ход жёстче.',
       ['How fast their animations play. Most attacks follow the animation, so they come sooner or later too.'] = 'Как быстро проигрываются их анимации. Большинство атак следуют анимации, поэтому они тоже происходят раньше или позже.',
+      ['How hard it is to roll it onto its side. Higher: harder to tip over in turns and blasts.'] = 'Насколько трудно завалить машину на бок. Выше: труднее опрокинуть в поворотах и от взрывов.',
+      ['How hard it is to start or stop turning. Too low on a heavy vehicle makes turns stutter.'] = 'Насколько трудно начать или прекратить поворот. Слишком мало на тяжёлой машине: повороты дёргаются.',
+      ['How hard it is to tip it nose up or down. Higher: steadier over bumps and jumps.'] = 'Насколько трудно наклонить машину носом вверх или вниз. Выше: устойчивее на кочках и прыжках.',
       ['How hard the engine pushes. Higher: faster acceleration and steeper hills, but more wheelspin.'] = 'Сила тяги двигателя. Больше: быстрее разгон и круче подъёмы, но больше пробуксовки.',
       ['How high the balance point sits. Lower (even below 0): stays flat in hard turns and over rocks.'] = 'Высота центра тяжести. Ниже (даже меньше 0): держится ровно в резких поворотах и на камнях.',
+      ['How long SEAF waits before sending more soldiers: 155 to 165 seconds at x1.'] = 'Сколько СЕАФ ждёт перед отправкой новых солдат: от 155 до 165 секунд при x1.',
       ['How long the round waits after the hit (or after the blast proximity trips) before it goes off.'] = 'Сколько снаряд ждёт после попадания (или после срабатывания дистанции подрыва), прежде чем взорваться.',
       ['How many bombs one run drops and how they land. The bombs stay this Eagle\'s own.'] = 'Сколько бомб сбрасывает один заход и как они ложатся. Бомбы остаются своими для этого «Орла».',
       ['How many times the round can bounce off a surface. 0: it never bounces back at you.'] = 'Сколько раз снаряд может отскочить от поверхности. 0: он никогда не отскочит обратно в вас.',
+      ['How much of the engine torque it has at its lowest speed. Higher: stronger off the line and on hills.'] = 'Сколько крутящего момента на минимальных оборотах. Выше: сильнее с места и в гору.',
+      ['How much of the engine torque it keeps at its top speed. Higher: keeps speeding up near the top.'] = 'Сколько крутящего момента остаётся на максимальных оборотах. Выше: продолжает разгоняться у предела.',
+      ['How much speeding up and braking tip the nose. Lower: stays level when it brakes or speeds up.'] = 'Насколько разгон и торможение наклоняют нос. Ниже: остаётся ровным.',
+      ['How much the air lifts it at speed. Above 0: lighter and floatier when fast. Below 0: pressed down, more grip.'] = 'Насколько воздух поднимает машину на скорости. Выше 0: легче на скорости. Ниже 0: прижимается, больше сцепления.',
+      ['How much the engine holds itself back at its best speed. Higher: weaker acceleration overall.'] = 'Насколько двигатель сдерживает себя на оптимальных оборотах. Выше: слабее разгон в целом.',
+      ['How much the engine holds itself back at its lowest speed. Higher: slower to get going.'] = 'Насколько двигатель сдерживает себя на минимальных оборотах. Выше: медленнее трогается.',
+      ['How much the engine holds itself back near its top speed. Higher: it struggles to reach it.'] = 'Насколько двигатель сдерживает себя у максимальных оборотов. Выше: ему труднее их достичь.',
+      ['How much the wheels’ forces lean the body in turns. Lower: stays flatter and harder to roll.'] = 'Насколько силы колёс кренят корпус в поворотах. Ниже: ровнее и труднее опрокинуть.',
+      ['How much the wheels’ forces swing it round. Lower: steadier, less likely to spin out.'] = 'Насколько силы колёс разворачивают машину. Ниже: устойчивее, реже срывается в занос.',
       ['How much this gear multiplies the engine. Higher: stronger pull, but it tops out sooner.'] = 'Во сколько раз передача усиливает двигатель. Больше: сильнее тяга, но раньше упирается в предел.',
       ['How quickly the scoped view catches up when you move your aim at this zoom (0.6 on most optics).'] = 'Как быстро вид в прицеле догоняет наведение на этом увеличении (0,6 у большинства прицелов).',
+      ['How thick the air is for this vehicle. Higher: more air drag, a lower top speed.'] = 'Насколько плотный воздух для этой машины. Выше: больше сопротивление, ниже максимальная скорость.',
       ['How well the tyres hold the ground. Higher: sharper turns, less sliding and wheelspin.'] = 'Насколько шины держат дорогу. Больше: круче повороты, меньше заносов и пробуксовки.',
       ['Hulk'] = 'Глыба',
       ['Hulk Bruiser'] = 'Глыба-крушитель',
@@ -10019,6 +10314,7 @@ MOD.langs = {
       ['Inner torso'] = 'Внутренний торс',
       ['Insides'] = 'Внутренности',
       ['Install into the game'] = 'Установить в игру',
+      ['Install loads the chosen arm\'s exosuit into every mission, so its model shows.'] = 'Установка загружает экзокостюм выбранной руки в каждую миссию, чтобы была видна её модель.',
       ['Install loads up to 6 such weapons into every mission, so nobody has to bring them. A support weapon brings its own.'] = 'Установка загружает до 6 таких видов оружия в каждую миссию, так что брать их не нужно. Оружие поддержки приносит своё сам.',
       ['Installed, but not everything fits. Some projectiles may show no trail, and some Always bring it stratagems stay out of missions.'] = 'Установлено, но поместилось не всё. У некоторых снарядов может не быть следа, а часть стратагем «Брать всегда» не попадёт в миссии.',
       ['Installing: finding what changed...'] = 'Установка: поиск изменений...',
@@ -10094,6 +10390,11 @@ MOD.langs = {
       ['Left'] = 'Слева',
       ['Left arm'] = 'Левая рука',
       ['Left arm armor'] = 'Броня левой руки',
+      ['Left arm from (1-4)'] = 'Левая рука от (1-4)',
+      ['Left arm from: Breakthrough'] = 'Левая рука от: Breakthrough',
+      ['Left arm from: Emancipator'] = 'Левая рука от: Emancipator',
+      ['Left arm from: Lumberer'] = 'Левая рука от: Lumberer',
+      ['Left arm from: Patriot'] = 'Левая рука от: Patriot',
       ['Left arm health'] = 'Здоровье левой руки',
       ['Left arm weakspot'] = 'Слабая точка левой руки',
       ['Left armor'] = 'Левая броня',
@@ -10171,6 +10472,7 @@ MOD.langs = {
       ['Left wrist blade'] = 'Клинок на левом запястье',
       ['Leg injury immunity (1 on)'] = 'Иммунитет к ранению ног (1 — вкл.)',
       ['Less: bumps go straight into the body and it wobbles.'] = 'Меньше: кочки бьют прямо в корпус, и он раскачивается.',
+      ['Less: bumps go straight into the body.'] = 'Меньше: удары идут прямо в корпус.',
       ['Leveller'] = 'Уравнитель',
       ['Leviathan'] = 'Левиафан',
       ['Leviathan bomb'] = 'Бомба левиафана',
@@ -10182,6 +10484,7 @@ MOD.langs = {
       ['Liberator Legacy'] = '«Классический освободитель»',
       ['Liberator Penetrator'] = '«Пробойный освободитель»',
       ['Lifetime (s)'] = 'Время жизни (с)',
+      ['Lift coefficient'] = 'Коэффициент подъёмной силы',
       ['Light armor'] = 'Лёгкая броня',
       ['Light, medium or heavy, per armor (every armor set with that name).'] = 'Лёгкая, средняя или тяжёлая, для каждой брони (все комплекты с этим названием).',
       ['Lighter: quicker off the line, but bounces over bumps and gets thrown around by explosions.'] = 'Легче: резвее с места, но подпрыгивает на кочках, и его отбрасывает взрывами.',
@@ -10199,9 +10502,12 @@ MOD.langs = {
       ['Lower back'] = 'Нижняя спина',
       ['Lower it if a high zoom spins the view.'] = 'Уменьшите, если на большом увеличении вид крутится.',
       ['Lower spine'] = 'Нижний хребет',
+      ['Lower: a higher top speed, if the engine can pull it.'] = 'Ниже: выше максимальная скорость, если двигателю хватит сил.',
       ['Lower: a softer ride, the body leans in turns and sags.'] = 'Меньше: мягче ход, корпус кренится в поворотах и проседает.',
       ['Lower: faster in this gear, weaker on hills and from a stop.'] = 'Меньше: быстрее на этой передаче, слабее в гору и с места.',
       ['Lower: keeps bouncing after every bump.'] = 'Меньше: раскачивается после каждой кочки.',
+      ['Lower: the wheels spring back fast and the body bounces.'] = 'Ниже: колёса быстро отскакивают, и корпус подпрыгивает.',
+      ['Lowest engine speed (rpm)'] = 'Минимальные обороты (об/мин)',
       ['Lowest patrol frequency (x)'] = 'Минимальная частота патрулей (x)',
       ['Lowest rates'] = 'Нижние пределы частоты',
       ['Lowest reinforcement frequency (x)'] = 'Минимальная частота подкреплений (x)',
@@ -10294,6 +10600,7 @@ MOD.langs = {
       ['Movement'] = 'Передвижение',
       ['Movement speed (multiplier)'] = 'Скорость движения (множитель)',
       ['Movement speed (x)'] = 'Скорость передвижения (x)',
+      ['Multiplies every gear. Higher: stronger pull and steeper hills, a lower top speed.'] = 'Умножает все передачи. Выше: сильнее тяга и круче подъёмы, ниже максимальная скорость.',
       ['Muzzle'] = 'Дуло',
       ['Muzzle brake'] = 'Дульный тормоз',
       ['Name'] = 'Название',
@@ -10310,6 +10617,7 @@ MOD.langs = {
       ['No changes: loading it puts every value back to the game\'s.'] = 'Изменений нет: загрузка вернет все значения игры.',
       ['No description'] = 'Без описания',
       ['No free preset place: delete one first.'] = 'Нет свободного места: сначала удалите пресет.',
+      ['No knockdown when standing'] = 'Без падения при стрельбе стоя',
       ['No other vehicle has this section.'] = 'Ни у какой другой техники нет этого раздела.',
       ['No page in this editor uses this id.'] = 'Ни одна страница редактора не использует этот id.',
       ['No passive.'] = 'Нет пассивки.',
@@ -10347,6 +10655,7 @@ MOD.langs = {
       ['On: your '] = 'Вкл: ваши ',
       ['On: your arc chain length / split apply with other players too (arcs can stay on screen).'] = 'Вкл: ваши длина и разветвление цепи дуги действуют и с другими игроками (дуги могут оставаться на экране).',
       ['On: your rockets, launcher rounds and stratagem ordnance fly through tree canopies and bushes.'] = 'Вкл.: ваши ракеты, снаряды и боеприпасы стратагем пролетают сквозь кроны деревьев и кусты.',
+      ['Once your reinforcements run out, one comes back after this long: 120 seconds by default.'] = 'Когда подкрепления закончились, одно возвращается через это время: по умолчанию 120 секунд.',
       ['One True Flag'] = 'Один истинный флаг',
       ['One-Two'] = 'Двоечка',
       ['One-handed'] = 'Одной рукой',
@@ -10449,6 +10758,8 @@ MOD.langs = {
       ['Pilot light goes out after (s)'] = 'Запальник гаснет через (с)',
       ['Pilot seat'] = 'Кресло пилота',
       ['Pineapple'] = 'Лимонка',
+      ['Pitch from wheel forces (x)'] = 'Тангаж от сил колёс (x)',
+      ['Pitch inertia'] = 'Инерция тангажа',
       ['Plasma Pistol. Canister Extended'] = 'Плазменный пистолет. Увеличенный баллон',
       ['Plasma Pistol. Canister Pistol'] = 'Плазменный пистолет. Стандартный баллон',
       ['Point of interest range'] = 'Дальность точек интереса',
@@ -10473,6 +10784,8 @@ MOD.langs = {
       ['Projectiles per shot'] = 'Снарядов за выстрел',
       ['Projectiles with no trail:'] = 'Снаряды без следа:',
       ['Prone speed (m/s)'] = 'Скорость ползком (м/с)',
+      ['Pull at the lowest engine speed (x)'] = 'Тяга на минимальных оборотах (x)',
+      ['Pull at the top engine speed (x)'] = 'Тяга на максимальных оборотах (x)',
       ['Punisher'] = '«Каратель»',
       ['Punisher Plasma'] = '«Плазменный каратель»',
       ['Purifier'] = '«Очиститель»',
@@ -10525,9 +10838,12 @@ MOD.langs = {
       ['Rear brake strength'] = 'Тормоза задних колёс',
       ['Rear cockpit'] = 'Задняя кабина',
       ['Rear damping'] = 'Демпфирование сзади',
+      ['Rear damping (compression)'] = 'Демпфирование сзади (сжатие)',
+      ['Rear damping (rebound)'] = 'Демпфирование сзади (отбой)',
       ['Rear sight range (m)'] = 'Дальность заднего зрения (м)',
       ['Rear spring stiffness'] = 'Жёсткость задней подвески',
       ['Rear suspension travel'] = 'Ход задней подвески',
+      ['Rear suspension travel (m)'] = 'Ход задней подвески (м)',
       ['Rear wheel grip'] = 'Сцепление задних колёс',
       ['Rear wheel radius (m)'] = 'Радиус задних колёс (м)',
       ['Recharge delay (s)'] = 'Задержка восстановления (с)',
@@ -10553,6 +10869,7 @@ MOD.langs = {
       ['Reinforced Epaulettes'] = 'Армированные эполеты',
       ['Reinforced Scout Strider'] = 'Укрепленный шатун-разведчик',
       ['Reinforcement frequency (x)'] = 'Частота подкреплений (x)',
+      ['Reinforcement regen time (s)'] = 'Время восстановления подкреплений (с)',
       ['Reinforcement size (x)'] = 'Размер подкреплений (x)',
       ['Reinforcements'] = 'Подкрепления',
       ['Reinforcements (flares, breaches, drops)'] = 'Подкрепления (сигнальные ракеты, прорывы, десанты)',
@@ -10585,6 +10902,11 @@ MOD.langs = {
       ['Right'] = 'Справа',
       ['Right arm'] = 'Правая рука',
       ['Right arm armor'] = 'Броня правой руки',
+      ['Right arm from (1-4)'] = 'Правая рука от (1-4)',
+      ['Right arm from: Breakthrough'] = 'Правая рука от: Breakthrough',
+      ['Right arm from: Emancipator'] = 'Правая рука от: Emancipator',
+      ['Right arm from: Lumberer'] = 'Правая рука от: Lumberer',
+      ['Right arm from: Patriot'] = 'Правая рука от: Patriot',
       ['Right arm health'] = 'Здоровье правой руки',
       ['Right arm weakspot'] = 'Слабая точка правой руки',
       ['Right armor'] = 'Правая броня',
@@ -10665,6 +10987,8 @@ MOD.langs = {
       ['Rocket Sentry'] = '«Ракетная турель»',
       ['Rocket fired (id)'] = 'Ракета (id)',
       ['Rocket pods'] = 'Ракетные блоки',
+      ['Roll from wheel forces (x)'] = 'Крен от сил колёс (x)',
+      ['Roll inertia'] = 'Инерция крена',
       ['Rooted (experimental)'] = 'Обездвиживание (эксперимент.)',
       ['Rotator'] = 'Ротор',
       ['Round 1 blast'] = 'Взрыв выстрела 1',
@@ -10792,12 +11116,14 @@ MOD.langs = {
       ['Sentry: its cooldown, its body, then its weapon.'] = 'Турель: перезарядка, корпус, затем оружие.',
       ['Separate from the normal ground patrols. Does nothing on a mission without such a modifier.'] = 'Отдельно от обычных наземных патрулей. Без такого модификатора на миссии ничего не меняет.',
       ['Servo-Assisted'] = 'Сервопривод',
+      ['Set it low for nearly endless reinforcements.'] = 'Поставьте поменьше, чтобы подкрепления были почти бесконечными.',
       ['Sets off mines'] = 'Подрывает мины',
       ['Settings'] = 'Настройки',
       ['Settings are saved at once, in config.txt with your changes.'] = 'Настройки сохраняются сразу, в config.txt вместе с вашими изменениями.',
       ['Several vehicles of a kind'] = 'Несколько машин одного вида',
       ['Shape'] = 'Форма',
       ['Shared by every armor with this passive. Multipliers: 1 = no change.'] = 'Общее для всей брони с этим эффектом. Множители: 1 = без изменений.',
+      ['Shares its levels: change their damage on the Double-Edge Sickle\'s page. Applies on Install.'] = 'Уровни общие с ним: меняйте их урон на странице Обоюдоострого серпа. Применяется при установке.',
       ['Shares its name and description with the armor of this name: a change here changes both.'] = 'Название и описание общие с бронёй с этим названием: изменение здесь меняет оба.',
       ['Shear'] = 'Ножницы',
       ['Shell fired (id)'] = 'Снаряд (id)',
@@ -10813,6 +11139,8 @@ MOD.langs = {
       ['Shield plate armor'] = 'Броня щита',
       ['Shield plate health'] = 'Здоровье щита',
       ['Shield zone'] = 'Щит',
+      ['Shift down at (rpm)'] = 'Понижение передачи при (об/мин)',
+      ['Shift up at (rpm)'] = 'Повышение передачи при (об/мин)',
       ['Ship upgrades that make support weapons and sentries launch at once skip it (tested).'] = 'Улучшения корабля, при которых оружие поддержки и турели отправляются сразу, его пропускают (проверено).',
       ['Shockwave radius (m)'] = 'Радиус ударной волны (м)',
       ['Short Magazine'] = 'Короткий магазин',
@@ -10873,6 +11201,8 @@ MOD.langs = {
       ['Spear'] = 'Копье',
       ['Speargun'] = 'Гарпун',
       ['Speed while aiming (m/s)'] = 'Скорость при прицеливании (м/с)',
+      ['Spin damping'] = 'Гашение вращения',
+      ['Spin damping in collisions'] = 'Гашение вращения при столкновениях',
       ['Spine lower'] = 'Нижний хребет',
       ['Spine plate'] = 'Пластина хребта',
       ['Spine roll back'] = 'Задняя часть хребта',
@@ -10927,6 +11257,8 @@ MOD.langs = {
       ['Stationary Shroud'] = 'Неподвижный покров',
       ['Status effects'] = 'Состояния',
       ['Statuses'] = 'Эффекты',
+      ['Steering'] = 'Рулевое управление',
+      ['Steering angle (deg)'] = 'Угол поворота колёс (°)',
       ['Stim Pistol'] = 'Стим-пистолет',
       ['Stingray'] = 'Хвостокол',
       ['Stoker'] = 'Топка',
@@ -10970,6 +11302,7 @@ MOD.langs = {
       ['Surplus EAT Allocation'] = 'Выдача излишков «ОБ»',
       ['Surviving lethal damage'] = 'Выживание при смертельном уроне',
       ['Suspension travel'] = 'Ход подвески',
+      ['Suspension travel (m)'] = 'Ход подвески (м)',
       ['Sway multiplier'] = 'Множитель колебания',
       ['Sweeper'] = 'Чистильщик',
       ['Swim speed (m/s)'] = 'Скорость плавания (м/с)',
@@ -10997,10 +11330,12 @@ MOD.langs = {
       ['Tested releases only.'] = 'Только проверенные релизы.',
       ['That did not work; see the log.'] = 'Не получилось; см. журнал.',
       ['That is not a valid preset code.'] = 'Это неверный код пресета.',
+      ['That takes one of the 6 spots the Projectile swap rows also use.'] = 'Это занимает одно из 6 мест, которые используют и строки замены снаряда.',
       ['That would make a loop of extra stratagems.'] = 'Так получится цикл из доп. стратагем.',
       ['The Arbitrator\'s underbarrel shotgun, not the rifle itself.'] = 'Подствольный дробовик «Третейского судьи», а не сама винтовка.',
       ['The Defender SEAF soldiers carry. Not yours.'] = '«Защитник» солдат ВССЗ. Не ваш.',
       ['The EAT-17 SEAF soldiers carry. Not yours.'] = 'EAT-17 солдат ВССЗ. Не ваш.',
+      ['The GATER\'s 600 (FRVs 5, tanks 15) is what holds it near 55 km/h.'] = 'Именно 600 у GATER (FRV 5, танки 15) держит его около 55 км/ч.',
       ['The MG-43 SEAF soldiers carry. Not yours.'] = 'MG-43 солдат ВССЗ. Не ваш.',
       ['The One-Two\'s underbarrel launcher, not the rifle. Fires the GP-31\'s grenade.'] = 'Подствольный гранатомет «Двоечки», а не винтовка. Стреляет гранатой GP-31.',
       ['The SMG you carry. Its underbarrel flamer is listed separately.'] = 'Пистолет-пулемет, который вы носите. Его подствольный огнемет указан отдельно.',
@@ -11013,6 +11348,9 @@ MOD.langs = {
       ['The beacon\'s countdown before the delivery is sent.'] = 'Отсчёт маяка до отправки доставки.',
       ['The charge backpack, the charge and its blast. Cooldown: Stratagems tab.'] = 'Рюкзак с зарядом, сам заряд и его взрыв. Перезарядка: вкладка «Стратагемы».',
       ['The clipboard has no valid preset code.'] = 'В буфере нет верного кода пресета.',
+      ['The engine speed where it changes to the next gear. Higher: holds each gear longer.'] = 'Обороты, на которых включается следующая передача. Выше: дольше держит каждую передачу.',
+      ['The engine speed where it drops a gear. Higher: drops sooner, so it keeps more pull on hills.'] = 'Обороты, на которых включается пониженная передача. Выше: раньше переключается, больше тяги в гору.',
+      ['The engine speed where it pulls hardest. Its pull falls off below and above it.'] = 'Обороты, на которых тяга сильнее всего. Ниже и выше тяга падает.',
       ['The explosion the round sets off when it hits something. 0: no explosion.'] = 'Взрыв, который снаряд вызывает при попадании во что-либо. 0: без взрыва.',
       ['The explosion the round sets off when its life time runs out before it hits anything. 0: no explosion.'] = 'Взрыв, который снаряд вызывает, когда его время жизни истекает раньше попадания. 0: без взрыва.',
       ['The flamethrower you carry.'] = 'Огнемет, который вы носите.',
@@ -11035,6 +11373,7 @@ MOD.langs = {
       ['The round goes off when it passes this close to an enemy, without hitting it. 0: off (the RL-77 uses 2 m).'] = 'Снаряд взрывается, когда пролетает так близко от врага, не попав в него. 0: выкл. (у RL-77 2 м).',
       ['The round only bounces when it hits faster than this. Grenade launcher rounds use 20 m/s, most rounds 60 m/s.'] = 'Снаряд отскакивает, только если попадает быстрее этого. Снаряды гранатомётов: 20 м/с, большинство снарядов 60 м/с.',
       ['The round only bounces when it hits further than this from head on (0 = head on, 90 = grazing).'] = 'Снаряд отскакивает, только если попадает дальше этого угла от прямого (0 = прямо, 90 = вскользь).',
+      ['The same, right after it hits something. Higher: a crash spins it round less.'] = 'То же, сразу после удара. Выше: столкновение меньше разворачивает машину.',
       ['The shot\'s trail and other effects belong to the chosen weapon.'] = 'След выстрела и другие эффекты принадлежат выбранному оружию.',
       ['The support hammer delivered by hellpod. The game data files it next to the Machete.'] = 'Молот поддержки, доставляемый Адской капсулой. В данных игры он лежит рядом с Мачете.',
       ['The support weapon. The CQC-73 is listed under Secondary.'] = 'Оружие поддержки. CQC-73 — во вкладке «Дополнительное».',
@@ -11084,6 +11423,7 @@ MOD.langs = {
       ['Trooper jump pack'] = 'Реактивный ранец кавалериста',
       ['True Grit'] = 'Железная хватка',
       ['Tube Reddot 2x'] = 'Трубчатый коллиматор (2x)',
+      ['Turn inertia'] = 'Инерция поворота',
       ['Turn speed (x)'] = 'Скорость поворота (x)',
       ['Turn speed at cruise'] = 'Скорость поворота на крейсерской',
       ['Turn speed at slowest'] = 'Скорость поворота на минимальной',
@@ -11175,13 +11515,17 @@ MOD.langs = {
       ['Wheel grip'] = 'Сцепление колёс',
       ['Wheel radius (m)'] = 'Радиус колёс (м)',
       ['Wheels'] = 'Колёса',
+      ['Where the engine\'s speed range starts. Higher: more pull from a stop, but it wastes the low end.'] = 'Где начинается диапазон оборотов. Выше: больше тяги с места, но низ теряется.',
+      ['Which exosuit this arm comes from: 1 Patriot, 2 Emancipator, 3 Breakthrough, 4 Lumberer.'] = 'Из какого экзокостюма эта рука: 1 Patriot, 2 Emancipator, 3 Breakthrough, 4 Lumberer.',
       ['Wind-down time (s)'] = 'Время замедления (с)',
       ['Wind-down time, released (s)'] = 'Время замедления после отпускания (с)',
       ['Wind-up'] = 'Раскрутка',
       ['Wind-up time (s)'] = 'Время раскрутки (с)',
       ['Wings'] = 'Крылья',
+      ['With the air density, it caps the GATER\'s top speed.'] = 'Вместе с плотностью воздуха ограничивает максимальную скорость GATER.',
       ['Wretch'] = 'Паскуда',
       ['Xenobite Ardent'] = 'Ксенобит-приверженец',
+      ['Yaw from wheel forces (x)'] = 'Рыскание от сил колёс (x)',
       ['You are an insect, Helldiver.'] = 'Ты насекомое, адский десантник.',
       ['Your changes are off: turn them on in Settings to edit.'] = 'Ваши изменения выключены: включите их в Настройках, чтобы редактировать.',
       ['Your changes are off: turn them on in Settings to load a preset'] = 'Ваши изменения выключены: включите их в Настройках, чтобы загрузить пресет',
@@ -11197,6 +11541,7 @@ MOD.langs = {
       ['assassinate'] = 'убийца',
       ['assault'] = 'штурм',
       ['at least 1 round, at most 2048'] = 'минимум 1 патрон, максимум 2048',
+      ['below 0: pressed down at speed'] = 'ниже 0: прижимается к земле на скорости',
       ['body parts without their own armor use this'] = 'используется частями тела без своей брони',
       ['bull'] = 'бык',
       ['clip'] = 'обойма',
@@ -11207,12 +11552,17 @@ MOD.langs = {
       ['every enemy with this attack shares it'] = 'общее для всех врагов с этой атакой',
       ['extra health for this part, it does not run out by itself'] = 'дополнительное здоровье этой части, само по себе не убывает',
       ['fake'] = 'ложный',
+      ['faster than this, it steers less'] = 'быстрее этого колёса поворачиваются меньше',
       ['gloom'] = 'Мгла',
       ['gunships, Dragonroaches, Leviathans and the like, where a planet has them'] = 'штурмовики, дракораканы, левиафаны и т. п., где они есть на планете',
       ['heavier: slower to speed up, harder to push or roll'] = 'тяжелее: медленнее разгоняется, труднее сдвинуть или перевернуть',
       ['heavycannon'] = 'тяжелая пушка',
       ['hexagon'] = 'шестигранник',
+      ['higher: harder to reach top speed'] = 'выше: труднее набрать максимальную скорость',
+      ['higher: harder to tip over'] = 'выше: труднее опрокинуть',
       ['higher: less bounce'] = 'больше: меньше раскачивается',
+      ['higher: more air drag, a lower top speed'] = 'выше: больше сопротивление воздуха, ниже максимальная скорость',
+      ['higher: stops spinning out sooner'] = 'выше: быстрее перестаёт крутиться',
       ['hit reactions, staggers and stuns'] = 'реакции на попадания, пошатывания и оглушения',
       ['how close enemy fire must pass to shake your aim; 0: never'] = 'как близко должен пройти вражеский огонь, чтобы сбить ваш прицел; 0: никогда',
       ['how close your shots must land to rattle it'] = 'как близко должны лечь ваши выстрелы, чтобы сбить его',
@@ -11238,6 +11588,7 @@ MOD.langs = {
       ['how quickly the view follows your aim at this zoom; lower it if a high zoom spins the view'] = 'как быстро прицел следует за наведением на этом увеличении; уменьшите, если на большом увеличении прицел крутится',
       ['its height above its flight route; lower flies closer to the ground (terrain still holds it up)'] = 'высота над маршрутом полёта; ниже — ближе к земле (рельеф всё равно не даёт опуститься)',
       ['its own. - / + : fire another weapon\'s'] = 'свой. - / + : стрелять снарядом другого оружия',
+      ['its own. 1 Patriot, 2 Emancipator, 3 Breakthrough, 4 Lumberer'] = 'своя. 1 Patriot, 2 Emancipator, 3 Breakthrough, 4 Lumberer',
       ['ivory legion assault'] = 'Костяной легион, штурм',
       ['ivory legion tier 2'] = 'Костяной легион, уровень 2',
       ['jammer'] = 'глушилка',
@@ -11246,11 +11597,15 @@ MOD.langs = {
       ['loaded into an empty weapon, from your spare rounds'] = 'заряжается в пустое оружие из запасных патронов',
       ['lower (more negative): you go deeper before drowning starts'] = 'ниже (отрицательнее): глубже, прежде чем начнёте тонуть',
       ['lower: a higher top speed in that gear, a weaker pull'] = 'меньше: выше максимальная скорость на этой передаче, слабее тяга',
+      ['lower: bounces back faster'] = 'ниже: быстрее отскакивает',
+      ['lower: dips less when braking'] = 'ниже: меньше клюёт при торможении',
       ['lower: harder to roll over'] = 'ниже: труднее перевернуться',
+      ['lower: leans less in turns'] = 'ниже: меньше кренится в поворотах',
       ['lower: softer, the body sags (at 1 it barely moves)'] = 'меньше: мягче, корпус проседает (при 1 почти не едет)',
       ['lower: their shots land closer to where they aim (0: dead on)'] = 'ниже: выстрелы ложатся ближе к точке прицеливания (0: точно в цель)',
       ['melee, guns and death explosions, shared ones included'] = 'ближний бой, оружие и взрывы при гибели, включая общие',
       ['min charge'] = 'мин. заряд',
+      ['multiplies every gear; lower: faster, weaker pull'] = 'умножает все передачи; ниже: быстрее, но слабее тяга',
       ['negative: below level, -90 straight down'] = 'отрицательное: ниже горизонта, -90 прямо вниз',
       ['no shrapnel'] = 'без осколков',
       ['none'] = 'нет',
@@ -11305,6 +11660,7 @@ MOD.langs = {
       ['what each hit applies; the slots go in order'] = 'что накладывает каждое попадание; ячейки идут по порядку',
       ['what it has left once its health is gone, lost over time'] = 'остаток после потери здоровья, убывает со временем',
       ['where it hangs when put away: 0 on the back, 1 on the hip'] = 'где висит, когда убрано: 0 на спине, 1 на бедре',
+      ['where it pulls hardest'] = 'где тяга сильнее всего',
       ['who it fights for: units of other sides attack it, and it attacks them'] = 'за кого сражается: юниты других сторон атакуют его, а он атакует их',
       ['with the gears, sets the top speed'] = 'вместе с передачами задаёт максимальную скорость',
     },
@@ -12431,10 +12787,12 @@ MOD.langs = {
       ['A mounted copy run by AI (emplacement-style). Not the one you carry.'] = 'Una copia montada manejada por IA (tipo emplazamiento). No la que llevas.',
       ['A mounted copy. Not the one you carry.'] = 'Una copia montada. No la que llevas.',
       ['A pathetic creature of meat and bone.'] = 'Una patética criatura de carne y hueso.',
+      ['A preset file in the import folder was not imported. Fix the lines the log names and start SSEO again.'] = 'Un archivo de preset en la carpeta import no se importó. Corrige las líneas que indica el registro y vuelve a abrir SSEO.',
       ['A preset keeps every change you have made as one set, under a name you choose.'] = 'Un perfil guarda todos tus cambios como un conjunto, con el nombre que elijas.',
       ['A preset keeps every enemy and spawning change as one custom difficulty, under a name you choose. Your weapon changes are kept apart.'] = 'Un perfil guarda todos los cambios de enemigos y aparición como una dificultad personalizada, con el nombre que elijas. Tus cambios de armas se guardan aparte.',
       ['A resupply box gives this many. An ammo box on the map gives half, rounded down (at least 1).'] = 'Una caja de reabastecimiento da esta cantidad. Una caja de munición en el mapa da la mitad, redondeada hacia abajo (mínimo 1).',
       ['A resupply box gives this much. An ammo box on the map gives half, rounded down.'] = 'Una caja de reabastecimiento da esta cantidad. Una caja de munición en el mapa da la mitad, redondeada hacia abajo.',
+      ['A second ammo fires as many projectiles per shot as this weapon\'s own.'] = 'La segunda munición dispara tantos proyectiles por disparo como la munición propia de esta arma.',
       ['A value changed on an enemy\'s own page stays red: this page leaves it as it is.'] = 'Un valor cambiado en la página propia de un enemigo queda en rojo: esta página lo deja como está.',
       ['A weapon whose own Sway multiplier you changed keeps it. Sway this row changes shows in blue.'] = 'Un arma cuyo propio Multiplicador de balanceo cambiaste lo conserva. El balanceo que cambia esta fila se muestra en azul.',
       ['A/AC-8 Autocannon Sentry'] = 'A/AC-8 Vigía de cañón automático',
@@ -12478,6 +12836,7 @@ MOD.langs = {
       ['AX/FLAM-75 "Guard Dog" Hot Dog'] = 'AX/FLAM-75 "Guard Dog" Hot Dog',
       ['AX/LAS-5 "Guard Dog" Rover'] = 'AX/LAS-5 "Guard Dog" Rover',
       ['AX/TX-13 "Guard Dog" Dog Breath'] = 'AX/TX-13 "Guard Dog" Dog Breath',
+      ['Above this speed the wheels turn less and less. Raise it to keep steering at high speed.'] = 'Por encima de esta velocidad las ruedas giran cada vez menos. Súbelo para seguir girando a alta velocidad.',
       ['Acceleration (m/s2)'] = 'Aceleración (m/s2)',
       ['Accelerator Rifle'] = 'Rifle acelerador',
       ['Acclimated'] = 'Aclimatación',
@@ -12497,6 +12856,7 @@ MOD.langs = {
       ['Aim limit, up (deg)'] = 'Límite de puntería, arriba (grados)',
       ['Aim zoom (x)'] = 'Zoom al apuntar (x)',
       ['Aiming sway'] = 'Balanceo al apuntar',
+      ['Air density'] = 'Densidad del aire',
       ['Airborne'] = 'Aerotransportado',
       ['Airburst Rocket Launcher'] = 'Lanzacohetes de estallido aéreo',
       ['All'] = 'Todo',
@@ -12554,6 +12914,7 @@ MOD.langs = {
       ['Armor penetration'] = 'Penetración de blindaje',
       ['Armor weight'] = 'Peso del blindaje',
       ['Armors'] = 'Blindajes',
+      ['Arms'] = 'Brazos',
       ['Ask'] = 'Preguntar',
       ['Assassinate'] = 'Asesinato',
       ['Assault'] = 'Asalto',
@@ -12615,6 +12976,7 @@ MOD.langs = {
       ['Beams per barrel'] = 'Rayos por cañón',
       ['Belt-Fed Grenade Launcher'] = 'Lanzagranadas de cinta',
       ['Berserker'] = 'Frenético',
+      ['Best engine speed (rpm)'] = 'Velocidad óptima del motor (rpm)',
       ['Better stratagem bounce'] = 'Mejor rebote de estratagemas',
       ['Big walker cannon'] = 'Cañón de caminante grande',
       ['Bigger wheels: a higher top speed and more room under the body, but a weaker pull.'] = 'Ruedas más grandes: más velocidad máxima y más altura bajo la carrocería, pero menos fuerza.',
@@ -12739,6 +13101,7 @@ MOD.langs = {
       ['Charges'] = 'Cargas',
       ['Charges from resupply'] = 'Cargas del reabastecimiento',
       ['Charging speed (m/s)'] = 'Velocidad de embestida (m/s)',
+      ['Chassis'] = 'Chasis',
       ['Chemical Backpack'] = 'Mochila química',
       ['Chest'] = 'Pecho',
       ['Chest bleeding damage'] = 'Daño por sangrado en el pecho',
@@ -12752,6 +13115,11 @@ MOD.langs = {
       ['Click again'] = 'Haz clic otra vez',
       ['Click again to overwrite'] = 'Haz clic otra vez para sobrescribir',
       ['Click again within 4 seconds to end the game. Unsaved progress is lost.'] = 'Haz clic otra vez en 4 segundos para cerrar el juego. Se pierde el progreso sin guardar.',
+      ['Client-sided only: in a lobby it counts for your own shots, not other players\'.'] = 'Solo del lado del cliente: en una sala cuenta para tus disparos, no para los de otros jugadores.',
+      ['Client-sided only: other players may keep the game\'s normal radius.'] = 'Solo del lado del cliente: los demás pueden conservar el radio normal del juego.',
+      ['Client-sided only: other players may see the game\'s normal shots.'] = 'Solo del lado del cliente: los demás pueden ver los disparos normales del juego.',
+      ['Client-sided only: other players see the normal animation; attack timing may follow the host.'] = 'Solo del lado del cliente: los demás ven la animación normal; el tiempo de los ataques puede seguir al anfitrión.',
+      ['Client-sided only: other players see the normal size; reach may follow the host.'] = 'Solo del lado del cliente: los demás ven el tamaño normal; el alcance puede seguir al anfitrión.',
       ['Climb acceleration'] = 'Aceleración de ascenso',
       ['Climb multiplier (horizontal)'] = 'Multiplicador de escalada (horizontal)',
       ['Climb multiplier (vertical)'] = 'Multiplicador de escalada (vertical)',
@@ -12761,6 +13129,7 @@ MOD.langs = {
       ['Close all'] = 'Cerrar todo',
       ['Close game'] = 'Cerrar juego',
       ['Cluster Bomb'] = 'Bomba de racimo',
+      ['Clutch slip (rpm)'] = 'Patinaje del embrague (rpm)',
       ['Cognitive Disruptor'] = 'Disruptor Cognitivo',
       ['Collision'] = 'Colisión',
       ['Combat Hatchet'] = 'Hachuela de combate',
@@ -12821,6 +13190,8 @@ MOD.langs = {
       ['Damage ticks per minute'] = 'Golpes de daño por minuto',
       ['Damage to you'] = 'Daño que recibes',
       ['Damping'] = 'Amortiguación',
+      ['Damping (compression)'] = 'Amortiguación (compresión)',
+      ['Damping (rebound)'] = 'Amortiguación (rebote)',
       ['Dark Fluid burst'] = 'Estallido de Fluido Oscuro',
       ['De-Escalator'] = 'Desescalador',
       ['Dead Sprint'] = 'Corrida mortal',
@@ -12852,7 +13223,9 @@ MOD.langs = {
       ['Done'] = 'Listo',
       ['Double Freedom'] = 'Doble libertad',
       ['Double-Edge Sickle'] = 'Hoz de doble filo',
+      ['Double-Edge Sickle heat ramp'] = 'Escalado de calor de la Hoz de doble filo',
       ['Down'] = 'Abajo',
+      ['Drag coefficient'] = 'Coeficiente de arrastre',
       ['Drag factor'] = 'Factor de arrastre',
       ['Dragonroach'] = 'Dracoracha',
       ['Drift from the last shell, least (m)'] = 'Desvío desde el último proyectil, mínimo (m)',
@@ -12923,6 +13296,10 @@ MOD.langs = {
       ['Enemy cap (x)'] = 'Límite de enemigos (x)',
       ['Enemy detection range'] = 'Rango de detección de enemigos',
       ['Enemy.'] = 'Enemigo.',
+      ['Engine'] = 'Motor',
+      ['Engine drag at the best speed'] = 'Freno del motor a la velocidad óptima',
+      ['Engine drag at the lowest speed'] = 'Freno del motor a la velocidad mínima',
+      ['Engine drag at the top speed'] = 'Freno del motor a la velocidad máxima',
       ['Engine front'] = 'Motor delantero',
       ['Engine rear'] = 'Motor trasero',
       ['Engine torque'] = 'Torque del motor',
@@ -12992,6 +13369,7 @@ MOD.langs = {
       ['Field width (m)'] = 'Ancho del campo (m)',
       ['Fighting speed (m/s)'] = 'Velocidad en combate (m/s)',
       ['Fin front'] = 'Aleta delantera',
+      ['Final drive ratio'] = 'Relación final',
       ['Finding the stats...'] = 'Buscando las estadísticas...',
       ['Fire'] = 'Fuego',
       ['Fire damage taken'] = 'Daño de fuego recibido',
@@ -13001,6 +13379,8 @@ MOD.langs = {
       ['Fire rate (x)'] = 'Cadencia de disparo (x)',
       ['Fire/gas/acid/arc damage taken'] = 'Daño de fuego/gas/ácido/arco recibido',
       ['Firebomb Hellpods'] = 'Cápsulas Hell de bombas incendiarias',
+      ['Fires the Double-Edge Sickle\'s stronger shots as it heats up, and hurts you near overheat.'] = 'Dispara los disparos más fuertes de la Hoz de doble filo al calentarse y te hiere cerca del sobrecalentamiento.',
+      ['Firing it standing no longer knocks you down or hurts you.'] = 'Disparar de pie ya no te derriba ni te hace daño.',
       ['First shell (id)'] = 'Primer proyectil (id)',
       ['Flame Sentry'] = 'Vigía de llamas',
       ['Flames'] = 'Llamas',
@@ -13022,10 +13402,13 @@ MOD.langs = {
       ['Frag'] = 'Fragmentadora',
       ['From supply'] = 'Del suministro',
       ['Front'] = 'Frente',
+      ['Front area (m2)'] = 'Área frontal (m2)',
       ['Front armor'] = 'Blindaje frontal',
       ['Front body'] = 'Cuerpo frontal',
       ['Front brake strength'] = 'Fuerza de los frenos delanteros',
       ['Front damping'] = 'Amortiguación delantera',
+      ['Front damping (compression)'] = 'Amortiguación delantera (compresión)',
+      ['Front damping (rebound)'] = 'Amortiguación delantera (rebote)',
       ['Front face'] = 'Cara frontal',
       ['Front grip lower than the rear: it turns wide. Rear lower than the front: the back slides out.'] = 'Delanteras con menos agarre que las traseras: abre en las curvas. Traseras con menos: la cola se sale.',
       ['Front hull'] = 'Casco frontal',
@@ -13035,11 +13418,13 @@ MOD.langs = {
       ['Front right wheel hub'] = 'Cubo de rueda delantera derecha',
       ['Front spring stiffness'] = 'Rigidez de la suspensión delantera',
       ['Front suspension travel'] = 'Recorrido de la suspensión delantera',
+      ['Front suspension travel (m)'] = 'Recorrido de la suspensión delantera (m)',
       ['Front wheel grip'] = 'Agarre de las ruedas delanteras',
       ['Front wheel radius (m)'] = 'Radio de las ruedas delanteras (m)',
       ['Full charge'] = 'Carga completa',
       ['Full charge explosion'] = 'Explosión con carga completa',
       ['Full charge shot'] = 'Disparo con carga completa',
+      ['Full steering up to (m/s)'] = 'Dirección completa hasta (m/s)',
       ['Fuse time (s)'] = 'Tiempo de espoleta (s)',
       ['Fusion Autocannon'] = 'Autocañón de fusión',
       ['Fusion Repeater'] = 'Repetidor de fusión',
@@ -13163,6 +13548,7 @@ MOD.langs = {
       ['High Explosive'] = 'Alta explosividad',
       ['High-Velocity Shrapnel'] = 'Metralla de alta velocidad',
       ['Higher: a stiffer ride, less lean in turns, bumps kick harder.'] = 'Más alto: andar más duro, se inclina menos en curvas, los baches golpean más.',
+      ['Higher: easier starts from a stop and on hills. Lower: a more direct pull.'] = 'Más alto: arranca más fácil y en subidas. Más bajo: fuerza más directa.',
       ['Higher: leans more and tips over in sharp turns.'] = 'Más alto: se inclina más y vuelca en curvas cerradas.',
       ['Higher: stops in a shorter distance. Too high locks the wheels, and it skids instead of stopping.'] = 'Más alto: frena en menos distancia. Demasiado alto bloquea las ruedas y derrapa en vez de frenar.',
       ['Highest ledge it climbs (m)'] = 'Saliente más alto que escala (m)',
@@ -13188,18 +13574,37 @@ MOD.langs = {
       ['Hover speed (m/s)'] = 'Velocidad en vuelo (m/s)',
       ['Hover time, full-speed climb (s)'] = 'Tiempo de vuelo, ascenso a toda velocidad (s)',
       ['Hover time, holding height (s)'] = 'Tiempo de vuelo, manteniendo altura (s)',
+      ['How badly its shape cuts through the air. Higher: more air drag, a lower top speed.'] = 'Qué tan mal corta el aire su forma. Más alto: más resistencia, menos velocidad máxima.',
+      ['How big the vehicle is to the air. Higher: more air drag, a lower top speed.'] = 'Qué tan grande es el vehículo para el aire. Más alto: más resistencia, menos velocidad máxima.',
       ['How close the view gets when you aim: 1 is the normal view, 2 twice as close, 4 four times.'] = 'Cuánto se acerca la vista al apuntar: 1 es la vista normal, 2 el doble de cerca, 4 cuatro veces.',
       ['How close this zoom step looks: 1 is the normal view, 2 twice as close, 4 four times.'] = 'Qué tan cerca se ve este nivel de zoom: 1 es la vista normal, 2 el doble de cerca, 4 cuatro veces.',
+      ['How far the engine speed can run ahead of the wheels before the clutch grips.'] = 'Cuánto puede adelantarse el motor a las ruedas antes de que agarre el embrague.',
+      ['How far the front wheels turn. Higher: tighter turns at low speed.'] = 'Cuánto giran las ruedas delanteras. Más alto: curvas más cerradas a baja velocidad.',
+      ['How fast a spin dies down on its own. Higher: stops spinning out sooner.'] = 'Qué tan rápido se calma un trompo solo. Más alto: deja de girar antes.',
       ['How fast the engine may spin before it stops pulling. Higher: a higher top speed in every gear,'] = 'Qué tan rápido gira el motor antes de dejar de empujar. Más alto: más velocidad máxima en cada marcha,',
+      ['How fast the springs push back out after a bump. Higher: they come back slowly, a calmer ride.'] = 'Qué tan rápido se estiran los resortes tras un golpe. Más alto: vuelven despacio, un viaje más tranquilo.',
       ['How fast the springs settle after a bump. Higher: settles at once, a firmer ride.'] = 'Qué tan rápido se calman los resortes tras un bache. Más alto: al instante, andar más firme.',
       ['How fast their animations play. Most attacks follow the animation, so they come sooner or later too.'] = 'Qué tan rápido se reproducen sus animaciones. La mayoría de los ataques siguen la animación, así que también llegan antes o después.',
+      ['How hard it is to roll it onto its side. Higher: harder to tip over in turns and blasts.'] = 'Qué tan difícil es volcarlo de lado. Más alto: cuesta más volcarlo en curvas y explosiones.',
+      ['How hard it is to start or stop turning. Too low on a heavy vehicle makes turns stutter.'] = 'Qué tan difícil es empezar o dejar de girar. Muy bajo en un vehículo pesado hace que los giros tiemblen.',
+      ['How hard it is to tip it nose up or down. Higher: steadier over bumps and jumps.'] = 'Qué tan difícil es inclinar la trompa arriba o abajo. Más alto: más estable en baches y saltos.',
       ['How hard the engine pushes. Higher: faster acceleration and steeper hills, but more wheelspin.'] = 'Cuánto empuja el motor. Más alto: acelera más rápido y sube más pendiente, pero patina más.',
       ['How high the balance point sits. Lower (even below 0): stays flat in hard turns and over rocks.'] = 'Altura del punto de equilibrio. Más bajo (incluso menos de 0): se mantiene plano en curvas y rocas.',
       ['How long the round waits after the hit (or after the blast proximity trips) before it goes off.'] = 'Cuánto espera la ronda después del impacto (o después de que se active la proximidad) antes de explotar.',
       ['How many bombs one run drops and how they land. The bombs stay this Eagle\'s own.'] = 'Cuántas bombas suelta cada pasada y cómo caen. Las bombas siguen siendo de este Águila.',
       ['How many times the round can bounce off a surface. 0: it never bounces back at you.'] = 'Cuántas veces puede rebotar la ronda en una superficie. 0: nunca rebota de vuelta hacia ti.',
+      ['How much of the engine torque it has at its lowest speed. Higher: stronger off the line and on hills.'] = 'Cuánto torque tiene a la velocidad mínima. Más alto: más fuerte al arrancar y en subidas.',
+      ['How much of the engine torque it keeps at its top speed. Higher: keeps speeding up near the top.'] = 'Cuánto torque conserva a la velocidad máxima. Más alto: sigue acelerando cerca del tope.',
+      ['How much speeding up and braking tip the nose. Lower: stays level when it brakes or speeds up.'] = 'Cuánto inclinan la trompa acelerar y frenar. Más bajo: se mantiene nivelado.',
+      ['How much the air lifts it at speed. Above 0: lighter and floatier when fast. Below 0: pressed down, more grip.'] = 'Cuánto lo levanta el aire a velocidad. Sobre 0: más liviano a alta velocidad. Bajo 0: pegado al suelo, más agarre.',
+      ['How much the engine holds itself back at its best speed. Higher: weaker acceleration overall.'] = 'Cuánto se frena el motor a la velocidad óptima. Más alto: acelera menos en general.',
+      ['How much the engine holds itself back at its lowest speed. Higher: slower to get going.'] = 'Cuánto se frena el motor a la velocidad mínima. Más alto: tarda más en arrancar.',
+      ['How much the engine holds itself back near its top speed. Higher: it struggles to reach it.'] = 'Cuánto se frena el motor cerca de su velocidad máxima. Más alto: le cuesta llegar.',
+      ['How much the wheels’ forces lean the body in turns. Lower: stays flatter and harder to roll.'] = 'Cuánto inclinan la carrocería las fuerzas de las ruedas en curvas. Más bajo: más plano y cuesta más volcarlo.',
+      ['How much the wheels’ forces swing it round. Lower: steadier, less likely to spin out.'] = 'Cuánto lo hacen girar las fuerzas de las ruedas. Más bajo: más estable, trompea menos.',
       ['How much this gear multiplies the engine. Higher: stronger pull, but it tops out sooner.'] = 'Cuánto multiplica esta marcha al motor. Más alto: más fuerza, pero llega antes a su tope.',
       ['How quickly the scoped view catches up when you move your aim at this zoom (0.6 on most optics).'] = 'Qué tan rápido la vista con mira sigue tu puntería con este zoom (0.6 en la mayoría de las miras).',
+      ['How thick the air is for this vehicle. Higher: more air drag, a lower top speed.'] = 'Qué tan denso es el aire para este vehículo. Más alto: más resistencia, menos velocidad máxima.',
       ['How well the tyres hold the ground. Higher: sharper turns, less sliding and wheelspin.'] = 'Cuánto se agarran las llantas al suelo. Más alto: curvas más cerradas, menos derrape y patinazo.',
       ['Hulk'] = 'Gigantón',
       ['Hulk Bruiser'] = 'Aporreador gigantón',
@@ -13238,6 +13643,7 @@ MOD.langs = {
       ['Inner torso'] = 'Torso interior',
       ['Insides'] = 'Interior',
       ['Install into the game'] = 'Instalar en el juego',
+      ['Install loads the chosen arm\'s exosuit into every mission, so its model shows.'] = 'Instalar carga el exotraje del brazo elegido en cada misión, para que se vea su modelo.',
       ['Install loads up to 6 such weapons into every mission, so nobody has to bring them. A support weapon brings its own.'] = 'Instalar carga hasta 6 armas de este tipo en todas las misiones, así que nadie necesita llevarlas. Un arma de apoyo trae las suyas.',
       ['Installed, but not everything fits. Some projectiles may show no trail, and some Always bring it stratagems stay out of missions.'] = 'Instalado, pero no cabe todo. Algunos proyectiles pueden no mostrar estela y algunas estratagemas de "Llevar siempre" quedan fuera de las misiones.',
       ['Installing: finding what changed...'] = 'Instalando: buscando qué cambió...',
@@ -13311,6 +13717,11 @@ MOD.langs = {
       ['Lb wing'] = 'Ala ti',
       ['Left'] = 'Izquierda',
       ['Left arm'] = 'Brazo izquierdo',
+      ['Left arm from (1-4)'] = 'Brazo izquierdo de (1-4)',
+      ['Left arm from: Breakthrough'] = 'Brazo izquierdo de: Breakthrough',
+      ['Left arm from: Emancipator'] = 'Brazo izquierdo de: Emancipator',
+      ['Left arm from: Lumberer'] = 'Brazo izquierdo de: Lumberer',
+      ['Left arm from: Patriot'] = 'Brazo izquierdo de: Patriot',
       ['Left arm health'] = 'Salud del brazo izquierdo',
       ['Left armor'] = 'Blindaje izquierdo',
       ['Left arms'] = 'Brazos izquierdos',
@@ -13379,6 +13790,7 @@ MOD.langs = {
       ['Left wrist blade'] = 'Cuchilla de muñeca izquierda',
       ['Leg injury immunity (1 on)'] = 'Inmunidad a lesiones de pierna (1 activada)',
       ['Less: bumps go straight into the body and it wobbles.'] = 'Menos: los baches pasan directo a la carrocería y se bambolea.',
+      ['Less: bumps go straight into the body.'] = 'Menos: los golpes van directo a la carrocería.',
       ['Leveller'] = 'Nivelador',
       ['Leviathan'] = 'Leviatán',
       ['Leviathan bomb'] = 'Bomba del Leviatán',
@@ -13390,6 +13802,7 @@ MOD.langs = {
       ['Liberator Legacy'] = 'Legado de liberador',
       ['Liberator Penetrator'] = 'Liberador penetrante',
       ['Lifetime (s)'] = 'Duración (s)',
+      ['Lift coefficient'] = 'Coeficiente de sustentación',
       ['Light armor'] = 'Blindaje ligero',
       ['Light, medium or heavy, per armor (every armor set with that name).'] = 'Ligero, intermedio o pesado, por blindaje (todo blindaje con ese nombre).',
       ['Lighter: quicker off the line, but bounces over bumps and gets thrown around by explosions.'] = 'Más ligero: arranca más rápido, pero rebota en los baches y las explosiones lo lanzan.',
@@ -13407,9 +13820,12 @@ MOD.langs = {
       ['Lower back'] = 'Espalda baja',
       ['Lower it if a high zoom spins the view.'] = 'Baja ese valor si un zoom alto hace girar la vista.',
       ['Lower spine'] = 'Columna baja',
+      ['Lower: a higher top speed, if the engine can pull it.'] = 'Más bajo: más velocidad máxima, si el motor puede con ella.',
       ['Lower: a softer ride, the body leans in turns and sags.'] = 'Más bajo: andar más blando, la carrocería se inclina en curvas y se hunde.',
       ['Lower: faster in this gear, weaker on hills and from a stop.'] = 'Más bajo: más rápido en esta marcha, más débil en subidas y al arrancar.',
       ['Lower: keeps bouncing after every bump.'] = 'Más bajo: sigue rebotando después de cada bache.',
+      ['Lower: the wheels spring back fast and the body bounces.'] = 'Más bajo: las ruedas vuelven rápido y la carrocería rebota.',
+      ['Lowest engine speed (rpm)'] = 'Velocidad mínima del motor (rpm)',
       ['Lowest patrol frequency (x)'] = 'Frecuencia mínima de patrullas (x)',
       ['Lowest rates'] = 'Valores mínimos',
       ['Lowest reinforcement frequency (x)'] = 'Frecuencia mínima de refuerzos (x)',
@@ -13501,6 +13917,7 @@ MOD.langs = {
       ['Movement'] = 'Movimiento',
       ['Movement speed (multiplier)'] = 'Velocidad de movimiento (multiplicador)',
       ['Movement speed (x)'] = 'Velocidad de movimiento (x)',
+      ['Multiplies every gear. Higher: stronger pull and steeper hills, a lower top speed.'] = 'Multiplica todas las marchas. Más alto: más fuerza y subidas más empinadas, menos velocidad máxima.',
       ['Muzzle'] = 'Boca',
       ['Muzzle brake'] = 'Freno de boca',
       ['Name'] = 'Nombre',
@@ -13515,6 +13932,7 @@ MOD.langs = {
       ['No changes: loading it puts every value back to the game\'s.'] = 'Sin cambios: cargarlo devuelve todos los valores a los del juego.',
       ['No description'] = 'Sin descripción',
       ['No free preset place: delete one first.'] = 'No hay lugar libre: elimina un preset primero.',
+      ['No knockdown when standing'] = 'Sin derribo al disparar de pie',
       ['No other vehicle has this section.'] = 'Ningún otro vehículo tiene esta sección.',
       ['No page in this editor uses this id.'] = 'Ninguna página de este editor usa este id.',
       ['No passive.'] = 'Sin pasivo.',
@@ -13550,6 +13968,7 @@ MOD.langs = {
       ['On: your '] = 'Activado: tus ',
       ['On: your arc chain length / split apply with other players too (arcs can stay on screen).'] = 'Activado: tu longitud / división de cadenas de arco también se aplican con otros jugadores (los arcos pueden quedarse en pantalla).',
       ['On: your rockets, launcher rounds and stratagem ordnance fly through tree canopies and bushes.'] = 'Activado: tus cohetes, rondas de lanzador y artillería de estratagemas atraviesan copas de árboles y arbustos.',
+      ['Once your reinforcements run out, one comes back after this long: 120 seconds by default.'] = 'Cuando se acaban tus refuerzos, uno vuelve tras este tiempo: 120 segundos por defecto.',
       ['One True Flag'] = 'La única bandera',
       ['One-Two'] = 'Uno-Dos',
       ['One-handed'] = 'Una mano',
@@ -13650,6 +14069,8 @@ MOD.langs = {
       ['Pilot light goes out after (s)'] = 'La llama piloto se apaga después de (s)',
       ['Pilot seat'] = 'Asiento del piloto',
       ['Pineapple'] = 'Piña',
+      ['Pitch from wheel forces (x)'] = 'Cabeceo por las ruedas (x)',
+      ['Pitch inertia'] = 'Inercia de cabeceo',
       ['Plasma Pistol. Canister Extended'] = 'Pistola de plasma. Cartucho extendido',
       ['Plasma Pistol. Canister Pistol'] = 'Pistola de plasma. Cartucho de pistola',
       ['Point of interest range'] = 'Alcance de puntos de interés',
@@ -13674,6 +14095,8 @@ MOD.langs = {
       ['Projectiles per shot'] = 'Proyectiles por disparo',
       ['Projectiles with no trail:'] = 'Proyectiles sin estela:',
       ['Prone speed (m/s)'] = 'Velocidad cuerpo a tierra (m/s)',
+      ['Pull at the lowest engine speed (x)'] = 'Fuerza a la velocidad mínima del motor (x)',
+      ['Pull at the top engine speed (x)'] = 'Fuerza a la velocidad máxima del motor (x)',
       ['Punisher'] = 'Castigadora',
       ['Punisher Plasma'] = 'Castigadora de plasma',
       ['Purifier'] = 'Purificador',
@@ -13725,9 +14148,12 @@ MOD.langs = {
       ['Rear brake strength'] = 'Fuerza de los frenos traseros',
       ['Rear cockpit'] = 'Cabina trasera',
       ['Rear damping'] = 'Amortiguación trasera',
+      ['Rear damping (compression)'] = 'Amortiguación trasera (compresión)',
+      ['Rear damping (rebound)'] = 'Amortiguación trasera (rebote)',
       ['Rear sight range (m)'] = 'Alcance de visión trasera (m)',
       ['Rear spring stiffness'] = 'Rigidez de la suspensión trasera',
       ['Rear suspension travel'] = 'Recorrido de la suspensión trasera',
+      ['Rear suspension travel (m)'] = 'Recorrido de la suspensión trasera (m)',
       ['Rear wheel grip'] = 'Agarre de las ruedas traseras',
       ['Rear wheel radius (m)'] = 'Radio de las ruedas traseras (m)',
       ['Recharge delay (s)'] = 'Retraso de recarga (s)',
@@ -13753,6 +14179,7 @@ MOD.langs = {
       ['Reinforced Epaulettes'] = 'Charreteras Reforzadas',
       ['Reinforced Scout Strider'] = 'Andante explorador reforzado',
       ['Reinforcement frequency (x)'] = 'Frecuencia de refuerzos (x)',
+      ['Reinforcement regen time (s)'] = 'Tiempo de recarga de refuerzos (s)',
       ['Reinforcement size (x)'] = 'Tamaño de refuerzos (x)',
       ['Reinforcements'] = 'Refuerzos',
       ['Reinforcements (flares, breaches, drops)'] = 'Refuerzos (bengalas, brechas, envíos)',
@@ -13783,6 +14210,11 @@ MOD.langs = {
       ['Rifle Justice. Short '] = 'Rifle Justice. Corto ',
       ['Right'] = 'Derecha',
       ['Right arm'] = 'Brazo derecho',
+      ['Right arm from (1-4)'] = 'Brazo derecho de (1-4)',
+      ['Right arm from: Breakthrough'] = 'Brazo derecho de: Breakthrough',
+      ['Right arm from: Emancipator'] = 'Brazo derecho de: Emancipator',
+      ['Right arm from: Lumberer'] = 'Brazo derecho de: Lumberer',
+      ['Right arm from: Patriot'] = 'Brazo derecho de: Patriot',
       ['Right arm health'] = 'Salud del brazo derecho',
       ['Right armor'] = 'Blindaje derecho',
       ['Right arms'] = 'Brazos derechos',
@@ -13854,6 +14286,8 @@ MOD.langs = {
       ['Rocket Sentry'] = 'Vigía de cohetes',
       ['Rocket fired (id)'] = 'Cohete disparado (id)',
       ['Rocket pods'] = 'Lanzacohetes',
+      ['Roll from wheel forces (x)'] = 'Balanceo por las ruedas (x)',
+      ['Roll inertia'] = 'Inercia de balanceo',
       ['Rooted (experimental)'] = 'Enraizado (experimental)',
       ['Rotator'] = 'Rotor',
       ['Round 1 blast'] = 'Explosión ronda 1',
@@ -13981,12 +14415,14 @@ MOD.langs = {
       ['Sentry: its cooldown, its body, then its weapon.'] = 'Vigía: su tiempo de recarga, su cuerpo y luego su arma.',
       ['Separate from the normal ground patrols. Does nothing on a mission without such a modifier.'] = 'Aparte de las patrullas normales en tierra. No hace nada en una misión sin ese modificador.',
       ['Servo-Assisted'] = 'Servoasistido',
+      ['Set it low for nearly endless reinforcements.'] = 'Bájalo para tener refuerzos casi infinitos.',
       ['Sets off mines'] = 'Activa minas',
       ['Settings'] = 'Configuración',
       ['Settings are saved at once, in config.txt with your changes.'] = 'La configuración se guarda al instante, en config.txt con tus cambios.',
       ['Several vehicles of a kind'] = 'Varios vehículos del mismo tipo',
       ['Shape'] = 'Forma',
       ['Shared by every armor with this passive. Multipliers: 1 = no change.'] = 'Lo comparten todos los blindajes con esta pasiva. Multiplicadores: 1 = sin cambio.',
+      ['Shares its levels: change their damage on the Double-Edge Sickle\'s page. Applies on Install.'] = 'Comparte sus niveles: cambia su daño en la página de la Hoz de doble filo. Se aplica al instalar.',
       ['Shares its name and description with the armor of this name: a change here changes both.'] = 'Comparte nombre y descripción con el blindaje del mismo nombre: un cambio aquí cambia ambos.',
       ['Shear'] = 'Segador',
       ['Shell fired (id)'] = 'Proyectil disparado (id)',
@@ -14002,6 +14438,8 @@ MOD.langs = {
       ['Shield plate armor'] = 'Blindaje de la placa del escudo',
       ['Shield plate health'] = 'Salud de la placa del escudo',
       ['Shield zone'] = 'Zona del escudo',
+      ['Shift down at (rpm)'] = 'Baja de marcha a (rpm)',
+      ['Shift up at (rpm)'] = 'Sube de marcha a (rpm)',
       ['Ship upgrades that make support weapons and sentries launch at once skip it (tested).'] = 'Las mejoras de nave que lanzan al instante las armas de apoyo y las torretas la omiten (probado).',
       ['Shockwave radius (m)'] = 'Radio de la onda expansiva (m)',
       ['Short Magazine'] = 'Cargador corto',
@@ -14060,6 +14498,8 @@ MOD.langs = {
       ['Spear'] = 'Lanza',
       ['Speargun'] = 'Arpón',
       ['Speed while aiming (m/s)'] = 'Velocidad al apuntar (m/s)',
+      ['Spin damping'] = 'Amortiguación del giro',
+      ['Spin damping in collisions'] = 'Amortiguación del giro en choques',
       ['Spine lower'] = 'Columna inferior',
       ['Spine plate'] = 'Placa de la columna',
       ['Spine roll back'] = 'Giro trasero de la columna',
@@ -14114,6 +14554,8 @@ MOD.langs = {
       ['Stationary Shroud'] = 'Velo Estático',
       ['Status effects'] = 'Efectos de estado',
       ['Statuses'] = 'Estados',
+      ['Steering'] = 'Dirección',
+      ['Steering angle (deg)'] = 'Ángulo de dirección (grados)',
       ['Stim Pistol'] = 'Pistola de estimulantes',
       ['Stingray'] = 'Mantarraya',
       ['Stoker'] = 'Fogonero',
@@ -14156,6 +14598,7 @@ MOD.langs = {
       ['Surplus EAT Allocation'] = 'Asignación extra de EAT',
       ['Surviving lethal damage'] = 'Sobrevivir a daño letal',
       ['Suspension travel'] = 'Recorrido de la suspensión',
+      ['Suspension travel (m)'] = 'Recorrido de la suspensión (m)',
       ['Sway multiplier'] = 'Multiplicador de balanceo',
       ['Sweeper'] = 'Barredora',
       ['Swim speed (m/s)'] = 'Velocidad nadando (m/s)',
@@ -14183,10 +14626,12 @@ MOD.langs = {
       ['Tested releases only.'] = 'Solo versiones probadas.',
       ['That did not work; see the log.'] = 'Eso no funcionó; ver el registro.',
       ['That is not a valid preset code.'] = 'Ese código de preset no es válido.',
+      ['That takes one of the 6 spots the Projectile swap rows also use.'] = 'Eso ocupa uno de los 6 lugares que también usan las filas de cambio de proyectil.',
       ['That would make a loop of extra stratagems.'] = 'Eso formaría un ciclo de estratagemas extra.',
       ['The Arbitrator\'s underbarrel shotgun, not the rifle itself.'] = 'La escopeta en cañón secundario del Arbitrator, no el rifle en sí.',
       ['The Defender SEAF soldiers carry. Not yours.'] = 'El Defender que llevan los soldados SEAF. No el tuyo.',
       ['The EAT-17 SEAF soldiers carry. Not yours.'] = 'El EAT-17 que llevan los soldados SEAF. No el tuyo.',
+      ['The GATER\'s 600 (FRVs 5, tanks 15) is what holds it near 55 km/h.'] = 'El 600 del GATER (FRV 5, tanques 15) es lo que lo deja cerca de 55 km/h.',
       ['The MG-43 SEAF soldiers carry. Not yours.'] = 'La MG-43 que llevan los soldados SEAF. No la tuya.',
       ['The One-Two\'s underbarrel launcher, not the rifle. Fires the GP-31\'s grenade.'] = 'El lanzador en cañón secundario del One-Two, no el rifle. Dispara la granada del GP-31.',
       ['The SMG you carry. Its underbarrel flamer is listed separately.'] = 'El subfusil que llevas. Su lanzallamas en cañón secundario aparece aparte.',
@@ -14199,6 +14644,9 @@ MOD.langs = {
       ['The beacon\'s countdown before the delivery is sent.'] = 'La cuenta regresiva de la baliza antes de enviar la entrega.',
       ['The charge backpack, the charge and its blast. Cooldown: Stratagems tab.'] = 'La mochila de cargas, la carga y su explosión. Tiempo de recarga: pestaña Estratagemas.',
       ['The clipboard has no valid preset code.'] = 'El portapapeles no tiene un código de preset válido.',
+      ['The engine speed where it changes to the next gear. Higher: holds each gear longer.'] = 'La velocidad del motor a la que sube de marcha. Más alto: aguanta más cada marcha.',
+      ['The engine speed where it drops a gear. Higher: drops sooner, so it keeps more pull on hills.'] = 'La velocidad del motor a la que baja de marcha. Más alto: baja antes y tira más en subidas.',
+      ['The engine speed where it pulls hardest. Its pull falls off below and above it.'] = 'La velocidad del motor donde más tira. La fuerza baja por debajo y por encima.',
       ['The explosion the round sets off when it hits something. 0: no explosion.'] = 'La explosión que causa la ronda al golpear algo. 0: sin explosión.',
       ['The explosion the round sets off when its life time runs out before it hits anything. 0: no explosion.'] = 'La explosión que provoca el proyectil cuando se acaba su tiempo de vida antes de impactar con algo. 0: sin explosión.',
       ['The flamethrower you carry.'] = 'El lanzallamas que llevas.',
@@ -14221,6 +14669,7 @@ MOD.langs = {
       ['The round goes off when it passes this close to an enemy, without hitting it. 0: off (the RL-77 uses 2 m).'] = 'La ronda explota cuando pasa así de cerca de un enemigo, sin golpearlo. 0: desactivado (el RL-77 usa 2 m).',
       ['The round only bounces when it hits faster than this. Grenade launcher rounds use 20 m/s, most rounds 60 m/s.'] = 'La ronda solo rebota si impacta más rápido que esto. Las rondas de lanzagranadas usan 20 m/s, la mayoría 60 m/s.',
       ['The round only bounces when it hits further than this from head on (0 = head on, 90 = grazing).'] = 'La ronda solo rebota si impacta más lejos que este ángulo de frente (0 = de frente, 90 = rozando).',
+      ['The same, right after it hits something. Higher: a crash spins it round less.'] = 'Lo mismo, justo después de chocar. Más alto: un choque lo hace girar menos.',
       ['The shot\'s trail and other effects belong to the chosen weapon.'] = 'La estela del disparo y otros efectos pertenecen al arma elegida.',
       ['The support hammer delivered by hellpod. The game data files it next to the Machete.'] = 'El martillo de apoyo enviado en cápsula. Los datos del juego lo guardan junto al Machete.',
       ['The support weapon. The CQC-73 is listed under Secondary.'] = 'El arma de apoyo. El CQC-73 aparece en Secundaria.',
@@ -14270,6 +14719,7 @@ MOD.langs = {
       ['Trooper jump pack'] = 'Mochila propulsora del Soldado',
       ['True Grit'] = 'Audacia Auténtica',
       ['Tube Reddot 2x'] = 'Punto rojo de tubo de 2x',
+      ['Turn inertia'] = 'Inercia de giro',
       ['Turn speed (x)'] = 'Velocidad de giro (x)',
       ['Turn speed at cruise'] = 'Giro a velocidad de crucero',
       ['Turn speed at slowest'] = 'Giro a la velocidad más lenta',
@@ -14359,13 +14809,17 @@ MOD.langs = {
       ['Wheel grip'] = 'Agarre de las ruedas',
       ['Wheel radius (m)'] = 'Radio de las ruedas (m)',
       ['Wheels'] = 'Ruedas',
+      ['Where the engine\'s speed range starts. Higher: more pull from a stop, but it wastes the low end.'] = 'Donde empieza el rango del motor. Más alto: más fuerza al arrancar, pero pierde la parte baja.',
+      ['Which exosuit this arm comes from: 1 Patriot, 2 Emancipator, 3 Breakthrough, 4 Lumberer.'] = 'De qué exotraje viene este brazo: 1 Patriot, 2 Emancipator, 3 Breakthrough, 4 Lumberer.',
       ['Wind-down time (s)'] = 'Tiempo de frenado (s)',
       ['Wind-down time, released (s)'] = 'Tiempo de frenado, al soltar (s)',
       ['Wind-up'] = 'Arranque',
       ['Wind-up time (s)'] = 'Tiempo de arranque (s)',
       ['Wings'] = 'Alas',
+      ['With the air density, it caps the GATER\'s top speed.'] = 'Junto con la densidad del aire, limita la velocidad máxima del GATER.',
       ['Wretch'] = 'Nefasto',
       ['Xenobite Ardent'] = 'Ardoroso xenobita',
+      ['Yaw from wheel forces (x)'] = 'Giro por las ruedas (x)',
       ['You are an insect, Helldiver.'] = 'Eres un insecto, Helldiver.',
       ['Your changes are off: turn them on in Settings to edit.'] = 'Tus cambios están desactivados: actívalos en Configuración para editar.',
       ['Your changes are off: turn them on in Settings to load a preset'] = 'Tus cambios están desactivados: actívalos en Configuración para cargar un perfil',
@@ -14381,6 +14835,7 @@ MOD.langs = {
       ['assassinate'] = 'asesinato',
       ['assault'] = 'asalto',
       ['at least 1 round, at most 2048'] = 'mínimo 1 bala, máximo 2048',
+      ['below 0: pressed down at speed'] = 'bajo 0: se pega al suelo a velocidad',
       ['body parts without their own armor use this'] = 'las partes del cuerpo sin blindaje propio usan este',
       ['bull'] = 'toro',
       ['clip'] = 'cargador',
@@ -14389,12 +14844,17 @@ MOD.langs = {
       ['elite'] = 'élite',
       ['every enemy with this attack shares it'] = 'todos los enemigos con este ataque lo comparten',
       ['fake'] = 'falso',
+      ['faster than this, it steers less'] = 'más rápido que esto, gira menos',
       ['gloom'] = 'penumbra',
       ['gunships, Dragonroaches, Leviathans and the like, where a planet has them'] = 'naves de guerra, Dragocucarachas, Leviatanes y similares, donde un planeta los tenga',
       ['heavier: slower to speed up, harder to push or roll'] = 'más pesado: acelera más lento, cuesta más empujarlo o volcarlo',
       ['heavycannon'] = 'cañón pesado',
       ['hexagon'] = 'hexágono',
+      ['higher: harder to reach top speed'] = 'más alto: cuesta más llegar a la velocidad máxima',
+      ['higher: harder to tip over'] = 'más alto: cuesta más volcarlo',
       ['higher: less bounce'] = 'más alto: rebota menos',
+      ['higher: more air drag, a lower top speed'] = 'más alto: más resistencia del aire, menos velocidad máxima',
+      ['higher: stops spinning out sooner'] = 'más alto: deja de trompear antes',
       ['hit reactions, staggers and stuns'] = 'reacciones a impactos, tambaleos y aturdimientos',
       ['how far the wheels can move up and down'] = 'cuánto pueden subir y bajar las ruedas',
       ['how far the wheels can move up and down; lower: the body wobbles a lot'] = 'cuánto pueden subir y bajar las ruedas; menor: la carrocería se bambolea mucho',
@@ -14410,6 +14870,7 @@ MOD.langs = {
       ['how quickly the view follows your aim at this zoom; lower it if a high zoom spins the view'] = 'qué tan rápido la vista sigue tu puntería con este zoom; bájalo si un zoom alto hace girar la vista',
       ['its height above its flight route; lower flies closer to the ground (terrain still holds it up)'] = 'su altura sobre su ruta de vuelo; más bajo vuela más cerca del suelo (el terreno igual lo sostiene)',
       ['its own. - / + : fire another weapon\'s'] = 'el suyo. - / + : dispara el de otra arma',
+      ['its own. 1 Patriot, 2 Emancipator, 3 Breakthrough, 4 Lumberer'] = 'el suyo. 1 Patriot, 2 Emancipator, 3 Breakthrough, 4 Lumberer',
       ['ivory legion assault'] = 'asalto de la legión de marfil',
       ['ivory legion tier 2'] = 'legión de marfil nivel 2',
       ['jammer'] = 'inhibidor',
@@ -14418,11 +14879,15 @@ MOD.langs = {
       ['loaded into an empty weapon, from your spare rounds'] = 'cargadas en un arma vacía, de tus rondas de reserva',
       ['lower (more negative): you go deeper before drowning starts'] = 'más bajo (más negativo): te hundes más antes de empezar a ahogarte',
       ['lower: a higher top speed in that gear, a weaker pull'] = 'más bajo: más velocidad máxima en esa marcha, menos fuerza',
+      ['lower: bounces back faster'] = 'más bajo: rebota más rápido',
+      ['lower: dips less when braking'] = 'más bajo: se hunde menos al frenar',
       ['lower: harder to roll over'] = 'más bajo: cuesta más volcarlo',
+      ['lower: leans less in turns'] = 'más bajo: se inclina menos en las curvas',
       ['lower: softer, the body sags (at 1 it barely moves)'] = 'menor: más blanda, la carrocería se hunde (en 1 casi no se mueve)',
       ['lower: their shots land closer to where they aim (0: dead on)'] = 'más bajo: sus disparos caen más cerca de donde apuntan (0: exactos)',
       ['melee, guns and death explosions, shared ones included'] = 'cuerpo a cuerpo, armas y explosiones al morir, incluidas las compartidas',
       ['min charge'] = 'carga mín.',
+      ['multiplies every gear; lower: faster, weaker pull'] = 'multiplica todas las marchas; más bajo: más rápido, menos fuerza',
       ['negative: below level, -90 straight down'] = 'negativo: bajo el nivel, -90 hacia abajo',
       ['no shrapnel'] = 'sin metralla',
       ['none'] = 'ninguno',
@@ -14477,6 +14942,7 @@ MOD.langs = {
       ['what each hit applies; the slots go in order'] = 'lo que aplica cada impacto; las ranuras van en orden',
       ['what it has left once its health is gone, lost over time'] = 'lo que le queda cuando se acaba su salud, se pierde con el tiempo',
       ['where it hangs when put away: 0 on the back, 1 on the hip'] = 'dónde cuelga al guardarla: 0 en la espalda, 1 en la cadera',
+      ['where it pulls hardest'] = 'donde más tira',
       ['who it fights for: units of other sides attack it, and it attacks them'] = 'para quién pelea: las unidades de otros bandos lo atacan, y él las ataca',
       ['with the gears, sets the top speed'] = 'junto con las marchas, fija la velocidad máxima',
     },
@@ -15581,10 +16047,12 @@ MOD.langs = {
       ['A mounted copy run by AI (emplacement-style). Not the one you carry.'] = 'Uma cópia montada operada por IA (tipo posicionamento). Não é a que você carrega.',
       ['A mounted copy. Not the one you carry.'] = 'Uma cópia montada. Não é a que você carrega.',
       ['A pathetic creature of meat and bone.'] = 'Uma criatura patética de carne e osso.',
+      ['A preset file in the import folder was not imported. Fix the lines the log names and start SSEO again.'] = 'Um arquivo de preset na pasta import não foi importado. Corrija as linhas que o log indica e abra o SSEO de novo.',
       ['A preset keeps every change you have made as one set, under a name you choose.'] = 'Um perfil guarda todas as suas mudanças como um conjunto, com o nome que você escolher.',
       ['A preset keeps every enemy and spawning change as one custom difficulty, under a name you choose. Your weapon changes are kept apart.'] = 'Um perfil guarda todas as mudanças de inimigos e surgimento como uma dificuldade personalizada, com o nome que você escolher. Suas mudanças de armas ficam separadas.',
       ['A resupply box gives this many. An ammo box on the map gives half, rounded down (at least 1).'] = 'Uma caixa de reabastecimento dá esta quantidade. Uma caixa de munição no mapa dá a metade, arredondada para baixo (mínimo 1).',
       ['A resupply box gives this much. An ammo box on the map gives half, rounded down.'] = 'Uma caixa de reabastecimento dá esta quantidade. Uma caixa de munição no mapa dá a metade, arredondada para baixo.',
+      ['A second ammo fires as many projectiles per shot as this weapon\'s own.'] = 'A segunda munição dispara tantos projéteis por tiro quanto a munição própria desta arma.',
       ['A value changed on an enemy\'s own page stays red: this page leaves it as it is.'] = 'Um valor mudado na página própria de um inimigo fica vermelho: esta página o deixa como está.',
       ['A weapon whose own Sway multiplier you changed keeps it. Sway this row changes shows in blue.'] = 'Uma arma cujo próprio Multiplicador de balanço você mudou o mantém. O balanço que esta linha muda aparece em azul.',
       ['A/AC-8 Autocannon Sentry'] = 'A/AC-8 Canhão Automático Sentinela',
@@ -15628,6 +16096,7 @@ MOD.langs = {
       ['AX/FLAM-75 "Guard Dog" Hot Dog'] = 'AX/FLAM-75 "Guard Dog" Hot Dog',
       ['AX/LAS-5 "Guard Dog" Rover'] = 'AX/LAS-5 "Guard Dog" Rover',
       ['AX/TX-13 "Guard Dog" Dog Breath'] = 'AX/TX-13 "Guard Dog" Dog Breath',
+      ['Above this speed the wheels turn less and less. Raise it to keep steering at high speed.'] = 'Acima dessa velocidade as rodas viram cada vez menos. Aumente para continuar virando em alta velocidade.',
       ['Acceleration (m/s2)'] = 'Aceleração (m/s2)',
       ['Accelerator Rifle'] = 'Rifle Acelerador',
       ['Acclimated'] = 'Aclimatada',
@@ -15647,6 +16116,7 @@ MOD.langs = {
       ['Aim limit, up (deg)'] = 'Limite de mira, cima (graus)',
       ['Aim zoom (x)'] = 'Zoom ao mirar (x)',
       ['Aiming sway'] = 'Balanço da mira',
+      ['Air density'] = 'Densidade do ar',
       ['Airborne'] = 'Aerotransportado',
       ['Airburst Rocket Launcher'] = 'Lança-foguetes de Explosão Atmosférica',
       ['All'] = 'Tudo',
@@ -15704,6 +16174,7 @@ MOD.langs = {
       ['Armor penetration'] = 'Penetração de blindagem',
       ['Armor weight'] = 'Peso da blindagem',
       ['Armors'] = 'Blindagens',
+      ['Arms'] = 'Braços',
       ['Ask'] = 'Perguntar',
       ['Assassinate'] = 'Assassinato',
       ['Assault'] = 'Assalto',
@@ -15765,6 +16236,7 @@ MOD.langs = {
       ['Beams per barrel'] = 'Feixes por cano',
       ['Belt-Fed Grenade Launcher'] = 'Lança-granadas com Fita',
       ['Berserker'] = 'Berserker',
+      ['Best engine speed (rpm)'] = 'Rotação ideal do motor (rpm)',
       ['Better stratagem bounce'] = 'Ricochete de estratégias melhor',
       ['Big walker cannon'] = 'Canhão de andador grande',
       ['Bigger wheels: a higher top speed and more room under the body, but a weaker pull.'] = 'Rodas maiores: velocidade máxima maior e mais vão livre, mas menos força.',
@@ -15889,6 +16361,7 @@ MOD.langs = {
       ['Charges'] = 'Cargas',
       ['Charges from resupply'] = 'Cargas do reabastecimento',
       ['Charging speed (m/s)'] = 'Velocidade de investida (m/s)',
+      ['Chassis'] = 'Chassi',
       ['Chemical Backpack'] = 'Mochila de substâncias químicas',
       ['Chest'] = 'Peito',
       ['Chest bleeding damage'] = 'Dano de sangramento no peito',
@@ -15902,6 +16375,11 @@ MOD.langs = {
       ['Click again'] = 'Clique de novo',
       ['Click again to overwrite'] = 'Clique de novo para sobrescrever',
       ['Click again within 4 seconds to end the game. Unsaved progress is lost.'] = 'Clique de novo em 4 segundos para fechar o jogo. O progresso não salvo será perdido.',
+      ['Client-sided only: in a lobby it counts for your own shots, not other players\'.'] = 'Apenas no cliente: em um lobby vale para os seus tiros, não para os de outros jogadores.',
+      ['Client-sided only: other players may keep the game\'s normal radius.'] = 'Apenas no cliente: os outros podem manter o raio normal do jogo.',
+      ['Client-sided only: other players may see the game\'s normal shots.'] = 'Apenas no cliente: os outros podem ver os tiros normais do jogo.',
+      ['Client-sided only: other players see the normal animation; attack timing may follow the host.'] = 'Apenas no cliente: os outros veem a animação normal; o tempo dos ataques pode seguir o anfitrião.',
+      ['Client-sided only: other players see the normal size; reach may follow the host.'] = 'Apenas no cliente: os outros veem o tamanho normal; o alcance pode seguir o anfitrião.',
       ['Climb acceleration'] = 'Aceleração de subida',
       ['Climb multiplier (horizontal)'] = 'Multiplicador de escalada (horizontal)',
       ['Climb multiplier (vertical)'] = 'Multiplicador de escalada (vertical)',
@@ -15911,6 +16389,7 @@ MOD.langs = {
       ['Close all'] = 'Fechar tudo',
       ['Close game'] = 'Fechar jogo',
       ['Cluster Bomb'] = 'Bomba de fragmentação',
+      ['Clutch slip (rpm)'] = 'Patinação da embreagem (rpm)',
       ['Cognitive Disruptor'] = 'Disruptor Cognitivo',
       ['Collision'] = 'Colisão',
       ['Combat Hatchet'] = 'Machadinha de combate',
@@ -15971,6 +16450,8 @@ MOD.langs = {
       ['Damage ticks per minute'] = 'Pulsos de dano por minuto',
       ['Damage to you'] = 'Dano em você',
       ['Damping'] = 'Amortecimento',
+      ['Damping (compression)'] = 'Amortecimento (compressão)',
+      ['Damping (rebound)'] = 'Amortecimento (retorno)',
       ['Dark Fluid burst'] = 'Explosão de Fluido Sombrio',
       ['De-Escalator'] = 'Desescalador',
       ['Dead Sprint'] = 'Corrida Desesperada',
@@ -16002,7 +16483,9 @@ MOD.langs = {
       ['Done'] = 'Pronto',
       ['Double Freedom'] = 'Dupla Liberdade',
       ['Double-Edge Sickle'] = 'Foice de Dois Gumes',
+      ['Double-Edge Sickle heat ramp'] = 'Escalada de calor da Foice de Dois Gumes',
       ['Down'] = 'Baixo',
+      ['Drag coefficient'] = 'Coeficiente de arrasto',
       ['Drag factor'] = 'Fator de arrasto',
       ['Dragonroach'] = 'Dracobarata',
       ['Drift from the last shell, least (m)'] = 'Desvio do último projétil, mínimo (m)',
@@ -16073,6 +16556,10 @@ MOD.langs = {
       ['Enemy cap (x)'] = 'Limite de inimigos (x)',
       ['Enemy detection range'] = 'Alcance de detecção de inimigos',
       ['Enemy.'] = 'Inimigo.',
+      ['Engine'] = 'Motor',
+      ['Engine drag at the best speed'] = 'Resistência do motor na rotação ideal',
+      ['Engine drag at the lowest speed'] = 'Resistência do motor na rotação mínima',
+      ['Engine drag at the top speed'] = 'Resistência do motor na rotação máxima',
       ['Engine front'] = 'Motor dianteiro',
       ['Engine rear'] = 'Motor traseiro',
       ['Engine torque'] = 'Torque do motor',
@@ -16142,6 +16629,7 @@ MOD.langs = {
       ['Field width (m)'] = 'Largura do campo (m)',
       ['Fighting speed (m/s)'] = 'Velocidade em combate (m/s)',
       ['Fin front'] = 'Aleta dianteira',
+      ['Final drive ratio'] = 'Relação final',
       ['Finding the stats...'] = 'Procurando os atributos...',
       ['Fire'] = 'Fogo',
       ['Fire damage taken'] = 'Dano de fogo recebido',
@@ -16151,6 +16639,8 @@ MOD.langs = {
       ['Fire rate (x)'] = 'Cadência (x)',
       ['Fire/gas/acid/arc damage taken'] = 'Dano de fogo/gás/ácido/arco recebido',
       ['Firebomb Hellpods'] = 'Hellpods Bombásticos',
+      ['Fires the Double-Edge Sickle\'s stronger shots as it heats up, and hurts you near overheat.'] = 'Dispara os tiros mais fortes da Foice de Dois Gumes conforme esquenta e fere você perto de superaquecer.',
+      ['Firing it standing no longer knocks you down or hurts you.'] = 'Atirar em pé não te derruba nem te machuca mais.',
       ['First shell (id)'] = 'Primeiro projétil (id)',
       ['Flame Sentry'] = 'Sentinela ígnea',
       ['Flames'] = 'Chamas',
@@ -16172,10 +16662,13 @@ MOD.langs = {
       ['Frag'] = 'Fragmentadora',
       ['From supply'] = 'Do suprimento',
       ['Front'] = 'Frente',
+      ['Front area (m2)'] = 'Área frontal (m2)',
       ['Front armor'] = 'Blindagem frontal',
       ['Front body'] = 'Corpo frontal',
       ['Front brake strength'] = 'Força dos freios dianteiros',
       ['Front damping'] = 'Amortecimento dianteiro',
+      ['Front damping (compression)'] = 'Amortecimento dianteiro (compressão)',
+      ['Front damping (rebound)'] = 'Amortecimento dianteiro (retorno)',
       ['Front face'] = 'Face frontal',
       ['Front grip lower than the rear: it turns wide. Rear lower than the front: the back slides out.'] = 'Dianteira com menos aderência que a traseira: abre nas curvas. Traseira com menos: a traseira escapa.',
       ['Front hull'] = 'Casco frontal',
@@ -16185,11 +16678,13 @@ MOD.langs = {
       ['Front right wheel hub'] = 'Cubo da roda dianteira direita',
       ['Front spring stiffness'] = 'Rigidez da suspensão dianteira',
       ['Front suspension travel'] = 'Curso da suspensão dianteira',
+      ['Front suspension travel (m)'] = 'Curso da suspensão dianteira (m)',
       ['Front wheel grip'] = 'Aderência das rodas dianteiras',
       ['Front wheel radius (m)'] = 'Raio das rodas dianteiras (m)',
       ['Full charge'] = 'Carga completa',
       ['Full charge explosion'] = 'Explosão com carga completa',
       ['Full charge shot'] = 'Disparo com carga completa',
+      ['Full steering up to (m/s)'] = 'Direção total até (m/s)',
       ['Fuse time (s)'] = 'Tempo da espoleta (s)',
       ['Fusion Autocannon'] = 'Autocanhão de fusão',
       ['Fusion Repeater'] = 'Repetidor de fusão',
@@ -16313,6 +16808,7 @@ MOD.langs = {
       ['High Explosive'] = 'Detonante',
       ['High-Velocity Shrapnel'] = 'Estilhaço de alta velocidade',
       ['Higher: a stiffer ride, less lean in turns, bumps kick harder.'] = 'Mais alto: rodagem mais dura, inclina menos nas curvas, os buracos batem mais forte.',
+      ['Higher: easier starts from a stop and on hills. Lower: a more direct pull.'] = 'Maior: sai mais fácil e em subidas. Menor: força mais direta.',
       ['Higher: leans more and tips over in sharp turns.'] = 'Mais alto: inclina mais e capota em curvas fechadas.',
       ['Higher: stops in a shorter distance. Too high locks the wheels, and it skids instead of stopping.'] = 'Mais alto: para em menos distância. Alto demais trava as rodas e ele derrapa em vez de parar.',
       ['Highest ledge it climbs (m)'] = 'Borda mais alta que escala (m)',
@@ -16338,18 +16834,37 @@ MOD.langs = {
       ['Hover speed (m/s)'] = 'Velocidade de voo (m/s)',
       ['Hover time, full-speed climb (s)'] = 'Tempo de voo, subida em velocidade máxima (s)',
       ['Hover time, holding height (s)'] = 'Tempo de voo, mantendo a altura (s)',
+      ['How badly its shape cuts through the air. Higher: more air drag, a lower top speed.'] = 'Quão mal o formato corta o ar. Maior: mais resistência, menor velocidade máxima.',
+      ['How big the vehicle is to the air. Higher: more air drag, a lower top speed.'] = 'Quão grande o veículo é para o ar. Maior: mais resistência, menor velocidade máxima.',
       ['How close the view gets when you aim: 1 is the normal view, 2 twice as close, 4 four times.'] = 'Quanto a visão se aproxima ao mirar: 1 é a visão normal, 2 duas vezes mais perto, 4 quatro vezes.',
       ['How close this zoom step looks: 1 is the normal view, 2 twice as close, 4 four times.'] = 'Quão perto este nível de zoom parece: 1 é a visão normal, 2 duas vezes mais perto, 4 quatro vezes.',
+      ['How far the engine speed can run ahead of the wheels before the clutch grips.'] = 'Quanto a rotação pode passar das rodas antes de a embreagem pegar.',
+      ['How far the front wheels turn. Higher: tighter turns at low speed.'] = 'Quanto as rodas dianteiras viram. Maior: curvas mais fechadas em baixa velocidade.',
+      ['How fast a spin dies down on its own. Higher: stops spinning out sooner.'] = 'Quão rápido um giro para sozinho. Maior: para de rodar mais cedo.',
       ['How fast the engine may spin before it stops pulling. Higher: a higher top speed in every gear,'] = 'Até que rotação o motor continua empurrando. Mais alto: velocidade máxima maior em todas as marchas,',
+      ['How fast the springs push back out after a bump. Higher: they come back slowly, a calmer ride.'] = 'Quão rápido as molas voltam após um impacto. Maior: voltam devagar, uma viagem mais calma.',
       ['How fast the springs settle after a bump. Higher: settles at once, a firmer ride.'] = 'Quão rápido as molas se acalmam depois de um buraco. Mais alto: na hora, rodagem mais firme.',
       ['How fast their animations play. Most attacks follow the animation, so they come sooner or later too.'] = 'Quão rápido as animações deles tocam. A maioria dos ataques segue a animação, então também acontecem antes ou depois.',
+      ['How hard it is to roll it onto its side. Higher: harder to tip over in turns and blasts.'] = 'Quão difícil é tombá-lo de lado. Maior: mais difícil de capotar em curvas e explosões.',
+      ['How hard it is to start or stop turning. Too low on a heavy vehicle makes turns stutter.'] = 'Quão difícil é começar ou parar de virar. Muito baixo num veículo pesado faz as curvas engasgarem.',
+      ['How hard it is to tip it nose up or down. Higher: steadier over bumps and jumps.'] = 'Quão difícil é inclinar o nariz para cima ou para baixo. Maior: mais estável em buracos e saltos.',
       ['How hard the engine pushes. Higher: faster acceleration and steeper hills, but more wheelspin.'] = 'A força do motor. Mais alto: acelera mais rápido e sobe mais ladeira, mas patina mais.',
       ['How high the balance point sits. Lower (even below 0): stays flat in hard turns and over rocks.'] = 'Altura do ponto de equilíbrio. Mais baixo (até abaixo de 0): fica estável em curvas fechadas e pedras.',
       ['How long the round waits after the hit (or after the blast proximity trips) before it goes off.'] = 'Quanto a munição espera após o acerto (ou após a proximidade ativar) antes de explodir.',
       ['How many bombs one run drops and how they land. The bombs stay this Eagle\'s own.'] = 'Quantas bombas cada passagem solta e como caem. As bombas continuam sendo desta Águia.',
       ['How many times the round can bounce off a surface. 0: it never bounces back at you.'] = 'Quantas vezes a munição pode ricochetear numa superfície. 0: ela nunca volta na sua direção.',
+      ['How much of the engine torque it has at its lowest speed. Higher: stronger off the line and on hills.'] = 'Quanto torque ele tem na rotação mínima. Maior: mais forte na arrancada e em subidas.',
+      ['How much of the engine torque it keeps at its top speed. Higher: keeps speeding up near the top.'] = 'Quanto torque ele mantém na rotação máxima. Maior: continua acelerando perto do limite.',
+      ['How much speeding up and braking tip the nose. Lower: stays level when it brakes or speeds up.'] = 'Quanto acelerar e frear inclinam o nariz. Menor: fica nivelado.',
+      ['How much the air lifts it at speed. Above 0: lighter and floatier when fast. Below 0: pressed down, more grip.'] = 'Quanto o ar o levanta em velocidade. Acima de 0: mais leve quando rápido. Abaixo de 0: grudado no chão, mais aderência.',
+      ['How much the engine holds itself back at its best speed. Higher: weaker acceleration overall.'] = 'Quanto o motor se segura na rotação ideal. Maior: acelera menos no geral.',
+      ['How much the engine holds itself back at its lowest speed. Higher: slower to get going.'] = 'Quanto o motor se segura na rotação mínima. Maior: demora mais para sair.',
+      ['How much the engine holds itself back near its top speed. Higher: it struggles to reach it.'] = 'Quanto o motor se segura perto da rotação máxima. Maior: tem dificuldade em chegar lá.',
+      ['How much the wheels’ forces lean the body in turns. Lower: stays flatter and harder to roll.'] = 'Quanto as forças das rodas inclinam a carroceria nas curvas. Menor: mais reto e mais difícil de capotar.',
+      ['How much the wheels’ forces swing it round. Lower: steadier, less likely to spin out.'] = 'Quanto as forças das rodas o fazem girar. Menor: mais estável, roda menos.',
       ['How much this gear multiplies the engine. Higher: stronger pull, but it tops out sooner.'] = 'Quanto esta marcha multiplica o motor. Mais alto: mais força, mas chega ao limite antes.',
       ['How quickly the scoped view catches up when you move your aim at this zoom (0.6 on most optics).'] = 'Quão rápido a visão da luneta acompanha sua mira com este zoom (0.6 na maioria das miras).',
+      ['How thick the air is for this vehicle. Higher: more air drag, a lower top speed.'] = 'Quão denso é o ar para este veículo. Maior: mais resistência, menor velocidade máxima.',
       ['How well the tyres hold the ground. Higher: sharper turns, less sliding and wheelspin.'] = 'O quanto os pneus seguram o chão. Mais alto: curvas mais fechadas, menos derrapagem e patinagem.',
       ['Hulk'] = 'Hulk',
       ['Hulk Bruiser'] = 'Hulk brutamonte',
@@ -16388,6 +16903,7 @@ MOD.langs = {
       ['Inner torso'] = 'Torso interno',
       ['Insides'] = 'Interior',
       ['Install into the game'] = 'Instalar no jogo',
+      ['Install loads the chosen arm\'s exosuit into every mission, so its model shows.'] = 'Instalar carrega o exotraje do braço escolhido em cada missão, para que seu modelo apareça.',
       ['Install loads up to 6 such weapons into every mission, so nobody has to bring them. A support weapon brings its own.'] = 'A instalação carrega até 6 armas desse tipo em todas as missões, então ninguém precisa levá-las. Uma arma de apoio traz as suas.',
       ['Installed, but not everything fits. Some projectiles may show no trail, and some Always bring it stratagems stay out of missions.'] = 'Instalado, mas nem tudo coube. Alguns projéteis podem não mostrar rastro e alguns estratagemas de "Levar sempre" ficam fora das missões.',
       ['Installing: finding what changed...'] = 'Instalando: procurando o que mudou...',
@@ -16461,6 +16977,11 @@ MOD.langs = {
       ['Lb wing'] = 'Asa te',
       ['Left'] = 'Esquerda',
       ['Left arm'] = 'Braço esquerdo',
+      ['Left arm from (1-4)'] = 'Braço esquerdo de (1-4)',
+      ['Left arm from: Breakthrough'] = 'Braço esquerdo de: Breakthrough',
+      ['Left arm from: Emancipator'] = 'Braço esquerdo de: Emancipator',
+      ['Left arm from: Lumberer'] = 'Braço esquerdo de: Lumberer',
+      ['Left arm from: Patriot'] = 'Braço esquerdo de: Patriot',
       ['Left arm health'] = 'Vida do braço esquerdo',
       ['Left armor'] = 'Blindagem esquerda',
       ['Left arms'] = 'Braços esquerdos',
@@ -16529,6 +17050,7 @@ MOD.langs = {
       ['Left wrist blade'] = 'Lâmina de pulso esquerda',
       ['Leg injury immunity (1 on)'] = 'Imunidade a lesão na perna (1 ligado)',
       ['Less: bumps go straight into the body and it wobbles.'] = 'Menos: os buracos vão direto para a carroceria e ela balança.',
+      ['Less: bumps go straight into the body.'] = 'Menos: os impactos vão direto para a carroceria.',
       ['Leveller'] = 'Desobstrutora',
       ['Leviathan'] = 'Leviatã',
       ['Leviathan bomb'] = 'Bomba do Leviatã',
@@ -16540,6 +17062,7 @@ MOD.langs = {
       ['Liberator Legacy'] = 'Liberador Legatário',
       ['Liberator Penetrator'] = 'Liberador Perfurante',
       ['Lifetime (s)'] = 'Duração (s)',
+      ['Lift coefficient'] = 'Coeficiente de sustentação',
       ['Light armor'] = 'Blindagem leve',
       ['Light, medium or heavy, per armor (every armor set with that name).'] = 'Leve, média ou pesada, por blindagem (toda blindagem com esse nome).',
       ['Lighter: quicker off the line, but bounces over bumps and gets thrown around by explosions.'] = 'Mais leve: arranca mais rápido, mas quica nos buracos e é jogado longe por explosões.',
@@ -16557,9 +17080,12 @@ MOD.langs = {
       ['Lower back'] = 'Lombar',
       ['Lower it if a high zoom spins the view.'] = 'Diminua se um zoom alto faz a visão girar.',
       ['Lower spine'] = 'Coluna inferior',
+      ['Lower: a higher top speed, if the engine can pull it.'] = 'Menor: maior velocidade máxima, se o motor aguentar.',
       ['Lower: a softer ride, the body leans in turns and sags.'] = 'Mais baixo: rodagem mais macia, a carroceria inclina nas curvas e afunda.',
       ['Lower: faster in this gear, weaker on hills and from a stop.'] = 'Mais baixo: mais rápido nesta marcha, mais fraco em subidas e na arrancada.',
       ['Lower: keeps bouncing after every bump.'] = 'Mais baixo: continua quicando depois de cada buraco.',
+      ['Lower: the wheels spring back fast and the body bounces.'] = 'Menor: as rodas voltam rápido e a carroceria quica.',
+      ['Lowest engine speed (rpm)'] = 'Rotação mínima do motor (rpm)',
       ['Lowest patrol frequency (x)'] = 'Frequência mínima de patrulhas (x)',
       ['Lowest rates'] = 'Valores mínimos',
       ['Lowest reinforcement frequency (x)'] = 'Frequência mínima de reforços (x)',
@@ -16651,6 +17177,7 @@ MOD.langs = {
       ['Movement'] = 'Movimento',
       ['Movement speed (multiplier)'] = 'Velocidade de movimento (multiplicador)',
       ['Movement speed (x)'] = 'Velocidade de movimento (x)',
+      ['Multiplies every gear. Higher: stronger pull and steeper hills, a lower top speed.'] = 'Multiplica todas as marchas. Maior: mais força e subidas mais íngremes, menor velocidade máxima.',
       ['Muzzle'] = 'Boca',
       ['Muzzle brake'] = 'Freio de boca',
       ['Name'] = 'Nome',
@@ -16665,6 +17192,7 @@ MOD.langs = {
       ['No changes: loading it puts every value back to the game\'s.'] = 'Sem mudanças: carregar devolve todos os valores aos do jogo.',
       ['No description'] = 'Sem descrição',
       ['No free preset place: delete one first.'] = 'Sem espaço livre: exclua um preset primeiro.',
+      ['No knockdown when standing'] = 'Sem queda ao atirar em pé',
       ['No other vehicle has this section.'] = 'Nenhum outro veículo tem esta seção.',
       ['No page in this editor uses this id.'] = 'Nenhuma página deste editor usa este id.',
       ['No passive.'] = 'Sem passiva.',
@@ -16700,6 +17228,7 @@ MOD.langs = {
       ['On: your '] = 'Ligado: suas ',
       ['On: your arc chain length / split apply with other players too (arcs can stay on screen).'] = 'Ligado: seu comprimento / divisão de correntes de arco também valem com outros jogadores (os arcos podem ficar na tela).',
       ['On: your rockets, launcher rounds and stratagem ordnance fly through tree canopies and bushes.'] = 'Ligado: seus foguetes, munições de lançador e artilharia de estratégias atravessam copas de árvores e arbustos.',
+      ['Once your reinforcements run out, one comes back after this long: 120 seconds by default.'] = 'Quando seus reforços acabam, um volta depois desse tempo: 120 segundos por padrão.',
       ['One True Flag'] = 'A Bandeira Una',
       ['One-Two'] = 'Dois em Um',
       ['One-handed'] = 'Uma mão',
@@ -16800,6 +17329,8 @@ MOD.langs = {
       ['Pilot light goes out after (s)'] = 'A chama piloto apaga após (s)',
       ['Pilot seat'] = 'Assento do piloto',
       ['Pineapple'] = 'Abacaxi',
+      ['Pitch from wheel forces (x)'] = 'Arfagem pelas rodas (x)',
+      ['Pitch inertia'] = 'Inércia de arfagem',
       ['Plasma Pistol. Canister Extended'] = 'Pistola de plasma. Cartucho estendido',
       ['Plasma Pistol. Canister Pistol'] = 'Pistola de plasma. Cartucho de pistola',
       ['Point of interest range'] = 'Alcance de pontos de interesse',
@@ -16824,6 +17355,8 @@ MOD.langs = {
       ['Projectiles per shot'] = 'Projéteis por disparo',
       ['Projectiles with no trail:'] = 'Projéteis sem rastro:',
       ['Prone speed (m/s)'] = 'Velocidade deitado (m/s)',
+      ['Pull at the lowest engine speed (x)'] = 'Força na rotação mínima (x)',
+      ['Pull at the top engine speed (x)'] = 'Força na rotação máxima (x)',
       ['Punisher'] = 'Justiceiro',
       ['Punisher Plasma'] = 'Justiceiro de Plasma',
       ['Purifier'] = 'Purificadora',
@@ -16875,9 +17408,12 @@ MOD.langs = {
       ['Rear brake strength'] = 'Força dos freios traseiros',
       ['Rear cockpit'] = 'Cabine traseira',
       ['Rear damping'] = 'Amortecimento traseiro',
+      ['Rear damping (compression)'] = 'Amortecimento traseiro (compressão)',
+      ['Rear damping (rebound)'] = 'Amortecimento traseiro (retorno)',
       ['Rear sight range (m)'] = 'Alcance de visão traseira (m)',
       ['Rear spring stiffness'] = 'Rigidez da suspensão traseira',
       ['Rear suspension travel'] = 'Curso da suspensão traseira',
+      ['Rear suspension travel (m)'] = 'Curso da suspensão traseira (m)',
       ['Rear wheel grip'] = 'Aderência das rodas traseiras',
       ['Rear wheel radius (m)'] = 'Raio das rodas traseiras (m)',
       ['Recharge delay (s)'] = 'Atraso da recarga (s)',
@@ -16903,6 +17439,7 @@ MOD.langs = {
       ['Reinforced Epaulettes'] = 'Dragonas Reforçadas',
       ['Reinforced Scout Strider'] = 'Caminhante explorador reforçado',
       ['Reinforcement frequency (x)'] = 'Frequência de reforços (x)',
+      ['Reinforcement regen time (s)'] = 'Tempo de recarga de reforços (s)',
       ['Reinforcement size (x)'] = 'Tamanho dos reforços (x)',
       ['Reinforcements'] = 'Reforços',
       ['Reinforcements (flares, breaches, drops)'] = 'Reforços (sinais, brechas, quedas)',
@@ -16933,6 +17470,11 @@ MOD.langs = {
       ['Rifle Justice. Short '] = 'Rifle Justice. Curto ',
       ['Right'] = 'Direita',
       ['Right arm'] = 'Braço direito',
+      ['Right arm from (1-4)'] = 'Braço direito de (1-4)',
+      ['Right arm from: Breakthrough'] = 'Braço direito de: Breakthrough',
+      ['Right arm from: Emancipator'] = 'Braço direito de: Emancipator',
+      ['Right arm from: Lumberer'] = 'Braço direito de: Lumberer',
+      ['Right arm from: Patriot'] = 'Braço direito de: Patriot',
       ['Right arm health'] = 'Vida do braço direito',
       ['Right armor'] = 'Blindagem direita',
       ['Right arms'] = 'Braços direitos',
@@ -17004,6 +17546,8 @@ MOD.langs = {
       ['Rocket Sentry'] = 'Foguete Sentinela',
       ['Rocket fired (id)'] = 'Foguete disparado (id)',
       ['Rocket pods'] = 'Lança-foguetes',
+      ['Roll from wheel forces (x)'] = 'Rolagem pelas rodas (x)',
+      ['Roll inertia'] = 'Inércia de rolagem',
       ['Rooted (experimental)'] = 'Enraizado (experimental)',
       ['Rotator'] = 'Rotor',
       ['Round 1 blast'] = 'Explosão munição 1',
@@ -17131,12 +17675,14 @@ MOD.langs = {
       ['Sentry: its cooldown, its body, then its weapon.'] = 'Sentinela: o tempo de recarga, o corpo e depois a arma.',
       ['Separate from the normal ground patrols. Does nothing on a mission without such a modifier.'] = 'Separado das patrulhas normais em terra. Não faz nada numa missão sem esse modificador.',
       ['Servo-Assisted'] = 'Servomecanismo',
+      ['Set it low for nearly endless reinforcements.'] = 'Abaixe para ter reforços quase infinitos.',
       ['Sets off mines'] = 'Ativa minas',
       ['Settings'] = 'Configurações',
       ['Settings are saved at once, in config.txt with your changes.'] = 'As configurações são salvas na hora, em config.txt com suas mudanças.',
       ['Several vehicles of a kind'] = 'Vários veículos do mesmo tipo',
       ['Shape'] = 'Forma',
       ['Shared by every armor with this passive. Multipliers: 1 = no change.'] = 'Compartilhado por todas as blindagens com esta passiva. Multiplicadores: 1 = sem mudança.',
+      ['Shares its levels: change their damage on the Double-Edge Sickle\'s page. Applies on Install.'] = 'Compartilha os níveis dela: mude o dano na página da Foice de Dois Gumes. Aplica ao instalar.',
       ['Shares its name and description with the armor of this name: a change here changes both.'] = 'Compartilha nome e descrição com a armadura de mesmo nome: mudar aqui muda os dois.',
       ['Shear'] = 'Podadeira',
       ['Shell fired (id)'] = 'Projétil disparado (id)',
@@ -17152,6 +17698,8 @@ MOD.langs = {
       ['Shield plate armor'] = 'Blindagem da placa do escudo',
       ['Shield plate health'] = 'Vida da placa do escudo',
       ['Shield zone'] = 'Zona do escudo',
+      ['Shift down at (rpm)'] = 'Desce de marcha em (rpm)',
+      ['Shift up at (rpm)'] = 'Sobe de marcha em (rpm)',
       ['Ship upgrades that make support weapons and sentries launch at once skip it (tested).'] = 'Melhorias da nave que lançam armas de suporte e sentinelas na hora a pulam (testado).',
       ['Shockwave radius (m)'] = 'Raio da onda de choque (m)',
       ['Short Magazine'] = 'Carregador curto',
@@ -17210,6 +17758,8 @@ MOD.langs = {
       ['Spear'] = 'Lança',
       ['Speargun'] = 'Arbalete',
       ['Speed while aiming (m/s)'] = 'Velocidade mirando (m/s)',
+      ['Spin damping'] = 'Amortecimento do giro',
+      ['Spin damping in collisions'] = 'Amortecimento do giro em colisões',
       ['Spine lower'] = 'Coluna inferior',
       ['Spine plate'] = 'Placa da coluna',
       ['Spine roll back'] = 'Giro traseiro da coluna',
@@ -17264,6 +17814,8 @@ MOD.langs = {
       ['Stationary Shroud'] = 'Mortalha Estática',
       ['Status effects'] = 'Efeitos de status',
       ['Statuses'] = 'Estados',
+      ['Steering'] = 'Direção',
+      ['Steering angle (deg)'] = 'Ângulo de direção (graus)',
       ['Stim Pistol'] = 'Pistola estimulante',
       ['Stingray'] = 'Arraia',
       ['Stoker'] = 'Foguista',
@@ -17306,6 +17858,7 @@ MOD.langs = {
       ['Surplus EAT Allocation'] = 'Alocação de EAT Excedente',
       ['Surviving lethal damage'] = 'Sobreviver a dano letal',
       ['Suspension travel'] = 'Curso da suspensão',
+      ['Suspension travel (m)'] = 'Curso da suspensão (m)',
       ['Sway multiplier'] = 'Multiplicador de balanço',
       ['Sweeper'] = 'Faxineira',
       ['Swim speed (m/s)'] = 'Velocidade nadando (m/s)',
@@ -17333,10 +17886,12 @@ MOD.langs = {
       ['Tested releases only.'] = 'Só versões testadas.',
       ['That did not work; see the log.'] = 'Isso não funcionou; veja o log.',
       ['That is not a valid preset code.'] = 'Esse código de preset não é válido.',
+      ['That takes one of the 6 spots the Projectile swap rows also use.'] = 'Isso ocupa um dos 6 espaços que as linhas de troca de projétil também usam.',
       ['That would make a loop of extra stratagems.'] = 'Isso faria um ciclo de estratégias extras.',
       ['The Arbitrator\'s underbarrel shotgun, not the rifle itself.'] = 'A escopeta acoplada do Arbitrator, não o rifle em si.',
       ['The Defender SEAF soldiers carry. Not yours.'] = 'O Defender que os soldados SEAF carregam. Não é o seu.',
       ['The EAT-17 SEAF soldiers carry. Not yours.'] = 'O EAT-17 que os soldados SEAF carregam. Não é o seu.',
+      ['The GATER\'s 600 (FRVs 5, tanks 15) is what holds it near 55 km/h.'] = 'O 600 do GATER (FRVs 5, tanques 15) é o que o segura perto de 55 km/h.',
       ['The MG-43 SEAF soldiers carry. Not yours.'] = 'A MG-43 que os soldados SEAF carregam. Não é a sua.',
       ['The One-Two\'s underbarrel launcher, not the rifle. Fires the GP-31\'s grenade.'] = 'O lançador acoplado do One-Two, não o rifle. Dispara a granada do GP-31.',
       ['The SMG you carry. Its underbarrel flamer is listed separately.'] = 'A submetralhadora que você carrega. O lança-chamas acoplado aparece separado.',
@@ -17349,6 +17904,9 @@ MOD.langs = {
       ['The beacon\'s countdown before the delivery is sent.'] = 'A contagem regressiva do sinalizador antes de a entrega ser enviada.',
       ['The charge backpack, the charge and its blast. Cooldown: Stratagems tab.'] = 'A mochila de cargas, a carga e a explosão dela. Tempo de recarga: aba Estratégias.',
       ['The clipboard has no valid preset code.'] = 'A área de transferência não tem um código de preset válido.',
+      ['The engine speed where it changes to the next gear. Higher: holds each gear longer.'] = 'A rotação em que sobe de marcha. Maior: segura mais cada marcha.',
+      ['The engine speed where it drops a gear. Higher: drops sooner, so it keeps more pull on hills.'] = 'A rotação em que desce de marcha. Maior: desce antes e puxa mais em subidas.',
+      ['The engine speed where it pulls hardest. Its pull falls off below and above it.'] = 'A rotação onde ele puxa mais forte. A força cai abaixo e acima dela.',
       ['The explosion the round sets off when it hits something. 0: no explosion.'] = 'A explosão que a munição causa ao acertar algo. 0: sem explosão.',
       ['The explosion the round sets off when its life time runs out before it hits anything. 0: no explosion.'] = 'A explosão que o projétil causa quando seu tempo de vida acaba antes de atingir algo. 0: sem explosão.',
       ['The flamethrower you carry.'] = 'O lança-chamas que você carrega.',
@@ -17371,6 +17929,7 @@ MOD.langs = {
       ['The round goes off when it passes this close to an enemy, without hitting it. 0: off (the RL-77 uses 2 m).'] = 'A munição explode quando passa assim tão perto de um inimigo, sem acertá-lo. 0: desligado (o RL-77 usa 2 m).',
       ['The round only bounces when it hits faster than this. Grenade launcher rounds use 20 m/s, most rounds 60 m/s.'] = 'A munição só ricocheteia se acertar mais rápido que isso. Munições de lança-granadas usam 20 m/s, a maioria 60 m/s.',
       ['The round only bounces when it hits further than this from head on (0 = head on, 90 = grazing).'] = 'A munição só ricocheteia se acertar mais longe que este ângulo de frente (0 = de frente, 90 = de raspão).',
+      ['The same, right after it hits something. Higher: a crash spins it round less.'] = 'O mesmo, logo depois de bater. Maior: uma batida o faz girar menos.',
       ['The shot\'s trail and other effects belong to the chosen weapon.'] = 'O rastro do disparo e outros efeitos pertencem à arma escolhida.',
       ['The support hammer delivered by hellpod. The game data files it next to the Machete.'] = 'O martelo de suporte enviado por cápsula. Os dados do jogo o guardam junto ao Machete.',
       ['The support weapon. The CQC-73 is listed under Secondary.'] = 'A arma de suporte. O CQC-73 aparece em Secundária.',
@@ -17420,6 +17979,7 @@ MOD.langs = {
       ['Trooper jump pack'] = 'Mochila a jato do Soldado',
       ['True Grit'] = 'Bravura Indômita',
       ['Tube Reddot 2x'] = 'Ponto vermelho com lente 2x',
+      ['Turn inertia'] = 'Inércia de giro',
       ['Turn speed (x)'] = 'Velocidade de giro (x)',
       ['Turn speed at cruise'] = 'Giro em velocidade de cruzeiro',
       ['Turn speed at slowest'] = 'Giro na velocidade mais lenta',
@@ -17509,13 +18069,17 @@ MOD.langs = {
       ['Wheel grip'] = 'Aderência das rodas',
       ['Wheel radius (m)'] = 'Raio das rodas (m)',
       ['Wheels'] = 'Rodas',
+      ['Where the engine\'s speed range starts. Higher: more pull from a stop, but it wastes the low end.'] = 'Onde começa a faixa do motor. Maior: mais força na arrancada, mas perde a parte baixa.',
+      ['Which exosuit this arm comes from: 1 Patriot, 2 Emancipator, 3 Breakthrough, 4 Lumberer.'] = 'De qual exotraje vem este braço: 1 Patriot, 2 Emancipator, 3 Breakthrough, 4 Lumberer.',
       ['Wind-down time (s)'] = 'Tempo de desaceleração (s)',
       ['Wind-down time, released (s)'] = 'Tempo de desaceleração, ao soltar (s)',
       ['Wind-up'] = 'Aceleração',
       ['Wind-up time (s)'] = 'Tempo de aceleração (s)',
       ['Wings'] = 'Asas',
+      ['With the air density, it caps the GATER\'s top speed.'] = 'Junto com a densidade do ar, limita a velocidade máxima do GATER.',
       ['Wretch'] = 'Miserável',
       ['Xenobite Ardent'] = 'Xenobita fervoroso',
+      ['Yaw from wheel forces (x)'] = 'Guinada pelas rodas (x)',
       ['You are an insect, Helldiver.'] = 'Você é um inseto, Helldiver.',
       ['Your changes are off: turn them on in Settings to edit.'] = 'Suas mudanças estão desligadas: ligue-as em Configurações para editar.',
       ['Your changes are off: turn them on in Settings to load a preset'] = 'Suas mudanças estão desligadas: ligue-as em Configurações para carregar um perfil',
@@ -17531,6 +18095,7 @@ MOD.langs = {
       ['assassinate'] = 'assassinato',
       ['assault'] = 'assalto',
       ['at least 1 round, at most 2048'] = 'mínimo 1 bala, máximo 2048',
+      ['below 0: pressed down at speed'] = 'abaixo de 0: gruda no chão em velocidade',
       ['body parts without their own armor use this'] = 'partes do corpo sem blindagem própria usam esta',
       ['bull'] = 'touro',
       ['clip'] = 'pente',
@@ -17539,12 +18104,17 @@ MOD.langs = {
       ['elite'] = 'elite',
       ['every enemy with this attack shares it'] = 'todos os inimigos com este ataque compartilham',
       ['fake'] = 'falso',
+      ['faster than this, it steers less'] = 'mais rápido que isso, vira menos',
       ['gloom'] = 'penumbra',
       ['gunships, Dragonroaches, Leviathans and the like, where a planet has them'] = 'artilhaéreos, Dragobaratas, Leviatãs e parecidos, onde um planeta os tem',
       ['heavier: slower to speed up, harder to push or roll'] = 'mais pesado: acelera mais devagar, mais difícil de empurrar ou capotar',
       ['heavycannon'] = 'canhão pesado',
       ['hexagon'] = 'hexágono',
+      ['higher: harder to reach top speed'] = 'maior: mais difícil chegar à velocidade máxima',
+      ['higher: harder to tip over'] = 'maior: mais difícil de capotar',
       ['higher: less bounce'] = 'mais alto: quica menos',
+      ['higher: more air drag, a lower top speed'] = 'maior: mais resistência do ar, menor velocidade máxima',
+      ['higher: stops spinning out sooner'] = 'maior: para de rodar mais cedo',
       ['hit reactions, staggers and stuns'] = 'reações a golpes, cambaleios e atordoamentos',
       ['how far the wheels can move up and down'] = 'quanto as rodas podem subir e descer',
       ['how far the wheels can move up and down; lower: the body wobbles a lot'] = 'quanto as rodas podem subir e descer; menor: a carroceria balança muito',
@@ -17560,6 +18130,7 @@ MOD.langs = {
       ['how quickly the view follows your aim at this zoom; lower it if a high zoom spins the view'] = 'quão rápido a visão acompanha sua mira com este zoom; diminua se um zoom alto faz a visão girar',
       ['its height above its flight route; lower flies closer to the ground (terrain still holds it up)'] = 'a altura acima da rota de voo; mais baixo voa mais perto do chão (o terreno ainda o segura)',
       ['its own. - / + : fire another weapon\'s'] = 'o próprio. - / + : dispara o de outra arma',
+      ['its own. 1 Patriot, 2 Emancipator, 3 Breakthrough, 4 Lumberer'] = 'o próprio. 1 Patriot, 2 Emancipator, 3 Breakthrough, 4 Lumberer',
       ['ivory legion assault'] = 'assalto da legião de marfim',
       ['ivory legion tier 2'] = 'legião de marfim nível 2',
       ['jammer'] = 'bloqueador',
@@ -17568,11 +18139,15 @@ MOD.langs = {
       ['loaded into an empty weapon, from your spare rounds'] = 'carregados numa arma vazia, das suas munições reserva',
       ['lower (more negative): you go deeper before drowning starts'] = 'mais baixo (mais negativo): você afunda mais antes de começar a se afogar',
       ['lower: a higher top speed in that gear, a weaker pull'] = 'mais baixo: mais velocidade máxima nessa marcha, menos força',
+      ['lower: bounces back faster'] = 'menor: volta mais rápido',
+      ['lower: dips less when braking'] = 'menor: afunda menos ao frear',
       ['lower: harder to roll over'] = 'mais baixo: mais difícil de capotar',
+      ['lower: leans less in turns'] = 'menor: inclina menos nas curvas',
       ['lower: softer, the body sags (at 1 it barely moves)'] = 'menor: mais macia, a carroceria afunda (em 1 quase não anda)',
       ['lower: their shots land closer to where they aim (0: dead on)'] = 'mais baixo: os disparos caem mais perto de onde miram (0: exatos)',
       ['melee, guns and death explosions, shared ones included'] = 'corpo a corpo, armas e explosões ao morrer, incluindo as compartilhadas',
       ['min charge'] = 'carga mín.',
+      ['multiplies every gear; lower: faster, weaker pull'] = 'multiplica todas as marchas; menor: mais rápido, menos força',
       ['negative: below level, -90 straight down'] = 'negativo: abaixo do nível, -90 para baixo',
       ['no shrapnel'] = 'sem estilhaços',
       ['none'] = 'nenhum',
@@ -17627,6 +18202,7 @@ MOD.langs = {
       ['what each hit applies; the slots go in order'] = 'o que cada acerto aplica; os espaços seguem em ordem',
       ['what it has left once its health is gone, lost over time'] = 'o que sobra quando a vida acaba, perdido com o tempo',
       ['where it hangs when put away: 0 on the back, 1 on the hip'] = 'onde fica pendurada quando guardada: 0 nas costas, 1 no quadril',
+      ['where it pulls hardest'] = 'onde ele puxa mais forte',
       ['who it fights for: units of other sides attack it, and it attacks them'] = 'por quem luta: unidades de outros lados o atacam, e ele as ataca',
       ['with the gears, sets the top speed'] = 'junto com as marchas, define a velocidade máxima',
     },
@@ -20306,7 +20882,8 @@ end
 -- (type -> its stat modifiers) } }. The weapon's line: the items listed with its default one.
 -- Weapons whose other magazines are a line of their own: weapon -> that line's name. The AR-59
 -- Suppressor comes with the Liberator's Extended; its Short and Drum are 'whisper' ones.
-KINDS[TYPES.custom].LINES = { [hash_key('708EA298C82093D0')] = 'whisper rifle 5,5x50mm.' }
+KINDS[TYPES.custom].LINES = { [hash_key('708EA298C82093D0')] = 'whisper rifle 5,5x50mm.',
+                              [hash_key('41F2DEF484634B59')] = 'rifle simo.' }   -- (R-40 Sightliner: its two in two lines, issue #134)
 
 local function attachments(key)
     local cache = KINDS[TYPES.custom].cache
@@ -21496,6 +22073,19 @@ local function resolve_gun(weapon, key)
                 end
             end
         end
+        -- every other heat weapon has the same three levels, empty (#122): a switch copies the Double-Edge Sickle's
+        -- in at Install (MOD.donors; works on the Sickle, beam weapons ignore it: tested on the Laser Cannon 2026-11-04).
+        -- Its level 1 shot field goes with the swaps, so Install also loads the Double-Edge Sickle's package.
+        if (default_of(field_at(T_HEAT, heat, 'f32', 1000000)) or 0) == 0 and not record(T_BEAM_WEAPON) and
+           (weapon.slot == 'Primary' or weapon.slot == 'Secondary' or weapon.slot == 'Support') then
+            local lead = { id = 'heat_ramp', field = field_at(T_HEAT, 'ramp' .. heat, 'virtual', 1) }
+            lead.field.default, lead.field.ramp = 0, heat
+            add_row(weapon, 'Heat', 'heat_ramp', 'Double-Edge Sickle heat ramp', 'flag', { lead }, 0, 1, 1, 1).tip = {
+                "Fires the Double-Edge Sickle's stronger shots as it heats up, and hurts you near overheat.",
+                "Shares its levels: change their damage on the Double-Edge Sickle's page. Applies on Install." }
+            weapon.swaps = weapon.swaps or {}
+            weapon.swaps[#weapon.swaps + 1] = { parts = { part('heat_ramp_shot', T_HEAT, heat + 4, 'u32', 100000) } }
+        end
     end
     -- each magazine attachment: its magazine, reload and heat values, then its stat modifiers (ergonomics
     -- bonus, ...); its rows change only that attachment (and every weapon that can fit it)
@@ -21549,6 +22139,16 @@ local function resolve_gun(weapon, key)
                 add_row(weapon, 'Handling', 'no_bolt', 'No bolt pull', 'flag', parts, 0, 1, 1, 1).tip =
                     { 'Skips the bolt pull after each shot. Fire rate, ammo and damage stay as they are.' }
             end
+        end
+        -- no knockdown (issue #129, tested in game): firing standing knocks you down and hurts you. The Apex: its own
+        -- fire ability (+948) swapped for the generic one; the Variable's Total mode: the ability at +952 cleared
+        local fall = KINDS[T_WEAPON].stride == 1240
+                     and ({ B814EECE17533BC4 = { 948, 2677, 2719 }, F992CE97577C8A7F = { 952, 50, 0 } })[weapon.hash]
+        if fall and default_of(field_at(T_WEAPON, data + fall[1], 'u32', 4294967295)) == fall[2] then
+            local p = part('no_knockdown', T_WEAPON, data + fall[1], 'bolt', 1)
+            p.field.bolt_off, p.field.bolt_on = fall[2], fall[3]
+            add_row(weapon, 'Handling', 'no_knockdown', 'No knockdown when standing', 'flag', { p }, 0, 1, 1, 1).tip =
+                { 'Firing it standing no longer knocks you down or hurts you.' }
         end
         -- infinite ammo (SHODAN Offline Integration): the game's own switches, WeaponData +960 and the
         -- projectile weapon's +36 (1240-byte layout)
@@ -22080,6 +22680,59 @@ end
 -- Validated EXO weapon-arm health components; other vehicle mounts are left alone.
 MOD.exo_mounted = { ['EXO-45 Patriot Exosuit'] = true, ['EXO-49 Emancipator Exosuit'] = true,
                     ['EXO-51 Lumberer Exosuit'] = true, ['EXO-55 Breakthrough Exosuit'] = true }
+-- Arm swaps (issue #130, tested in game: the Patriot with the Emancipator's right arm): an exosuit's left or
+-- right mount (MountComponentData +0, label +16) takes another exosuit's arm on that side. Install writes the
+-- arm and loads the donor exosuit into every mission (MOD.donors), so its model shows without anyone bringing it.
+MOD.exo_arms = { ORDER = { '79E4B3D2DA5E45E3', 'C2D449ECF7FACAB1', '35DBF54F016F3624', '7B2326F6FD9C8069' },
+                 NAMES = { 'Patriot', 'Emancipator', 'Breakthrough', 'Lumberer' },
+                 SIDES = { { 0x7BDEC47B, 'arm_left', 'Left arm' }, { 0x47775624, 'arm_right', 'Right arm' } } }
+-- the mount record offset of `key`'s arm on side `label`, nil when none
+function MOD.exo_arms.slot(key, label)
+    local mt = tables[TYPES.mount]
+    local at = mt and mt.index[key]
+    for m = 0, at and 4 or -1 do
+        if default_of(field_at(TYPES.mount, at + m * 24 + 16, 'u32', 4294967295)) == label then return at + m * 24 end
+    end
+end
+function MOD.exo_arms.rows(entry, key)
+    local E, own = MOD.exo_arms, nil
+    for k, hex in ipairs(E.ORDER) do if hash_key(hex) == key then own = k end end
+    if not own then return end
+    for _, side in ipairs(E.SIDES) do
+        local slot = E.slot(key, side[1])
+        if slot then
+            local f = field_at(TYPES.mount, side[2] .. ':' .. entry.hash, 'virtual', #E.ORDER)
+            f.default, f.arm = own, { slot = slot, label = side[1], own = own }
+            local row = add_row(entry, 'Arms', side[2], side[3] .. ' from (1-4)', 'u32', { { id = side[2], field = f } }, 1, #E.ORDER, 1, 1)
+            row.label_of = function() return side[3] .. ' from: ' .. (E.NAMES[read_field(f)] or '?') end
+            row.tip = { 'Which exosuit this arm comes from: 1 Patriot, 2 Emancipator, 3 Breakthrough, 4 Lumberer.',
+                        "Install loads the chosen arm's exosuit into every mission, so its model shows.",
+                        'That takes one of the 6 spots the Projectile swap rows also use.' }
+        end
+    end
+end
+-- At Install (MOD.donors): every arm row's mount words, and the donor exosuits' packages added to `want`
+function MOD.exo_arms.apply(want, seen)
+    local E = MOD.exo_arms
+    for _, f in pairs(fields) do
+        if f.arm then
+            local v = read_field(f)
+            local donor = v ~= f.arm.own and E.ORDER[v] and hash_key(E.ORDER[v])
+            local from = donor and E.slot(donor, f.arm.label)
+            for o = 0, 4, 4 do
+                local here = field_at(TYPES.mount, f.arm.slot + o, 'u32', 4294967295)
+                write_field(here, from and default_of(field_at(TYPES.mount, from + o, 'u32', 4294967295)) or default_of(here))
+            end
+            local key = from and tables[TYPES.package].index[donor]
+            local lo = key and read_field(field_at(TYPES.package, key + 8, 'u32', 4294967295))
+            local hi = key and read_field(field_at(TYPES.package, key + 12, 'u32', 4294967295))
+            if lo and (lo ~= 0 or hi ~= 0) and not seen[lo .. ':' .. hi] then
+                seen[lo .. ':' .. hi] = true
+                table.insert(want, 1, { lo, hi, name = 'EXO ' .. E.NAMES[v] })
+            end
+        end
+    end
+end
 KINDS[TYPES.vehicle].rows = function(entry, key, twins)
     local t = tables[TYPES.health]
     local at = t and t.index[key]
@@ -22130,7 +22783,8 @@ KINDS[TYPES.vehicle].rows = function(entry, key, twins)
             parts('regen_delay', 12, 'f32', 3600), 0, 600, 0.1, 1)
     -- the melee button's stomp is an ability, no record names its damage: row 253 (unnamed), the wiki's 9 values (609, the same, is the Cyborg Lieutenant's)
     if MOD.exo_mounted[entry.name] then MOD.melee_rows(entry, 253, 'Stomp', 'stomp_').tip = { 'Every exosuit shares this stomp.' } end
-    MOD.physics.rows(entry, key)
+    if MOD.exo_mounted[entry.name] then MOD.exo_arms.rows(entry, key) end
+    MOD.physics.rows(entry, key, twins)
     local n = 0
     for z = 0, 37 do
         local base = 520 + z * 552
@@ -22159,6 +22813,12 @@ end
 -- count, +8 offsets from the tag; a wheel: +12 position, then +24 grip, +28 radius, +72 spring, +76 damping, +80
 -- suspension travel), [2] engine ('VRE ': +24 top rpm, +28 peak torque), [3] gears ('VRT ': +52 count, +56 ratios),
 -- [5] brakes ('VRB ': +16, +32 two brake torques, by wheel; tested in game 2026-10-28). Names after the FRV Anti-Flip mod's README.
+-- (issue #143, from CChusky's notes: Havok's vehicle classes) a block: tag, count, offsets from the tag to its records;
+-- engine record +0 lowest / +4 best / +8 top rpm, +12 torque, +16 / +20 pull at the lowest / top rpm, +24..+32 drag at
+-- lowest / best / top rpm, +36 clutch slip rpm; gears +4 final drive, +12 / +16 shift down / up rpm; [4] steering
+-- ('VRS ') +0 angle, +4 speed of full steering; [6] air ('VRA ') +0 density, +4 front area, +8 drag, +12 lift;
+-- [7] spin damper ('VRV ') +0, +4 in collisions; [8] chassis ('VRD ') +16..+24 roll / pitch / yaw from wheel forces,
+-- +36..+44 yaw / roll / pitch inertia. A wheel's +40 is its suspension travel, +80 the rebound damping.
 TYPES.physics = 0x5F7203C8
 MOD.physics = { MASS = string.rep('\255', 28) .. '\68\0\0\0' }
 MOD.physics.TIPS = {   -- row id (without front_/rear_, gears as 'gear') -> hover tip
@@ -22182,8 +22842,39 @@ MOD.physics.TIPS = {   -- row id (without front_/rear_, gears as 'gear') -> hove
                'Lower: a softer ride, the body leans in turns and sags.' },
     damping = { 'How fast the springs settle after a bump. Higher: settles at once, a firmer ride.',
                 'Lower: keeps bouncing after every bump.' },
-    travel = { 'More: soaks up big bumps and keeps the wheels on the ground on rough terrain.',
-               'Less: bumps go straight into the body and it wobbles.' },
+    suspension = { 'More: soaks up big bumps and keeps the wheels on the ground on rough terrain.',
+                   'Less: bumps go straight into the body.' },
+    travel = { 'How fast the springs push back out after a bump. Higher: they come back slowly, a calmer ride.',
+               'Lower: the wheels spring back fast and the body bounces.' },
+    air_density = { 'How thick the air is for this vehicle. Higher: more air drag, a lower top speed.',
+                    "The GATER's 600 (FRVs 5, tanks 15) is what holds it near 55 km/h." },
+    resist_high = { 'How much the engine holds itself back near its top speed. Higher: it struggles to reach it.',
+                    "With the air density, it caps the GATER's top speed." },
+    steer_speed = { 'Above this speed the wheels turn less and less. Raise it to keep steering at high speed.' },
+    yaw_inertia = { 'How hard it is to start or stop turning. Too low on a heavy vehicle makes turns stutter.' },
+    idle_rpm = { 'Where the engine\'s speed range starts. Higher: more pull from a stop, but it wastes the low end.' },
+    opt_rpm = { 'The engine speed where it pulls hardest. Its pull falls off below and above it.' },
+    torque_low = { 'How much of the engine torque it has at its lowest speed. Higher: stronger off the line and on hills.' },
+    torque_high = { 'How much of the engine torque it keeps at its top speed. Higher: keeps speeding up near the top.' },
+    resist_low = { 'How much the engine holds itself back at its lowest speed. Higher: slower to get going.' },
+    resist_opt = { 'How much the engine holds itself back at its best speed. Higher: weaker acceleration overall.' },
+    clutch = { 'How far the engine speed can run ahead of the wheels before the clutch grips.',
+               'Higher: easier starts from a stop and on hills. Lower: a more direct pull.' },
+    final_drive = { 'Multiplies every gear. Higher: stronger pull and steeper hills, a lower top speed.',
+                    'Lower: a higher top speed, if the engine can pull it.' },
+    shift_up = { 'The engine speed where it changes to the next gear. Higher: holds each gear longer.' },
+    shift_down = { 'The engine speed where it drops a gear. Higher: drops sooner, so it keeps more pull on hills.' },
+    steer_angle = { 'How far the front wheels turn. Higher: tighter turns at low speed.' },
+    frontal_area = { 'How big the vehicle is to the air. Higher: more air drag, a lower top speed.' },
+    drag = { 'How badly its shape cuts through the air. Higher: more air drag, a lower top speed.' },
+    lift = { 'How much the air lifts it at speed. Above 0: lighter and floatier when fast. Below 0: pressed down, more grip.' },
+    roll_inertia = { 'How hard it is to roll it onto its side. Higher: harder to tip over in turns and blasts.' },
+    pitch_inertia = { 'How hard it is to tip it nose up or down. Higher: steadier over bumps and jumps.' },
+    torque_roll = { 'How much the wheels’ forces lean the body in turns. Lower: stays flatter and harder to roll.' },
+    torque_pitch = { 'How much speeding up and braking tip the nose. Lower: stays level when it brakes or speeds up.' },
+    torque_yaw = { 'How much the wheels’ forces swing it round. Lower: steadier, less likely to spin out.' },
+    spin_damping = { 'How fast a spin dies down on its own. Higher: stops spinning out sooner.' },
+    spin_damping_hit = { 'The same, right after it hits something. Higher: a crash spins it round less.' },
 }
 function MOD.physics.host()
     local host = rawget(_G, 'SHODAN_PHYSICS')
@@ -22193,11 +22884,14 @@ function MOD.physics.host()
     end
     return host
 end
-function MOD.physics.rows(entry, key)
+function MOD.physics.rows(entry, key, twins)
     local host = MOD.physics.host()
     if not host then return end
     if MOD.exo_mounted[entry.name] then return MOD.physics.exo_rows(entry, host) end
-    local file = host.files[string.format('%08X%08X', u32(key, 4), u32(key, 0)) .. '.5F7203C8F280DAB8']
+    local file   -- (the GATER's file is named after its second entity)
+    for _, k in ipairs({ key, unpack(twins or {}) }) do
+        file = file or host.files[string.format('%08X%08X', u32(k, 4), u32(k, 0)) .. '.5F7203C8F280DAB8']
+    end
     local d = file and api.read(host.base + file.at, file.size)
     if not d then return end
     local function f32(o) return bits_to_f32(u32(d, o)) end
@@ -22225,6 +22919,7 @@ function MOD.physics.rows(entry, key)
         return o and o + 4 <= #d and d:sub(o + 1, o + 4) == tag and o or nil
     end
     local engine, gears, brakes, wheels = block(2, 'VRE '), block(3, 'VRT '), block(5, 'VRB '), block(1, 'VRW ')
+    local function record(o) return o and o + u32(d, o + 8) end
     if engine then
         row('Handling', 'torque', 'Engine torque', { engine + 28 }, 0, 1000000, 50, 500, 'pulling power: how fast it speeds up and climbs')
         row('Handling', 'rpm', 'Top engine speed (rpm)', { engine + 24 }, 100, 100000, 100, 1000, 'with the gears, sets the top speed')
@@ -22273,10 +22968,56 @@ function MOD.physics.rows(entry, key)
             row('Wheels', g[1] .. 'radius', L('wheel radius (m)'), list(28), 0.05, 5, 0.01, 0.05)
             row('Wheels', g[1] .. 'spring', L('spring stiffness'), list(72), 0, 1000, 1, 5,
                 'lower: softer, the body sags (at 1 it barely moves)')
-            row('Wheels', g[1] .. 'damping', L('damping'), list(76), 0, 100, 0.05, 0.25, 'higher: less bounce')
-            row('Wheels', g[1] .. 'travel', L('suspension travel'), list(80), 0, 100, 0.1, 1,
-                'how far the wheels can move up and down; lower: the body wobbles a lot')
+            row('Wheels', g[1] .. 'damping', L('damping (compression)'), list(76), 0, 100, 0.05, 0.25, 'higher: less bounce')
+            -- (+80 was labelled travel before issue #143: its id stays, so saved values keep their meaning)
+            row('Wheels', g[1] .. 'travel', L('damping (rebound)'), list(80), 0, 100, 0.1, 1, 'lower: bounces back faster')
+            row('Wheels', g[1] .. 'suspension', L('suspension travel (m)'), list(40), 0, 10, 0.05, 0.25,
+                'how far the wheels can move up and down')
         end
+    end
+    -- (after the wheels: the gear and brake rows above stay under Handling)
+    local e = record(engine)
+    if e then
+        row('Engine', 'idle_rpm', 'Lowest engine speed (rpm)', { e }, 0, 100000, 50, 500)
+        row('Engine', 'opt_rpm', 'Best engine speed (rpm)', { e + 4 }, 0, 100000, 50, 500, 'where it pulls hardest')
+        row('Engine', 'torque_low', 'Pull at the lowest engine speed (x)', { e + 16 }, 0, 10, 0.05, 0.25)
+        row('Engine', 'torque_high', 'Pull at the top engine speed (x)', { e + 20 }, 0, 10, 0.05, 0.25)
+        row('Engine', 'resist_low', 'Engine drag at the lowest speed', { e + 24 }, 0, 10, 0.05, 0.25)
+        row('Engine', 'resist_opt', 'Engine drag at the best speed', { e + 28 }, 0, 10, 0.05, 0.25)
+        row('Engine', 'resist_high', 'Engine drag at the top speed', { e + 32 }, 0, 10, 0.05, 0.25, 'higher: harder to reach top speed')
+        row('Engine', 'clutch', 'Clutch slip (rpm)', { e + 36 }, 0, 100000, 50, 500)
+    end
+    local t = record(gears)
+    if t then
+        row('Engine', 'final_drive', 'Final drive ratio', { t + 4 }, 0.05, 1000, 1, 10, 'multiplies every gear; lower: faster, weaker pull')
+        row('Engine', 'shift_up', 'Shift up at (rpm)', { t + 16 }, 0, 100000, 50, 500)
+        row('Engine', 'shift_down', 'Shift down at (rpm)', { t + 12 }, 0, 100000, 50, 500)
+    end
+    local steer = record(block(4, 'VRS '))
+    if steer then
+        row('Steering', 'steer_angle', 'Steering angle (deg)', { steer }, 0, 90, 1, 5)
+        row('Steering', 'steer_speed', 'Full steering up to (m/s)', { steer + 4 }, 0, 1000, 1, 10, 'faster than this, it steers less')
+    end
+    local air = record(block(6, 'VRA '))
+    if air then
+        row('Chassis', 'air_density', 'Air density', { air }, 0, 10000, 1, 10, 'higher: more air drag, a lower top speed')
+        row('Chassis', 'frontal_area', 'Front area (m2)', { air + 4 }, 0, 1000, 0.5, 2)
+        row('Chassis', 'drag', 'Drag coefficient', { air + 8 }, 0, 100, 0.05, 0.25)
+        row('Chassis', 'lift', 'Lift coefficient', { air + 12 }, -100, 100, 0.01, 0.1, 'below 0: pressed down at speed')
+    end
+    local chassis = record(block(8, 'VRD '))
+    if chassis then
+        row('Chassis', 'yaw_inertia', 'Turn inertia', { chassis + 36 }, 0.01, 1000, 0.1, 1)
+        row('Chassis', 'roll_inertia', 'Roll inertia', { chassis + 40 }, 0.01, 1000, 0.1, 1, 'higher: harder to tip over')
+        row('Chassis', 'pitch_inertia', 'Pitch inertia', { chassis + 44 }, 0.01, 1000, 0.1, 1)
+        row('Chassis', 'torque_roll', 'Roll from wheel forces (x)', { chassis + 16 }, 0, 10, 0.05, 0.25, 'lower: leans less in turns')
+        row('Chassis', 'torque_pitch', 'Pitch from wheel forces (x)', { chassis + 20 }, 0, 10, 0.05, 0.25, 'lower: dips less when braking')
+        row('Chassis', 'torque_yaw', 'Yaw from wheel forces (x)', { chassis + 24 }, 0, 10, 0.05, 0.25)
+    end
+    local damper = record(block(7, 'VRV '))
+    if damper then
+        row('Chassis', 'spin_damping', 'Spin damping', { damper }, 0, 100, 0.05, 0.25, 'higher: stops spinning out sooner')
+        row('Chassis', 'spin_damping_hit', 'Spin damping in collisions', { damper + 4 }, 0, 100, 0.5, 2)
     end
 end
 
@@ -22897,6 +23638,7 @@ local function resolve_stratagem(entry)
                     { part('uses', def.kind, def.off + 80, 'u32', 999) }, 0, 999, 1, 5)
         end
         MOD.code.row(entry, def)
+        if entry.name == 'Reinforcement Beacon' then MOD.regen_row(entry) end
         if s.family ~= 'eagle' then MOD.callin_rows(entry, { def }) end
         if s.family ~= 'eagle' and MOD.extra.FAMILIES[s.family] then
             MOD.extra.row(entry, def)
@@ -23743,6 +24485,24 @@ MOD.enemy.STATUSES = {
     { id = 'gas_taken', label = 'Gas damage taken (x)', kinds = { [27] = true, [28] = true }, offsets = { 168 } },
 }
 
+-- Rows that work differently in a lobby: their (?) and this line of the tip are orange
+MOD.enemy.CLIENT_HIT = "Client-sided only: in a lobby it counts for your own shots, not other players'."
+MOD.enemy.CLIENT_ANIM = 'Client-sided only: other players see the normal animation; attack timing may follow the host.'
+MOD.enemy.CLIENT_SIZE = 'Client-sided only: other players see the normal size; reach may follow the host.'
+MOD.enemy.CLIENT_SHOT = "Client-sided only: other players may see the game's normal shots."
+MOD.enemy.CLIENT_JAM = "Client-sided only: other players may keep the game's normal radius."
+MOD.enemy.CLIENT_ONLY = { armor = MOD.enemy.CLIENT_HIT, durable = MOD.enemy.CLIENT_HIT, all_armor = MOD.enemy.CLIENT_HIT,
+                          anim_speed = MOD.enemy.CLIENT_ANIM, anim_attack = MOD.enemy.CLIENT_ANIM, anim_hit = MOD.enemy.CLIENT_ANIM,
+                          all_anim = MOD.enemy.CLIENT_ANIM, scale = MOD.enemy.CLIENT_SIZE, all_spread = MOD.enemy.CLIENT_SHOT,
+                          jam_radius = MOD.enemy.CLIENT_JAM, scramble_radius = MOD.enemy.CLIENT_JAM }
+function MOD.enemy.client_only(weapon, row)
+    if not weapon.enemy then return nil end
+    if weapon.enemy.gun then   -- (a gun's 'durable' is its damage, not the enemy's durable ratio)
+        return (row.id:match('spread_[hv]$') or row.id:match('velocity$')) and MOD.enemy.CLIENT_SHOT or nil
+    end
+    return MOD.enemy.CLIENT_ONLY[(row.id:gsub('^zone%d+_', ''))]
+end
+
 -- The rest of an enemy's page, from its other components (each variant on the page written):
 -- Movement: AiEnemy (736 bytes in this build) state speeds guard +0, patrol +36, investigate +60, combat +100,
 -- strafe +124, drift +152, retreat +244, charge +276; AiCharacter +0 preferred / +4 maximum speed.
@@ -24172,15 +24932,23 @@ function MOD.enemy.spawning_resolve(entry)
         if not at then return end
         MOD.enemy.mult_row(entry, 'Lowest rates', 'floor_patrol', 'Lowest patrol frequency (x)',
                            { { TYPES.spawn_floor, at + 80 }, { TYPES.spawn_floor, at + 84 } }, 10, nil,
-                           'the faction multipliers cannot slow patrols below this: lower it with them')
+                           'the faction multipliers cannot slow patrols below this: lower it with them').tip =
+            { 'A limit: patrols never come slower than this, even if a faction page asks for slower.',
+              'For very few patrols, lower this as well as Patrol frequency on the faction page.' }
         MOD.enemy.mult_row(entry, 'Lowest rates', 'floor_reinf', 'Lowest reinforcement frequency (x)',
-                           { { TYPES.spawn_floor, at + 88 }, { TYPES.spawn_floor, at + 92 } }, 10)
+                           { { TYPES.spawn_floor, at + 88 }, { TYPES.spawn_floor, at + 92 } }, 10).tip =
+            { 'A limit: enemy reinforcements never come slower than this, even if a faction page asks for slower.',
+              'For very few reinforcements, lower this as well as Reinforcement frequency on the faction page.' }
         MOD.enemy.mult_row(entry, 'SEAF', 'seaf_reinf', 'SEAF reinforcement cooldown (x)',
                            { { TYPES.spawn_floor, at + 48 }, { TYPES.spawn_floor, at + 52 }, { TYPES.spawn_floor, at + 56 },
-                             { TYPES.spawn_floor, at + 60 } }, 10)
+                             { TYPES.spawn_floor, at + 60 } }, 10).tip =
+            { 'How long SEAF waits before sending more soldiers: 155 to 165 seconds at x1.',
+              'Higher means a longer wait, so they come slower. x2 is 310 to 330 seconds.' }
         MOD.enemy.mult_row(entry, 'SEAF', 'seaf_wave', 'SEAF wave cooldown (x)',
                            { { TYPES.spawn_floor, at + 64 }, { TYPES.spawn_floor, at + 68 }, { TYPES.spawn_floor, at + 72 },
-                             { TYPES.spawn_floor, at + 76 } }, 10)
+                             { TYPES.spawn_floor, at + 76 } }, 10).tip =
+            { 'A second SEAF wait: 80 to 100 seconds at x1. Probably the pause between waves of soldiers; the game only gives the name.',
+              'Higher means a longer wait, so they come slower. x2 is 160 to 200 seconds.' }
         return
     end
     local t = tables[TYPES.hivemind]
@@ -24429,6 +25197,7 @@ KINDS[T_PROJECTILE].swap_row = function(weapon, sources, shots, fire, extra)
     local second = alt and default_of(alt)
     if second and second > 0 then
         row = swap('projectile_2', 'Second mode fires (id)', { { id = 'projectile_2', field = alt } })
+        weapon.second_ammo = true
     else
         second = nil
         local wrow = alt and tables[T_WEAPON].index[weapon.key]
@@ -24451,6 +25220,7 @@ KINDS[T_PROJECTILE].swap_row = function(weapon, sources, shots, fire, extra)
                 end
             end
             row = swap('projectile_2', 'Second ammo (id)', { { id = 'projectile_2', field = alt } })
+            weapon.second_ammo = true
         end
     end
     if ammo then
@@ -24463,6 +25233,8 @@ KINDS[T_PROJECTILE].swap_row = function(weapon, sources, shots, fire, extra)
     row.after = { "Swapping makes the shot the chosen weapon's, your edits to it included: damage,",
                   'armor penetration, forces, velocity, drag, gravity, pellets and explosions. Kept: this',
                   "weapon's fire rate, ammo, handling and heat. To tune the shot, edit the chosen weapon." }
+    -- (the game has no per-mode pellet count: a second ammo fires as many as the weapon's own shot, issue #125)
+    if weapon.second_ammo then row.after[#row.after + 1] = "A second ammo fires as many projectiles per shot as this weapon's own." end
     row.after_h = #row.after * 16 + 6
     weapon.own_shots = {}
     for _, shot in ipairs(shots or { { id = weapon.projectile } }) do
@@ -24583,11 +25355,14 @@ function MOD.records.users()
     MOD.records.cache = { shots = shots, blasts = blasts, rounds = rounds, fired = fired }
     return MOD.records.cache
 end
+-- explosions nothing in the data links to a page, named by hand (matched to the wiki by radius; #147)
+-- shortcut: ids as of build 25988413, recheck if a game update renumbers explosions
+MOD.records.BLASTS = { [221] = 'Integrated Explosives' }
 -- A record's name (English), or nil.
 function MOD.records.name(kind, id)
     local u = MOD.records.users()
     if kind == T_PROJECTILE then return MOD.round_names and MOD.round_names[id] or (u.shots[id] or {})[1]
-    elseif kind == T_EXPLOSION then return (u.blasts[id] or {})[1] or u.rounds[id] end
+    elseif kind == T_EXPLOSION then return (u.blasts[id] or {})[1] or u.rounds[id] or MOD.records.BLASTS[id] end
     if state.lang and state.lang() == 'zh-Hans' and MOD.status.by[id] then return MOD.status.by[id].name end
     return KINDS[T_STATUS].names[id] or KINDS[T_STATUS].stuns[id]
 end
@@ -25756,6 +26531,23 @@ TYPES.loadout = 0x4F2CF417
 TYPES.hivemind, TYPES.spawn_floor = 0xD0207221, 0xD74E6E1A
 KINDS[TYPES.hivemind] = { name = 'hive mind', stride = 1084, keyed = true }
 KINDS[TYPES.spawn_floor] = { name = 'spawn floor', stride = 96, keyed = true }
+-- GameModeComponentData (one 76-byte record per mission type): +28 the wait before a used-up reinforcement
+-- comes back (120 s in every mode, issue #136)
+TYPES.game_mode = 0x09E13FAC
+KINDS[TYPES.game_mode] = { name = 'game mode', stride = 76, keyed = true }
+function MOD.regen_row(entry)
+    local t = tables[TYPES.game_mode]
+    if not t then return end
+    local records, p = {}, {}
+    for _, off in pairs(t.index) do records[#records + 1] = off end
+    table.sort(records)
+    for n, off in ipairs(records) do p[n] = part(n == 1 and 'reinf_regen' or ('reinf_regen_' .. n), TYPES.game_mode, off + 28, 'f32', 100000) end
+    if #p == 0 or read_field(p[1].field) == nil then return end
+    local r = add_row(entry, 'Reinforcements', 'reinf_regen', 'Reinforcement regen time (s)', 'f32', p, 0, 10000, 1, 10)
+    r.lead = #p > 1 or nil   -- (same values: the first stands for all)
+    r.tip = { 'Once your reinforcements run out, one comes back after this long: 120 seconds by default.',
+              'Set it low for nearly endless reinforcements.' }
+end
 -- the enemy pages' other tables (filediver's typelib layouts; strides checked on the current build):
 -- AiCharacter (+0 preferred / +4 maximum speed), AiEnemy (each AI state's speed; 736 bytes in this build),
 -- Unit (+8 / +12 scale), Inventory (+0 / +8 weapons carried), SensorEar (+4 hearing),
@@ -26863,7 +27655,7 @@ end
 
 -- Copy to (vehicle pages): a section's shown values onto other vehicles' rows of the same section and label
 -- (labels, not ids: body part zones are numbered per vehicle)
-MOD.COPY_SECTIONS = { Vehicle = true, ['Body parts'] = true, Handling = true, Wheels = true }
+MOD.COPY_SECTIONS = { Vehicle = true, ['Body parts'] = true, Handling = true, Wheels = true, Engine = true, Steering = true, Chassis = true }
 function MOD.copy_targets(weapon, section)
     local labels, out = {}, {}
     for _, r in ipairs(weapon.rows) do if r.section == section then labels[r.label] = true end end
@@ -27120,6 +27912,15 @@ do
                 for _, v in ipairs(values or {}) do
                     lines[#lines + 1] = hash .. ' ' .. n .. ' ' .. v.id .. ' ' .. number_text(v.value) .. named(hash)
                 end
+                if values and values.passives then
+                    local list = #values.passives > 0 and table.concat(values.passives, ',') or 'none'
+                    lines[#lines + 1] = hash .. ' ' .. n .. ' passives ' .. list .. named(hash)
+                end
+                for page, typed in pairs(values and values.texts or {}) do
+                    for field, text in pairs(typed) do
+                        lines[#lines + 1] = hash .. ' ' .. n .. ' rename ' .. page .. ' ' .. field .. ' ' .. text:gsub('#', '{H}')
+                    end
+                end
             end
         end
         write_lines(path, lines)
@@ -27155,35 +27956,41 @@ do
         write_lines(path, presets.body(full_presets[n], lines, named))
     end
 
-    -- A preset file's lines as a preset, or nil when it was cleared.
+    -- A preset file's lines as a preset, or nil when it was cleared; then how many lines it could not read, and how
+    -- many it could (names, values, texts: PR #127)
     function presets.parse(lines, numbers, n, file)
-        local preset = { name = 'Preset ' .. n, values = {} }
+        local preset, skipped, recognized = { name = 'Preset ' .. n, values = {} }, 0, 0
         for i, line in ipairs(lines) do
-            if line:match('^%s*cleared') then return nil end
+            if line:match('^%s*cleared') then return nil, skipped, recognized end
             local name = line:match('^%s*name%s+(.-)%s*$')
             local desc = line:match('^%s*desc%s+(.-)%s*$')
             local hash, id, amount = line:match('^%s*(' .. HEX16 .. ')%s+([%w_]+)%s+(%S+)')
             local parsed = hash and MOD.parse_number(amount)
             local page, field, typed = line:match('^%s*rename%s+(' .. HEX16 .. ')%s+(%a+)%s+(.+)$')
             if page then
+                recognized = recognized + 1
                 preset.texts = preset.texts or {}
                 preset.texts[page:upper()] = preset.texts[page:upper()] or {}
                 preset.texts[page:upper()][field] = typed:gsub('{H}', '#')
             elseif name and name ~= '' then
+                recognized = recognized + 1
                 preset.name = name:sub(1, NAME_BYTES)
             elseif desc and desc ~= '' then
                 preset.desc = desc:sub(1, MOD.rename.LIMIT.desc)
             elseif parsed then
+                recognized = recognized + 1
                 preset.values[#preset.values + 1] = { hash = hash:upper(), id = id, value = parsed }
             else
+                skipped = skipped + 1
                 MOD.skipped(file, numbers[i], line)
             end
         end
-        return preset
+        return preset, skipped, recognized
     end
 
-    -- Files someone sent you, put in StatEditor\import: each takes a free preset place, and the file goes once it
-    -- has one (no free place: it stays for the next start).
+    -- Files someone sent you, put in StatEditor\import: each valid file takes a free preset place, and the file goes once
+    -- it has one (no free place: it stays for the next start). A file with broken lines or no preset in it stays, to be
+    -- corrected and tried again, and the footer says so (PR #127).
     function presets.import()
         local dir, ok, I = preset_file('import'), pcall(require, 'install')
         if not (MOD.offline and dir and ok) then return end
@@ -27195,8 +28002,9 @@ do
             if raw then enemy = (raw:read('*a') or ''):find('SHODAN Enemy Editor preset', 1, true) ~= nil; raw:close() end
             local into, free = enemy and presets.enemy or presets.full, nil
             for k = 1, FULL_PRESETS do if not into[k] then free = k; break end end
-            local preset = lines and free and presets.parse(lines, numbers, free, file)
-            if preset then
+            local preset, skipped, recognized
+            if lines and free then preset, skipped, recognized = presets.parse(lines, numbers, free, file) end
+            if preset and skipped == 0 and recognized > 0 then
                 local was = MOD.enemy.on
                 MOD.enemy.on = enemy
                 into[free] = preset
@@ -27204,6 +28012,10 @@ do
                 MOD.enemy.on = was
                 os.remove(dir .. '/' .. file)
                 log('presets: imported ' .. file .. ' as "' .. preset.name .. '"')
+            elseif lines and free then
+                log('presets: kept ' .. file .. ' in import; ' .. (skipped > 0 and (skipped .. ' malformed line(s)')
+                    or 'no preset entries found') .. '. Correct the file and restart SSEO.')
+                MOD.notify('A preset file in the import folder was not imported. Fix the lines the log names and start SSEO again.', 20, true)
             end
         end
     end
@@ -27475,7 +28287,16 @@ do
                 if not values then values = {}; weapon_presets[hash][n] = values; count = count + 1 end
                 local id, amount = rest:match('^([%w_]+)%s+(%S+)$')
                 local parsed = id and MOD.parse_number(amount)
-                if parsed then
+                local page, field, typed = rest:match('^rename%s+(' .. HEX16 .. ')%s+(%a+)%s+(.+)$')
+                local passives = rest:match('^passives%s+([%d,]+)$') or rest:match('^passives%s+(none)$')
+                if passives then
+                    values.passives = {}
+                    for id in passives:gmatch('%d+') do values.passives[#values.passives + 1] = tonumber(id) end
+                elseif page then
+                    values.texts = values.texts or {}
+                    values.texts[page:upper()] = values.texts[page:upper()] or {}
+                    values.texts[page:upper()][field] = typed:gsub('{H}', '#')
+                elseif parsed then
                     values[#values + 1] = { id = id, value = parsed }
                 elseif rest ~= '-' then
                     MOD.skipped('weapon_presets.txt', weapon_numbers[i], line)
@@ -27544,12 +28365,31 @@ do
         return out
     end
 
+    -- the pages whose texts a weapon's page edits: its own, and on an armor each listed passive's description
+    function presets.text_pages(weapon)
+        local out = { (MOD.rename.page(weapon, 'name')) }   -- (one value: page() also returns the field)
+        for _, id in ipairs(MOD.offline and weapon.armor and MOD.kits.list_of(weapon) or {}) do
+            out[#out + 1] = by_hash[string.format('FFFFFFFE%08X', id)]   -- (#out + 1 skips a missing one)
+        end
+        return out
+    end
+
     local function weapon_preset(weapon, n)
         return weapon and weapon_presets[weapon.hash] and weapon_presets[weapon.hash][n]
     end
 
     local function save_weapon_preset(weapon, n)
         local values = weapon_changes(weapon)
+        local own = weapon.armor and settings.armor_passives[weapon.armor]   -- an armor's passive list (nil: the game's)
+        if own then values.passives = {}; for k, id in ipairs(own) do values.passives[k] = id end end
+        for _, page in ipairs(presets.text_pages(weapon)) do   -- every text the page lets you type, per preset
+            local typed = MOD.rename.texts[page.hash]
+            if typed then
+                values.texts = values.texts or {}
+                values.texts[page.hash] = {}
+                for field, text in pairs(typed) do values.texts[page.hash][field] = text end
+            end
+        end
         weapon_presets[weapon.hash] = weapon_presets[weapon.hash] or {}
         weapon_presets[weapon.hash][n] = values
         save_weapon_presets()
@@ -27597,6 +28437,13 @@ do
             end
         end
         for id in pairs(want) do refused = refused + 1; log('preset: ' .. weapon.name .. ' has no stat ' .. id) end
+        if weapon.armor then MOD.kits.set(weapon, values.passives and { unpack(values.passives) }) end   -- (a copy; before the texts: they follow its list)
+        for _, page in ipairs(MOD.offline and presets.text_pages(weapon) or {}) do   -- texts the preset lacks: the game's
+            local want, has = (values.texts or {})[page.hash] or {}, MOD.rename.texts[page.hash] or {}
+            for _, field in ipairs(presets.code.FIELDS) do
+                if has[field] ~= want[field] then MOD.rename.set(page, field, want[field]) end
+            end
+        end
         say('Loaded ' .. weapon.name .. ' preset ' .. n .. (refused > 0 and (' (' .. refused .. ' value(s) not applied)') or ''))
         ui.version = ui.version + 1
     end
@@ -27788,7 +28635,7 @@ do
         local preset = full_presets[n]
         if not preset then return end
         if not settings.changes then say('Your changes are off: turn them on in Settings to load a preset'); return end
-        MOD.reset_side(MOD.enemy.on)
+        reset_all()   -- (names, descriptions and armor passives too: the preset's state exactly, issue #135)
         local refused, passives, values = 0, {}, {}
         for _, o in ipairs(preset.values) do
             if o.id:match('^passive_') then
@@ -27796,7 +28643,6 @@ do
                 if o.id ~= 'passive_none' then table.insert(passives[o.hash], o.value) end
             else values[#values + 1] = o end
         end
-        -- shortcut: an armor the preset does not name keeps its passives, so older presets wipe nothing
         for hash, list in pairs(passives) do
             if by_hash[hash] then MOD.kits.set(by_hash[hash], list) else refused = refused + 1 end
         end
@@ -28599,7 +29445,7 @@ local function draw(width, height)
         end
         -- this weapon's presets, under its stats
         local sy = H - 70 - 34
-        if not weapon.armor and not weapon.look then   -- (no values of its own to keep)
+        do   -- (armor, helmet and cape pages: their texts and passives)
         text('PRESETS', x0, sy + 8, 15, MUTED, nil, nil, nil, 'heading')
         for n = 1, presets.weapon_count do
             local saved = presets.weapon_preset(weapon, n)
@@ -28628,7 +29474,7 @@ local function draw(width, height)
         local stack_list = MOD.offline and weapon.armor and MOD.kits.list_of(weapon)
         if stack_list then bottom = bottom - (36 + 34 * (#stack_list + 2)) end
         local pitch = math.floor((bottom - y - sections * 24 - below) / math.max(1, #weapon.rows))
-        local scrolling = pitch < 22
+        local scrolling = pitch < 22 and #weapon.rows > 0   -- (an armor page: no rows, only passives, issue #128)
         if scrolling then
             pitch, bottom = 24, bottom - (settings.nav_buttons and 36 or 0)
             ui.scroll = math.max(1, math.min(ui.scroll, #weapon.rows))
@@ -28689,9 +29535,15 @@ local function draw(width, height)
                 local label = row.label
                 if row.label_of then label = row.label_of() end
                 text(label, x0, y + bh / 2 - 8, 16, focus and GOLD or WHITE, 236)
-                if row.tip then
-                    text('(?)', x0 + math.min(width(label, 16), 236) + 6, y + bh / 2 - 7, 14, DIM)
-                    if ui.hover == 'row:' .. n then tip_overlay = { lines = row.tip, x = x0, y = y + bh + 2 } end
+                local client = MOD.enemy.client_only(weapon, row)
+                if row.tip or client then
+                    text('(?)', x0 + math.min(width(label, 16), 236) + 6, y + bh / 2 - 7, 14, client and WARN or DIM)
+                    if ui.hover == 'row:' .. n then
+                        local lines = {}
+                        for _, line in ipairs(row.tip or {}) do lines[#lines + 1] = line end
+                        lines[#lines + 1] = client
+                        tip_overlay = { lines = lines, warn = client, x = x0, y = y + bh + 2 }
+                    end
                 end
                 if row.choice and (ui.hover == 'row:' .. n or ui.hover == 'value:' .. n) then
                     local lines = MOD.records.source(row)
@@ -29001,7 +29853,7 @@ local function draw(width, height)
         rect(x, y, w, h, color(8, 11, 15), 958)
         rect(x, y, w, 2, GOLD, 959); rect(x, y + h - 2, w, 2, GOLD, 959)
         rect(x, y, 2, h, GOLD, 959); rect(x + w - 2, y, 2, h, GOLD, 959)
-        for k, line in ipairs(tip_overlay.lines) do text(line, x + 12, y + 8 + (k - 1) * 18, 15, WHITE, w - 24, false, 960) end
+        for k, line in ipairs(tip_overlay.lines) do text(line, x + 12, y + 8 + (k - 1) * 18, 15, line == tip_overlay.warn and WARN or WHITE, w - 24, false, 960) end
     end
     -- every entry a hovered 'shared with' list names, in columns, over the rows below it (above, near the bottom)
     if shared_overlay then
@@ -29490,11 +30342,16 @@ function MOD.egg.tick(now)
 end
 
 -- Keyboard: presses, and repeats while held (after 0.4 s, every 0.08 s; or after `delay`, every `every`).
+-- A key counts once it has been seen up while the window has focus: one Windows reports held from elsewhere
+-- (a controller mapped to keys, a stuck key) is ignored until let go (issue #132).
 local held = {}
+MOD.keys_up = {}
 local function pressed(name, now, delay, every)
     local down = key_down(VK[name])
     local h = held[name]
-    if not down then held[name] = nil; return false end
+    if not focused_window() then MOD.keys_up = {}; held[name] = nil; return false end
+    if not down then held[name], MOD.keys_up[name] = nil, true; return false end
+    if not MOD.keys_up[name] then return false end
     if not h then held[name] = { next = now + (delay or 0.4) }; return true end
     if now >= h.next then h.next = now + (every or 0.08); return true end
     return false
@@ -29787,7 +30644,7 @@ local function keyboard(now)
         if n and pressed('Delete', now) then presets.confirm('delete', n) end
         return
     end
-    if not weapon or #weapon.rows == 0 then return end
+    if not weapon then return end
     if key_down(VK.Ctrl) then
         for n = 1, presets.weapon_count do
             if pressed('Key' .. n, now) then
@@ -29796,6 +30653,7 @@ local function keyboard(now)
             end
         end
     end
+    if #weapon.rows == 0 then return end
     local enter = pressed('Enter', now)
     if enter and weapon.rows[ui.row] and weapon.rows[ui.row].code then MOD.code.start(ui.row); return end
     if enter and weapon.rows[ui.row] and row_value(weapon.rows[ui.row]) ~= nil then
@@ -30842,6 +31700,33 @@ function MOD.donors()
         set(group, at, 172, donor and donor[2])
     end
     MOD.extra.always_undo(set)
+    -- the hidden donor stratagems; a support weapon's +200 holding one is our old link, anything else is its Extra stratagem
+    local HIDDEN, hidden = { 2663642538, 905054095, 101457192, 3702563421, 4264661046 }, {}
+    for _, id in ipairs(HIDDEN) do
+        local group, at = find(id)
+        if group then hidden[default_of(field_at(group, at, 'u32', 4294967295))] = true end
+    end
+    -- Double-Edge Sickle heat ramp switches: its three levels (start heat scaled to each weapon's overheat
+    -- threshold, shot, status on you) copied in, or the weapon's own empty ones back
+    local ht, src = tables[T_HEAT], nil
+    for _, at in pairs(ht and ht.index or {}) do
+        if (default_of(field_at(T_HEAT, at, 'f32', 1000000)) or 0) > 0 then src = at end
+    end
+    for _, f in pairs(fields) do
+        if f.ramp and src then
+            local on, cap = read_field(f) == 1, read_field(field_at(T_HEAT, f.ramp + 96, 'f32', 1000000)) or 0
+            local scale = cap / math.max(1, read_field(field_at(T_HEAT, src + 96, 'f32', 1000000)) or 0)
+            for k = 0, 2 do
+                local from, to = src + k * 24, f.ramp + k * 24
+                local start = field_at(T_HEAT, to, 'f32', 1000000)
+                write_field(start, on and (read_field(field_at(T_HEAT, from, 'f32', 1000000)) or 0) * scale or default_of(start))
+                for _, o in ipairs({ 4, 20 }) do
+                    local here = field_at(T_HEAT, to + o, 'u32', 4294967295)
+                    write_field(here, on and read_field(field_at(T_HEAT, from + o, 'u32', 4294967295)) or default_of(here))
+                end
+            end
+        end
+    end
     -- A support weapon's first swap goes through its own stratagem, every other swap loads always.
     local own, own_list = {}, {}
     for pass = 1, 2 do
@@ -30850,7 +31735,9 @@ function MOD.donors()
             local id = at and read_field(field_at(TYPES.loadout, at, 'u32', 4294967295))
             local group, record = nil, nil
             if id then group, record = find(id) end
-            if pass == 1 and group then set(group, record, 200) end
+            if pass == 1 and group and hidden[read_field(field_at(group, record + 200, 'u32', 4294967295))] then
+                set(group, record, 200)
+            end
             for k, row in ipairs(weapon.swaps or {}) do
                 local now = read_field(row.parts[1].field)
                 local shot = now and now ~= default_of(row.parts[1].field) and by_id[now]
@@ -30873,6 +31760,7 @@ function MOD.donors()
             end
         end
     end
+    MOD.exo_arms.apply(want, seen)
     local used, tails = 0, {}
     for k, id in ipairs({ 2266266587, 3193487269, 867876502 }) do
         local group, at = find(id)
@@ -30886,7 +31774,7 @@ function MOD.donors()
         end
     end
     local always, links, turn = 4 - math.min(4, #own_list), 0, 0
-    for _, id in ipairs({ 2663642538, 905054095, 101457192, 3702563421, 4264661046 }) do
+    for _, id in ipairs(HIDDEN) do
         local group, at = find(id)
         if group and #tails > 0 then
             local donor, list = nil, nil

@@ -41,7 +41,41 @@ SETTINGS_TEXT = {"hotkey", "update_channel", "updates", "lang", "editor", "last_
                  "panel_lang", "update_size"}
 SETTINGS_NUMBER = {"panel_size", "panel_opacity"}
 SETTINGS_PASSIVE = {"passive_stack", "passive_own", "passive_conflicts", "passive_every"}
+
+
+def panel_settings(panel: Path | None) -> set[str]:
+    """Every config key the panel's loader accepts, read from its source, so this never drifts again.
+
+    The loader is a chain of `elseif name == 'x' then ...` (some test two names in one branch), plus
+    `M.parse_number`/`ONOFF` variants for the same names.
+    """
+    found: set[str] = set()
+    if not panel or not panel.exists():
+        return found
+    import re
+    in_loader = False
+    for line in panel.read_text(encoding="utf-8", errors="replace").splitlines():
+        if "local function load_config(" in line:
+            in_loader = True
+            continue
+        if not in_loader:
+            continue
+        # the loader is one function: it ends where the next top-level one begins
+        if line.startswith("local function ") or line.startswith("function M.") or line.startswith("local M."):
+            break
+        for name in re.findall(r"name\s*==\s*'([a-z_]+)'", line):
+            found.add(name)
+    return found
 ALL_SETTINGS = SETTINGS_ONOFF | SETTINGS_TEXT | SETTINGS_NUMBER | SETTINGS_PASSIVE
+
+
+def all_settings(panel: Path | None = None) -> set[str]:
+    """The hand-written groups plus every key the panel's own loader accepts.
+
+    The loader is a chain of `elseif name == 'x' then` (some branches test two names), so reading it
+    keeps this list current without a human noticing each new setting.
+    """
+    return ALL_SETTINGS | panel_settings(panel)
 # written by this fork's overlays (they read them itself; the panel skips them)
 FORK_KEYS = {"passive_conflicts", "passive_every"}
 PANEL_KEYS = {"armor_passive"}      # the panel's own per-armor passive list
@@ -95,9 +129,10 @@ def close(word: str, options) -> str | None:
 
 
 def check(path: Path, weapons: set[str] | None, stats: dict[str, set[str]] | None,
-          passives: set[int] | None) -> tuple[list[str], list[str], list[str]]:
+          passives: set[int] | None, panel: Path | None = None) -> tuple[list[str], list[str], list[str]]:
     """(errors, warnings, info) - errors are lines the panel would drop or clamp."""
     errors, warnings, info = [], [], []
+    known = all_settings(panel)
     text = path.read_text(encoding="utf-8", errors="replace")
     for number, raw in enumerate(text.splitlines(), 1):
         line = raw.split("#", 1)[0].strip()
@@ -106,7 +141,7 @@ def check(path: Path, weapons: set[str] | None, stats: dict[str, set[str]] | Non
         where = f"line {number}"
         parts = line.split()
         head = parts[0]
-        if head in ALL_SETTINGS:
+        if head in known:
             value = parts[1] if len(parts) > 1 else ""
             if head in SETTINGS_ONOFF and value not in ONOFF:
                 errors.append(f"{where}: {head} wants on/off, got '{value}'")
@@ -187,10 +222,10 @@ def check(path: Path, weapons: set[str] | None, stats: dict[str, set[str]] | Non
                 errors.append(f"{where}: {weapon} has no stat '{stat}'" + (f" (did you mean '{near}'?)" if near else ""))
             continue
         # anything else: a setting name the panel does not know?
-        near = close(head, ALL_SETTINGS)
+        near = close(head, known)
         if near:
             errors.append(f"{where}: unknown setting '{head}' (did you mean '{near}'?)")
-        elif len(parts) == 2 and head not in ALL_SETTINGS:
+        elif len(parts) == 2 and head not in known:
             errors.append(f"{where}: '{head} {parts[1]}' is not a line this panel reads")
         else:
             errors.append(f"{where}: cannot read '{line[:60]}'")
@@ -212,7 +247,9 @@ def main(argv=None) -> int:
     weapons = stats = passives = None
     if tsv and Path(tsv).exists():
         weapons, stats, passives = panel_ids(Path(tsv))
-    errors, warnings, info = check(path, weapons, stats, passives)
+    # (HERE is .../SHODAN-Stat-Editor/local/tools, so the panel's source is two levels up)
+    panel_src = HERE.parent.parent / "src" / "stat_editor_offline.lua"
+    errors, warnings, info = check(path, weapons, stats, passives, panel_src)
 
     if not args.quiet:
         print(f"{path}")
